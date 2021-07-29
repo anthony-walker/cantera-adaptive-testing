@@ -1,0 +1,169 @@
+description: |-
+  VERSION:  High temperature POLIMI PRF+PAH+soot
+  AUTHORS: C. Saggese, S. Ferrario, J. Camacho, A. Cuoci, A. Frassoldati, E. Ranzi, H. Wang, T. Faravelli
+  TITLE: Kinetic Modeling of Particle Size Distribution of Soot in a Premixed Burner-Stabilized Stagnation Ethylene Flame
+  WEBSITE: http://creckmodeling.chem.polimi.it/
+  VERSION:  High temperature POLIMI PRF+PAH+soot
+  AUTHORS: C. Saggese, S. Ferrario, J. Camacho, A. Cuoci, A. Frassoldati, E. Ranzi, H. Wang, T. Faravelli
+  TITLE: Kinetic Modeling of Particle Size Distribution of Soot in a Premixed Burner-Stabilized Stagnation Ethylene Flame
+  WEBSITE: http://creckmodeling.chem.polimi.it/
+
+generator: ck2yaml
+input-files: [big_molecule.mech, big_molecule.therm]
+cantera-version: 2.6.0a2
+date: Thu, 29 Jul 2021 18:10:10 -0400
+
+units: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}
+
+phases:
+- name: gas
+  thermo: ideal-gas
+  elements: [C, H, Cl, O, N, Ar, He]
+  species: [H, OH, C2H2, BIN18AJ, BIN18A, BIN18BJ, BIN18B, BIN19AJ, BIN19A,
+    BIN19BJ, BIN19B, BIN20A, BIN20B]
+  kinetics: gas
+  state: {T: 300.0, P: 1 atm}
+
+species:
+- name: H
+  composition: {H: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 4000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, 2.547162e+04, -0.4601176]
+    - [2.5, 0.0, 0.0, 0.0, 0.0, 2.547162e+04, -0.4601176]
+- name: OH
+  composition: {H: 1, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1710.0, 4000.0]
+    data:
+    - [3.41896226, 3.19255801e-04, -3.08292717e-07, 3.64407494e-10, -1.00195479e-13,
+      3452.64448, 2.54433372]
+    - [2.8537604, 1.02994334e-03, -2.32666477e-07, 1.93750704e-11, -3.15759847e-16,
+      3699.4972, 5.78756825]
+- name: C2H2
+  composition: {C: 2, H: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 4000.0]
+    data:
+    - [2.013562, 0.01519045, -1.6163191e-05, 9.0789918e-09, -1.912746e-12,
+      2.612444e+04, 8.805378]
+    - [4.436773, 5.3760391e-03, -1.9128161e-06, 3.2863789e-10, -2.156709e-14,
+      2.56676622e+04, -2.80035722]
+- name: BIN18AJ
+  composition: {C: 2500000, H: 499999}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-8.615752e+05, 1.615501e+04, -10.44288, 3.648717e-03, -4.02617e-07,
+      2.305535e+09, 4.401981e+06]
+    - [-8.615752e+05, 1.615501e+04, -10.44288, 3.648717e-03, -4.02617e-07,
+      2.305535e+09, 4.401981e+06]
+- name: BIN18A
+  composition: {C: 2500000, H: 500000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-8.615752e+05, 1.615501e+04, -10.44288, 3.648717e-03, -4.02617e-07,
+      2.305475e+09, 4.401981e+06]
+    - [-8.615752e+05, 1.615501e+04, -10.44288, 3.648717e-03, -4.02617e-07,
+      2.305475e+09, 4.401981e+06]
+    note: test multi-line with space before '&'
+- name: BIN18BJ
+  composition: {C: 2500000, H: 124999}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-9.359524e+05, 1.526799e+04, -10.15979, 3.74308e-03, -3.837443e-07,
+      1.721967e+09, 3.887465e+06]
+    - [-9.359524e+05, 1.526799e+04, -10.15979, 3.74308e-03, -3.837443e-07,
+      1.721967e+09, 3.887465e+06]
+- name: BIN18B
+  composition: {C: 2500000, H: 125000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-9.359524e+05, 1.526799e+04, -10.15979, 3.74308e-03, -3.837443e-07,
+      1.721907e+09, 3.887465e+06]
+    - [-9.359524e+05, 1.526799e+04, -10.15979, 3.74308e-03, -3.837443e-07,
+      1.721907e+09, 3.887465e+06]
+- name: BIN19AJ
+  composition: {C: 5000000, H: 999999}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-1.72315e+06, 3.231002e+04, -20.88576, 7.297433e-03, -8.05234e-07,
+      4.61101e+09, 8.803963e+06]
+    - [-1.72315e+06, 3.231002e+04, -20.88576, 7.297433e-03, -8.05234e-07,
+      4.61101e+09, 8.803963e+06]
+- name: BIN19A
+  composition: {C: 5000000, H: 1000000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-1.72315e+06, 3.231002e+04, -20.88576, 7.297433e-03, -8.05234e-07,
+      4.61095e+09, 8.803963e+06]
+    - [-1.72315e+06, 3.231002e+04, -20.88576, 7.297433e-03, -8.05234e-07,
+      4.61095e+09, 8.803963e+06]
+- name: BIN19BJ
+  composition: {C: 5000000, H: 249999}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-1.871905e+06, 3.053598e+04, -20.31958, 7.48616e-03, -7.674887e-07,
+      3.443874e+09, 7.77493e+06]
+    - [-1.871905e+06, 3.053598e+04, -20.31958, 7.48616e-03, -7.674887e-07,
+      3.443874e+09, 7.77493e+06]
+- name: BIN19B
+  composition: {C: 5000000, H: 250000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-1.871905e+06, 3.053598e+04, -20.31958, 7.48616e-03, -7.674887e-07,
+      3.443814e+09, 7.77493e+06]
+    - [-1.871905e+06, 3.053598e+04, -20.31958, 7.48616e-03, -7.674887e-07,
+      3.443814e+09, 7.77493e+06]
+    note: test multi-line without space before '&'
+- name: BIN20A
+  composition: {C: 10000000, H: 2000000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-3.446301e+06, 6.462003e+04, -41.77151, 0.01459487, -1.610468e-06,
+      9.221901e+09, 1.760793e+07]
+    - [-3.446301e+06, 6.462003e+04, -41.77151, 0.01459487, -1.610468e-06,
+      9.221901e+09, 1.760793e+07]
+- name: BIN20B
+  composition: {C: 10000000, H: 500000}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 1000.0, 5000.0]
+    data:
+    - [-3.74381e+06, 6.107197e+04, -40.63915, 0.01497232, -1.534977e-06,
+      6.887628e+09, 1.554986e+07]
+    - [-3.74381e+06, 6.107197e+04, -40.63915, 0.01497232, -1.534977e-06,
+      6.887628e+09, 1.554986e+07]
+
+reactions:
+- equation: C2H2 + BIN18AJ => 0.999998133335 BIN18A + 1.066665e-06 BIN18B
+    + 7.99999e-07 BIN19A + H  # Reaction 1
+  rate-constant: {A: 3.012e+14, b: 0.0, Ea: 5000.0}
+- equation: C2H2 + BIN18BJ => 0.9999992 BIN18B + 8e-07 BIN19B + 0.9 H  # Reaction 2
+  rate-constant: {A: 7.481e+13, b: 0.0, Ea: 5000.0}
+- equation: C2H2 + BIN19AJ => 0.999999066667 BIN19A + 5.33333e-07 BIN19B
+    + 4e-07 BIN20A + H  # Reaction 3
+  rate-constant: {A: 6.062e+14, b: 0.0, Ea: 5000.0}
+- equation: C2H2 + BIN19BJ => 0.9999996 BIN19B + 4e-07 BIN20B + 0.9 H  # Reaction 4
+  rate-constant: {A: 1.498e+14, b: 0.0, Ea: 5000.0}
