@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source ~/.functions
+
+rebuildCantera
+python tests.py;
+
+export CURR_DIR=$(pwd)
+export CANTERA_DIR='/home/anthony-walker/nrg-cantera-project/cantera'
+cd $CANTERA_DIR
+git checkout mapped
+git branch
+cd $CURR_DIR
+
+
+rebuildCantera
+python tests.py
+
+cd $CANTERA_DIR
+git checkout ap-dev-stoich
+git branch
+cd $CURR_DIR

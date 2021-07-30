@@ -1,0 +1,13 @@
+import os
+
+env = Environment()
+
+env.Append(CCFLAGS=['-pg','-g3'],
+           CPPPATH=[os.path.join(os.environ['CONDA_PREFIX'],'include'),],
+           LIBS=['cantera',],
+           LIBPATH=[os.path.join(os.environ['CONDA_PREFIX'],'lib')],
+           LINKFLAGS=['-pg', '-pthread'])
+
+osap = env.Program('dev-test.out', ['dev-test.cpp', 'dev-test-examples.cpp'])
+
+# Default(sample)
