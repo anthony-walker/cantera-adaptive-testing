@@ -18,6 +18,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(),
     include_package_data=True,
+    scripts=["scripts/*",],
     package_data={'cantera_adaptive_testing': ['mechanisms/*',]},
     classifiers=[
         "Programming Language :: Python :: 3",
