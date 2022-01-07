@@ -12,9 +12,14 @@ do
     do
         sbatch -J "$model-prec-$i" precon.sh
         sleep0.1
+    done
+    # run more expensive runs later (mass and moles)
+    for i in {0..9}
+    do
         sbatch -J "$model-mass-$i" mass.sh
         sleep 0.1
-	sbatch -J "$model-mole-$i" moles.sh
+	    sbatch -J "$model-mole-$i" moles.sh
+        sleep 0.1
     done
 done
 
