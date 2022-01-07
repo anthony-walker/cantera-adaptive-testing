@@ -2,7 +2,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import ruamel.yaml, os, random, inspect, importlib, operator
 import numpy as np
-import cantera_adaptive_testing.mechanisms as mechanisms
+import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.plotter as plotter
 import cantera as ct
 plt.rcParams['mathtext.fontset'] = 'cm'
@@ -16,7 +16,7 @@ def getZeroKeyDictionary(keys):
     return {k: 0 for k in keys}
 
 
-def countUniqueMechYamls(datadir):
+def countUniqueModYamls(datadir):
     files = os.listdir(datadir)
     files = ["-".join(f.split('-')[:-1]) for f in files]
     ctrs = getZeroKeyDictionary(set(files))
@@ -161,7 +161,7 @@ def getPlotData(datafile, problem, reverse=False):
     return sorted_data[pix:piy]
 
 
-def plot_mechanism_based(datafile, problem="pressure_problem"):
+def plot_model_based(datafile, problem="pressure_problem"):
     sorted_data = getPlotData(datafile, problem, reverse=True)
     pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
     mnames = [k.split("-")[0] for k in keys]
@@ -202,7 +202,7 @@ def plot_mechanism_based(datafile, problem="pressure_problem"):
 
 def getMinMaxData(runtimes, midxs, mnames, species, thresholds):
     print('-----------------------------------------------------------')
-    mechdata = []
+    moddata = []
     runtimes = np.array(runtimes)
     for mix, miy in midxs:
         threshs = thresholds[mix:miy]
@@ -212,9 +212,9 @@ def getMinMaxData(runtimes, midxs, mnames, species, thresholds):
         locw = np.where(worst == runtimes[mix+2:miy])[0][0]
         entry = (species[mix], runtimes[mix], runtimes[mix+1], best, worst)
         print("{:s}:{:d} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[mix]/worst, runtimes[mix]/best))
-        mechdata.append(entry)
+        moddata.append(entry)
     print('-----------------------------------------------------------')
-    return mechdata
+    return moddata
 
 
 def plot_log_based(datafile, problem="pressure_problem"):
@@ -274,7 +274,7 @@ def plot_log_based(datafile, problem="pressure_problem"):
 
 
 def countReactionTypes(datadir):
-    directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),"mechanisms")
+    directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),"models")
     files = os.listdir(directory)
     files.sort()
     files.remove("gas-def.yaml")
@@ -336,7 +336,7 @@ def plot_threshold_boxwhisker(datafile, problem="pressure_problem"):
 
 
 def produceReactionTypeFigure(datadir):
-    directory = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)),"mechanisms"), "study-test-set")
+    directory = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)),"models"), "study-test-set")
     files = os.listdir(directory)
     files.sort()
     yaml = ruamel.yaml.YAML()

@@ -96,7 +96,7 @@ void EigenTest()
 void JetA()
 {
     //Setting up solution object and thermo/kinetics pointers
-    std::shared_ptr<Solution> sol = newSolution("../mechanisms/JetA/JetA-detailed-NOx.yaml");
+    std::shared_ptr<Solution> sol = newSolution("../models/JetA/JetA-detailed-NOx.yaml");
     std::shared_ptr<ThermoPhase> gas= sol->thermo();
     std::shared_ptr<Kinetics> kin= sol->kinetics();
     gas->setState_TPX(710.0, 101325, "POSF10325:0.0040030, O2:0.16513, N2:0.62087, CO2:0.20, H:0.0100");

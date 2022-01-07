@@ -1,2 +1,2 @@
-__all__ = ['mechanisms',]
-import cantera_adaptive_testing.mechanisms
+__all__ = ['models',]
+import cantera_adaptive_testing.models

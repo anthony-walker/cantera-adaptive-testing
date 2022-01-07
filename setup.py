@@ -18,8 +18,8 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(),
     include_package_data=True,
-    scripts=["scripts/*",],
-    package_data={'cantera_adaptive_testing': ['mechanisms/*',]},
+    # scripts=["./scripts/study-1/adaptive-precon.sh",],
+    package_data={'cantera_adaptive_testing': ['models/*',]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",

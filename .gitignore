@@ -6,7 +6,7 @@ __pycache__/
 *.out
 *.o
 *.sconsign.dblite
-external-mechanisms/RMG-models
+external-models/RMG-models
 # C extensions
 *.so
 

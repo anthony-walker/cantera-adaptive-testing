@@ -1,6 +1,6 @@
 import argparse, inspect, os, importlib, random
 import cantera_adaptive_testing.utilities as utilities
-import cantera_adaptive_testing.mechanisms as mechanisms
+import cantera_adaptive_testing.models as models
 from mpi4py import MPI
 import multiprocessing as mp
 import cantera as ct
@@ -11,21 +11,21 @@ def MPIRunAll(*args, **kwargs):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     if rank == 0:
-        parser = parserSetup(add_mech=False)
+        parser = parserSetup(add_mod=False)
         args = parser.parse_args()
         data = vars(args)
-        mechs = inspect.getmembers(mechanisms, inspect.isclass)
-        mechs = [mech for mname, mech in mechs]
-        random.shuffle(mechs)
-        mechs = np.array_split(mechs, comm.Get_size())
+        mods = inspect.getmembers(models, inspect.isclass)
+        mods = [mod for mname, mod in mods]
+        random.shuffle(mods)
+        mods = np.array_split(mods, comm.Get_size())
     else:
-        mechs = None
+        mods = None
         data = None
     data = comm.bcast(data, root=0)
-    rankMech = comm.scatter(mechs, root=0)
-    for rm in rankMech:
-        currMech = rm(**data)
-        currMech()
+    rankMod = comm.scatter(mods, root=0)
+    for rm in rankMod:
+        currMod = rm(**data)
+        currMod()
 
 
 def MPIRunLoop():
@@ -38,46 +38,46 @@ def MPIRunLoop():
     else:
         data = None
         args = None
-    # get mechanisms
-    mechs = inspect.getmembers(mechanisms, inspect.isclass)
-    mechs = {element[0]: element[1] for element in mechs}
-    del mechs['MechanismBase'] # delete mechanism because it is not a valid option
+    # get models
+    mods = inspect.getmembers(models, inspect.isclass)
+    mods = {element[0]: element[1] for element in mods}
+    del mods['ModelBase'] # delete model because it is not a valid option
     # get data from main rank
     data = comm.bcast(data, root=0)
     args = comm.bcast(args, root=0)
-    selected = mechs[args.mechanism](**vars(args))
+    selected = mods[args.model](**vars(args))
     selected()
 
 
-def processMechanismRun(mech_and_kwargs):
-    mech, kwargs = mech_and_kwargs
-    currMech = mech(**kwargs)
-    currMech()
+def processModanismRun(mod_and_kwargs):
+    mod, kwargs = mod_and_kwargs
+    currMod = mod(**kwargs)
+    currMod()
 
 
 def MultiProcessingRunAll(*args, **kwargs):
-    parser = parserSetup(add_mech=False)
+    parser = parserSetup(add_mod=False)
     args = parser.parse_args()
     data = vars(args)
-    mechs = inspect.getmembers(mechanisms, inspect.isclass)
-    mechsList = []
-    for mname, mech in mechs:
-        if mname != "MechanismBase":
-            mechsList.append((mech, data))
-    pool = mp.Pool(len(mechsList))
-    pool.map(processMechanismRun, mechsList)
+    mods = inspect.getmembers(models, inspect.isclass)
+    modsList = []
+    for mname, mod in mods:
+        if mname != "ModelBase":
+            modsList.append((mod, data))
+    pool = mp.Pool(len(modsList))
+    pool.map(processModelRun, modsList)
 
 
-def parserSetup(add_mech=True):
+def parserSetup(add_mod=True):
     """This function is the main call for the commandline interface for
     testing the additions to Cantera."""
     parser = argparse.ArgumentParser(description="""adaptive-testing:
     This entry was created to measure and analyze performance of the
     newly implemented reactor and preconditioning features into cantera.
-    This interface works by specifying a mechanism and flags to tune the
+    This interface works by specifying a model and flags to tune the
     simulation.""")
-    if add_mech:
-        parser.add_argument("mechanism", type=str, help="Specify the mechanism you would like to run. List all mechanisms by using \"list\" as the positional argument.")
+    if add_mod:
+        parser.add_argument("model", type=str, help="Specify the model you would like to run. List all models by using \"list\" as the positional argument.")
     # Configurable options
     parser.add_argument('-w', '--write', action='store_true', help="If this flag is added and the study has an associated data output, it will be generated.")
     parser.add_argument('-L', '--log', action='store_true', help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
@@ -113,15 +113,15 @@ def commandLineUtilities():
 def commandLineMain():
     parser = parserSetup()
     args = parser.parse_args()
-    # Handle mechanisms
-    mechs = inspect.getmembers(mechanisms, inspect.isclass)
-    mechs = {element[0]: element[1] for element in mechs}
-    del mechs['MechanismBase'] # delete mechanism because it is not a valid option
-    if args.mechanism not in mechs:
-        # print mechanisms
-        print("Available mechanisms include:")
-        for mech in mechs:
-            print("\t"+mech)
+    # Handle models
+    mods = inspect.getmembers(models, inspect.isclass)
+    mods = {element[0]: element[1] for element in mods}
+    del mods['ModelBase'] # delete model because it is not a valid option
+    if args.model not in mods:
+        # print models
+        print("Available models include:")
+        for mod in mods:
+            print("\t"+mod)
     else:
-        selected = mechs[args.mechanism](**vars(args))
+        selected = mods[args.model](**vars(args))
         selected()
