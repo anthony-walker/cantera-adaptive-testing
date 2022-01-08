@@ -16,8 +16,6 @@
 
 #SBATCH -o ./slurm-output/%x-%j.out
 
-#SBATCH --mem=16G
-
 # load any software environment module required for app
 
 # run my jobs
