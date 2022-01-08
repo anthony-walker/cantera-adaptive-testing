@@ -9,7 +9,7 @@ plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
 
 
-def plot_precon_species_barchart(labels, y, manual_max=None):
+def plot_precon_species_barchart(labels, y, xend, manual_max=None):
     # make plots
     x = np.arange(len(labels))  # the label locations
     width = 0.5  # the width of the bars
@@ -27,12 +27,11 @@ def plot_precon_species_barchart(labels, y, manual_max=None):
         ylbls, yticks = zip(*[(str(yt), yt) for yt in yticks])
     ax.set_yticks(yticks)
     ax.set_yticklabels(ylbls, fontsize=14)
-    newx = [x[i] for i in range(0, len(x)-1, 2)] + [x[-1], ]
+    trim = list(zip(x, labels))
+    newlabels = [(trim[i][0], trim[i][1]) for i in range(0, len(trim)-xend, 2)]
+    newlabels += [(trim[i][0], trim[i][1]) for i in range(len(trim)-xend, len(trim), 1)]
+    newx, newlabels = zip(*newlabels)
     ax.set_xticks(newx)
-    if (len(labels)) > 1:
-        newlabels = [labels[i] for i in range(0, len(labels)-1, 2)] + ["$0$", ]
-    else:
-        newlabels = labels
     ax.set_xticklabels(newlabels, fontsize=14)
     ax.set_xlabel('Threshold', fontsize=14)
     return fig, ax

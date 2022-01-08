@@ -106,34 +106,33 @@ def plot_model_based(datafile, *args, **kwargs):
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
         labels = ["$10^{{{:d}}}$".format(int(lbl.split("e")[-1])) for lbl in labels]
-        labels = labels[:-2] + ["M", "Y"]
+        labels = labels[:-3] + ["$0$", "M", "Y"]
         # data
         curr_runtimes = np.array(runtimes[mix:miy])
         # plot speedup
-        speedup = curr_runtimes[-1]/curr_runtimes[:-1]
-        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], speedup[:-1])
+        speedup = curr_runtimes[-1]/curr_runtimes[:]
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], speedup[:-2], 1)
         ax.set_ylabel('Speed-up', fontsize=14)
         plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
         # plot liniters
         crr_liniters = np.array([ linsols[i]['iters'] for i in range(mix, miy-2, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters)
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters, 1)
         ax.set_ylabel('Linear Iterations', fontsize=14)
         plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
         # plot sparsities
         crr_sparsities = np.array([ linsols[i]['sparsity'] for i in range(mix, miy-2, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_sparsities, manual_max=1)
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_sparsities, 1, manual_max=1)
         ax.set_ylabel('Sparsity', fontsize=14)
         plt.savefig(os.path.join("figures", "Sparsities-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
-        # # FIXME: issue is that this can include non-preconditioned
-        # # plot nonliniters
-        # crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
-        # fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters)
-        # ax.set_ylabel('Nonlinear Iterations', fontsize=14)
-        # plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        # plt.close()
+        # plot nonliniters
+        crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
+        fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters, 3)
+        ax.set_ylabel('Nonlinear Iterations', fontsize=14)
+        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.close()
 
 
 def plot_log_based(datafile, *args, **kwargs):
@@ -175,7 +174,7 @@ def plot_log_based(datafile, *args, **kwargs):
     plt.savefig(os.path.join("figures", "LinIters-Nspecies.pdf"))
     plt.close()
     # plot nonlinear iterations
-    nonliniters = np.array([ linsols[i]['iters'] for i in range(len(nonlinsols))])
+    nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(len(nonlinsols))])
     X, Y, M, Best, Worst = zip(*get_min_max(nonliniters, midxs, mnames, species, thresholds))
     fig, ax = plt.subplots()
     alpha = 0.5
@@ -190,7 +189,23 @@ def plot_log_based(datafile, *args, **kwargs):
     ax.legend(loc='upper left')
     plt.savefig(os.path.join("figures", "NonlinIters-Nspecies.pdf"))
     plt.close()
-
+    # plot timesteps
+    time_steps = np.array([ siminfos[i]['time_steps'] for i in range(len(siminfos))])
+    X, Y, M, Best, Worst = zip(*get_min_max(time_steps, midxs, mnames, species, thresholds))
+    fig, ax = plt.subplots()
+    alpha = 0.5
+    plt.loglog(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
+    plt.loglog(X, Y, marker="^", color='#1b9e77', label="Mass Fractions")
+    plt.loglog(X, M, marker="o", color='#d95f02', label="Moles")
+    # labels and ticks
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    ax.set_ylabel("Time steps", fontsize=14)
+    ax.set_xlabel("Number of Species", fontsize=14)
+    ax.legend(loc='upper left')
+    plt.savefig(os.path.join("figures", "Timesteps-Nspecies.pdf"))
+    plt.close()
+    
 
 def count_reaction_types(datadir):
     directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),"models")
