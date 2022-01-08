@@ -1,22 +1,22 @@
+import numpy as np
+import cantera as ct
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import ruamel.yaml, os, random, inspect, importlib, operator
-import numpy as np
+from cantera_adaptive_testing.iutils import *
 import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.plotter as plotter
-import cantera as ct
+import ruamel.yaml, os, random, inspect, importlib, operator
+
+
+# set plot font computer modern
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
-
+# getting yaml for use in functions
 yaml = ruamel.yaml.YAML()
 
 
-def getZeroKeyDictionary(keys):
-    return {k: 0 for k in keys}
-
-
-def countUniqueModYamls(datadir):
+def count_uniq_yamls(datadir):
     files = os.listdir(datadir)
     files = ["-".join(f.split('-')[:-1]) for f in files]
     ctrs = getZeroKeyDictionary(set(files))
@@ -27,28 +27,7 @@ def countUniqueModYamls(datadir):
         print(r)
 
 
-def getYamlData(yamlFileName):
-    data = dict()
-    yaml = ruamel.yaml.YAML()
-    f = open(yamlFileName, 'r')
-    previous = yaml.load(f)
-    data.update(previous)
-    return data
-
-
-def sortYamlData(data, reverse=False):
-    sorted_data = []
-    for key in data:
-        for pt in data[key]:
-            subdata = data[key][pt]
-            numerical = subdata["numerical"]
-            thermo = subdata["thermo"]
-            sorted_data.append((pt, int(thermo["nspecies"]), key, float(subdata["runtime_seconds"]), float(subdata["sim_end_time"]), int(thermo["nreactions"]), float(numerical["threshold"]), int(numerical["totalLinIters"]), int(numerical["totalNonlinIters"]), float(numerical["sparsity"])))
-    sorted_data = sorted(sorted_data, key=operator.itemgetter(0, 1, 2, 7), reverse=reverse)
-    return sorted_data
-
-
-def CombineDirIntoOneYaml(datadir):
+def combine_dir(datadir):
     files = os.listdir(datadir)
     yaml = ruamel.yaml.YAML()
     # get log file name
@@ -74,18 +53,8 @@ def CombineDirIntoOneYaml(datadir):
         yaml.dump(data, f)
 
 
-def getRangesPts(pts):
-    counts = [pts.count(s) for s in set(pts)]
-    idxs = []
-    ctr = 0
-    for ct in counts:
-        idxs.append((ctr, ct + ctr))
-        ctr += ct
-
-    return idxs
-
-
-def AverageFileEntries(log_file):
+# FIXME:
+def average_file_entries(log_file):
     data = getYamlData(log_file)
     sorted_data = sortYamlData(data)
     pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
@@ -139,26 +108,9 @@ def AverageFileEntries(log_file):
         yaml.dump(newdata, f)
 
 
-def CombineAndAverage(datadir):
-    CombineDirIntoOneYaml(datadir)
-    AverageFileEntries("{:s}.yaml".format(datadir))
-
-
-def getPlotData(datafile, problem, reverse=False):
-    data = getYamlData(datafile)
-    sorted_data = sortYamlData(data, reverse=reverse)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
-    # getting problem type
-    idxs = getRangesPts(pts)
-    pidx = 0
-    for idx in idxs:
-        if pts[idx[0]] == problem:
-            pidx = idx
-    if pidx == 0:
-        raise Exception("{:s} undefined".format(problem))
-    pix, piy = pidx
-    # getting updated data
-    return sorted_data[pix:piy]
+def combine_and_average(datadir):
+    combine_dir(datadir)
+    average_file_entries("{:s}.yaml".format(datadir))
 
 
 def plot_model_based(datafile, problem="pressure_problem"):
@@ -198,23 +150,6 @@ def plot_model_based(datafile, problem="pressure_problem"):
         ax.set_ylabel('Linear Iterations', fontsize=14)
         plt.savefig(os.path.join("figures", "Sparsities-{:s}-{:s}-{:d}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
-
-
-def getMinMaxData(runtimes, midxs, mnames, species, thresholds):
-    print('-----------------------------------------------------------')
-    moddata = []
-    runtimes = np.array(runtimes)
-    for mix, miy in midxs:
-        threshs = thresholds[mix:miy]
-        best = np.amin(runtimes[mix+2:miy])
-        worst = np.amax(runtimes[mix+2:miy])
-        locb = np.where(best == runtimes[mix+2:miy])[0][0]
-        locw = np.where(worst == runtimes[mix+2:miy])[0][0]
-        entry = (species[mix], runtimes[mix], runtimes[mix+1], best, worst)
-        print("{:s}:{:d} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[mix]/worst, runtimes[mix]/best))
-        moddata.append(entry)
-    print('-----------------------------------------------------------')
-    return moddata
 
 
 def plot_log_based(datafile, problem="pressure_problem"):
@@ -273,7 +208,7 @@ def plot_log_based(datafile, problem="pressure_problem"):
     plt.close()
 
 
-def countReactionTypes(datadir):
+def count_reaction_types(datadir):
     directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),"models")
     files = os.listdir(directory)
     files.sort()
@@ -335,7 +270,7 @@ def plot_threshold_boxwhisker(datafile, problem="pressure_problem"):
     plt.close()
 
 
-def produceReactionTypeFigure(datadir):
+def plot_rtype_figure(datadir):
     directory = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)),"models"), "study-test-set")
     files = os.listdir(directory)
     files.sort()

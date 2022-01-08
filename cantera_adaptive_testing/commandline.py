@@ -1,5 +1,5 @@
 import argparse, inspect, os, importlib, random
-import cantera_adaptive_testing.utilities as utilities
+import cantera_adaptive_testing.cutils as cutils
 import cantera_adaptive_testing.models as models
 from mpi4py import MPI
 import multiprocessing as mp
@@ -99,7 +99,7 @@ def commandLineUtilities():
     parser.add_argument("data", type=str, help="Specify either the directory or specific yaml file used")
     parser.add_argument("utility", type=str, help="Specify the utility to be applied")
     args = parser.parse_args()
-    options = inspect.getmembers(utilities, inspect.isfunction)
+    options = inspect.getmembers(cutils, inspect.isfunction)
     options = {element[0]: element[1] for element in options}
 
     if args.utility in options:
