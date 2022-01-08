@@ -98,12 +98,13 @@ def commandLineUtilities():
     This configure and plot data in a useful form.""")
     parser.add_argument("data", type=str, help="Specify either the directory or specific yaml file used")
     parser.add_argument("utility", type=str, help="Specify the utility to be applied")
+    parser.add_argument('-p', '--problem', type=str, default="pressure_problem", help="Use this flag to set the problem type for functions that take one.")
     args = parser.parse_args()
     options = inspect.getmembers(cutils, inspect.isfunction)
     options = {element[0]: element[1] for element in options}
-
+    kwargs = vars(args)
     if args.utility in options:
-        options[args.utility](args.data)
+        options[args.utility](args.data, **kwargs)
     else:
         print("Valid options are:")
         for k in options:

@@ -143,6 +143,7 @@ class ModelBase(object):
             # pre-run operations
             self.currRun = {func.__name__:{}}
             self.sim_end_time = 0
+            self.exception = {}
             # run problem
             t0 = time.time_ns()
             func(self)
@@ -153,7 +154,9 @@ class ModelBase(object):
             self.currRun[func.__name__].update(self.thermo_data)
             self.currRun[func.__name__].update(num_stats)
             if self.max_time_step is not None:
-                self.currRun["numerical"].update({"max_time_step":self.max_time_step})
+                self.currRun[func.__name__]['nonlinear_solver'].update({"maxtimestep":self.max_time_step})
+            if self.exception:
+                self.currRun[func.__name__].update(self.exception)
             self.logdata.update(self.currRun)
             return
         return wrapped
@@ -201,7 +204,7 @@ class ModelBase(object):
                 self.sim_end_time = curr_time
                 self.ctr += 1
             except Exception as e:
-                self.currRun.update({"Exception": str(e)})
+                self.exception = {"exception": str(e)}
                 curr_time = tf
             if self.write:
                 states.append(reactor.thermo.state)
@@ -270,7 +273,7 @@ class ModelBase(object):
                 self.sim_end_time = curr_time
                 self.ctr += 1
             except Exception as e:
-                self.currRun.update({"Exception": str(e)})
+                self.exception = {"exception": str(e)}
                 curr_time = tf
             if self.write:
                 states.append(reactor.thermo.state, tnow=curr_time, sparsity=self.net.get_sparsity_percentage())
@@ -363,7 +366,7 @@ class ModelBase(object):
                 self.sim_end_time = curr_time
                 self.ctr += 1
             except Exception as e:
-                self.currRun.update({"Exception": str(e)})
+                self.exception = {"exception": str(e)}
                 curr_time = tf
             if self.write:
                 working_array[:] = 0

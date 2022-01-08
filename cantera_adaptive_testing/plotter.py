@@ -29,10 +29,12 @@ def plot_precon_species_barchart(labels, y, manual_max=None):
     ax.set_yticklabels(ylbls, fontsize=14)
     newx = [x[i] for i in range(0, len(x)-1, 2)] + [x[-1], ]
     ax.set_xticks(newx)
-    newlabels = [labels[i] for i in range(0, len(labels)-1, 2)] + ["$0$", ]
+    if (len(labels)) > 1:
+        newlabels = [labels[i] for i in range(0, len(labels)-1, 2)] + ["$0$", ]
+    else:
+        newlabels = labels
     ax.set_xticklabels(newlabels, fontsize=14)
     ax.set_xlabel('Threshold', fontsize=14)
-    # plt.xticks(rotation=90)
     return fig, ax
 
 

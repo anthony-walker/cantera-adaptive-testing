@@ -1,14 +1,14 @@
-import ruamel.yaml, os, random, inspect, importlib, operator
-
+import ruamel.yaml, operator
+import numpy as np
 
 yaml = ruamel.yaml.YAML()
 
 
-def getZeroKeyDictionary(keys):
+def get_zero_dict(keys):
     return {k: 0 for k in keys}
 
 
-def getYamlData(yamlFileName):
+def get_yaml_data(yamlFileName):
     data = dict()
     yaml = ruamel.yaml.YAML()
     f = open(yamlFileName, 'r')
@@ -17,19 +17,35 @@ def getYamlData(yamlFileName):
     return data
 
 
-def sortYamlData(data, reverse=False):
+def sort_yaml_data(data, reverse=False, sortkey=operator.itemgetter(0, 1, 2, 3)):
     sorted_data = []
     for key in data:
         for pt in data[key]:
             subdata = data[key][pt]
-            numerical = subdata["numerical"]
-            thermo = subdata["thermo"]
-            sorted_data.append((pt, int(thermo["nspecies"]), key, float(subdata["runtime_seconds"]), float(subdata["sim_end_time"]), int(thermo["nreactions"]), float(numerical["threshold"]), int(numerical["totalLinIters"]), int(numerical["totalNonlinIters"]), float(numerical["sparsity"])))
-    sorted_data = sorted(sorted_data, key=operator.itemgetter(0, 1, 2, 7), reverse=reverse)
+            siminfo = subdata['simulation_info']
+            linsol = subdata['linear_solver']
+            nonlinsol = subdata['nonlinear_solver']
+            thermo = subdata['thermo']
+            currdata = [pt, thermo['nspecies'], key, siminfo['runtime_seconds'], linsol['threshold'], siminfo, thermo, linsol, nonlinsol]
+            sorted_data.append(currdata)
+    sorted_data = sorted(sorted_data, key=sortkey, reverse=reverse)
     return sorted_data
 
 
-def getRangesPts(pts):
+def get_plot_data(datafile, *args, **kwargs):
+    problem=kwargs['problem']
+    reverse = kwargs['reverse'] if 'reverse' in kwargs else False
+    data = get_yaml_data(datafile)
+    sorted_data = sort_yaml_data(data, reverse=reverse)
+    prob_data = []
+    for i in range(len(sorted_data)):
+        if (sorted_data[i][0] == problem):
+            prob_data.append(sorted_data[i])
+    # getting updated data
+    return prob_data
+
+
+def get_range_pts(pts):
     counts = [pts.count(s) for s in set(pts)]
     idxs = []
     ctr = 0
@@ -39,24 +55,7 @@ def getRangesPts(pts):
     return idxs
 
 
-def getPlotData(datafile, problem, reverse=False):
-    data = getYamlData(datafile)
-    sorted_data = sortYamlData(data, reverse=reverse)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
-    # getting problem type
-    idxs = getRangesPts(pts)
-    pidx = 0
-    for idx in idxs:
-        if pts[idx[0]] == problem:
-            pidx = idx
-    if pidx == 0:
-        raise Exception("{:s} undefined".format(problem))
-    pix, piy = pidx
-    # getting updated data
-    return sorted_data[pix:piy]
-
-
-def getMinMaxData(runtimes, midxs, mnames, species, thresholds):
+def get_min_max(runtimes, midxs, mnames, species, thresholds):
     print('-----------------------------------------------------------')
     moddata = []
     runtimes = np.array(runtimes)
@@ -67,7 +66,7 @@ def getMinMaxData(runtimes, midxs, mnames, species, thresholds):
         locb = np.where(best == runtimes[mix+2:miy])[0][0]
         locw = np.where(worst == runtimes[mix+2:miy])[0][0]
         entry = (species[mix], runtimes[mix], runtimes[mix+1], best, worst)
-        print("{:s}:{:d} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[mix]/worst, runtimes[mix]/best))
+        print("{:s}:{:0.0f} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[mix]/worst, runtimes[mix]/best))
         moddata.append(entry)
     print('-----------------------------------------------------------')
     return moddata

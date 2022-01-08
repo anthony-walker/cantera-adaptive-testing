@@ -1,11 +1,9 @@
 import numpy as np
 import cantera as ct
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 from cantera_adaptive_testing.iutils import *
-import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.plotter as plotter
-import ruamel.yaml, os, random, inspect, importlib, operator
+import ruamel.yaml, os, warnings
 
 
 # set plot font computer modern
@@ -16,10 +14,10 @@ plt.rcParams["font.family"] = 'serif'
 yaml = ruamel.yaml.YAML()
 
 
-def count_uniq_yamls(datadir):
+def count_uniq_yamls(datadir, *args, **kwargs):
     files = os.listdir(datadir)
     files = ["-".join(f.split('-')[:-1]) for f in files]
-    ctrs = getZeroKeyDictionary(set(files))
+    ctrs = get_zero_dict(set(files))
     for f in files:
         ctrs[f] += 1
     res = sorted([(k, ctrs[k]) for k in ctrs])
@@ -27,7 +25,7 @@ def count_uniq_yamls(datadir):
         print(r)
 
 
-def combine_dir(datadir):
+def combine_dir(datadir, *args, **kwargs):
     files = os.listdir(datadir)
     yaml = ruamel.yaml.YAML()
     # get log file name
@@ -53,72 +51,57 @@ def combine_dir(datadir):
         yaml.dump(data, f)
 
 
-# FIXME:
-def average_file_entries(log_file):
-    data = getYamlData(log_file)
-    sorted_data = sortYamlData(data)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
-    # form new data
-    newdata = {}
-    unikeys = ["-".join(k.split("-")[:-1]) for k in keys]
-    for uk in set(unikeys):
-        for k in keys:
-            if uk == "-".join(k.split("-")[:-1]):
-                newdata.update({uk: data[k]})
-                break
-    # average data
-    keys = unikeys
-    idxs = getRangesPts(pts)
-    for ix, iy in idxs:
-        curr_pt = pts[ix]
-        # setup zero dictionaries
-        uks = set(keys[ix:iy])
-        curr_runtimes = getZeroKeyDictionary(uks)
-        curr_ctrs = getZeroKeyDictionary(uks)
-        curr_liniters = getZeroKeyDictionary(uks)
-        curr_endtimes = getZeroKeyDictionary(uks)
-        curr_nonliniters = getZeroKeyDictionary(uks)
-        curr_sparsities = getZeroKeyDictionary(uks)
-        # compute sum
-        for j in range(ix, iy, 1):
-            curr_key = keys[j]
-            curr_ctrs[curr_key] += 1
-            curr_runtimes[curr_key] += runtimes[j]
-            curr_liniters[curr_key] += liniters[j]
-            curr_nonliniters[curr_key] += nonliniters[j]
-            curr_sparsities[curr_key] += sparsities[j]
-            curr_endtimes[curr_key] += endtimes[j]
-        # compute average
-        for ck in curr_ctrs:
-            curr_runtimes[ck] /= curr_ctrs[ck]
-            curr_liniters[ck] /= curr_ctrs[ck]
-            curr_nonliniters[ck] /= curr_ctrs[ck]
-            curr_sparsities[ck] /= curr_ctrs[ck]
-            curr_endtimes[ck] /= curr_ctrs[ck]
-        # update data
-        for ck in curr_ctrs:
-            numerical = newdata[ck][curr_pt]["numerical"]
-            newdata[ck][curr_pt]["runtime_seconds"] = curr_runtimes[ck]
-            newdata[ck][curr_pt]["sim_end_time"] = curr_endtimes[ck]
-            numerical["totalLinIters"] = curr_liniters[ck]
-            numerical["totalNonlinIters"] = curr_nonliniters[ck]
-            numerical["sparsity"] = curr_sparsities[ck]
-    # create a new file with merged yaml
+def average_file_entries(log_file, *args, **kwargs):
+    data = get_yaml_data(log_file)
+    unikeys = set(["-".join(k.split('-')[:-1]) for k in data.keys()])
+    avgdata = {}
+    for key in data:
+        currkey = "-".join(key.split('-')[:-1])
+        if currkey in avgdata:
+            for pt in data[key]:
+                sectdata = data[key][pt]
+                if 'exception' in sectdata.keys():
+                     warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
+                else:
+                    for sect in sectdata:
+                        for ele in sectdata[sect]:
+                            eledata = sectdata[sect][ele]
+                            if isinstance(eledata, bool):
+                                pass # do nothing
+                            elif  isinstance(eledata,(int, float)):
+                                avgdata[currkey][pt][sect][ele] = (avgdata[currkey][pt][sect][ele] + eledata)/2               
+        else:
+            avgdata[currkey] = data[key]
+            except_keys = []
+            for pt in avgdata[currkey]:
+                subdata = avgdata[currkey][pt]
+                if 'exception' in subdata.keys():
+                    warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
+                    except_keys.append((currkey, pt))
+            for ck, pt in except_keys:
+                del avgdata[ck][pt]
+            # check if entry has any data and delete if not
+            if not avgdata[currkey]:
+                del avgdata[currkey]
+            
+
+    # create merged yaml
     with open("averaged-{:s}".format(log_file), "w") as f:
-        yaml.dump(newdata, f)
-
-
-def combine_and_average(datadir):
+        yaml.dump(avgdata, f)
+    
+    
+def combine_and_average(datadir, *args, **kwargs):
     combine_dir(datadir)
     average_file_entries("{:s}.yaml".format(datadir))
 
 
-def plot_model_based(datafile, problem="pressure_problem"):
-    sorted_data = getPlotData(datafile, problem, reverse=True)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
+def plot_model_based(datafile, *args, **kwargs):
+    problem = kwargs['problem']
+    kwargs['reverse'] = True
+    sorted_data = get_plot_data(datafile, *args, **kwargs)
+    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
     mnames = [k.split("-")[0] for k in keys]
-    midxs = getRangesPts(mnames)
-
+    midxs = get_range_pts(mnames)
     for mix, miy in midxs:
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
@@ -130,34 +113,36 @@ def plot_model_based(datafile, problem="pressure_problem"):
         speedup = curr_runtimes[-1]/curr_runtimes[:-1]
         fig, ax = plotter.plot_precon_species_barchart(labels[:-2], speedup[:-1])
         ax.set_ylabel('Speed-up', fontsize=14)
-        plt.savefig(os.path.join("figures", "Speedup-{:s}-{:s}-{:d}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
         # plot liniters
-        crr_liniters = np.array(liniters[mix:miy])
-        fig, ax = plotter.plot_precon_species_barchart(labels, crr_liniters)
+        crr_liniters = np.array([ linsols[i]['iters'] for i in range(mix, miy-2, 1)])
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters)
         ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:d}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
-        # plot nonliniters
-        crr_nonliniters = np.array(nonliniters[mix:miy])
-        fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters)
-        ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:d}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
         # plot sparsities
-        crr_sparsities = np.array(sparsities[mix+1:miy])
-        fig, ax = plotter.plot_precon_species_barchart(labels[1:], crr_sparsities, manual_max=1)
-        ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "Sparsities-{:s}-{:s}-{:d}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        crr_sparsities = np.array([ linsols[i]['sparsity'] for i in range(mix, miy-2, 1)])
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_sparsities, manual_max=1)
+        ax.set_ylabel('Sparsity', fontsize=14)
+        plt.savefig(os.path.join("figures", "Sparsities-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
+        # # FIXME: issue is that this can include non-preconditioned
+        # # plot nonliniters
+        # crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
+        # fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters)
+        # ax.set_ylabel('Nonlinear Iterations', fontsize=14)
+        # plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        # plt.close()
 
 
-def plot_log_based(datafile, problem="pressure_problem"):
-    sorted_data = getPlotData(datafile, problem)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
+def plot_log_based(datafile, *args, **kwargs):
+    problem = kwargs['problem']
+    sorted_data = get_plot_data(datafile, *args, **kwargs)
+    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
     mnames = [k.split("-")[0] for k in keys]
-    midxs = getRangesPts(mnames)
-    X, Y, M, Best, Worst = zip(*getMinMaxData(runtimes, midxs, mnames, species, thresholds))
+    midxs = get_range_pts(mnames)
+    X, Y, M, Best, Worst = zip(*get_min_max(runtimes, midxs, mnames, species, thresholds))
     # plot clock time
     fig, ax = plt.subplots()
     alpha = 0.5
@@ -175,12 +160,11 @@ def plot_log_based(datafile, problem="pressure_problem"):
     plt.savefig(os.path.join("figures", "Clocktime-Nspecies.pdf"))
     plt.close()
     # plot iterations
-    X, Y, M, Best, Worst = zip(*getMinMaxData(liniters, midxs, mnames, species, thresholds))
+    liniters = np.array([ linsols[i]['iters'] for i in range(len(linsols))])
+    X, Y, M, Best, Worst = zip(*get_min_max(liniters, midxs, mnames, species, thresholds))
     fig, ax = plt.subplots()
     alpha = 0.5
     plt.scatter(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
-    # plt.loglog(X, Y, marker="^", color='#1b9e77', label="Mass Fractions")
-    # plt.loglog(X, M, marker="o", color='#d95f02', label="Moles")
     # labels and ticks
     plt.xscale("log")
     plt.yscale("log")
@@ -188,11 +172,11 @@ def plot_log_based(datafile, problem="pressure_problem"):
     plt.yticks([10**i for i in range(3, 6, 1)], fontsize=14)
     ax.set_ylabel("Linear Iterations", fontsize=14)
     ax.set_xlabel("Number of Species", fontsize=14)
-    # ax.legend(loc='upper left')
     plt.savefig(os.path.join("figures", "LinIters-Nspecies.pdf"))
     plt.close()
     # plot nonlinear iterations
-    X, Y, M, Best, Worst = zip(*getMinMaxData(nonliniters, midxs, mnames, species, thresholds))
+    nonliniters = np.array([ linsols[i]['iters'] for i in range(len(nonlinsols))])
+    X, Y, M, Best, Worst = zip(*get_min_max(nonliniters, midxs, mnames, species, thresholds))
     fig, ax = plt.subplots()
     alpha = 0.5
     plt.loglog(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
@@ -240,13 +224,14 @@ def count_reaction_types(datadir):
         print("---------------------------------------")
 
 
-def plot_threshold_boxwhisker(datafile, problem="pressure_problem"):
-    sorted_data = getPlotData(datafile, problem, reverse=False)
-    pts, species, keys, runtimes, endtimes, reactions, thresholds, liniters, nonliniters, sparsities = zip(*sorted_data)
+def plot_box_threshold(datafile, *args, **kwargs):
+    problem = kwargs['problem']
+    sorted_data = get_plot_data(datafile, *args, **kwargs)
+    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
     mnames = [k.split("-")[0] for k in keys]
-    midxs = getRangesPts(mnames)
+    midxs = get_range_pts(mnames)
     unique_species = sorted(list(set(species)))
-    labels = ["{:d}".format(x) for x in unique_species]
+    labels = ["{:0.0f}".format(x) for x in unique_species]
     normalized_runtimes = []
     w = 0.1
     width = lambda p, w: 10**(np.log10(p)+w/2.)-10**(np.log10(p)-w/2.)
@@ -270,7 +255,7 @@ def plot_threshold_boxwhisker(datafile, problem="pressure_problem"):
     plt.close()
 
 
-def plot_rtype_figure(datadir):
+def plot_rtype_figure(datadir, *args, **kwargs):
     directory = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)),"models"), "study-test-set")
     files = os.listdir(directory)
     files.sort()
