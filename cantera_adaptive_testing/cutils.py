@@ -58,22 +58,24 @@ def average_file_entries(log_file, *args, **kwargs):
     for key in data:
         currkey = "-".join(key.split('-')[:-1])
         if currkey in avgdata:
-            for pt in data[key]:
+            for pt in data[key]: 
                 sectdata = data[key][pt]
                 if 'exception' in sectdata.keys():
                      warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
                 else:
+                    avgdata[currkey][pt]['simulation_info']['runs'] += 1
                     for sect in sectdata:
                         for ele in sectdata[sect]:
                             eledata = sectdata[sect][ele]
-                            if isinstance(eledata, bool):
+                            if isinstance(eledata, bool) or ele == 'threshold':
                                 pass # do nothing
                             elif  isinstance(eledata,(int, float)):
-                                avgdata[currkey][pt][sect][ele] = (avgdata[currkey][pt][sect][ele] + eledata)/2               
+                                avgdata[currkey][pt][sect][ele] += eledata  
         else:
             avgdata[currkey] = data[key]
             except_keys = []
             for pt in avgdata[currkey]:
+                avgdata[currkey][pt]['simulation_info']['runs'] = 1
                 subdata = avgdata[currkey][pt]
                 if 'exception' in subdata.keys():
                     warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
@@ -83,8 +85,36 @@ def average_file_entries(log_file, *args, **kwargs):
             # check if entry has any data and delete if not
             if not avgdata[currkey]:
                 del avgdata[currkey]
-            
-
+    #divide by number of terms ['simulation_info']['runs']
+    for k in avgdata:
+        for pt in avgdata[k]:
+            currctr = avgdata[k][pt]['simulation_info']['runs']
+            for sect in avgdata[k][pt]:
+                for ele in avgdata[k][pt][sect]:
+                    if ele != 'runs' and ele != 'threshold':  
+                        if isinstance(avgdata[k][pt][sect][ele], bool):
+                                    pass # do nothing
+                        elif  isinstance(avgdata[k][pt][sect][ele], (int, float)):
+                            avgdata[k][pt][sect][ele] /= currctr  
+    # remove any that does not have at least mass, mole, and precon
+    models = list(set([key.split('-')[0] for key in avgdata]))
+    exclude_models = []
+    for m in models:    
+        substrings = "{:s}-precon {:s}-mass {:s}-moles".format(m, m, m)
+        substrings = substrings.split(' ')
+        include_mod = True
+        for ss in substrings:
+            include_mod = any(ss in s for s in avgdata.keys()) and include_mod
+        if not include_mod:
+            exclude_models.append(m)
+    exclude_keys = []
+    for m in exclude_models:
+        for k in avgdata:
+            if m in k:
+                exclude_keys.append(k)
+    for ex in exclude_keys:
+        warnings.warn('Insufficient model data, excluding {:s}'.format(ex))
+        del avgdata[ex]
     # create merged yaml
     with open("averaged-{:s}".format(log_file), "w") as f:
         yaml.dump(avgdata, f)
@@ -100,6 +130,8 @@ def plot_model_based(datafile, *args, **kwargs):
     kwargs['reverse'] = True
     sorted_data = get_plot_data(datafile, *args, **kwargs)
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
+    # for i in range(len(pts)):
+    #     print(pts[i], species[i], keys[i], runtimes[i], thresholds[i])
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
     for mix, miy in midxs:
