@@ -40,10 +40,11 @@ class ModelBase(object):
         else:
             self.precName = "-mass"
         self.write = kwargs["write"] if "write" in kwargs else False
-        self.dataDir, self.figDir = self.get_directories()
+        out_dir = kwargs["out_dir"] if "out_dir" in kwargs else "data"
+        self.dataDir, self.figDir = self.get_directories(data_name=out_dir)
         # log variables
         self.runName = self.__class__.__name__ + self.precName + "-" + str(random.randint(0, 1e9))
-        while (os.path.exists("./data/"+self.runName+".yaml")):
+        while (os.path.exists(os.path.join(self.dataDir, self.runName+".yaml"))):
             self.runName = self.__class__.__name__ + self.precName + "-" + str(random.randint(0, 1e9))
         self.log = kwargs["log"] if "log" in kwargs else True
         self.logfile = self.runName+".yaml"
@@ -68,9 +69,9 @@ class ModelBase(object):
     def set_threshold(self, threshold):
         self.threshold = threshold
 
-    def get_directories(self):
+    def get_directories(self, data_name="data", fig_name="figures"):
         cwd = os.getcwd()
-        return os.path.join(cwd, "data"), os.path.join(cwd, "figures")
+        return os.path.join(cwd, data_name), os.path.join(cwd, fig_name)
 
     def get_test_set_path(self, model):
         return os.path.join(os.path.join(os.path.dirname(__file__), "models"), model)

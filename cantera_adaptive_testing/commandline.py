@@ -90,6 +90,7 @@ def parserSetup(add_mod=True):
     parser.add_argument('--no_vol_prob', action='store_false', default=True, help="Turn off solving the volume problem.")
     parser.add_argument('--no_net_prob', action='store_false', default=True, help="Turn off solving the network problem.")
     parser.add_argument('-MTS', '--max_time_step', type=float, help="Set a fixed max time step value.")
+    parser.add_argument('-O', "--out_dir", type=str, default="data", help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
     return parser
 
 
