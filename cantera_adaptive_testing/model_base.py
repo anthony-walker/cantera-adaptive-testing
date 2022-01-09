@@ -129,7 +129,6 @@ class ModelBase(object):
         lin_stats = dict(zip(lin_opts, lin_stats))
         lin_stats['solver'] = self.solver
         lin_stats['threshold'] = self.threshold
-        lin_stats['sparsity'] = self.net.get_sparsity_percentage()
         lin_stats['preconditioned'] = self.precon_on
         # nonlinear solver stats
         nonlin_opts = ['iters', 'conv_fails']
@@ -265,7 +264,7 @@ class ModelBase(object):
         # Integrate
         tf = 1.0
         curr_time = 0.0
-        states = ct.SolutionArray(gas, extra=['tnow', 'sparsity'])
+        states = ct.SolutionArray(gas, extra=['tnow',])
         self.ctr = 0
         while curr_time < tf:
             # perform time integration
@@ -277,7 +276,7 @@ class ModelBase(object):
                 self.exception = {"exception": str(e)}
                 curr_time = tf
             if self.write:
-                states.append(reactor.thermo.state, tnow=curr_time, sparsity=self.net.get_sparsity_percentage())
+                states.append(reactor.thermo.state, tnow=curr_time)
         if self.write:
             csvName = self.runName + "-" + "volume" + ".csv"
             csvName = os.path.join(self.dataDir, csvName)
@@ -342,8 +341,7 @@ class ModelBase(object):
         # apply numerical options
         self.apply_numerical_options()
         # Making a loop to store data for entire network
-        names_array = ['sparsity',]
-        offset = len(names_array)
+        names_array = []
         state_len = gas.n_species + 1
         for c in range(state_len):
             names_array.append(combustor.component_name(c)+"-v")
@@ -352,11 +350,10 @@ class ModelBase(object):
         total_len = len(names_array)
         state_array = np.empty((0, total_len), dtype=float)
         working_array = np.ndarray((total_len,))
-        working_array[:] = 0
-        working_array[offset] = combustor.T
-        working_array[offset+1:state_len+offset] = gas.X
-        working_array[state_len + offset] = combustor.T
-        working_array[state_len+offset+1:] = gas.X
+        working_array[0] = combustor.T
+        working_array[1:state_len] = gas.X
+        working_array[state_len:state_len + 1] = combustor.T
+        working_array[state_len+1:] = gas.X
         tf = 1.0
         curr_time = 0.0
         self.net.set_initial_time(curr_time)
@@ -370,12 +367,10 @@ class ModelBase(object):
                 self.exception = {"exception": str(e)}
                 curr_time = tf
             if self.write:
-                working_array[:] = 0
-                working_array[offset-1] = self.net.get_sparsity_percentage()
-                working_array[offset] = combustor.T
-                working_array[offset+1:state_len+offset] = gas.X
-                working_array[state_len + offset] = combustor.T
-                working_array[state_len+offset+1:] = gas.X
+                working_array[0] = combustor.T
+                working_array[1:state_len] = gas.X
+                working_array[state_len:state_len + 1] = combustor.T
+                working_array[state_len+1:] = gas.X
                 state_array = np.append(state_array, np.array((working_array,)), axis=0)
         # write data out
         if self.write:
