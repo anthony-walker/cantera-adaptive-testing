@@ -17,11 +17,11 @@ do
     # ADD_ARGS is a string argumenent given to the the launch file to add arguements to the run e.g. "--no_vol_prob --no_net_prob" or "--max_time_step 1e-8"
     for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","4G" "Butane","4G" "NHeptane","4G" "IsoOctane","4G" "ThreeMethylHeptane","6G" "NHexadecane","6G" "MethylFiveDeconate","6G" "MethylDeconateNHeptane","8G" "TwoMethylnonadecane","12G"
     do
-        IFS=","; 
+        IFS=",";
         set -- $j;
-        export model=$1
+        export CURR_MODEL=$1
         export AMS=$2
-        sbatch -J "$model-prec-$i" precon.sh --mem=$AMS
+        sbatch -J "$CURR_MODEL-prec-$i" precon.sh --mem=$AMS
         sleep 0.1
     done
 done
@@ -32,13 +32,13 @@ do
     # ADD_ARGS is a string argumenent given to the the launch file to add arguements to the run e.g. "--no_vol_prob --no_net_prob" or "--max_time_step 1e-8"
     for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","4G" "Butane","4G" "NHeptane","4G" "IsoOctane","4G" "ThreeMethylHeptane","6G" "NHexadecane","6G" "MethylFiveDeconate","6G" "MethylDeconateNHeptane","8G" "TwoMethylnonadecane","16G"
     do
-        IFS=","; 
+        IFS=",";
         set -- $j;
-        export model=$1
+        export CURR_MODEL=$1
         export AMS=$2
-        sbatch -J "$model-mass-$i" mass.sh --mem=$AMS
+        sbatch -J "$CURR_MODEL-mass-$i" mass.sh --mem=$AMS
         sleep 0.1
-	    sbatch -J "$model-mole-$i" moles.sh --mem=$AMS
+	    sbatch -J "$CURR_MODEL-mole-$i" moles.sh --mem=$AMS
         sleep 0.1
     done
 done
