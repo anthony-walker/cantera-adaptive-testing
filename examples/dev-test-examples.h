@@ -10,7 +10,6 @@
 #include "cantera/kinetics/GasKinetics.h"
 #include "cantera/transport.h"
 #include "cantera/numerics/AdaptivePreconditioner.h"
-#include "cantera/numerics/TestPrecon.h"
 //Creating reactor and reactor network
 #include "cantera/zerodim.h"
 

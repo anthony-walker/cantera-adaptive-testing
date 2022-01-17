@@ -1,12 +1,19 @@
 #!/bin/bash
 source ~/.functions
 export CURR_DIR=$(pwd)
-export EX_DIR='/home/anthony-walker/nrg-cantera-project/cantera-adaptive-testing/examples'
-rebuildCantera
+export EX_DIR='../examples'
+export CANTERA_DIR='../../cantera/'
+# Rebuild cantera
+cd $CANTERA_DIR
+scons build -j 12
+scons install prefix=$CONDA_PREFIX
+# Build example
+cd $CURR_DIR
 cd $EX_DIR
 scons;
 ./dev-test.out;
-gprof -Q -D -b dev-test.out gmon.out>$CURR_DIR/profiles/$1
+# profile example
+gprof -Q -b dev-test.out gmon.out>$CURR_DIR/profiles/$1
 
 # -Q no call graph
 # -D ignore non-functions

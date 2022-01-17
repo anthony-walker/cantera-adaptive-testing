@@ -22,7 +22,8 @@ void HydrogenAutoIgnition()
     // create reactor network and set to use preconditioner
     ReactorNet sim;
     sim.addReactor(r);
-    sim.setIntegratorType(&precon, GMRES);
+    sim.setProblemType(GMRES);
+    sim.setPreconditioner(precon);
     // main loop
     double dt = 1.e-5; // interval at which output is written
     int nsteps = 100; // number of intervals
@@ -47,7 +48,8 @@ void PreconditionerTestRun()
     //Creating reactor network
     ReactorNet network;
     AdaptivePreconditioner precon;
-    network.setIntegratorType(&precon, GMRES);
+    network.setProblemType(GMRES);
+    network.setPreconditioner(precon);
     // network.setVerbose(); //Setting verbose to be true
     network.addReactor(reactor); //Adding reactor to network
     //Setting up simulation
@@ -96,7 +98,7 @@ void EigenTest()
 void JetA()
 {
     //Setting up solution object and thermo/kinetics pointers
-    std::shared_ptr<Solution> sol = newSolution("../models/JetA/JetA-detailed-NOx.yaml");
+    std::shared_ptr<Solution> sol = newSolution("../cantera_adaptive_testing/models/jetA-detailed-NOx-203.yaml");
     std::shared_ptr<ThermoPhase> gas= sol->thermo();
     std::shared_ptr<Kinetics> kin= sol->kinetics();
     gas->setState_TPX(710.0, 101325, "POSF10325:0.0040030, O2:0.16513, N2:0.62087, CO2:0.20, H:0.0100");
@@ -125,7 +127,8 @@ void JetA()
     //Creating reactor network
     ReactorNet network;
     AdaptivePreconditioner precon;
-    network.setIntegratorType(&precon, GMRES);
+    network.setProblemType(GMRES);
+    network.setPreconditioner(precon);
     // network.setVerbose(); //Setting verbose to be true
     network.addReactor(reactor); //Adding reactor to network
     //Setting up simulation

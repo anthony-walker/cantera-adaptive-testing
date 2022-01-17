@@ -3,6 +3,6 @@
 //Main implementation
 int main(int argc, char const *argv[])
 {
-    HydrogenAutoIgnition();
+    JetA();
     return 0;
 }
