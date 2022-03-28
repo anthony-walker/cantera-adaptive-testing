@@ -130,8 +130,6 @@ def plot_model_based(datafile, *args, **kwargs):
     kwargs['reverse'] = True
     sorted_data = get_plot_data(datafile, *args, **kwargs)
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
-    # for i in range(len(pts)):
-    #     print(pts[i], species[i], keys[i], runtimes[i], thresholds[i])
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
     for mix, miy in midxs:
@@ -165,6 +163,7 @@ def plot_log_based(datafile, *args, **kwargs):
     problem = kwargs['problem']
     sorted_data = get_plot_data(datafile, *args, **kwargs)
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
+    # getting names
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
     X, Y, M, Best, Worst = zip(*get_min_max(runtimes, midxs, mnames, species, thresholds))

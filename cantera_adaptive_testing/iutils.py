@@ -46,10 +46,18 @@ def get_plot_data(datafile, *args, **kwargs):
 
 
 def get_range_pts(pts):
-    counts = [pts.count(s) for s in set(pts)]
+    counts = {}
+    uniq_names = []
+    for pt in pts:
+        if pt in counts:
+            counts[pt] += 1
+        else:
+            uniq_names.append(pt)
+            counts[pt] = 1
     idxs = []
     ctr = 0
-    for ct in counts:
+    for k in uniq_names:
+        ct = counts[k]
         idxs.append((ctr, ct + ctr))
         ctr += ct
     return idxs
