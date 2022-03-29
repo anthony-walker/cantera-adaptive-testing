@@ -1,0 +1,38 @@
+network_problem:
+  exception: "\n*******************************************************************************\n\
+    CanteraError thrown by CVodesIntegrator::step:\nCVodes error encountered. Error\
+    \ code: -3\n\nAt t = 4.06826e-08 and h = 2.05418e-29, the error test failed repeatedly\
+    \ or with |h| = hmin.\nComponents with largest weighted error estimates:\n331:\
+    \ -8576.673928093545\n340: 8576.67252201662\n326: -8576.672301501998\n317: -3.6289441581420827\n\
+    577: -0.015510268074752531\n576: 0.015510268074750755\n152: -1.7831311864953027e-10\n\
+    174: 1.7831311864953027e-10\n6: 1.7831195832948313e-10\n0: 4.745483631032689e-12\n\
+    *******************************************************************************\n"
+  linear_solver: {conv_fails: 47.0, iters: 2162.0, jac_evals: 0.0, jac_vec_prod_evals: 2162.0,
+    jac_vec_setups: 0.0, prec_evals: 34.0, prec_solvs: 3827.0, preconditioned: true,
+    rhs_fd_jac_evals: 2162.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 7.0, iters: 1667.0}
+  simulation_info: {date: 10:35:34-29-03-22, runtime_seconds: 1.56208108, sim_end_time: 4.0682610560852314e-08,
+    time_steps: 788}
+  thermo: {P0-air: 101325.0, P0-fuel: 2026500.0, T0: 300, V0-air: 1.0, V0-fuel: 0.001,
+    air: 'O2:1.0, N2:3.76', equiv_ratio: 1, fuel: C4H8O1-2:1.0, model: 2-butonane-ch3coch2ch3-315-1803.yaml,
+    mole-reactor: true, nreactions: 1802, nspecies: 315}
+pressure_problem:
+  linear_solver: {conv_fails: 170.0, iters: 13316.0, jac_evals: 0.0, jac_vec_prod_evals: 13316.0,
+    jac_vec_setups: 0.0, prec_evals: 80.0, prec_solvs: 17761.0, preconditioned: true,
+    rhs_fd_jac_evals: 13316.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 2.0, iters: 4450.0}
+  simulation_info: {date: 10:35:34-29-03-22, runtime_seconds: 1.91702489, sim_end_time: 1.0046646610152685,
+    time_steps: 3872}
+  thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
+    fuel: C4H8O1-2:1.0, model: 2-butonane-ch3coch2ch3-315-1803.yaml, mole-reactor: true,
+    nreactions: 1802, nspecies: 315}
+volume_problem:
+  linear_solver: {conv_fails: 0.0, iters: 114.0, jac_evals: 0.0, jac_vec_prod_evals: 114.0,
+    jac_vec_setups: 0.0, prec_evals: 1.0, prec_solvs: 166.0, preconditioned: true,
+    rhs_fd_jac_evals: 114.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 0.0, iters: 57.0}
+  simulation_info: {date: 10:35:34-29-03-22, runtime_seconds: 0.48942873, sim_end_time: 1.0138868345882879,
+    time_steps: 47}
+  thermo: {P0: 2026500.0, T0: 1000, V0: 0.001, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
+    fuel: C4H8O1-2:1.0, model: 2-butonane-ch3coch2ch3-315-1803.yaml, mole-reactor: true,
+    nreactions: 1802, nspecies: 315}

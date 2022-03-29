@@ -41,6 +41,17 @@ class JetA(ModelBase):
         self.model = self.get_test_set_path('jetA-detailed-NOx-203.yaml')
         self.fuel = 'POSF10325:1.0'
 
+class TwoButonane(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(TwoButonane, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('2-butonane-ch3coch2ch3-315-1803.yaml')
+        self.fuel = 'C4H8O1-2:1.0'
+
+class IsoButene(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(IsoButene, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('isobutene-ic4h8-493-2716.yaml')
+        self.fuel = 'IC4H8:1.0'
 
 class NHeptane(ModelBase):
     def __init__(self, *args, **kwargs):
