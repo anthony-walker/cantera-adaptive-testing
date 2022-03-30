@@ -1,0 +1,28 @@
+network_problem:
+  linear_solver: {conv_fails: 1.0, iters: 845.0, jac_evals: 0.0, jac_vec_prod_evals: 845.0,
+    jac_vec_setups: 0.0, prec_evals: 11.0, prec_solvs: 1464.0, preconditioned: true,
+    rhs_fd_jac_evals: 845.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 1.0, iters: 684.0}
+  simulation_info: {date: 09:54:20-29-03-22, runtime_seconds: 0.0481714, sim_end_time: 1.0027812807947236,
+    time_steps: 528}
+  thermo: {P0-air: 101325.0, P0-fuel: 2026500.0, T0: 300, V0-air: 1.0, V0-fuel: 0.001,
+    air: 'O2:1.0, N2:3.76', equiv_ratio: 1, fuel: H2:1.0, model: hydrogen-10.yaml,
+    mole-reactor: true, nreactions: 28, nspecies: 10}
+pressure_problem:
+  linear_solver: {conv_fails: 257.0, iters: 5953.0, jac_evals: 0.0, jac_vec_prod_evals: 5953.0,
+    jac_vec_setups: 0.0, prec_evals: 81.0, prec_solvs: 8190.0, preconditioned: true,
+    rhs_fd_jac_evals: 5953.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 17.0, iters: 2284.0}
+  simulation_info: {date: 09:54:20-29-03-22, runtime_seconds: 0.03350817, sim_end_time: 4.069158057100215,
+    time_steps: 1609}
+  thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
+    fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28, nspecies: 10}
+volume_problem:
+  linear_solver: {conv_fails: 0.0, iters: 145.0, jac_evals: 0.0, jac_vec_prod_evals: 145.0,
+    jac_vec_setups: 0.0, prec_evals: 2.0, prec_solvs: 225.0, preconditioned: true,
+    rhs_fd_jac_evals: 145.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 0.0, iters: 88.0}
+  simulation_info: {date: 09:54:20-29-03-22, runtime_seconds: 0.0202775, sim_end_time: 1.0056675851771184,
+    time_steps: 70}
+  thermo: {P0: 2026500.0, T0: 1000, V0: 0.001, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
+    fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28, nspecies: 10}
