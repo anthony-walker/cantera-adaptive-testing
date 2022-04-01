@@ -1,0 +1,9 @@
+volume_problem:
+  linear_solver: {conv_fails: 115.0, iters: 4285.0, jac_evals: 0.0, jac_vec_prod_evals: 4285.0,
+    jac_vec_setups: 0.0, prec_evals: 60.0, prec_solvs: 6181.0, preconditioned: true,
+    rhs_fd_jac_evals: 4285.0, solver: GMRES, threshold: 1e-08}
+  nonlinear_solver: {conv_fails: 14.0, iters: 1951.0}
+  simulation_info: {date: 08:13:18-01-04-22, runtime_seconds: 3.06826856, sim_end_time: 10.19407810285,
+    time_steps: 1155}
+  thermo: {P0: 2026500.0, T0: 1000, V0: 0.001, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
+    fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: true, nreactions: 6864, nspecies: 874}

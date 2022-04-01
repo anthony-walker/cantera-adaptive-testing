@@ -37,8 +37,8 @@ NHeptane-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 35424.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4326.0}
-    simulation_info: {date: 21:11:55-27-03-22, runtime_seconds: 75.18363752316665,
-      sim_end_time: 1.0398738246505919, time_steps: 2930.0, runs: 60}
+    simulation_info: {date: 21:11:55-27-03-22, runtime_seconds: 282.9358828007, sim_end_time: 1.0398738246505943,
+      time_steps: 2930.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: NC7H16:1.0, model: n-heptane-c7h16-654-4846.yaml, mole-reactor: false,
       nreactions: 4846.0, nspecies: 654.0}
@@ -119,14 +119,25 @@ MethylDeconateNHeptane-precon-1.0e-09:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264.0,
       nspecies: 3787.0}
+TwoMethylnonadecane-precon-1.0e-02:
+  pressure_problem:
+    linear_solver: {conv_fails: 57.0, iters: 3961.0, jac_evals: 0.0, jac_vec_prod_evals: 3961.0,
+      jac_vec_setups: 0.0, prec_evals: 28.0, prec_solvs: 5570.0, preconditioned: true,
+      rhs_fd_jac_evals: 3961.0, solver: GMRES, threshold: 0.01}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1628.0}
+    simulation_info: {date: 20:34:38-27-03-22, runtime_seconds: 114.05709012380001,
+      sim_end_time: 1.1858958266445958, time_steps: 1486.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 JetA-mass:
   pressure_problem:
     linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 60.0, jac_vec_prod_evals: 0.0,
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 12180.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4754.0}
-    simulation_info: {date: 08:46:00-28-03-22, runtime_seconds: 4.500136714333333,
-      sim_end_time: 1.0877709893881884, time_steps: 3144.0, runs: 60}
+    simulation_info: {date: 08:46:00-28-03-22, runtime_seconds: 5.063884736, sim_end_time: 1.087770989388189,
+      time_steps: 3144.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: false,
       nreactions: 1589.0, nspecies: 201.0}
@@ -158,8 +169,8 @@ MethaneGRI-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 1925.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 2523.0}
-    simulation_info: {date: 08:45:31-28-03-22, runtime_seconds: 0.33734338699999994,
-      sim_end_time: 4.256636377630769, time_steps: 1967.0, runs: 60}
+    simulation_info: {date: 08:45:31-28-03-22, runtime_seconds: 0.47641092869999996,
+      sim_end_time: 4.256636377630758, time_steps: 1967.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: false, nreactions: 325.0,
       nspecies: 53.0}
@@ -191,8 +202,8 @@ DME-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 6050.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3900.0}
-    simulation_info: {date: 21:11:15-28-03-22, runtime_seconds: 1.0449362851666664,
-      sim_end_time: 3.3162585460463863, time_steps: 2284.0, runs: 60}
+    simulation_info: {date: 21:11:15-28-03-22, runtime_seconds: 3.0487682404000003,
+      sim_end_time: 3.316258546046392, time_steps: 2284.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
       nreactions: 711.0, nspecies: 120.0}
@@ -218,6 +229,28 @@ MethaneGRI-precon-1.0e-13:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325.0,
       nspecies: 53.0}
+Butane-mass:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 51.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 11832.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 4177.0}
+    simulation_info: {date: 10:21:42-29-03-22, runtime_seconds: 3.4434744644000013,
+      sim_end_time: 5.221062702871219, time_steps: 2905.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: false, nreactions: 2461.0,
+      nspecies: 230.0}
+TwoMethylnonadecane-precon-1.0e-05:
+  pressure_problem:
+    linear_solver: {conv_fails: 152.0, iters: 4414.0, jac_evals: 0.0, jac_vec_prod_evals: 4414.0,
+      jac_vec_setups: 0.0, prec_evals: 41.0, prec_solvs: 6093.0, preconditioned: true,
+      rhs_fd_jac_evals: 4414.0, solver: GMRES, threshold: 1e-05}
+    nonlinear_solver: {conv_fails: 6.0, iters: 1690.0}
+    simulation_info: {date: 20:27:35-27-03-22, runtime_seconds: 142.2743821480001,
+      sim_end_time: 1.2744709496474629, time_steps: 1459.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Butane-precon-1.0e-10:
   pressure_problem:
     linear_solver: {conv_fails: 68.0, iters: 4034.0, jac_evals: 0.0, jac_vec_prod_evals: 4034.0,
@@ -246,8 +279,8 @@ DME-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 7198.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4762.0}
-    simulation_info: {date: 21:11:08-28-03-22, runtime_seconds: 1.1066541890000001,
-      sim_end_time: 2.197537013845634, time_steps: 3132.0, runs: 60}
+    simulation_info: {date: 21:11:08-28-03-22, runtime_seconds: 2.0642884752000006,
+      sim_end_time: 2.1975370138456394, time_steps: 3132.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: false,
       nreactions: 711.0, nspecies: 120.0}
@@ -339,6 +372,17 @@ NHeptane-precon-1.0e-02:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: NC7H16:1.0, model: n-heptane-c7h16-654-4846.yaml, mole-reactor: true,
       nreactions: 4846.0, nspecies: 654.0}
+TwoMethylnonadecane-precon-1.0e-01:
+  pressure_problem:
+    linear_solver: {conv_fails: 93.0, iters: 3338.0, jac_evals: 0.0, jac_vec_prod_evals: 3338.0,
+      jac_vec_setups: 0.0, prec_evals: 22.0, prec_solvs: 4700.0, preconditioned: true,
+      rhs_fd_jac_evals: 3338.0, solver: GMRES, threshold: 0.1}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1370.0}
+    simulation_info: {date: 20:27:56-27-03-22, runtime_seconds: 93.40633869929998,
+      sim_end_time: 1.5128726621955293, time_steps: 1261.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 NHexadecane-precon-1.0e-04:
   pressure_problem:
     linear_solver: {conv_fails: 48.0, iters: 3068.0, jac_evals: 0.0, jac_vec_prod_evals: 3068.0,
@@ -350,6 +394,28 @@ NHexadecane-precon-1.0e-04:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: true, nreactions: 13339.0,
       nspecies: 2115.0}
+TwoMethylnonadecane-precon-1.0e-09:
+  pressure_problem:
+    linear_solver: {conv_fails: 89.0, iters: 3176.0, jac_evals: 0.0, jac_vec_prod_evals: 3176.0,
+      jac_vec_setups: 0.0, prec_evals: 24.0, prec_solvs: 4471.0, preconditioned: true,
+      rhs_fd_jac_evals: 3176.0, solver: GMRES, threshold: 1e-09}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1306.0}
+    simulation_info: {date: 20:29:20-27-03-22, runtime_seconds: 121.60811194100005,
+      sim_end_time: 1.0038096897391104, time_steps: 1186.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
+TwoMethylnonadecane-precon-1.0e-11:
+  pressure_problem:
+    linear_solver: {conv_fails: 125.0, iters: 4971.0, jac_evals: 0.0, jac_vec_prod_evals: 4971.0,
+      jac_vec_setups: 0.0, prec_evals: 43.0, prec_solvs: 6815.0, preconditioned: true,
+      rhs_fd_jac_evals: 4971.0, solver: GMRES, threshold: 1e-11}
+    nonlinear_solver: {conv_fails: 5.0, iters: 1856.0}
+    simulation_info: {date: 20:28:31-27-03-22, runtime_seconds: 173.5986252566, sim_end_time: 1.0412823432491045,
+      time_steps: 1585.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 JetA-precon-1.0e-10:
   pressure_problem:
     linear_solver: {conv_fails: 112.0, iters: 4745.0, jac_evals: 0.0, jac_vec_prod_evals: 4745.0,
@@ -361,6 +427,17 @@ JetA-precon-1.0e-10:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
+MethylFiveDeconate-mass:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 77.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 204127.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 5778.0}
+    simulation_info: {date: 10:21:46-29-03-22, runtime_seconds: 27420.983744988203,
+      sim_end_time: 1.0048361072858965, time_steps: 3817.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: false, nreactions: 10487.0,
+      nspecies: 2649.0}
 JetA-precon-1.0e-01:
   pressure_problem:
     linear_solver: {conv_fails: 42.0, iters: 3621.0, jac_evals: 0.0, jac_vec_prod_evals: 3621.0,
@@ -372,6 +449,17 @@ JetA-precon-1.0e-01:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
+TwoMethylnonadecane-precon-1.0e-14:
+  pressure_problem:
+    linear_solver: {conv_fails: 173.0, iters: 4740.0, jac_evals: 0.0, jac_vec_prod_evals: 4740.0,
+      jac_vec_setups: 0.0, prec_evals: 56.0, prec_solvs: 6535.0, preconditioned: true,
+      rhs_fd_jac_evals: 4740.0, solver: GMRES, threshold: 1e-14}
+    nonlinear_solver: {conv_fails: 13.0, iters: 1805.0}
+    simulation_info: {date: 20:36:48-27-03-22, runtime_seconds: 195.01190792139997,
+      sim_end_time: 1.0579353705680277, time_steps: 1525.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Butane-precon-1.0e-07:
   pressure_problem:
     linear_solver: {conv_fails: 67.0, iters: 3480.0, jac_evals: 0.0, jac_vec_prod_evals: 3480.0,
@@ -493,6 +581,17 @@ Butane-precon-1.0e-01:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461.0,
       nspecies: 230.0}
+IsoOctane-mass:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 67.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 58692.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 5236.0}
+    simulation_info: {date: 10:21:17-29-03-22, runtime_seconds: 556.0289312663997,
+      sim_end_time: 1.0233541863315179, time_steps: 3688.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: false, nreactions: 6864.0,
+      nspecies: 874.0}
 MethylFiveDeconate-precon-1.0e-03:
   pressure_problem:
     linear_solver: {conv_fails: 507.0, iters: 8890.0, jac_evals: 0.0, jac_vec_prod_evals: 8890.0,
@@ -515,6 +614,17 @@ NHexadecane-precon-0.0e+00:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: true, nreactions: 13339.0,
       nspecies: 2115.0}
+TwoMethylnonadecane-precon-1.0e-16:
+  pressure_problem:
+    linear_solver: {conv_fails: 60.0, iters: 7083.0, jac_evals: 0.0, jac_vec_prod_evals: 7083.0,
+      jac_vec_setups: 0.0, prec_evals: 46.0, prec_solvs: 9750.0, preconditioned: true,
+      rhs_fd_jac_evals: 7083.0, solver: GMRES, threshold: 1e-16}
+    nonlinear_solver: {conv_fails: 0.0, iters: 2683.0}
+    simulation_info: {date: 21:02:31-27-03-22, runtime_seconds: 295.33705693349987,
+      sim_end_time: 1.1983009007345666, time_steps: 2406.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Hydrogen-precon-1.0e-06:
   pressure_problem:
     linear_solver: {conv_fails: 299.0, iters: 9937.0, jac_evals: 0.0, jac_vec_prod_evals: 9937.0,
@@ -526,6 +636,17 @@ Hydrogen-precon-1.0e-06:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28.0,
       nspecies: 10.0}
+TwoMethylnonadecane-precon-1.0e-08:
+  pressure_problem:
+    linear_solver: {conv_fails: 86.0, iters: 15742.0, jac_evals: 0.0, jac_vec_prod_evals: 15742.0,
+      jac_vec_setups: 0.0, prec_evals: 82.0, prec_solvs: 20965.0, preconditioned: true,
+      rhs_fd_jac_evals: 15742.0, solver: GMRES, threshold: 1e-08}
+    nonlinear_solver: {conv_fails: 0.0, iters: 5239.0}
+    simulation_info: {date: 20:45:16-27-03-22, runtime_seconds: 491.2599904984, sim_end_time: 1.030569824877916,
+      time_steps: 4749.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 JetA-precon-1.0e-04:
   pressure_problem:
     linear_solver: {conv_fails: 72.0, iters: 4470.0, jac_evals: 0.0, jac_vec_prod_evals: 4470.0,
@@ -559,14 +680,25 @@ JetA-precon-0.0e+00:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
+ThreeMethylHeptane-mass:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 57.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 78660.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 4542.0}
+    simulation_info: {date: 10:21:18-29-03-22, runtime_seconds: 3219.4858865605993,
+      sim_end_time: 1.0649981113386002, time_steps: 3059.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: false,
+      nreactions: 8143.0, nspecies: 1378.0}
 JetA-moles:
   pressure_problem:
     linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 51.0, jac_vec_prod_evals: 0.0,
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 10302.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3903.0}
-    simulation_info: {date: 21:11:34-28-03-22, runtime_seconds: 3.8994072975000003,
-      sim_end_time: 1.0939090681832868, time_steps: 2577.0, runs: 60}
+    simulation_info: {date: 21:11:34-28-03-22, runtime_seconds: 6.603526043700001,
+      sim_end_time: 1.0939090681832895, time_steps: 2577.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
@@ -724,6 +856,17 @@ Hydrogen-precon-1.0e-01:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28.0,
       nspecies: 10.0}
+TwoMethylnonadecane-precon-1.0e-03:
+  pressure_problem:
+    linear_solver: {conv_fails: 33.0, iters: 3198.0, jac_evals: 0.0, jac_vec_prod_evals: 3198.0,
+      jac_vec_setups: 0.0, prec_evals: 23.0, prec_solvs: 4570.0, preconditioned: true,
+      rhs_fd_jac_evals: 3198.0, solver: GMRES, threshold: 0.001}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1396.0}
+    simulation_info: {date: 20:36:45-27-03-22, runtime_seconds: 104.64503349269998,
+      sim_end_time: 1.7525935672397877, time_steps: 1284.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 NHexadecane-precon-1.0e-17:
   pressure_problem:
     linear_solver: {conv_fails: 178.0, iters: 6087.0, jac_evals: 0.0, jac_vec_prod_evals: 6087.0,
@@ -757,6 +900,17 @@ IsoOctane-precon-1.0e-08:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: true, nreactions: 6864.0,
       nspecies: 874.0}
+TwoMethylnonadecane-precon-1.0e-12:
+  pressure_problem:
+    linear_solver: {conv_fails: 88.0, iters: 3666.0, jac_evals: 0.0, jac_vec_prod_evals: 3666.0,
+      jac_vec_setups: 0.0, prec_evals: 26.0, prec_solvs: 5138.0, preconditioned: true,
+      rhs_fd_jac_evals: 3666.0, solver: GMRES, threshold: 1e-12}
+    nonlinear_solver: {conv_fails: 1.0, iters: 1482.0}
+    simulation_info: {date: 20:37:54-27-03-22, runtime_seconds: 140.45561160249997,
+      sim_end_time: 1.0117111527613547, time_steps: 1331.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 MethaneGRI-precon-1.0e-16:
   pressure_problem:
     linear_solver: {conv_fails: 15.0, iters: 3114.0, jac_evals: 0.0, jac_vec_prod_evals: 3114.0,
@@ -928,8 +1082,8 @@ MethylDeconateNHeptane-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 333432.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 6456.0}
-    simulation_info: {date: 21:08:07-27-03-22, runtime_seconds: 125332.81792781099,
-      sim_end_time: 1.011348814539058, time_steps: 4048.0, runs: 20}
+    simulation_info: {date: 21:08:07-27-03-22, runtime_seconds: 98158.16641722889,
+      sim_end_time: 1.0113488145390577, time_steps: 4048.0, runs: 80}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: false, nreactions: 10264.0,
       nspecies: 3787.0}
@@ -944,17 +1098,6 @@ JetA-precon-1.0e-11:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
-MethylFiveDeconate-mass:
-  pressure_problem:
-    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 77.0, jac_vec_prod_evals: 0.0,
-      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
-      rhs_fd_jac_evals: 204127.0, solver: DENSE + NOJAC, threshold: 0}
-    nonlinear_solver: {conv_fails: 0.0, iters: 5778.0}
-    simulation_info: {date: 05:32:21-28-03-22, runtime_seconds: 37062.45547316021,
-      sim_end_time: 1.0048361072858962, time_steps: 3817.0, runs: 50}
-    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: false, nreactions: 10487.0,
-      nspecies: 2649.0}
 NHeptane-precon-1.0e-07:
   pressure_problem:
     linear_solver: {conv_fails: 108.0, iters: 4191.0, jac_evals: 0.0, jac_vec_prod_evals: 4191.0,
@@ -1131,6 +1274,17 @@ JetA-precon-1.0e-09:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589.0, nspecies: 201.0}
+TwoMethylnonadecane-precon-1.0e-06:
+  pressure_problem:
+    linear_solver: {conv_fails: 105.0, iters: 4176.0, jac_evals: 0.0, jac_vec_prod_evals: 4176.0,
+      jac_vec_setups: 0.0, prec_evals: 29.0, prec_solvs: 5866.0, preconditioned: true,
+      rhs_fd_jac_evals: 4176.0, solver: GMRES, threshold: 1e-06}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1709.0}
+    simulation_info: {date: 20:22:22-27-03-22, runtime_seconds: 135.56697265530002,
+      sim_end_time: 1.1296598866061203, time_steps: 1504.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 JetA-precon-1.0e-16:
   pressure_problem:
     linear_solver: {conv_fails: 66.0, iters: 4704.0, jac_evals: 0.0, jac_vec_prod_evals: 4704.0,
@@ -1170,8 +1324,8 @@ ThreeMethylHeptane-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 62055.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3492.0}
-    simulation_info: {date: 22:58:42-28-03-22, runtime_seconds: 2992.1837769730005,
-      sim_end_time: 1.2231814089739206, time_steps: 2265.0, runs: 60}
+    simulation_info: {date: 22:58:42-28-03-22, runtime_seconds: 2185.3649001559006,
+      sim_end_time: 1.2231814089739181, time_steps: 2265.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: true,
       nreactions: 8143.0, nspecies: 1378.0}
@@ -1219,6 +1373,17 @@ Hydrogen-precon-1.0e-05:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28.0,
       nspecies: 10.0}
+TwoMethylnonadecane-precon-1.0e-17:
+  pressure_problem:
+    linear_solver: {conv_fails: 66.0, iters: 3887.0, jac_evals: 0.0, jac_vec_prod_evals: 3887.0,
+      jac_vec_setups: 0.0, prec_evals: 29.0, prec_solvs: 5440.0, preconditioned: true,
+      rhs_fd_jac_evals: 3887.0, solver: GMRES, threshold: 1e-17}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1570.0}
+    simulation_info: {date: 22:19:28-27-03-22, runtime_seconds: 181.53143971700004,
+      sim_end_time: 1.2928168491978653, time_steps: 1398.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Butane-precon-1.0e-12:
   pressure_problem:
     linear_solver: {conv_fails: 87.0, iters: 3782.0, jac_evals: 0.0, jac_vec_prod_evals: 3782.0,
@@ -1274,6 +1439,17 @@ MethaneGRI-precon-1.0e-12:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325.0,
       nspecies: 53.0}
+TwoMethylnonadecane-precon-1.0e-18:
+  pressure_problem:
+    linear_solver: {conv_fails: 136.0, iters: 4748.0, jac_evals: 0.0, jac_vec_prod_evals: 4748.0,
+      jac_vec_setups: 0.0, prec_evals: 38.0, prec_solvs: 6469.0, preconditioned: true,
+      rhs_fd_jac_evals: 4748.0, solver: GMRES, threshold: 1e-18}
+    nonlinear_solver: {conv_fails: 4.0, iters: 1740.0}
+    simulation_info: {date: 20:47:08-27-03-22, runtime_seconds: 216.15153656099994,
+      sim_end_time: 1.077940145164266, time_steps: 1498.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Hydrogen-precon-1.0e-15:
   pressure_problem:
     linear_solver: {conv_fails: 39.0, iters: 2822.0, jac_evals: 0.0, jac_vec_prod_evals: 2822.0,
@@ -1313,8 +1489,8 @@ IsoOctane-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 46375.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4036.0}
-    simulation_info: {date: 21:13:58-27-03-22, runtime_seconds: 580.7528631366665,
-      sim_end_time: 1.113712632164365, time_steps: 2674.0, runs: 60}
+    simulation_info: {date: 21:13:58-27-03-22, runtime_seconds: 642.0408788953999,
+      sim_end_time: 1.113712632164365, time_steps: 2674.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: true, nreactions: 6864.0,
       nspecies: 874.0}
@@ -1395,6 +1571,17 @@ Butane-precon-1.0e-05:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461.0,
       nspecies: 230.0}
+TwoMethylnonadecane-precon-1.0e-10:
+  pressure_problem:
+    linear_solver: {conv_fails: 145.0, iters: 5646.0, jac_evals: 0.0, jac_vec_prod_evals: 5646.0,
+      jac_vec_setups: 0.0, prec_evals: 52.0, prec_solvs: 7764.0, preconditioned: true,
+      rhs_fd_jac_evals: 5646.0, solver: GMRES, threshold: 1e-10}
+    nonlinear_solver: {conv_fails: 7.0, iters: 2146.0}
+    simulation_info: {date: 20:37:51-27-03-22, runtime_seconds: 201.2674059821, sim_end_time: 1.0712240990522688,
+      time_steps: 1780.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 ThreeMethylHeptane-precon-1.0e-05:
   pressure_problem:
     linear_solver: {conv_fails: 84.0, iters: 3417.0, jac_evals: 0.0, jac_vec_prod_evals: 3417.0,
@@ -1626,17 +1813,6 @@ MethylDeconateNHeptane-precon-1.0e-16:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264.0,
       nspecies: 3787.0}
-IsoOctane-mass:
-  pressure_problem:
-    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 67.0, jac_vec_prod_evals: 0.0,
-      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
-      rhs_fd_jac_evals: 58692.0, solver: DENSE + NOJAC, threshold: 0}
-    nonlinear_solver: {conv_fails: 0.0, iters: 5236.0}
-    simulation_info: {date: 08:49:50-28-03-22, runtime_seconds: 570.6640381435001,
-      sim_end_time: 1.0233541863315188, time_steps: 3688.0, runs: 60}
-    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
-      fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: false, nreactions: 6864.0,
-      nspecies: 874.0}
 IsoOctane-precon-1.0e-06:
   pressure_problem:
     linear_solver: {conv_fails: 86.0, iters: 6186.0, jac_evals: 0.0, jac_vec_prod_evals: 6186.0,
@@ -1659,6 +1835,17 @@ ThreeMethylHeptane-precon-1.0e-01:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: true,
       nreactions: 8143.0, nspecies: 1378.0}
+Butane-moles:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 42.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 9702.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 3410.0}
+    simulation_info: {date: 10:22:21-29-03-22, runtime_seconds: 4.0978020752, sim_end_time: 1.4326687472579946,
+      time_steps: 2218.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461.0,
+      nspecies: 230.0}
 MethylFiveDeconate-precon-1.0e-17:
   pressure_problem:
     linear_solver: {conv_fails: 400.0, iters: 8052.0, jac_evals: 0.0, jac_vec_prod_evals: 8052.0,
@@ -1890,6 +2077,17 @@ MethaneGRI-precon-1.0e-18:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325.0,
       nspecies: 53.0}
+TwoMethylnonadecane-precon-1.0e-07:
+  pressure_problem:
+    linear_solver: {conv_fails: 126.0, iters: 3872.0, jac_evals: 0.0, jac_vec_prod_evals: 3872.0,
+      jac_vec_setups: 0.0, prec_evals: 30.0, prec_solvs: 5422.0, preconditioned: true,
+      rhs_fd_jac_evals: 3872.0, solver: GMRES, threshold: 1e-07}
+    nonlinear_solver: {conv_fails: 2.0, iters: 1559.0}
+    simulation_info: {date: 20:54:33-27-03-22, runtime_seconds: 132.1640728225001,
+      sim_end_time: 1.1065053088965198, time_steps: 1391.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Hydrogen-precon-1.0e-07:
   pressure_problem:
     linear_solver: {conv_fails: 304.0, iters: 13256.0, jac_evals: 0.0, jac_vec_prod_evals: 13256.0,
@@ -1901,6 +2099,17 @@ Hydrogen-precon-1.0e-07:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28.0,
       nspecies: 10.0}
+TwoMethylnonadecane-precon-1.0e-13:
+  pressure_problem:
+    linear_solver: {conv_fails: 113.0, iters: 8483.0, jac_evals: 0.0, jac_vec_prod_evals: 8483.0,
+      jac_vec_setups: 0.0, prec_evals: 52.0, prec_solvs: 11604.0, preconditioned: true,
+      rhs_fd_jac_evals: 8483.0, solver: GMRES, threshold: 1e-13}
+    nonlinear_solver: {conv_fails: 0.0, iters: 3143.0}
+    simulation_info: {date: 21:39:01-27-03-22, runtime_seconds: 312.02751655819986,
+      sim_end_time: 1.0373622568031484, time_steps: 2830.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 Butane-precon-1.0e-09:
   pressure_problem:
     linear_solver: {conv_fails: 92.0, iters: 3809.0, jac_evals: 0.0, jac_vec_prod_evals: 3809.0,
@@ -1912,6 +2121,17 @@ Butane-precon-1.0e-09:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461.0,
       nspecies: 230.0}
+TwoMethylnonadecane-precon-0.0e+00:
+  pressure_problem:
+    linear_solver: {conv_fails: 73.0, iters: 4213.0, jac_evals: 0.0, jac_vec_prod_evals: 4213.0,
+      jac_vec_setups: 0.0, prec_evals: 31.0, prec_solvs: 5939.0, preconditioned: true,
+      rhs_fd_jac_evals: 4213.0, solver: GMRES, threshold: 0.0}
+    nonlinear_solver: {conv_fails: 1.0, iters: 1744.0}
+    simulation_info: {date: 20:54:54-27-03-22, runtime_seconds: 118.3097291337, sim_end_time: 1.0951246485316477,
+      time_steps: 1470.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 NHeptane-precon-1.0e-11:
   pressure_problem:
     linear_solver: {conv_fails: 100.0, iters: 3797.0, jac_evals: 0.0, jac_vec_prod_evals: 3797.0,
@@ -1951,8 +2171,8 @@ MethylDeconateNHeptane-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 272736.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3848.0}
-    simulation_info: {date: 21:45:40-27-03-22, runtime_seconds: 72652.10216400126,
-      sim_end_time: 1.061944736156711, time_steps: 2246.0, runs: 40}
+    simulation_info: {date: 21:45:40-27-03-22, runtime_seconds: 55207.761716629546,
+      sim_end_time: 1.0619447361567087, time_steps: 2246.0, runs: 90}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264.0,
       nspecies: 3787.0}
@@ -1962,8 +2182,8 @@ NHexadecane-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 120669.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4584.0}
-    simulation_info: {date: 03:44:56-28-03-22, runtime_seconds: 17120.62050714583,
-      sim_end_time: 7.18338366476144, time_steps: 3103.0, runs: 60}
+    simulation_info: {date: 03:44:56-28-03-22, runtime_seconds: 16291.730393677408,
+      sim_end_time: 7.183383664761439, time_steps: 3103.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: false,
       nreactions: 13339.0, nspecies: 2115.0}
@@ -2061,8 +2281,8 @@ NHexadecane-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 90988.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3140.0}
-    simulation_info: {date: 04:28:15-28-03-22, runtime_seconds: 11874.460088701164,
-      sim_end_time: 6.436523254332034, time_steps: 2065.0, runs: 60}
+    simulation_info: {date: 10:21:48-29-03-22, runtime_seconds: 9131.408687969302,
+      sim_end_time: 6.436523254332044, time_steps: 2065.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: true, nreactions: 13339.0,
       nspecies: 2115.0}
@@ -2077,6 +2297,17 @@ DME-precon-1.0e-13:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
       nreactions: 711.0, nspecies: 120.0}
+TwoMethylnonadecane-precon-1.0e-15:
+  pressure_problem:
+    linear_solver: {conv_fails: 53.0, iters: 4026.0, jac_evals: 0.0, jac_vec_prod_evals: 4026.0,
+      jac_vec_setups: 0.0, prec_evals: 27.0, prec_solvs: 5624.0, preconditioned: true,
+      rhs_fd_jac_evals: 4026.0, solver: GMRES, threshold: 1e-15}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1614.0}
+    simulation_info: {date: 20:57:51-27-03-22, runtime_seconds: 164.15420156640002,
+      sim_end_time: 1.1454968024538479, time_steps: 1448.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
 MethaneGRI-precon-1.0e-09:
   pressure_problem:
     linear_solver: {conv_fails: 12.0, iters: 2923.0, jac_evals: 0.0, jac_vec_prod_evals: 2923.0,
@@ -2116,8 +2347,8 @@ NHeptane-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 30130.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 3746.0}
-    simulation_info: {date: 02:01:22-28-03-22, runtime_seconds: 77.57417406333336,
-      sim_end_time: 1.1764140749555658, time_steps: 2394.0, runs: 60}
+    simulation_info: {date: 02:01:22-28-03-22, runtime_seconds: 77.2920032688, sim_end_time: 1.1764140749555632,
+      time_steps: 2394.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: NC7H16:1.0, model: n-heptane-c7h16-654-4846.yaml, mole-reactor: true,
       nreactions: 4846.0, nspecies: 654.0}
@@ -2187,17 +2418,6 @@ MethylFiveDeconate-precon-1.0e-11:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487.0,
       nspecies: 2649.0}
-Butane-moles:
-  pressure_problem:
-    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 42.0, jac_vec_prod_evals: 0.0,
-      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
-      rhs_fd_jac_evals: 9702.0, solver: DENSE + NOJAC, threshold: 0}
-    nonlinear_solver: {conv_fails: 0.0, iters: 3410.0}
-    simulation_info: {date: 08:46:33-28-03-22, runtime_seconds: 3.010457049333334,
-      sim_end_time: 1.432668747257996, time_steps: 2218.0, runs: 60}
-    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
-      fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461.0,
-      nspecies: 230.0}
 DME-precon-1.0e-02:
   pressure_problem:
     linear_solver: {conv_fails: 63.0, iters: 10238.0, jac_evals: 0.0, jac_vec_prod_evals: 10238.0,
@@ -2259,8 +2479,8 @@ Hydrogen-mass:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 300.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 1918.0}
-    simulation_info: {date: 01:58:20-28-03-22, runtime_seconds: 0.03490753383333334,
-      sim_end_time: 1.1423162309280168, time_steps: 1437.0, runs: 60}
+    simulation_info: {date: 01:58:20-28-03-22, runtime_seconds: 0.08364180870000001,
+      sim_end_time: 1.142316230928017, time_steps: 1437.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: false, nreactions: 28.0,
       nspecies: 10.0}
@@ -2270,8 +2490,8 @@ MethaneGRI-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 1566.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 2056.0}
-    simulation_info: {date: 20:57:48-27-03-22, runtime_seconds: 0.3203582606666667,
-      sim_end_time: 4.225153486817271, time_steps: 1558.0, runs: 60}
+    simulation_info: {date: 20:57:48-27-03-22, runtime_seconds: 0.44643798339999974,
+      sim_end_time: 4.225153486817262, time_steps: 1558.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325.0,
       nspecies: 53.0}
@@ -2281,8 +2501,8 @@ Hydrogen-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 242.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 1636.0}
-    simulation_info: {date: 01:58:27-28-03-22, runtime_seconds: 0.030886696500000022,
-      sim_end_time: 6.433221415145116, time_steps: 1183.0, runs: 60}
+    simulation_info: {date: 01:58:27-28-03-22, runtime_seconds: 0.0830194796, sim_end_time: 6.433221415145115,
+      time_steps: 1183.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: H2:1.0, model: hydrogen-10.yaml, mole-reactor: true, nreactions: 28.0,
       nspecies: 10.0}
@@ -2429,17 +2649,6 @@ NHexadecane-precon-1.0e-16:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: true, nreactions: 13339.0,
       nspecies: 2115.0}
-ThreeMethylHeptane-mass:
-  pressure_problem:
-    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 57.0, jac_vec_prod_evals: 0.0,
-      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
-      rhs_fd_jac_evals: 78660.0, solver: DENSE + NOJAC, threshold: 0}
-    nonlinear_solver: {conv_fails: 0.0, iters: 4542.0}
-    simulation_info: {date: 21:13:58-27-03-22, runtime_seconds: 4181.388648153666,
-      sim_end_time: 1.064998111338603, time_steps: 3059.0, runs: 60}
-    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
-      fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: false,
-      nreactions: 8143.0, nspecies: 1378.0}
 DME-precon-1.0e-16:
   pressure_problem:
     linear_solver: {conv_fails: 38.0, iters: 3616.0, jac_evals: 0.0, jac_vec_prod_evals: 3616.0,
@@ -2468,8 +2677,8 @@ MethylFiveDeconate-moles:
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
       rhs_fd_jac_evals: 166950.0, solver: DENSE + NOJAC, threshold: 0}
     nonlinear_solver: {conv_fails: 0.0, iters: 4483.0}
-    simulation_info: {date: 14:47:34-28-03-22, runtime_seconds: 30137.198183592198,
-      sim_end_time: 1.280627881863475, time_steps: 2791.0, runs: 50}
+    simulation_info: {date: 14:47:34-28-03-22, runtime_seconds: 22335.314349652297,
+      sim_end_time: 1.280627881863478, time_steps: 2791.0, runs: 100}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487.0,
       nspecies: 2649.0}
@@ -2506,6 +2715,17 @@ MethylDeconateNHeptane-precon-1.0e-14:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264.0,
       nspecies: 3787.0}
+TwoMethylnonadecane-mass:
+  pressure_problem:
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 54.0, jac_vec_prod_evals: 0.0,
+      jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
+      rhs_fd_jac_evals: 387342.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 4223.0}
+    simulation_info: {date: 10:22:16-29-03-22, runtime_seconds: 176412.67011533197,
+      sim_end_time: 1.072378623399785, time_steps: 2829.0, runs: 30}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: false, nreactions: 38324.0,
+      nspecies: 7171.0}
 MethylDeconateNHeptane-precon-1.0e-13:
   pressure_problem:
     linear_solver: {conv_fails: 336.0, iters: 6617.0, jac_evals: 0.0, jac_vec_prod_evals: 6617.0,
@@ -2517,14 +2737,25 @@ MethylDeconateNHeptane-precon-1.0e-13:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264.0,
       nspecies: 3787.0}
-Butane-mass:
+TwoMethylnonadecane-moles:
   pressure_problem:
-    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 51.0, jac_vec_prod_evals: 0.0,
+    linear_solver: {conv_fails: 0.0, iters: 0.0, jac_evals: 46.0, jac_vec_prod_evals: 0.0,
       jac_vec_setups: 0.0, prec_evals: 0.0, prec_solvs: 0.0, preconditioned: false,
-      rhs_fd_jac_evals: 11832.0, solver: DENSE + NOJAC, threshold: 0}
-    nonlinear_solver: {conv_fails: 0.0, iters: 4177.0}
-    simulation_info: {date: 08:46:23-28-03-22, runtime_seconds: 3.179449368333334,
-      sim_end_time: 5.221062702871217, time_steps: 2905.0, runs: 60}
+      rhs_fd_jac_evals: 329912.0, solver: DENSE + NOJAC, threshold: 0}
+    nonlinear_solver: {conv_fails: 0.0, iters: 3342.0}
+    simulation_info: {date: 21:10:45-27-03-22, runtime_seconds: 199380.16299857537,
+      sim_end_time: 1.0358219714565633, time_steps: 2182.0, runs: 60}
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
-      fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: false, nreactions: 2461.0,
-      nspecies: 230.0}
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}
+TwoMethylnonadecane-precon-1.0e-04:
+  pressure_problem:
+    linear_solver: {conv_fails: 88.0, iters: 3527.0, jac_evals: 0.0, jac_vec_prod_evals: 3527.0,
+      jac_vec_setups: 0.0, prec_evals: 23.0, prec_solvs: 4981.0, preconditioned: true,
+      rhs_fd_jac_evals: 3527.0, solver: GMRES, threshold: 0.0001}
+    nonlinear_solver: {conv_fails: 0.0, iters: 1465.0}
+    simulation_info: {date: 20:38:30-27-03-22, runtime_seconds: 119.50427269010002,
+      sim_end_time: 1.5029951869697822, time_steps: 1334.0, runs: 100}
+    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1.0,
+      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324.0,
+      nspecies: 7171.0}

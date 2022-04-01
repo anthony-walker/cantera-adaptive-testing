@@ -17,6 +17,7 @@ class ModelBase(object):
         self.vol_prob = kwargs["no_vol_prob"] if "no_vol_prob" in kwargs else True
         self.net_prob = kwargs["no_net_prob"] if "no_net_prob" in kwargs else True
         self.max_time_step = kwargs["max_time_step"] if "max_time_step" in kwargs else None
+        self.derv_settings = {"skip-falloff":kwargs["skip_falloff"], "skip-third-bodies":kwargs['skip_thirdbody']}
         if self.precon_on:
             self.threshold = kwargs["threshold"] if "threshold" in kwargs else 1e-16
         else:
@@ -116,7 +117,7 @@ class ModelBase(object):
         """
         if self.precon_on:
             self.precon = ct.AdaptivePreconditioner()
-            self.precon.set_threshold(self.threshold)
+            self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
         if self.max_time_step is not None:
             self.net.max_time_step = self.max_time_step
@@ -149,6 +150,7 @@ class ModelBase(object):
             func(self)
             tf = time.time_ns()
             # post function analysis
+            print(self.sim_end_time)
             num_stats = self.get_numerical_stats()
             self.currRun[func.__name__].update({"simulation_info":{"runtime_seconds": round((tf-t0) * 1e-9, 8), "time_steps":self.ctr, "sim_end_time": self.sim_end_time, "date":self.currRunTime}})
             self.currRun[func.__name__].update(self.thermo_data)
@@ -194,18 +196,17 @@ class ModelBase(object):
         # approximate a time step to achieve a similar resolution as in
         # the next method
         tf = 1.0
-        curr_time = 0
+        self.sim_end_time = 0
         states = ct.SolutionArray(gas)
         self.ctr = 0
-        while curr_time < tf:
+        while self.sim_end_time < tf:
             # perform time integration
             try:
-                curr_time = self.net.step()
-                self.sim_end_time = curr_time
+                self.sim_end_time = self.net.step()
                 self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
-                curr_time = tf
+                self.sim_end_time = tf
             if self.write:
                 states.append(reactor.thermo.state)
         if self.write:
@@ -262,21 +263,20 @@ class ModelBase(object):
         # apply numerical options
         self.apply_numerical_options()
         # Integrate
-        tf = 1.0
-        curr_time = 0.0
+        tf = 10.0
+        self.sim_end_time = 0.0
         states = ct.SolutionArray(gas, extra=['tnow',])
         self.ctr = 0
-        while curr_time < tf:
+        while self.sim_end_time < tf:
             # perform time integration
             try:
-                curr_time = self.net.step()
-                self.sim_end_time = curr_time
+                self.sim_end_time = self.net.step()
                 self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
-                curr_time = tf
+                self.sim_end_time = tf
             if self.write:
-                states.append(reactor.thermo.state, tnow=curr_time)
+                states.append(reactor.thermo.state, tnow=self.sim_end_time)
         if self.write:
             csvName = self.runName + "-" + "volume" + ".csv"
             csvName = os.path.join(self.dataDir, csvName)
@@ -355,17 +355,16 @@ class ModelBase(object):
         working_array[state_len:state_len + 1] = combustor.T
         working_array[state_len+1:] = gas.X
         tf = 1.0
-        curr_time = 0.0
-        self.net.set_initial_time(curr_time)
+        self.sim_end_time = 0.0
+        self.net.set_initial_time(self.sim_end_time)
         self.ctr = 0
-        while curr_time < tf:
+        while self.sim_end_time < tf:
             try:
-                curr_time = self.net.step()
-                self.sim_end_time = curr_time
+                self.sim_end_time = self.net.step()
                 self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
-                curr_time = tf
+                self.sim_end_time = tf
             if self.write:
                 working_array[0] = combustor.T
                 working_array[1:state_len] = gas.X
