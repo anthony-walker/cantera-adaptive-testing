@@ -29,7 +29,7 @@ sleep 0.1
 for th in {1..18}
 do
     echo $PRECON_OPTS
-    export PRECON_OPTS="$CURR_MODEL -L -v -M -P -S GMRES -T 1e-$th $ADD_ARGS"
+    export PRECON_OPTS="$CURR_MODEL -L -v -M -P APPROXIMATE -S GMRES -T 1e-$th $ADD_ARGS"
     mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $PRECON_OPTS
     sleep 0.1
 done

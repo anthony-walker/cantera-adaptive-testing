@@ -83,7 +83,7 @@ def parserSetup(add_mod=True):
     parser.add_argument('-L', '--log', action='store_true', help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
     parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose simulation.")
     parser.add_argument('-S', '--solver', type=str, default="DENSE + NOJAC", help="Enable use of different solvers")
-    parser.add_argument('-P', '--precon_on', action='store_true', default=False, help="Enable the use of preconditioner.")
+    parser.add_argument('-P', '--preconditioner', type=str, help="Enable use of different preconditioners")
     parser.add_argument('-T', '--threshold', type=float, default=1e-8, help="Set a threshold value used for the preconditioned simulation.")
     parser.add_argument('-M', '--moles', action='store_true', default=False, help="Use mole based reactors.")
     parser.add_argument('--no_press_prob', action='store_false', default=True, help="Turn off solving the pressure problem.")

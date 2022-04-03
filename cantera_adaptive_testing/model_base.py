@@ -11,14 +11,14 @@ class ModelBase(object):
         self.verbose = kwargs["verbose"] if "verbose" in kwargs else False
         self.currRunTime = datetime.datetime.now().strftime("%X-%d-%m-%y")
         # numerical options
-        self.precon_on = kwargs["precon_on"] if "precon_on" in kwargs else True
+        self.preconditioner = kwargs['preconditioner']
         self.solver = kwargs["solver"] if "solver" in kwargs else "DENSE + NOJAC"
         self.press_prob = kwargs["no_press_prob"] if "no_press_prob" in kwargs else True
         self.vol_prob = kwargs["no_vol_prob"] if "no_vol_prob" in kwargs else True
         self.net_prob = kwargs["no_net_prob"] if "no_net_prob" in kwargs else True
         self.max_time_step = kwargs["max_time_step"] if "max_time_step" in kwargs else None
         self.derv_settings = {"skip-falloff":kwargs["skip_falloff"], "skip-third-bodies":kwargs['skip_thirdbody']}
-        if self.precon_on:
+        if self.preconditioner is not None:
             self.threshold = kwargs["threshold"] if "threshold" in kwargs else 1e-16
         else:
             self.threshold = 0
@@ -34,8 +34,9 @@ class ModelBase(object):
         self.ctr = 0
         self.thermo_data = dict()
         # output data options
-        if self.precon_on:
-            self.precName = "-precon-{:0.1e}".format(self.threshold)
+        if self.preconditioner is not None:
+            temp_str = self.preconditioner.lower()[:6]
+            self.precName = "-{:s}-precon-{:0.1e}".format(temp_str, self.threshold)
         elif self.moles:
             self.precName = "-moles"
         else:
@@ -115,8 +116,11 @@ class ModelBase(object):
             Use this function to apply numerical configurations to the
             network
         """
-        if self.precon_on:
-            self.precon = ct.AdaptivePreconditioner()
+        if self.preconditioner is not None:
+            if self.preconditioner == "APPROXIMATE":
+                self.precon = ct.AdaptivePreconditioner()
+            elif self.preconditioner == "ANALYTICAL":
+                self.precon = ct.AnalyticalAdaptivePreconditioner()
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
         if self.max_time_step is not None:
@@ -130,7 +134,7 @@ class ModelBase(object):
         lin_stats = dict(zip(lin_opts, lin_stats))
         lin_stats['solver'] = self.solver
         lin_stats['threshold'] = self.threshold
-        lin_stats['preconditioned'] = self.precon_on
+        lin_stats['preconditioned'] = self.preconditioner if self.preconditioner is not None else "NO_PRECONDITION"
         # nonlinear solver stats
         nonlin_opts = ['iters', 'conv_fails']
         nonlin_stats = [float(i) for i in self.net.get_nonlin_solver_stats()]
