@@ -21,7 +21,7 @@
 # run my jobs
 echo "Slurm ID: $SLURM_JOB_ID"
 # zero threshold
-export PRECON_OPTS="$CURR_MODEL -L -v -M -P -S GMRES -T 0 $ADD_ARGS"
+export PRECON_OPTS="$CURR_MODEL -L -v -M -P APPROXIMATE -S GMRES -T 0 $ADD_ARGS"
 echo $PRECON_OPTS
 mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $PRECON_OPTS
 sleep 0.1
