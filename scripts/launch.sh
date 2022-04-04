@@ -21,11 +21,11 @@ do
         set -- $j;
         export CURR_MODEL=$1
         export AMS=$2
-        echo "Launching $CURR_MODEL-prec-approx-$i -- $AMS"
-        sbatch -J "$CURR_MODEL-prec-$i" approx-precon.sh --mem=$AMS
+        echo "Launching $CURR_MODEL-prec-approx -- $AMS"
+        sbatch -J "apprec-$CURR_MODEL" approx-precon.sh --mem=$AMS
         sleep 0.1
-        echo "Launching $CURR_MODEL-prec-analyt-$i -- $AMS"
-        sbatch -J "$CURR_MODEL-prec-$i" analyt-precon.sh --mem=$AMS
+        echo "Launching $CURR_MODEL-prec-analyt -- $AMS"
+        sbatch -J "anprec-$CURR_MODEL" analyt-precon.sh --mem=$AMS
         sleep 0.1
     done
 done
@@ -41,10 +41,10 @@ do
         export CURR_MODEL=$1
         export AMS=$2
         echo "Launching $CURR_MODEL-mass-$i -- $AMS"
-        sbatch -J "$CURR_MODEL-mass-$i" mass.sh --mem=$AMS
+        sbatch -J "mass-$CURR_MODEL" mass.sh --mem=$AMS
         sleep 0.1
         echo "Launching $CURR_MODEL-moles-$i -- $AMS"
-	    sbatch -J "$CURR_MODEL-mole-$i" moles.sh --mem=$AMS
+	    sbatch -J "moles-$CURR_MODEL" moles.sh --mem=$AMS
         sleep 0.1
     done
 done
