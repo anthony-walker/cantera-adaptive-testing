@@ -273,7 +273,6 @@ class ModelBase(object):
         delta_T_max = 20.
         rtol = 1.e-12
         atol = 1.e-16
-
         #####################################################################
         # Set up IC engine Parameters and Functions
         #####################################################################
@@ -297,7 +296,10 @@ class ModelBase(object):
         gas = ct.Solution(self.model)
         # define initial state and set up reactor
         gas.TPX = T_inlet, p_inlet, comp_inlet
-        cyl = ct.IdealGasMoleReactor(gas)
+        if self.moles:
+            cyl = ct.IdealGasMoleReactor(gas)
+        else:
+            cyl = ct.IdealGasReactor(gas)
         cyl.volume = V_oT
         # define inlet state
         gas.TPX = T_inlet, p_inlet, comp_inlet
@@ -605,6 +607,169 @@ class ModelBase(object):
 
     @problem
     def network_problem(self):
+        """
+        This problem was adapted from
+        https://cantera.org/examples/python/reactors/ic_engine.py.html
+
+        Simulation of a (gaseous) Diesel-type internal combustion engine.
+
+        The simulation uses n-Dodecane as fuel, which is injected close to top dead
+        center. Note that this example uses numerous simplifying assumptions and
+        thus serves for illustration purposes only.
+
+        Requires: cantera >= 2.5.0, scipy >= 0.19, matplotlib >= 2.0
+        """
+
+        #########################################################################
+        # Input Parameters
+        #########################################################################
+        T0 = 300
+        P0 = 1600e5
+        f = 3000. / 60.  # engine speed [1/s] (3000 rpm)
+        V_H = .5e-3  # displaced volume [m**3]
+        epsilon = 20.  # compression ratio [-]
+        d_piston = 0.083  # piston diameter [m]
+        # turbocharger temperature, pressure, and composition
+        T_inlet = T0  # K
+        p_inlet = 1.3e5  # Pa
+        comp_inlet = self.air
+        # outlet pressure
+        p_outlet = 1.2e5  # Pa
+        # fuel properties (gaseous!)
+        T_injector = T0  # K
+        p_injector = P0  # Pa
+        comp_injector = self.fuel
+        # ambient properties
+        T_ambient = T0  # K
+        p_ambient = ct.one_atm  # Pa
+        comp_ambient = self.air
+        # Inlet valve friction coefficient, open and close timings
+        inlet_valve_coeff = 1.e-6
+        inlet_open = -18. / 180. * np.pi
+        inlet_close = 198. / 180. * np.pi
+        # Outlet valve friction coefficient, open and close timings
+        outlet_valve_coeff = 1.e-6
+        outlet_open = 522. / 180 * np.pi
+        outlet_close = 18. / 180. * np.pi
+        # Fuel mass, injector open and close timings
+        injector_open = 350. / 180. * np.pi
+        injector_close = 365. / 180. * np.pi
+        injector_mass = 3.2e-5  # kg
+        # Simulation time and parameters
+        sim_n_revolutions = 4
+        delta_T_max = 20.
+        rtol = 1.e-12
+        atol = 1.e-16
+        #####################################################################
+        # Set up IC engine Parameters and Functions
+        #####################################################################
+
+        V_oT = V_H / (epsilon - 1.)
+        A_piston = .25 * np.pi * d_piston ** 2
+        stroke = V_H / A_piston
+
+        def crank_angle(t):
+            """Convert time to crank angle"""
+            return np.remainder(2 * np.pi * f * t, 4 * np.pi)
+
+        def piston_speed(t):
+            """Approximate piston speed with sinusoidal velocity profile"""
+            return - stroke / 2 * 2 * np.pi * f * np.sin(crank_angle(t))
+
+        #####################################################################
+        # Set up Reactor Network
+        #####################################################################
+        # load reaction mechanism
+        gas = ct.Solution(self.model)
+        # define initial state and set up reactor
+        gas.TPX = T_inlet, p_inlet, comp_inlet
+        if self.moles:
+            cyl = ct.IdealGasMoleReactor(gas)
+        else:
+            cyl = ct.IdealGasReactor(gas)
+        cyl.volume = V_oT
+        # define inlet state
+        gas.TPX = T_inlet, p_inlet, comp_inlet
+        inlet = ct.Reservoir(gas)
+        # inlet valve
+        inlet_valve = ct.Valve(inlet, cyl)
+        inlet_delta = np.mod(inlet_close - inlet_open, 4 * np.pi)
+        inlet_valve.valve_coeff = inlet_valve_coeff
+        inlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
+        # define injector state (gaseous!)
+        gas.TPX = T_injector, p_injector, comp_injector
+        injector = ct.Reservoir(gas)
+        # injector is modeled as a mass flow controller
+        injector_mfc = ct.MassFlowController(injector, cyl)
+        injector_delta = np.mod(injector_close - injector_open, 4 * np.pi)
+        injector_t_open = (injector_close - injector_open) / 2. / np.pi / f
+        injector_mfc.mass_flow_coeff = injector_mass / injector_t_open
+        injector_mfc.set_time_function(lambda t: np.mod(crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
+        # define outlet pressure (temperature and composition don't matter)
+        gas.TPX = T_ambient, p_outlet, comp_ambient
+        # outlet constant pressure reactor here
+        if self.moles:
+            outlet_reactor = ct.IdealGasConstPressureMoleReactor(gas)
+        else:
+            outlet_reactor = ct.IdealGasConstPressureReactor(gas)
+        # outlet_reactor valve
+        outlet_valve = ct.Valve(cyl, outlet_reactor)
+        outlet_delta = np.mod(outlet_close - outlet_open, 4 * np.pi)
+        outlet_valve.valve_coeff = outlet_valve_coeff
+        outlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
+        # outlet reservoir
+        outlet_reservoir = ct.Reservoir(gas)
+        # Pressure controller for mass into atmosphere
+        outlet_mfc = ct.PressureController(outlet_reactor, outlet_reservoir, master=outlet_valve)
+        # define ambient pressure (temperature and composition don't matter)
+        gas.TPX = T_ambient, p_ambient, comp_ambient
+        ambient_air = ct.Reservoir(gas)
+        # piston is modeled as a moving wall
+        piston = ct.Wall(ambient_air, cyl)
+        piston.area = A_piston
+        piston.set_velocity(piston_speed)
+        # create a reactor network containing the cylinder and limit advance step
+        self.net = ct.ReactorNet([cyl, outlet_reactor])
+        self.net.rtol, self.net.atol = rtol, atol
+        cyl.set_advance_limit('temperature', delta_T_max)
+        # apply numerical options
+        self.apply_numerical_options()
+        #####################################################################
+        # Run Simulation
+        #####################################################################
+        # set up output data arrays
+        if self.write:
+            states = ct.SolutionArray(cyl.thermo, extra=('t', 'ca', 'V', 'm', 'mdot_in', 'mdot_out', 'dWv_dt'),)
+        # simulate with a maximum resolution of 1 deg crank angle
+        dt = 1. / (360 * f)
+        t_stop = sim_n_revolutions / f
+        self.sim_end_time = 0
+        self.ctr = 0
+        while self.net.time < t_stop:
+            # perform time integration
+            try:
+                self.net.advance(self.net.time + dt)
+                self.ctr += 1
+            except Exception as e:
+                self.exception = {"exception": str(e)}
+                self.sim_end_time = self.net.time
+            if self.write:
+                # calculate results to be stored
+                dWv_dt = - (cyl.thermo.P - ambient_air.thermo.P) * A_piston * \
+                    piston_speed(self.net.time)
+                # append output data
+                states.append(cyl.thermo.state, t=self.net.time, ca=crank_angle(self.net.time), V=cyl.volume, m=cyl.mass, mdot_in=inlet_valve.mass_flow_rate, mdot_out=outlet_valve.mass_flow_rate, dWv_dt=dWv_dt)
+        # Run a loop over decreasing residence times, until the reactor is extinguished,
+        # saving the state after each iteration.
+        if self.write:
+            states.append(reactor.thermo.state)
+            csvName = self.runName + "-" + "volume" + ".csv"
+            csvName = os.path.join(self.dataDir, csvName)
+            states.write_csv(csvName, cols=('T', 'D', 'X'))
+            self.currRun.update({"writefile": csvName.split("/")[-1]})
+
+    @problem
+    def network_problem_orig(self):
         """
         This is adds an ideal gas const pressure reactor to the volume problem as an "atmosphere"
         """
