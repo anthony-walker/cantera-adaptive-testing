@@ -15,7 +15,7 @@ mkdir slurm-output
 for i in {0..9}
 do
     # ADD_ARGS is a string argumenent given to the the launch file to add arguements to the run e.g. "--no_vol_prob --no_net_prob" or "--max_time_step 1e-8"
-    for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","4G" "Butane","4G" "NHeptane","6G" "IsoOctane","8G" "ThreeMethylHeptane","12G" "NHexadecane","12G" "MethylFiveDeconate","16G" "MethylDeconateNHeptane","20G" "TwoMethylnonadecane","24G"
+    for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","2G" "Butane","2G" "NHeptane","4G" "IsoOctane","4G" "ThreeMethylHeptane","4G" "NHexadecane","6G" "MethylFiveDeconate","8G" "MethylDeconateNHeptane","10G" "TwoMethylnonadecane","10G"
     do
         IFS=",";
         set -- $j;
@@ -34,7 +34,7 @@ done
 for i in {0..9}
 do
     # ADD_ARGS is a string argumenent given to the the launch file to add arguements to the run e.g. "--no_vol_prob --no_net_prob" or "--max_time_step 1e-8"
-    for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","4G" "Butane","4G" "NHeptane","6G" "IsoOctane","8G" "ThreeMethylHeptane","12G" "NHexadecane","12G" "MethylFiveDeconate","16G" "MethylDeconateNHeptane","20G" "TwoMethylnonadecane","24G"
+    for j in "Hydrogen","2G" "MethaneGRI","2G" "DME","2G" "JetA","2G" "Butane","2G" "NHeptane","4G" "IsoOctane","4G" "ThreeMethylHeptane","4G" "NHexadecane","6G" "MethylFiveDeconate","8G" "MethylDeconateNHeptane","10G" "TwoMethylnonadecane","10G"
     do
         IFS=",";
         set -- $j;

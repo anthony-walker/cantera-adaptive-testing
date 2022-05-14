@@ -12,13 +12,12 @@ class ModelBase(object):
         self.currRunTime = datetime.datetime.now().strftime("%X-%d-%m-%y")
         # numerical options
         self.preconditioner = kwargs['preconditioner']
-        self.solver = kwargs["solver"] if "solver" in kwargs else "DENSE + NOJAC"
         self.press_prob = kwargs["no_press_prob"] if "no_press_prob" in kwargs else True
         self.vol_prob = kwargs["no_vol_prob"] if "no_vol_prob" in kwargs else True
         self.net_prob = kwargs["no_net_prob"] if "no_net_prob" in kwargs else True
         self.max_time_step = kwargs["max_time_step"] if "max_time_step" in kwargs else None
         self.derv_settings = {"skip-falloff":kwargs["skip_falloff"], "skip-third-bodies":kwargs['skip_thirdbody']}
-        if self.preconditioner is not None:
+        if self.preconditioner:
             self.threshold = kwargs["threshold"] if "threshold" in kwargs else 1e-16
         else:
             self.threshold = 0
@@ -31,12 +30,10 @@ class ModelBase(object):
         self.fuel = None
         self.air = 'O2:1.0, N2:3.76'
         self.equiv_ratio = 1 # equivalence ratio
-        self.ctr = 0
         self.thermo_data = dict()
         # output data options
-        if self.preconditioner is not None:
-            temp_str = self.preconditioner.lower()[:6]
-            self.precName = "-{:s}-precon-{:0.1e}".format(temp_str, self.threshold)
+        if self.preconditioner:
+            self.precName = "-precon-{:0.1e}".format(self.threshold)
         elif self.moles:
             self.precName = "-moles"
         else:
@@ -116,29 +113,22 @@ class ModelBase(object):
             Use this function to apply numerical configurations to the
             network
         """
-        if self.preconditioner is not None:
-            if self.preconditioner == "APPROXIMATE":
-                self.precon = ct.AdaptivePreconditioner()
-            elif self.preconditioner == "ANALYTICAL":
-                self.precon = ct.AnalyticalAdaptivePreconditioner()
+        if self.preconditioner:
+            self.precon = ct.AdaptivePreconditioner()
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
         if self.max_time_step is not None:
             self.net.max_time_step = self.max_time_step
-        self.net.problem_type = self.solver
 
     def get_numerical_stats(self):
         # linear solver stats
         lin_opts = ['jac_evals', 'rhs_fd_jac_evals', 'iters', 'conv_fails', 'prec_evals', 'prec_solvs', 'jac_vec_setups', 'jac_vec_prod_evals']
-        lin_stats = [float(i) for i in self.net.get_lin_solver_stats()]
-        lin_stats = dict(zip(lin_opts, lin_stats))
-        lin_stats['solver'] = self.solver
+        lin_stats = self.net.linear_stats
         lin_stats['threshold'] = self.threshold
-        lin_stats['preconditioned'] = self.preconditioner if self.preconditioner is not None else "NO_PRECONDITION"
+        lin_stats['preconditioned'] = self.preconditioner if self.preconditioner else "NO_PRECONDITION"
         # nonlinear solver stats
         nonlin_opts = ['iters', 'conv_fails']
-        nonlin_stats = [float(i) for i in self.net.get_nonlin_solver_stats()]
-        nonlin_stats = dict(zip(nonlin_opts, nonlin_stats))
+        nonlin_stats = self.net.nonlinear_stats
         # numerical dictionary
         return {"linear_solver": lin_stats, "nonlinear_solver": nonlin_stats}
 
@@ -155,7 +145,7 @@ class ModelBase(object):
             tf = time.time_ns()
             # post function analysis
             num_stats = self.get_numerical_stats()
-            self.currRun[func.__name__].update({"simulation_info":{"runtime_seconds": round((tf-t0) * 1e-9, 8), "time_steps":self.ctr, "sim_end_time": self.sim_end_time, "date":self.currRunTime}})
+            self.currRun[func.__name__].update({"simulation_info":{"runtime_seconds": round((tf-t0) * 1e-9, 8), "sim_end_time": self.sim_end_time, "date":self.currRunTime}})
             self.currRun[func.__name__].update(self.thermo_data)
             self.currRun[func.__name__].update(num_stats)
             if self.max_time_step is not None:
@@ -201,12 +191,10 @@ class ModelBase(object):
         tf = 1.0
         self.sim_end_time = 0
         states = ct.SolutionArray(gas)
-        self.ctr = 0
         while self.sim_end_time < tf:
             # perform time integration
             try:
                 self.sim_end_time = self.net.step()
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 self.sim_end_time = tf
@@ -220,6 +208,35 @@ class ModelBase(object):
 
     @problem
     def volume_problem(self):
+        "A simple well-stirred reactor volume problem"
+        gas = ct.Solution(self.model)
+        gas.TP = 650, 20 * ct.one_atm
+        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
+        inlet = ct.Reservoir(gas)
+        if self.moles:
+            combustor = ct.IdealGasMoleReactor(gas)
+        else:
+            combustor = ct.IdealGasReactor(gas)
+        combustor.volume = 1.0
+        exhaust = ct.Reservoir(gas)
+        inlet_mfc = ct.MassFlowController(inlet, combustor)
+        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        # the simulation only contains one reactor
+        # Create the reactor network
+        self.net = ct.ReactorNet([combustor])
+        # apply numerical options
+        self.apply_numerical_options()
+        # Run a loop over decreasing residence times, until the reactor is extinguished,
+        # saving the state after each iteration.
+        try:
+            self.net.advance(1.0)
+            self.sim_end_time = 1.0
+        except Exception as e:
+            self.exception = {"exception": str(e)}
+
+
+    @problem
+    def volume_problem_engine(self):
         """
         This problem was adapted from
         https://cantera.org/examples/python/reactors/ic_engine.py.html
@@ -349,12 +366,10 @@ class ModelBase(object):
         dt = 1. / (360 * f)
         t_stop = sim_n_revolutions / f
         self.sim_end_time = 0
-        self.ctr = 0
         while self.net.time < t_stop:
             # perform time integration
             try:
                 self.net.advance(self.net.time + dt)
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 self.sim_end_time = self.net.time
@@ -442,7 +457,6 @@ class ModelBase(object):
         try:
             self.net.advance_to_steady_state()  # adv to ss
             self.sim_end_time = self.net.time
-            self.ctr = -1
         except Exception as e:
             self.exception = {"exception": str(e)}
         if self.write:
@@ -517,7 +531,6 @@ class ModelBase(object):
         states = ct.SolutionArray(gas, extra=['tres'])
         residence_time = 0.1  # starting residence time
         self.sim_end_time = 0.0
-        self.ctr = 0
         tf = 1e-5
         while combustor.T > 500:
             # perform time integration
@@ -526,7 +539,6 @@ class ModelBase(object):
                 self.net.advance_to_steady_state()
                 residence_time *= 0.9  # decrease the residence time for the next iteration
                 self.sim_end_time += self.net.time
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
             if self.write:
@@ -588,12 +600,10 @@ class ModelBase(object):
         tf = 10.0
         self.sim_end_time = 0.0
         states = ct.SolutionArray(gas, extra=['tnow',])
-        self.ctr = 0
         while self.sim_end_time < tf:
             # perform time integration
             try:
                 self.sim_end_time = self.net.step()
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 self.sim_end_time = tf
@@ -744,12 +754,10 @@ class ModelBase(object):
         dt = 1. / (360 * f)
         t_stop = sim_n_revolutions / f
         self.sim_end_time = 0
-        self.ctr = 0
         while self.net.time < t_stop:
             # perform time integration
             try:
                 self.net.advance(self.net.time + dt)
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 self.sim_end_time = self.net.time
@@ -842,11 +850,9 @@ class ModelBase(object):
         tf = 1.0
         self.sim_end_time = 0.0
         self.net.set_initial_time(self.sim_end_time)
-        self.ctr = 0
         while self.sim_end_time < tf:
             try:
                 self.sim_end_time = self.net.step()
-                self.ctr += 1
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 self.sim_end_time = tf
