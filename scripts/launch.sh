@@ -24,9 +24,9 @@ do
         echo "Launching $CURR_MODEL-prec-approx -- $AMS"
         sbatch -J "apprec-$CURR_MODEL" approx-precon.sh --mem=$AMS
         sleep 0.1
-        echo "Launching $CURR_MODEL-prec-analyt -- $AMS"
-        sbatch -J "anprec-$CURR_MODEL" analyt-precon.sh --mem=$AMS
-        sleep 0.1
+        #echo "Launching $CURR_MODEL-prec-analyt -- $AMS"
+        #sbatch -J "anprec-$CURR_MODEL" analyt-precon.sh --mem=$AMS
+        #sleep 0.1
     done
 done
 
