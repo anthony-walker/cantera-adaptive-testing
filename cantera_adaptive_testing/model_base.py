@@ -209,8 +209,10 @@ class ModelBase(object):
     @problem
     def volume_problem(self):
         "A simple well-stirred reactor volume problem"
+        T0 = 650
+        P0 = 20 * ct.one_atm
         gas = ct.Solution(self.model)
-        gas.TP = 650, 20 * ct.one_atm
+        gas.TP = T0, P0
         gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
         inlet = ct.Reservoir(gas)
         if self.moles:
