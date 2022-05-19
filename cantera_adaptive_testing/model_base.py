@@ -221,6 +221,8 @@ class ModelBase(object):
         exhaust = ct.Reservoir(gas)
         inlet_mfc = ct.MassFlowController(inlet, combustor)
         outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        # add properties to yaml
+        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0":P0, "V0":combustor.volume}})
         # the simulation only contains one reactor
         # Create the reactor network
         self.net = ct.ReactorNet([combustor])

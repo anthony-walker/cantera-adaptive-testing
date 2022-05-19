@@ -1,5 +1,6 @@
 import numpy as np
 import cantera as ct
+import multiprocessing as mp
 import matplotlib.pyplot as plt
 from cantera_adaptive_testing.iutils import *
 import cantera_adaptive_testing.plotter as plotter
@@ -14,26 +15,60 @@ plt.rcParams["font.family"] = 'serif'
 yaml = ruamel.yaml.YAML()
 
 
+def get_fnames_mp(file):
+    return "-".join(file.split('-')[:-1])
+
+
+def get_count_mp(files):
+    count = {}
+    for f in files:
+        if f in count:
+            count[f] += 1
+        else:
+            count[f] = 1
+    return count
+
+
+def split_list(res):
+    # split into pool_size
+    pool_size = mp.cpu_count()
+    nfiles = len(res)
+    step = nfiles//pool_size
+    files_lists = []
+    for i in range(pool_size):
+        if i+1 < pool_size:
+            files_lists.append(res[i*step:(i+1)*step])
+        else:
+            files_lists.append(res[i*step:])
+    return files_lists
+
 def count_uniq_yamls(datadir, *args, **kwargs):
     files = os.listdir(datadir)
-    files = ["-".join(f.split('-')[:-1]) for f in files]
-    ctrs = get_zero_dict(set(files))
-    for f in files:
-        ctrs[f] += 1
-    res = sorted([(k, ctrs[k]) for k in ctrs])
-    for r in res:
-        print(r)
+    pool_size = mp.cpu_count()
+    with mp.Pool(pool_size) as mpool:
+        res = mpool.map(get_fnames_mp, files)
+        files_lists = split_list(res)
+        res = mpool.map(get_count_mp, files_lists)
+        for r in res:
+            sums = 0
+            for k in r:
+                sums += r[k]
+        count = {}
+        for d in res:
+            for k in d:
+                if k in count:
+                    count[k] += d[k]
+                else:
+                    count[k] = d[k]
+        keys = list(count.keys())
+        keys.sort()
+        for k in keys:
+            print("{:s}: {:d}".format(k, count[k]))
 
-
-def combine_dir(datadir, *args, **kwargs):
-    files = os.listdir(datadir)
-    yaml = ruamel.yaml.YAML()
-    # get log file name
-    log_file = "{:s}.yaml".format(datadir)
-    # open the rest of the files
+def combine_dict_mp(files):
     data = dict()
-    for f in files:
-        curr_file = os.path.join(datadir, f)
+    for curr_file in files:
+        f = curr_file.split("/")[-1]
         with open(curr_file) as yf:
             curr_data = yaml.load(yf)
         data[f] = curr_data
@@ -46,84 +81,79 @@ def combine_dir(datadir, *args, **kwargs):
     for key, pt in except_keys:
         del data[key][pt]
         warnings.warn("Removing entry due to found exception {:s}:{:s}".format(key, pt))
+    return data
+
+def get_data(datadir):
+    # get log file name
+    log_file = "{:s}.yaml".format(datadir)
+    # get files
+    files = os.listdir(datadir)
+    files = [os.path.join(datadir, f) for f in files]
+    # get yaml reader
+    yaml = ruamel.yaml.YAML()
+    # open multiprocessing pool
+    pool_size = mp.cpu_count()
+    with mp.Pool(pool_size) as mpool:
+        files_lists = split_list(files)
+        data_data = mpool.map(combine_dict_mp, files_lists)
+    # combine now
+    data = dict()
+    for sub_data in data_data:
+        for k in sub_data:
+            data[k] = sub_data[k]
+    return data
+
+def combine_dir(datadir, *args, **kwargs):
+    data = get_data(datadir)
     # create a new file with merged yaml
     with open(log_file, "w") as f:
         yaml.dump(data, f)
 
+def compute_average_from_keylist(data_for_avg):
+    key_list, data_list = data_for_avg
+    avgdata = data_list[0]
+    data_len = len(data_list)
+    for curr_data in data_list[1:]:
+        for pt in curr_data:
+            avgdata[pt]['simulation_info']['runtime_seconds'] += curr_data[pt]['simulation_info']['runtime_seconds']
+    for pt in avgdata:
+        avgdata[pt]['simulation_info']['runtime_seconds'] /= data_len
+    return {"-".join(key_list[0].split("-")[:-1]):avgdata}
 
-def average_file_entries(log_file, *args, **kwargs):
-    data = get_yaml_data(log_file)
-    unikeys = set(["-".join(k.split('-')[:-1]) for k in data.keys()])
-    avgdata = {}
-    for key in data:
-        currkey = "-".join(key.split('-')[:-1])
-        if currkey in avgdata:
-            for pt in data[key]:
-                sectdata = data[key][pt]
-                if 'exception' in sectdata.keys():
-                     warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
-                else:
-                    avgdata[currkey][pt]['simulation_info']['runs'] += 1
-                    for sect in sectdata:
-                        for ele in sectdata[sect]:
-                            eledata = sectdata[sect][ele]
-                            if isinstance(eledata, bool) or ele == 'threshold':
-                                pass # do nothing
-                            elif  isinstance(eledata,(int, float)):
-                                avgdata[currkey][pt][sect][ele] += eledata
+def paralllel_average(data):
+    data_keys = list(data.keys())
+    unikeys = {}
+    for key in data_keys:
+        uniname = "-".join(key.split("-")[:-1])
+        if uniname in unikeys.keys():
+            unikeys[uniname].append(key)
         else:
-            avgdata[currkey] = data[key]
-            except_keys = []
-            for pt in avgdata[currkey]:
-                avgdata[currkey][pt]['simulation_info']['runs'] = 1
-                subdata = avgdata[currkey][pt]
-                if 'exception' in subdata.keys():
-                    warnings.warn("Excluding entry due to found exception {:s}:{:s}".format(key, pt))
-                    except_keys.append((currkey, pt))
-            for ck, pt in except_keys:
-                del avgdata[ck][pt]
-            # check if entry has any data and delete if not
-            if not avgdata[currkey]:
-                del avgdata[currkey]
-    #divide by number of terms ['simulation_info']['runs']
-    for k in avgdata:
-        for pt in avgdata[k]:
-            currctr = avgdata[k][pt]['simulation_info']['runs']
-            for sect in avgdata[k][pt]:
-                for ele in avgdata[k][pt][sect]:
-                    if ele != 'runs' and ele != 'threshold':
-                        if isinstance(avgdata[k][pt][sect][ele], bool):
-                                    pass # do nothing
-                        elif  isinstance(avgdata[k][pt][sect][ele], (int, float)):
-                            avgdata[k][pt][sect][ele] /= currctr
-    # remove any that does not have at least mass, mole, and precon
-    models = list(set([key.split('-')[0] for key in avgdata]))
-    exclude_models = []
-    for m in models:
-        substrings = "{:s}-precon {:s}-mass {:s}-moles".format(m, m, m)
-        substrings = substrings.split(' ')
-        include_mod = True
-        for ss in substrings:
-            include_mod = any(ss in s for s in avgdata.keys()) and include_mod
-        if not include_mod:
-            exclude_models.append(m)
-    exclude_keys = []
-    for m in exclude_models:
-        for k in avgdata:
-            if m in k:
-                exclude_keys.append(k)
-    for ex in exclude_keys:
-        warnings.warn('Insufficient model data, excluding {:s}'.format(ex))
-        del avgdata[ex]
+            unikeys[uniname] = [key,]
+    uninames = list(unikeys.keys())
+    key_lists = [unikeys[k] for k in unikeys]
+    data_lists = [[data[key] for key in kl] for kl in key_lists]
+    packaged_data = list(zip(key_lists, data_lists))
+    pool_size = mp.cpu_count()
+    avgdata = {}
+    with mp.Pool(pool_size) as mpool:
+        res = mpool.map(compute_average_from_keylist, packaged_data)
+        for r in res:
+            avgdata.update(r)
+    return avgdata
+
+def average_dir(datadir, *args, **kwargs):
+    data = get_data(datadir)
+    avgdata = paralllel_average(data)
+    # create merged yaml
+    with open("averaged-{:s}.yaml".format(datadir), "w") as f:
+        yaml.dump(avgdata, f)
+
+def average_logfile(log_file, *args, **kwargs):
+    data = get_yaml_data(log_file)
+    avgdata = paralllel_average(data)
     # create merged yaml
     with open("averaged-{:s}".format(log_file), "w") as f:
         yaml.dump(avgdata, f)
-
-
-def combine_and_average(datadir, *args, **kwargs):
-    combine_dir(datadir)
-    average_file_entries("{:s}.yaml".format(datadir))
-
 
 def plot_model_based(datafile, *args, **kwargs):
     problem = kwargs['problem']
