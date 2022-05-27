@@ -47,6 +47,7 @@ fi
 for j in $(seq 1 $4)
 do
     SCRIPT="$3.sh"
+    export CURR_MODEL=$2
     sbatch -J "$2-$3" $SCRIPT --mem=$AMS
 done
 

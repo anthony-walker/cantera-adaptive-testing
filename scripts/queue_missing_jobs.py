@@ -1,7 +1,7 @@
 import os, subprocess, sys
 
 def queue_missing_jobs():
-    if len(sys.argv) > 2:
+    if len(sys.argv)> 2:
         dirname = sys.argv[1]
         opts_type = sys.argv[2]
         command = "adaptive-utilities {:s} count_uniq_yamls".format(dirname)
@@ -17,32 +17,40 @@ def queue_missing_jobs():
         launch_cmd = "./one-launch.sh {:s} {:s} {:s} {:d}"
         # define thresh_id so it won't fail for mass/mole cases
         thresh_id=0
-        for f in outlist:
-            name, nruns = f.split(" ")
-            nruns = 10 - int(nruns)//10
-            if nruns > 0:
-                nlist = name.split("-")
-                # preconditioned run
-                if len(nlist) > 2:
-                    model = nlist[0]
-                    script_prefix = "-".join(nlist[1:3])
-                    curr_cmd = launch_cmd.format(opts_type, model, script_prefix, nruns)
-                    if nlist[-1][:-1] == "0.0e+00":
-                        thresh_id = 0
-                    else:
-                        thresh_id = int(nlist[-1][:-1])
-                # mass or mole run
-                else:
-                    model = nlist[0]
-                    script_prefix = nlist[1][:-1]
-                    curr_cmd = launch_cmd.format(opts_type, model, script_prefix, nruns)
-                # run the command
+        with open("missed_jobs.sh", "w") as missed:
+            for f in outlist:
+                name, nruns = f.split(" ")
+                nruns = 10 - int(nruns)//10
+                if nruns > 0:
+                    nlist = name.split("-")
+                    # preconditioned run
+                    if len(nlist) > 2:
+                        model = nlist[0]
+                        script_prefix = "-".join(nlist[1:3])
+                        curr_cmd = launch_cmd.format(opts_type, model, script_prefix, nruns)
+                        if nlist[-1][:-1] == "0.0e+00":
+                            thresh_id = 0
+                        else:
+                            thresh_id = int(nlist[-1][:-1])
 
-                process = subprocess.Popen(curr_cmd.split(), stdout=subprocess.PIPE, env={"TEND":str(thresh_id), "TSTART":str(thresh_id)})
-                out, err = process.communicate()
-                for ot in str(out).split("\\n"):
-                    print(ot)
-                process.terminate()
+                        write_cmd = "export TSTART={:d}; export TEND={:d}; ".format(thresh_id, thresh_id) + curr_cmd+"\n"
+                    # mass or mole run
+                    else:
+                        model = nlist[0]
+                        script_prefix = nlist[1][:-1]
+                        curr_cmd = launch_cmd.format(opts_type, model, script_prefix, nruns)
+                        write_cmd = curr_cmd + "\n"
+                    # run the command
+                    print(curr_cmd)
+                    process = subprocess.Popen(curr_cmd.split(), stdout=subprocess.PIPE, shell=True, env={"TEND":str(thresh_id), "TSTART":str(thresh_id)})
+                    out, err = process.communicate()
+                    for ot in str(out).split("\\n"):
+                        print(ot)
+                    process.terminate()
+                    missed.write(write_cmd)
+                    missed.write("sleep 3.5\n")
+        # make file executable
+        process = subprocess.Popen("chmod +x missed_jobs.sh".split())
     else:
         print("No type string passed as command line argument")
 

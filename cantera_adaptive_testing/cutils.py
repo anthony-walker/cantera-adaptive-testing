@@ -62,8 +62,66 @@ def count_uniq_yamls(datadir, *args, **kwargs):
                     count[k] = d[k]
         keys = list(count.keys())
         keys.sort()
-        for k in keys:
-            print("{:s}: {:d}".format(k, count[k]))
+        counts = [(k, count[k]) for k in keys]
+        for a, b in counts:
+            print("{:s}: {:d}".format(a, b))
+    return counts
+
+def trim_to_one_hundred(datadir, *args, **kwargs):
+    files = os.listdir(datadir)
+    counts = count_uniq_yamls(datadir, *args, **kwargs)
+    for name, count in counts:
+        curr_count = count
+        idx = 0
+        while curr_count > 100:
+            if name in files[idx]:
+                file_path = os.path.join(datadir, files[idx])
+                os.system("rm -rf {:s}".format(file_path))
+                files.pop(idx)
+                curr_count -= 1
+            else:
+                idx += 1
+
+
+
+def rename_precon_file(file, prefix):
+    formerfile = file
+    fsplit = file.split("-")
+    if len(fsplit) > 3 and prefix not in formerfile:
+        fsplit[1] = prefix+"-precon"
+        newfile = "-".join(fsplit)
+        return (formerfile, newfile)
+    else:
+        return ("", "")
+
+def rename_approx_precon_file_mp(file):
+    return rename_precon_file(file, "approx")
+
+def rename_approx_precon_files(datadir, *args, **kwargs):
+    files = os.listdir(datadir)
+    pool_size = mp.cpu_count()
+    with mp.Pool(pool_size) as mpool:
+        res = mpool.map(rename_approx_precon_file_mp, files)
+        for of, nf in res:
+            if of != "":
+                loc_old = os.path.join(datadir, of)
+                loc_new = os.path.join(datadir, nf)
+                cmd  = "mv {:s} {:s}".format(loc_old, loc_new)
+                os.system(cmd)
+
+def rename_analyt_precon_file_mp(file):
+    return rename_precon_file(file, "analyt")
+
+def rename_analyt_precon_files(datadir, *args, **kwargs):
+    files = os.listdir(datadir)
+    pool_size = mp.cpu_count()
+    with mp.Pool(pool_size) as mpool:
+        res = mpool.map(rename_analyt_precon_file_mp, files)
+        for of, nf in res:
+            loc_old = os.path.join(datadir, of)
+            loc_new = os.path.join(datadir, nf)
+            cmd  = "mv {:s} {:s}".format(loc_old, loc_new)
+            os.system(cmd)
 
 def combine_dict_mp(files):
     data = dict()
