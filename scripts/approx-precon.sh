@@ -20,16 +20,28 @@
 
 # run my jobs
 echo "Slurm ID: $SLURM_JOB_ID"
-# zero threshold
-export PRECON_OPTS="$CURR_MODEL -L -v -M -P -T 0 $ADD_ARGS"
-echo $PRECON_OPTS
-mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $PRECON_OPTS
-sleep 0.1
-# varying thresholds
-for th in {1..18}
+
+# starting threshold
+if [ -z "$TSTART" ]
+then
+    TSTART=0
+fi
+# ending threshold
+if [ -z "$TEND" ]
+then
+    TEND=18
+fi
+
+for th in $(seq $TSTART $TEND)
 do
+    if [ $th -ne 0 ]
+    then
+        THR="1e-$th"
+    else
+        THR="0"
+    fi
+    export PRECON_OPTS="$CURR_MODEL -L -v -M -P -T $THR $ADD_ARGS"
     echo $PRECON_OPTS
-    export PRECON_OPTS="$CURR_MODEL -L -v -M -P -T 1e-$th $ADD_ARGS"
     mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $PRECON_OPTS
     sleep 0.1
 done
