@@ -168,25 +168,7 @@ DME-approx-precon-1.0e-12:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
       nreactions: 711, nspecies: 120}
-MethylFiveDeconate-approx-precon-1.0e-12:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897817\n1514: -198.05500145699705\n2377: 198.0374668618006\n\
-      2384: -11.144583898014131\n1363: 10.614537524819115\n258: 10.236467124669296\n\
-      2315: 9.875422795259349\n2294: -9.747601047982291\n329: 6.995887443287796\n\
-      337: 6.9613326431853055\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-12}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 08:43:36-19-05-22, runtime_seconds: 11.701373703000002,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-12: {}
 MethylFiveDeconate-approx-precon-1.0e-06:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 30568, jt_vec_setup_evals: 0,
@@ -209,24 +191,7 @@ NHexadecane-approx-precon-1.0e-14:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: nc16h34:1.0, model: nhexadecane-2115-13341.yaml, mole-reactor: true, nreactions: 13339,
       nspecies: 2115}
-NHeptane-approx-precon-1.0e-10:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.136667 and h = 1.66354e-09, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      10: -185.00169941378476\n31: -78.78157640133827\n32: 77.54326566999815\n9: 53.545521153709984\n\
-      2: 6.267071910025925\n30: 0.7272021781439311\n6: 0.5160169148803966\n4: 0.48712932705791173\n\
-      3: -0.37255317386368647\n14: 0.18375100605699002\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 8666, jt_vec_setup_evals: 0,
-      lin_conv_fails: 251, lin_iters: 8666, lin_rhs_evals: 8666, prec_evals: 72, prec_solves: 12080,
-      preconditioned: true, threshold: 1e-10}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 3439}
-    simulation_info: {date: 08:21:24-19-05-22, runtime_seconds: 40.506403118899996,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: NC7H16:1.0, model: n-heptane-c7h16-654-4846.yaml, mole-reactor: true,
-      nreactions: 4846, nspecies: 654}
+NHeptane-approx-precon-1.0e-10: {}
 MethylDeconateNHeptane-approx-precon-1.0e-18:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 46862, jt_vec_setup_evals: 0,
@@ -822,25 +787,7 @@ ThreeMethylHeptane-moles:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: true,
       nreactions: 8143, nspecies: 1378}
-TwoMethylnonadecane-approx-precon-1.0e-08:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.867515 and h = 5.17298e-16, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      101: -126.27198556161288\n6: 125.60867364009073\n60: 125.60867239082704\n221:\
-      \ 0.6636679247260141\n384: -0.5404786521144489\n87: 0.29626894645897295\n527:\
-      \ 0.22200016787329757\n67: -0.2219512658134769\n12: -0.12318683955858957\n523:\
-      \ 0.022258618756433878\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 812, jt_vec_setup_evals: 0, lin_conv_fails: 49,
-      lin_iters: 812, lin_rhs_evals: 812, prec_evals: 16, prec_solves: 1388, preconditioned: true,
-      threshold: 1e-08}
-    nonlinear_solver: {nonlinear_conv_fails: 4, nonlinear_iters: 601}
-    simulation_info: {date: 11:24:28-19-05-22, runtime_seconds: 85.89231749900001,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324,
-      nspecies: 7171}
+TwoMethylnonadecane-approx-precon-1.0e-08: {}
 JetA-approx-precon-1.0e-17:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 537, jt_vec_setup_evals: 0, lin_conv_fails: 10,
@@ -884,25 +831,7 @@ ThreeMethylHeptane-approx-precon-1.0e-01:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: true,
       nreactions: 8143, nspecies: 1378}
-DME-approx-precon-1.0e-05:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0743583 and h = 2.22617e-20, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      83: -319986.2203276557\n84: 319982.03299230983\n74: 4.153507466324705\n0: 0.1962370335758602\n\
-      57: 0.04672962093135159\n11: 0.012199303425389638\n82: -0.002150495224133131\n\
-      58: 0.00020638990327687817\n9: -0.0001333458953454436\n100: -2.9840263030043874e-05\n\
-      *******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 19029, jt_vec_setup_evals: 0,
-      lin_conv_fails: 906, lin_iters: 19029, lin_rhs_evals: 19029, prec_evals: 164,
-      prec_solves: 26363, preconditioned: true, threshold: 1e-05}
-    nonlinear_solver: {nonlinear_conv_fails: 2, nonlinear_iters: 7370}
-    simulation_info: {date: 08:22:36-19-05-22, runtime_seconds: 3.666470629600001,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
-      nreactions: 711, nspecies: 120}
+DME-approx-precon-1.0e-05: {}
 MethaneGRI-approx-precon-1.0e-11:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 86, jt_vec_setup_evals: 0, lin_conv_fails: 2,
@@ -1022,25 +951,7 @@ ThreeMethylHeptane-approx-precon-1.0e-03:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: c8h18-3:1.0, model: 3-methylheptane-c8h18-3-1378-8143.yaml, mole-reactor: true,
       nreactions: 8143, nspecies: 1378}
-DME-approx-precon-1.0e-13:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.166513 and h = 3.8281e-09, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      7: -92.49207756041818\n5: -12.182048210938474\n12: -9.305659531883709\n9: 4.5432932615139086\n\
-      6: 1.0300209022170623\n11: 0.42945812103137304\n15: 0.19309219125916507\n13:\
-      \ 0.051148961431935834\n10: -0.041855139456371045\n8: 0.034697084132388235\n\
-      *******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 34555, jt_vec_setup_evals: 0,
-      lin_conv_fails: 1588, lin_iters: 34555, lin_rhs_evals: 34555, prec_evals: 311,
-      prec_solves: 47698, preconditioned: true, threshold: 1e-13}
-    nonlinear_solver: {nonlinear_conv_fails: 5, nonlinear_iters: 13257}
-    simulation_info: {date: 08:18:34-19-05-22, runtime_seconds: 6.718378393700002,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
-      nreactions: 711, nspecies: 120}
+DME-approx-precon-1.0e-13: {}
 Butane-moles:
   volume_problem:
     linear_solver: {jac_evals: 111, jt_vec_prod_evals: 0, jt_vec_setup_evals: 0, lin_conv_fails: 0,
@@ -1084,25 +995,7 @@ Butane-approx-precon-1.0e-03:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461,
       nspecies: 230}
-MethylFiveDeconate-approx-precon-1.0e-15:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897925\n1514: -198.05500145699307\n2377: 198.03746686180014\n\
-      2384: -11.144583898014114\n1363: 10.614537524818767\n258: 10.236467124669064\n\
-      2315: 9.875422795259354\n2294: -9.747601047982347\n329: 6.995887443287675\n\
-      337: 6.961332643185531\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-15}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 08:43:57-19-05-22, runtime_seconds: 11.401595359600002,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-15: {}
 NHexadecane-approx-precon-1.0e-06:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 28191, jt_vec_setup_evals: 0,
@@ -1156,24 +1049,7 @@ JetA-approx-precon-1.0e-04:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: POSF10325:1.0, model: jetA-detailed-NOx-203.yaml, mole-reactor: true,
       nreactions: 1589, nspecies: 201}
-MethylFiveDeconate-approx-precon-1.0e-10:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093546911748\n1514: -198.05500053748335\n2377: 198.03746594290388\n\
-      2384: -11.144583808811298\n1363: 10.614537439328783\n258: 10.236467038113224\n\
-      2315: 9.875422780541898\n2294: -9.747601059338217\n329: 6.995887407477014\n\
-      337: 6.961332607547521\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-10}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 08:51:54-19-05-22, runtime_seconds: 11.4010123447, sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-10: {}
 Hydrogen-approx-precon-1.0e-06:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 139, jt_vec_setup_evals: 0, lin_conv_fails: 0,
@@ -1225,24 +1101,7 @@ MethaneGRI-approx-precon-1.0e-03:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325,
       nspecies: 53}
-MethylFiveDeconate-approx-precon-1.0e-11:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.6909360989793\n1514: -198.05500145699318\n2377: 198.03746686180017\n\
-      2384: -11.144583898014119\n1363: 10.614537524818774\n258: 10.23646712466907\n\
-      2315: 9.875422795259341\n2294: -9.747601047982302\n329: 6.995887443287625\n\
-      337: 6.961332643185548\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-11}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 09:30:44-19-05-22, runtime_seconds: 11.6082012812, sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-11: {}
 Butane-approx-precon-1.0e-11:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 16628, jt_vec_setup_evals: 0,
@@ -1450,25 +1309,7 @@ TwoMethylnonadecane-approx-precon-1.0e-15:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: c20h42-2:1.0, model: mmc5-7171-38324.yaml, mole-reactor: true, nreactions: 38324,
       nspecies: 7171}
-MethylFiveDeconate-approx-precon-1.0e-18:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609870012\n1514: -198.05500145689197\n2377: 198.0374668616968\n\
-      2384: -11.144583897992232\n1363: 10.614537524797417\n258: 10.236467124652004\n\
-      2315: 9.875422795216188\n2294: -9.747601047922936\n329: 6.995887443269768\n\
-      337: 6.961332643168195\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-18}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 09:33:04-19-05-22, runtime_seconds: 11.165111342200005,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-18: {}
 MethylDeconateNHeptane-approx-precon-1.0e-17:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 48701, jt_vec_setup_evals: 0,
@@ -1480,24 +1321,7 @@ MethylDeconateNHeptane-approx-precon-1.0e-17:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: 'md:1.0, nc7h16:1.0', model: md-nc7-3787.yaml, mole-reactor: true, nreactions: 10264,
       nspecies: 3787}
-MethylFiveDeconate-approx-precon-1.0e-09:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292227 and h = 1.64e-10, the error test failed repeatedly\
-      \ or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.7377784214851\n1514: -198.10151253662966\n2377: 198.08406294298368\n\
-      2384: -11.134971882977686\n1363: 10.604331537826871\n258: 10.22597946599995\n\
-      2315: 9.878899892250374\n2294: -9.751050504655993\n329: 6.99845915852941\n337:\
-      \ 6.963891656947631\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-09}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 13:15:37-19-05-22, runtime_seconds: 11.3993818964, sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-09: {}
 NHexadecane-approx-precon-1.0e-11:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 22539, jt_vec_setup_evals: 0,
@@ -1625,25 +1449,7 @@ MethaneGRI-approx-precon-0.0e+00:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325,
       nspecies: 53}
-MethylFiveDeconate-approx-precon-1.0e-16:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897925\n1514: -198.05500145699307\n2377: 198.03746686180014\n\
-      2384: -11.144583898014114\n1363: 10.614537524818767\n258: 10.236467124669064\n\
-      2315: 9.875422795259354\n2294: -9.747601047982347\n329: 6.995887443287675\n\
-      337: 6.961332643185531\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-16}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 09:58:32-19-05-22, runtime_seconds: 11.515810876899998,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-16: {}
 NHexadecane-approx-precon-1.0e-04:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 24619, jt_vec_setup_evals: 0,
@@ -1836,25 +1642,7 @@ MethaneGRI-approx-precon-1.0e-13:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325,
       nspecies: 53}
-MethylFiveDeconate-approx-precon-1.0e-14:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897925\n1514: -198.05500145699307\n2377: 198.03746686180014\n\
-      2384: -11.144583898014114\n1363: 10.614537524818767\n258: 10.236467124669064\n\
-      2315: 9.875422795259352\n2294: -9.747601047982347\n329: 6.995887443287675\n\
-      337: 6.961332643185533\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-14}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 09:31:45-19-05-22, runtime_seconds: 11.504122801100005,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-14: {}
 ThreeMethylHeptane-approx-precon-1.0e-11:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 16757, jt_vec_setup_evals: 0,
@@ -1984,25 +1772,7 @@ IsoOctane-approx-precon-1.0e-10:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: IC8H18:1.0, model: ic8-874.yaml, mole-reactor: true, nreactions: 6864,
       nspecies: 874}
-MethylFiveDeconate-approx-precon-1.0e-17:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897925\n1514: -198.05500145699307\n2377: 198.03746686180014\n\
-      2384: -11.144583898014114\n1363: 10.614537524818767\n258: 10.236467124669064\n\
-      2315: 9.875422795259354\n2294: -9.747601047982347\n329: 6.995887443287675\n\
-      337: 6.961332643185531\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-17}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 09:02:29-19-05-22, runtime_seconds: 11.194048505000003,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-17: {}
 Hydrogen-approx-precon-1.0e-15:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 140, jt_vec_setup_evals: 0, lin_conv_fails: 0,
@@ -2411,43 +2181,8 @@ Butane-approx-precon-0.0e+00:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461,
       nspecies: 230}
-DME-approx-precon-1.0e-02:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0742557 and h = 5.89686e-27, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      83: -89.46891015656978\n84: 89.43918528453369\n74: 0.06048301575521477\n57:\
-      \ -0.0014203160620847954\n99: -0.0010258723327550786\n16: 0.0006959695132891089\n\
-      0: -0.0006912694011336866\n43: 0.0006806950648738944\n11: -0.00042095461482257243\n\
-      55: 8.3107036328681e-05\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 14727, jt_vec_setup_evals: 0,
-      lin_conv_fails: 654, lin_iters: 14727, lin_rhs_evals: 14727, prec_evals: 128,
-      prec_solves: 20433, preconditioned: true, threshold: 0.01}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 5717}
-    simulation_info: {date: 08:21:51-19-05-22, runtime_seconds: 2.8294681943999995,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
-      nreactions: 711, nspecies: 120}
-Butane-approx-precon-1.0e-01:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.176059 and h = 1.14314e-13, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      32: 179.82738768019686\n31: -179.76843622727833\n88: 5.251708349658281\n180:\
-      \ -5.242599629547478\n136: 2.4774726411964894\n59: 2.058212700215584\n42: -1.8356863480287307\n\
-      36: -1.1143452365720983\n145: -0.3475074582213451\n6: 0.3158778459948112\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 2371, jt_vec_setup_evals: 0,
-      lin_conv_fails: 20, lin_iters: 2371, lin_rhs_evals: 2371, prec_evals: 19, prec_solves: 3439,
-      preconditioned: true, threshold: 0.1}
-    nonlinear_solver: {nonlinear_conv_fails: 0, nonlinear_iters: 1072}
-    simulation_info: {date: 08:21:34-19-05-22, runtime_seconds: 3.8469483164999985,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: C4H10:1.0, model: butane-230-2461.yaml, mole-reactor: true, nreactions: 2461,
-      nspecies: 230}
+DME-approx-precon-1.0e-02: {}
+Butane-approx-precon-1.0e-01: {}
 MethylFiveDeconate-approx-precon-1.0e-08:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 26580, jt_vec_setup_evals: 0,
@@ -2491,24 +2226,7 @@ MethylFiveDeconate-moles:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
       nspecies: 2649}
-MethylFiveDeconate-approx-precon-1.0e-13:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609897925\n1514: -198.05500145699307\n2377: 198.03746686180014\n\
-      2384: -11.144583898014114\n1363: 10.614537524818767\n258: 10.236467124669064\n\
-      2315: 9.875422795259349\n2294: -9.747601047982345\n329: 6.9958874432876765\n\
-      337: 6.961332643185534\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 1e-13}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 08:52:20-19-05-22, runtime_seconds: 11.3944475116, sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-1.0e-13: {}
 Butane-approx-precon-1.0e-02:
   volume_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 8860, jt_vec_setup_evals: 0,
@@ -2582,25 +2300,7 @@ MethaneGRI-approx-precon-1.0e-17:
     thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: CH4:1.0, model: gri-mech-55.yaml, mole-reactor: true, nreactions: 325,
       nspecies: 53}
-MethylFiveDeconate-approx-precon-0.0e+00:
-  volume_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::integrate:\nCVodes error encountered.\
-      \ Error code: -3\nAt t = 0.0292205 and h = 1.63974e-10, the error test failed\
-      \ repeatedly or with |h| = hmin.\n\nComponents with largest weighted error estimates:\n\
-      50: -198.69093609870012\n1514: -198.05500145689197\n2377: 198.0374668616968\n\
-      2384: -11.144583897992232\n1363: 10.614537524797417\n258: 10.236467124652004\n\
-      2315: 9.875422795216188\n2294: -9.747601047922936\n329: 6.995887443269768\n\
-      337: 6.961332643168195\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 165, jt_vec_setup_evals: 0, lin_conv_fails: 26,
-      lin_iters: 165, lin_rhs_evals: 165, prec_evals: 8, prec_solves: 205, preconditioned: true,
-      threshold: 0.0}
-    nonlinear_solver: {nonlinear_conv_fails: 3, nonlinear_iters: 44}
-    simulation_info: {date: 08:20:19-19-05-22, runtime_seconds: 9.654379481700001,
-      sim_end_time: 0}
-    thermo: {P0: 2026500.0, T0: 650, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: md5d:1.0, model: md5d-2649.yaml, mole-reactor: true, nreactions: 10487,
-      nspecies: 2649}
+MethylFiveDeconate-approx-precon-0.0e+00: {}
 DME-mass:
   volume_problem:
     linear_solver: {jac_evals: 184, jt_vec_prod_evals: 0, jt_vec_setup_evals: 0, lin_conv_fails: 0,

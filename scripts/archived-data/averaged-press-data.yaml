@@ -2013,23 +2013,7 @@ DME-approx-precon-1.0e-04:
     thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
       fuel: 'CH3OCH3:1.0, C3H8:1.0', model: dme-propane-122.yaml, mole-reactor: true,
       nreactions: 711, nspecies: 120}
-NHeptane-approx-precon-1.0e-06:
-  pressure_problem:
-    exception: "\n*******************************************************************************\n\
-      CanteraError thrown by CVodesIntegrator::step:\nCVodes error encountered. Error\
-      \ code: -3\n\nAt t = 0.0408796 and h = 1.1397e-10, the error test failed repeatedly\
-      \ or with |h| = hmin.\nComponents with largest weighted error estimates:\n31:\
-      \ 57.973105496158894\n30: -57.97301351762207\n230: 56.93078059463819\n13: -56.56839719180181\n\
-      18: -16.125554045657513\n15: 16.125382124946576\n22: -14.241728720227371\n17:\
-      \ 13.888746049819192\n9: -4.450441131047055\n8: 3.1663995307481008\n*******************************************************************************\n"
-    linear_solver: {jac_evals: 0, jt_vec_prod_evals: 7908, jt_vec_setup_evals: 0,
-      lin_conv_fails: 285, lin_iters: 7908, lin_rhs_evals: 7908, prec_evals: 58, prec_solves: 11037,
-      preconditioned: true, threshold: 1e-06}
-    nonlinear_solver: {nonlinear_conv_fails: 2, nonlinear_iters: 3156}
-    simulation_info: {date: 13:32:30-24-05-22, runtime_seconds: 35.4577899257, sim_end_time: 1.0}
-    thermo: {P0: 101325.0, T0: 1500.0, V0: 1.0, air: 'O2:1.0, N2:3.76', equiv_ratio: 1,
-      fuel: NC7H16:1.0, model: n-heptane-c7h16-654-4846.yaml, mole-reactor: true,
-      nreactions: 4846, nspecies: 654}
+NHeptane-approx-precon-1.0e-06: {}
 ThreeMethylHeptane-approx-precon-1.0e-02:
   pressure_problem:
     linear_solver: {jac_evals: 0, jt_vec_prod_evals: 3637, jt_vec_setup_evals: 0,

@@ -129,7 +129,7 @@ def combine_dict_mp(files):
     except_keys = []
     for key in data:
         for pt in data[key]:
-            if "Exception" in data[key][pt]:
+            if "exception" in data[key][pt]:
                 except_keys.append((key, pt))
     for key, pt in except_keys:
         del data[key][pt]
@@ -194,21 +194,12 @@ def parallel_average(data):
             avgdata.update(r)
     return avgdata
 
-def exception_check(data):
-    for k in data:
-        for pt in data[k]:
-            if 'exception' in pt:
-                data.pop(k, None)
-                warnings.warn("Removing entry due to found exception {:s}:{:s}".format(k, pt))
-    return data
-
 def average_dir(datadir, *args, **kwargs):
     data = get_data_from_dir(datadir)
-    data = exception_check(data)
-    # avgdata = parallel_average(data)
-    # # create merged yaml
-    # with open("averaged-{:s}.yaml".format(datadir), "w") as f:
-    #     yaml.dump(avgdata, f)
+    avgdata = parallel_average(data)
+    # create merged yaml
+    with open("averaged-{:s}.yaml".format(datadir), "w") as f:
+        yaml.dump(avgdata, f)
 
 def average_logfile(log_file, *args, **kwargs):
     data = get_logfile_yaml_data(log_file)
@@ -222,11 +213,8 @@ def plot_model_based(datafile, *args, **kwargs):
     kwargs['reverse'] = False
     sorted_data = get_plot_data(datafile, *args, **kwargs)
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
-    for k in keys:
-        print(k)
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
-
     for mix, miy in midxs:
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
@@ -240,18 +228,18 @@ def plot_model_based(datafile, *args, **kwargs):
         ax.set_ylabel('Speed-up', fontsize=14)
         plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
-        # # plot liniters
-        # crr_liniters = np.array([ linsols[i]['iters'] for i in range(mix, miy-2, 1)])
-        # fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters, 1)
-        # ax.set_ylabel('Linear Iterations', fontsize=14)
-        # plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        # plt.close()
-        # # plot nonliniters
-        # crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
-        # fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters, 3)
-        # ax.set_ylabel('Nonlinear Iterations', fontsize=14)
-        # plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        # plt.close()
+        # plot liniters
+        crr_liniters = np.array([ linsols[i]['lin_iters'] for i in range(mix, miy-2, 1)])
+        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters, 1)
+        ax.set_ylabel('Linear Iterations', fontsize=14)
+        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.close()
+        # plot nonliniters
+        crr_nonliniters = np.array([ nonlinsols[i]['nonlinear_iters'] for i in range(mix, miy, 1)])
+        fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters, 3)
+        ax.set_ylabel('Nonlinear Iterations', fontsize=14)
+        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.close()
 
 
 def plot_log_based(datafile, *args, **kwargs):
@@ -261,7 +249,7 @@ def plot_log_based(datafile, *args, **kwargs):
     # getting names
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
-    X, Y, M, Best, Worst = zip(*get_min_max(runtimes, midxs, mnames, species, thresholds))
+    X, Y, M, Best, Worst = zip(*get_min_max("Clocktime", runtimes, midxs, mnames, species, thresholds))
     # plot clock time
     fig, ax = plt.subplots()
     alpha = 0.5
@@ -279,8 +267,8 @@ def plot_log_based(datafile, *args, **kwargs):
     plt.savefig(os.path.join("figures", "Clocktime-Nspecies-{:s}.pdf".format(problem)))
     plt.close()
     # plot iterations
-    liniters = np.array([ linsols[i]['iters'] for i in range(len(linsols))])
-    X, Y, M, Best, Worst = zip(*get_min_max(liniters, midxs, mnames, species, thresholds))
+    liniters = np.array([ linsols[i]['lin_iters'] for i in range(len(linsols))])
+    X, Y, M, Best, Worst = zip(*get_min_max("Linear iters", liniters, midxs, mnames, species, thresholds))
     fig, ax = plt.subplots()
     alpha = 0.5
     plt.scatter(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
@@ -294,8 +282,8 @@ def plot_log_based(datafile, *args, **kwargs):
     plt.savefig(os.path.join("figures", "LinIters-Nspecies-{:s}.pdf".format(problem)))
     plt.close()
     # plot nonlinear iterations
-    nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(len(nonlinsols))])
-    X, Y, M, Best, Worst = zip(*get_min_max(nonliniters, midxs, mnames, species, thresholds))
+    nonliniters = np.array([ nonlinsols[i]['nonlinear_iters'] for i in range(len(nonlinsols))])
+    X, Y, M, Best, Worst = zip(*get_min_max("Nonlinear Iters", nonliniters, midxs, mnames, species, thresholds))
     fig, ax = plt.subplots()
     alpha = 0.5
     plt.loglog(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
@@ -308,22 +296,6 @@ def plot_log_based(datafile, *args, **kwargs):
     ax.set_xlabel("Number of Species", fontsize=14)
     ax.legend(loc='upper left')
     plt.savefig(os.path.join("figures", "NonlinIters-Nspecies-{:s}.pdf".format(problem)))
-    plt.close()
-    # plot timesteps
-    time_steps = np.array([ siminfos[i]['time_steps'] for i in range(len(siminfos))])
-    X, Y, M, Best, Worst = zip(*get_min_max(time_steps, midxs, mnames, species, thresholds))
-    fig, ax = plt.subplots()
-    alpha = 0.5
-    plt.loglog(X, Best, marker="s", color='#7570b3', label="Preconditioned Best")
-    plt.loglog(X, Y, marker="^", color='#1b9e77', label="Mass Fractions")
-    plt.loglog(X, M, marker="o", color='#d95f02', label="Moles")
-    # labels and ticks
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    ax.set_ylabel("Time steps", fontsize=14)
-    ax.set_xlabel("Number of Species", fontsize=14)
-    ax.legend(loc='upper left')
-    plt.savefig(os.path.join("figures", "Timesteps-Nspecies-{:s}.pdf".format(problem)))
     plt.close()
 
 
@@ -374,7 +346,7 @@ def plot_box_threshold(datafile, *args, **kwargs):
     runtimes = np.array(runtimes)
     for mix, miy in midxs:
         # data
-        normalized_runtimes.append(runtimes[mix]/runtimes[mix+2:miy])
+        normalized_runtimes.append(runtimes[miy-2]/runtimes[mix:miy-2])
     fig = plt.figure(figsize=(6, 10))
     plt.boxplot(normalized_runtimes, positions=unique_species, widths=width(unique_species, w), showfliers=False, medianprops=medianprops)
     # labels and ticks

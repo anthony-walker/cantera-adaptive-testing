@@ -71,18 +71,18 @@ def get_range_pts(pts):
     return idxs
 
 
-def get_min_max(runtimes, midxs, mnames, species, thresholds):
+def get_min_max(run_name, runtimes, midxs, mnames, species, thresholds):
     print('-----------------------------------------------------------')
     moddata = []
     runtimes = np.array(runtimes)
     for mix, miy in midxs:
         threshs = thresholds[mix:miy]
-        best = np.amin(runtimes[mix+2:miy])
-        worst = np.amax(runtimes[mix+2:miy])
-        locb = np.where(best == runtimes[mix+2:miy])[0][0]
-        locw = np.where(worst == runtimes[mix+2:miy])[0][0]
-        entry = (species[mix], runtimes[mix], runtimes[mix+1], best, worst)
-        print("{:s}:{:0.0f} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[mix]/worst, runtimes[mix]/best))
+        best = np.amin(runtimes[mix:miy-2])
+        worst = np.amax(runtimes[mix:miy-2])
+        locb = np.where(best == runtimes[mix:miy-2])[0][0]
+        locw = np.where(worst == runtimes[mix:miy-2])[0][0]
+        entry = (species[mix], runtimes[miy-2], runtimes[miy-1], best, worst)
+        print("{:s}: {:s}:{:0.0f} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(run_name, mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[miy-2]/worst, runtimes[miy-2]/best))
         moddata.append(entry)
     print('-----------------------------------------------------------')
     return moddata
