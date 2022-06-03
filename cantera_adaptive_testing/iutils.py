@@ -8,12 +8,16 @@ def get_zero_dict(keys):
     return {k: 0 for k in keys}
 
 
-def get_yaml_data(yamlFileName):
+def get_logfile_yaml_data(yamlFileName, *args, **kwargs):
     data = dict()
     yaml = ruamel.yaml.YAML()
     f = open(yamlFileName, 'r')
     previous = yaml.load(f)
     data.update(previous)
+    if "precontype" in kwargs:
+        for k in data:
+            if "moles" not in k and "mass" not in k and kwargs["precontype"] not in k:
+                data.pop(k, None)
     return data
 
 
@@ -34,8 +38,9 @@ def sort_yaml_data(data, reverse=False, sortkey=operator.itemgetter(0, 1, 2, 3))
 
 def get_plot_data(datafile, *args, **kwargs):
     problem=kwargs['problem']
+    prec_type = kwargs['precontype']
     reverse = kwargs['reverse'] if 'reverse' in kwargs else False
-    data = get_yaml_data(datafile)
+    data = get_logfile_yaml_data(datafile, *args, **kwargs)
     sorted_data = sort_yaml_data(data, reverse=reverse)
     prob_data = []
     for i in range(len(sorted_data)):
@@ -46,6 +51,9 @@ def get_plot_data(datafile, *args, **kwargs):
 
 
 def get_range_pts(pts):
+    """
+        Get range indices corresponding to unique models
+    """
     counts = {}
     uniq_names = []
     for pt in pts:

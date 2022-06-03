@@ -123,12 +123,12 @@ class ModelBase(object):
     def get_numerical_stats(self):
         # linear solver stats
         lin_opts = ['jac_evals', 'rhs_fd_jac_evals', 'iters', 'conv_fails', 'prec_evals', 'prec_solvs', 'jac_vec_setups', 'jac_vec_prod_evals']
-        lin_stats = self.net.linear_stats
+        lin_stats = self.net.linear_solver_stats
         lin_stats['threshold'] = self.threshold
         lin_stats['preconditioned'] = self.preconditioner if self.preconditioner else "NO_PRECONDITION"
         # nonlinear solver stats
         nonlin_opts = ['iters', 'conv_fails']
-        nonlin_stats = self.net.nonlinear_stats
+        nonlin_stats = self.net.nonlinear_solver_stats
         # numerical dictionary
         return {"linear_solver": lin_stats, "nonlinear_solver": nonlin_stats}
 

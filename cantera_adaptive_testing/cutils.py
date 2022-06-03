@@ -14,10 +14,8 @@ plt.rcParams["font.family"] = 'serif'
 # getting yaml for use in functions
 yaml = ruamel.yaml.YAML()
 
-
 def get_fnames_mp(file):
     return "-".join(file.split('-')[:-1])
-
 
 def get_count_mp(files):
     count = {}
@@ -27,7 +25,6 @@ def get_count_mp(files):
         else:
             count[f] = 1
     return count
-
 
 def split_list(res):
     # split into pool_size
@@ -81,8 +78,6 @@ def trim_to_one_hundred(datadir, *args, **kwargs):
                 curr_count -= 1
             else:
                 idx += 1
-
-
 
 def rename_precon_file(file, prefix):
     formerfile = file
@@ -141,7 +136,7 @@ def combine_dict_mp(files):
         warnings.warn("Removing entry due to found exception {:s}:{:s}".format(key, pt))
     return data
 
-def get_data(datadir):
+def get_data_from_dir(datadir):
     # get log file name
     log_file = "{:s}.yaml".format(datadir)
     # get files
@@ -162,7 +157,7 @@ def get_data(datadir):
     return data
 
 def combine_dir(datadir, *args, **kwargs):
-    data = get_data(datadir)
+    data = get_data_from_dir(datadir)
     # create a new file with merged yaml
     with open(log_file, "w") as f:
         yaml.dump(data, f)
@@ -178,7 +173,7 @@ def compute_average_from_keylist(data_for_avg):
         avgdata[pt]['simulation_info']['runtime_seconds'] /= data_len
     return {"-".join(key_list[0].split("-")[:-1]):avgdata}
 
-def paralllel_average(data):
+def parallel_average(data):
     data_keys = list(data.keys())
     unikeys = {}
     for key in data_keys:
@@ -199,52 +194,64 @@ def paralllel_average(data):
             avgdata.update(r)
     return avgdata
 
+def exception_check(data):
+    for k in data:
+        for pt in data[k]:
+            if 'exception' in pt:
+                data.pop(k, None)
+                warnings.warn("Removing entry due to found exception {:s}:{:s}".format(k, pt))
+    return data
+
 def average_dir(datadir, *args, **kwargs):
-    data = get_data(datadir)
-    avgdata = paralllel_average(data)
-    # create merged yaml
-    with open("averaged-{:s}.yaml".format(datadir), "w") as f:
-        yaml.dump(avgdata, f)
+    data = get_data_from_dir(datadir)
+    data = exception_check(data)
+    # avgdata = parallel_average(data)
+    # # create merged yaml
+    # with open("averaged-{:s}.yaml".format(datadir), "w") as f:
+    #     yaml.dump(avgdata, f)
 
 def average_logfile(log_file, *args, **kwargs):
-    data = get_yaml_data(log_file)
-    avgdata = paralllel_average(data)
+    data = get_logfile_yaml_data(log_file)
+    avgdata = parallel_average(data)
     # create merged yaml
     with open("averaged-{:s}".format(log_file), "w") as f:
         yaml.dump(avgdata, f)
 
 def plot_model_based(datafile, *args, **kwargs):
     problem = kwargs['problem']
-    kwargs['reverse'] = True
+    kwargs['reverse'] = False
     sorted_data = get_plot_data(datafile, *args, **kwargs)
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(*sorted_data)
+    for k in keys:
+        print(k)
     mnames = [k.split("-")[0] for k in keys]
     midxs = get_range_pts(mnames)
+
     for mix, miy in midxs:
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
         labels = ["$10^{{{:d}}}$".format(int(lbl.split("e")[-1])) for lbl in labels]
-        labels = labels[:-3] + ["$0$", "M", "Y"]
+        labels = ["$0$",] + labels[1:-2] + ["Y", "M"]
         # data
         curr_runtimes = np.array(runtimes[mix:miy])
         # plot speedup
-        speedup = curr_runtimes[-1]/curr_runtimes[:]
+        speedup = curr_runtimes[-2]/curr_runtimes[:]
         fig, ax = plotter.plot_precon_species_barchart(labels[:-2], speedup[:-2], 1)
         ax.set_ylabel('Speed-up', fontsize=14)
         plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
         plt.close()
-        # plot liniters
-        crr_liniters = np.array([ linsols[i]['iters'] for i in range(mix, miy-2, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters, 1)
-        ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
-        # plot nonliniters
-        crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters, 3)
-        ax.set_ylabel('Nonlinear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
+        # # plot liniters
+        # crr_liniters = np.array([ linsols[i]['iters'] for i in range(mix, miy-2, 1)])
+        # fig, ax = plotter.plot_precon_species_barchart(labels[:-2], crr_liniters, 1)
+        # ax.set_ylabel('Linear Iterations', fontsize=14)
+        # plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        # plt.close()
+        # # plot nonliniters
+        # crr_nonliniters = np.array([ nonlinsols[i]['iters'] for i in range(mix, miy, 1)])
+        # fig, ax = plotter.plot_precon_species_barchart(labels, crr_nonliniters, 3)
+        # ax.set_ylabel('Nonlinear Iterations', fontsize=14)
+        # plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        # plt.close()
 
 
 def plot_log_based(datafile, *args, **kwargs):

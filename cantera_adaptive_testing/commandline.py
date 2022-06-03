@@ -82,7 +82,7 @@ def parserSetup(add_mod=True):
     parser.add_argument('-w', '--write', action='store_true', help="If this flag is added and the study has an associated data output, it will be generated.")
     parser.add_argument('-L', '--log', action='store_true', help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
     parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose simulation.")
-    parser.add_argument('-S', '--solver', type=str, default="DENSE + NOJAC", help="Enable use of different solvers")
+    parser.add_argument('-S', '--solver', type=str, default="DENSE", help="Enable use of different solvers")
     parser.add_argument('-P', '--preconditioner', action='store_true', default=False, help="Enable use of different preconditioners")
     parser.add_argument('-T', '--threshold', type=float, default=1e-8, help="Set a threshold value used for the preconditioned simulation.")
     parser.add_argument('-M', '--moles', action='store_true', default=False, help="Use mole based reactors.")
@@ -102,6 +102,7 @@ def commandLineUtilities():
     parser.add_argument("data", type=str, help="Specify either the directory or specific yaml file used")
     parser.add_argument("utility", type=str, help="Specify the utility to be applied")
     parser.add_argument('-p', '--problem', type=str, default="pressure_problem", help="Use this flag to set the problem type for functions that take one.")
+    parser.add_argument('-P', '--precontype', type=str, default="approx", help="Use this flag to set the proconditioner type to approx or analyt for plotting purposes.")
     args = parser.parse_args()
     options = inspect.getmembers(cutils, inspect.isfunction)
     options = {element[0]: element[1] for element in options}
