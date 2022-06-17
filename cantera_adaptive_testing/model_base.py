@@ -162,10 +162,12 @@ class ModelBase(object):
             num_stats = self.get_numerical_stats()
             self.currRun[func.__name__].update({"simulation_info": {"runtime_seconds": round(
                 (tf-t0) * 1e-9, 8), "sim_end_time": self.sim_end_time, "date": self.currRunTime}})
+
             self.currRun[func.__name__].update(self.thermo_data)
-            self.currRun[func.__name__].update(num_stats)
             if self.preconditioner:
-                self.currRun[func.__name__].update(self.derv_settings)
+                self.currRun[func.__name__].update({"derivative_settings":
+                self.derv_settings})
+            self.currRun[func.__name__].update(num_stats)
             if self.max_time_step is not None:
                 self.currRun[func.__name__]['nonlinear_solver'].update(
                     {"maxtimestep": self.max_time_step})
