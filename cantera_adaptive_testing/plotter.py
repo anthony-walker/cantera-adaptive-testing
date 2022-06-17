@@ -1,6 +1,9 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import ruamel.yaml, warnings, os, operator
+import ruamel.yaml
+import warnings
+import os
+import operator
 import numpy as np
 import random
 # change font
@@ -17,7 +20,7 @@ def plot_precon_species_barchart(labels, y, xend, manual_max=None):
     rects1 = ax.bar(x, y, width, color='#7570b3', label="speed-up")
     # labels and ticks
     if manual_max is None:
-        ymax =np.ceil(max(y) + max(y) * 0.05)
+        ymax = np.ceil(max(y) + max(y) * 0.05)
     else:
         ymax = manual_max
     yticks = np.linspace(0, ymax, 5)
@@ -29,7 +32,8 @@ def plot_precon_species_barchart(labels, y, xend, manual_max=None):
     ax.set_yticklabels(ylbls, fontsize=14)
     trim = list(zip(x, labels))
     newlabels = [(trim[i][0], trim[i][1]) for i in range(0, len(trim)-xend, 2)]
-    newlabels += [(trim[i][0], trim[i][1]) for i in range(len(trim)-xend, len(trim), 1)]
+    newlabels += [(trim[i][0], trim[i][1])
+                  for i in range(len(trim)-xend, len(trim), 1)]
     newx, newlabels = zip(*newlabels)
     ax.set_xticks(newx)
     ax.set_xticklabels(newlabels, fontsize=14)
@@ -47,7 +51,8 @@ def plot_single_comparison(self, x1, y1, x2, y2, xL, yL, test_name, class_name, 
     ax.set_xlabel(xL)
     plt.legend(["Preconditioned", "Standard"])
     joinDir = self.figDir if save_dir is None else save_dir
-    save_name = os.path.join(joinDir, "{:s}-vs-{:s}-{:s}-{:s}".format(xL, yL, test_name, class_name))
+    save_name = os.path.join(
+        joinDir, "{:s}-vs-{:s}-{:s}-{:s}".format(xL, yL, test_name, class_name))
     if not replace:
         ctr = 1
         while os.path.exists(save_name+"-{:d}.pdf".format(ctr)):
@@ -64,7 +69,8 @@ def plot_multi_comparison(self, x1, y1, x2, y2, xL, yL, test_name, class_name, l
     ax = fig.add_subplot(1, 1, 1)
     rows, cols = np.shape(y1)
     for i in range(cols):
-        color = ["#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])]
+        color = ["#"+''.join([random.choice('0123456789ABCDEF')
+                             for j in range(6)])]
         ax.plot(x1, y1[:, i], color=color[0])
         ax.plot(x2, y2[:, i], color=color[0], linestyle=":")
     # plt.show()
@@ -72,7 +78,8 @@ def plot_multi_comparison(self, x1, y1, x2, y2, xL, yL, test_name, class_name, l
     ax.set_xlabel(xL)
     if leg_labs:
         plt.legend(leg_labs)
-    save_name = "./figures/{:s}-vs-{:s}-{:s}-{:s}".format(xL, yL, test_name, class_name)
+    save_name = "./figures/{:s}-vs-{:s}-{:s}-{:s}".format(
+        xL, yL, test_name, class_name)
     ctr = 1
     while os.path.exists(save_name+"-{:d}.pdf".format(ctr)):
         ctr += 1
@@ -89,5 +96,5 @@ def plot_species(self, reactor, x1, y1, x2, y2, xL, yL, test_name, class_name):
     for i in range(cols):
         if (np.mean(y1[:, i]) > self.net1.rtol):
             name = reactor.component_name(i+1)
-            plot_single_comparison(self, x1, y1[:, i], x2,  y2[:, i], xL, "MF-{:s}".format(name), test_name+"-{:s}".format(name), class_name, save_dir=dname, replace=True)
-
+            plot_single_comparison(self, x1, y1[:, i], x2,  y2[:, i], xL, "MF-{:s}".format(
+                name), test_name+"-{:s}".format(name), class_name, save_dir=dname, replace=True)

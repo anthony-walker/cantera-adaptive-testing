@@ -1,4 +1,8 @@
-import os, time, datetime, ruamel_yaml, warnings
+import os
+import time
+import datetime
+import ruamel_yaml
+import warnings
 import cantera as ct
 import numpy as np
 import random
@@ -16,7 +20,8 @@ class ModelBase(object):
         self.vol_prob = kwargs["no_vol_prob"] if "no_vol_prob" in kwargs else True
         self.net_prob = kwargs["no_net_prob"] if "no_net_prob" in kwargs else True
         self.max_time_step = kwargs["max_time_step"] if "max_time_step" in kwargs else None
-        self.derv_settings = {"skip-falloff":kwargs["skip_falloff"], "skip-third-bodies":kwargs['skip_thirdbody']}
+        self.derv_settings = {"skip-falloff": kwargs["skip_falloff"], "skip-third-bodies":
+                              kwargs['skip_thirdbody'], "analytical-temp-derivs": kwargs["analyt_temp_derivs"]}
         if self.preconditioner:
             self.threshold = kwargs["threshold"] if "threshold" in kwargs else 1e-16
         else:
@@ -24,16 +29,19 @@ class ModelBase(object):
         self.precon = None
         # standard physical parameters/options
         self.moles = kwargs["moles"] if "moles" in kwargs else True
-        self.T0 = 300 # kelvin
-        self.P0 = ct.one_atm # pascals
-        self.V0 = 1 # m^3
+        self.T0 = 300  # kelvin
+        self.P0 = ct.one_atm  # pascals
+        self.V0 = 1  # m^3
         self.fuel = None
         self.air = 'O2:1.0, N2:3.76'
-        self.equiv_ratio = 1 # equivalence ratio
+        self.equiv_ratio = 1  # equivalence ratio
         self.thermo_data = dict()
         # output data options
         if self.preconditioner:
-            self.precName = "-precon-{:0.1e}".format(self.threshold)
+            self.fprefix = "-" + \
+                kwargs["prefix"] if kwargs["prefix"] != "" else ""
+            self.precName = self.fprefix + \
+                "-precon-{:0.1e}".format(self.threshold)
         elif self.moles:
             self.precName = "-moles"
         else:
@@ -42,9 +50,11 @@ class ModelBase(object):
         out_dir = kwargs["out_dir"] if "out_dir" in kwargs else "data"
         self.dataDir, self.figDir = self.get_directories(data_name=out_dir)
         # log variables
-        self.runName = self.__class__.__name__ + self.precName + "-" + str(random.randint(0, 1e9))
+        self.runName = self.__class__.__name__ + \
+            self.precName + "-" + str(random.randint(0, 1e9))
         while (os.path.exists(os.path.join(self.dataDir, self.runName+".yaml"))):
-            self.runName = self.__class__.__name__ + self.precName + "-" + str(random.randint(0, 1e9))
+            self.runName = self.__class__.__name__ + \
+                self.precName + "-" + str(random.randint(0, 1e9))
         self.log = kwargs["log"] if "log" in kwargs else True
         self.logfile = self.runName+".yaml"
         self.logdata = dict()
@@ -52,7 +62,8 @@ class ModelBase(object):
         if not os.path.isdir(self.dataDir):
             try:
                 os.mkdir(self.dataDir)
-                self.verbose_print(self.verbose, "Making data directory: " + self.dataDir)
+                self.verbose_print(
+                    self.verbose, "Making data directory: " + self.dataDir)
             except Exception as e:
                 print(e)
 
@@ -60,7 +71,8 @@ class ModelBase(object):
         if self.verbose:
             self.print_entry(self.logdata)
         if self.log and self.logdata:
-            self.append_yaml(os.path.join(self.dataDir, self.logfile), self.logdata)
+            self.append_yaml(os.path.join(
+                self.dataDir, self.logfile), self.logdata)
 
     def set_verbose(self, verbose):
         self.verbose = verbose
@@ -117,12 +129,14 @@ class ModelBase(object):
             self.precon = ct.AdaptivePreconditioner()
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
+            self.net.derivative_settings = self.derv_settings
         if self.max_time_step is not None:
             self.net.max_time_step = self.max_time_step
 
     def get_numerical_stats(self):
         # linear solver stats
-        lin_opts = ['jac_evals', 'rhs_fd_jac_evals', 'iters', 'conv_fails', 'prec_evals', 'prec_solvs', 'jac_vec_setups', 'jac_vec_prod_evals']
+        lin_opts = ['jac_evals', 'rhs_fd_jac_evals', 'iters', 'conv_fails',
+                    'prec_evals', 'prec_solvs', 'jac_vec_setups', 'jac_vec_prod_evals']
         lin_stats = self.net.linear_solver_stats
         lin_stats['threshold'] = self.threshold
         lin_stats['preconditioned'] = self.preconditioner if self.preconditioner else "NO_PRECONDITION"
@@ -134,9 +148,10 @@ class ModelBase(object):
 
     def problem(func):
         """This is a decorator wrap simulations in common functions"""
+
         def wrapped(self):
             # pre-run operations
-            self.currRun = {func.__name__:{}}
+            self.currRun = {func.__name__: {}}
             self.sim_end_time = 0
             self.exception = {}
             # run problem
@@ -145,11 +160,15 @@ class ModelBase(object):
             tf = time.time_ns()
             # post function analysis
             num_stats = self.get_numerical_stats()
-            self.currRun[func.__name__].update({"simulation_info":{"runtime_seconds": round((tf-t0) * 1e-9, 8), "sim_end_time": self.sim_end_time, "date":self.currRunTime}})
+            self.currRun[func.__name__].update({"simulation_info": {"runtime_seconds": round(
+                (tf-t0) * 1e-9, 8), "sim_end_time": self.sim_end_time, "date": self.currRunTime}})
             self.currRun[func.__name__].update(self.thermo_data)
             self.currRun[func.__name__].update(num_stats)
+            if self.preconditioner:
+                self.currRun[func.__name__].update(self.derv_settings)
             if self.max_time_step is not None:
-                self.currRun[func.__name__]['nonlinear_solver'].update({"maxtimestep":self.max_time_step})
+                self.currRun[func.__name__]['nonlinear_solver'].update(
+                    {"maxtimestep": self.max_time_step})
             if self.exception:
                 self.currRun[func.__name__].update(self.exception)
             self.logdata.update(self.currRun)
@@ -171,7 +190,7 @@ class ModelBase(object):
         Requires: cantera >= 2.5.0
         """
         T0 = 1500.0  # inlet temperature [K]
-        P0 = ct.one_atm # constant pressure [Pa]
+        P0 = ct.one_atm  # constant pressure [Pa]
         gas = ct.Solution(self.model)
         gas.TP = T0, P0
         gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
@@ -181,9 +200,10 @@ class ModelBase(object):
         else:
             reactor = ct.IdealGasConstPressureReactor(gas)
         reactor.volume = 1.0
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0":P0, "V0":reactor.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
         # create a reactor network for performing time integration
-        self.net = ct.ReactorNet([reactor,])
+        self.net = ct.ReactorNet([reactor, ])
         # apply numerical options
         self.apply_numerical_options()
         # approximate a time step to achieve a similar resolution as in
@@ -222,9 +242,11 @@ class ModelBase(object):
         combustor.volume = 1.0
         exhaust = ct.Reservoir(gas)
         inlet_mfc = ct.MassFlowController(inlet, combustor)
-        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        outlet_mfc = ct.PressureController(
+            combustor, exhaust, master=inlet_mfc, K=0.01)
         # add properties to yaml
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0":P0, "V0":combustor.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
         # the simulation only contains one reactor
         # Create the reactor network
         self.net = ct.ReactorNet([combustor])
@@ -237,7 +259,6 @@ class ModelBase(object):
             self.sim_end_time = 1.0
         except Exception as e:
             self.exception = {"exception": str(e)}
-
 
     @problem
     def volume_problem_engine(self):
@@ -329,7 +350,8 @@ class ModelBase(object):
         inlet_valve = ct.Valve(inlet, cyl)
         inlet_delta = np.mod(inlet_close - inlet_open, 4 * np.pi)
         inlet_valve.valve_coeff = inlet_valve_coeff
-        inlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
+        inlet_valve.set_time_function(lambda t: np.mod(
+            crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
         # define injector state (gaseous!)
         gas.TPX = T_injector, p_injector, comp_injector
         injector = ct.Reservoir(gas)
@@ -338,7 +360,8 @@ class ModelBase(object):
         injector_delta = np.mod(injector_close - injector_open, 4 * np.pi)
         injector_t_open = (injector_close - injector_open) / 2. / np.pi / f
         injector_mfc.mass_flow_coeff = injector_mass / injector_t_open
-        injector_mfc.set_time_function(lambda t: np.mod(crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
+        injector_mfc.set_time_function(lambda t: np.mod(
+            crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
         # define outlet pressure (temperature and composition don't matter)
         gas.TPX = T_ambient, p_outlet, comp_ambient
         outlet = ct.Reservoir(gas)
@@ -346,7 +369,8 @@ class ModelBase(object):
         outlet_valve = ct.Valve(cyl, outlet)
         outlet_delta = np.mod(outlet_close - outlet_open, 4 * np.pi)
         outlet_valve.valve_coeff = outlet_valve_coeff
-        outlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
+        outlet_valve.set_time_function(lambda t: np.mod(
+            crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
         # define ambient pressure (temperature and composition don't matter)
         gas.TPX = T_ambient, p_ambient, comp_ambient
         ambient_air = ct.Reservoir(gas)
@@ -365,7 +389,8 @@ class ModelBase(object):
         #####################################################################
         # set up output data arrays
         if self.write:
-            states = ct.SolutionArray(cyl.thermo, extra=('t', 'ca', 'V', 'm', 'mdot_in', 'mdot_out', 'dWv_dt'),)
+            states = ct.SolutionArray(cyl.thermo, extra=(
+                't', 'ca', 'V', 'm', 'mdot_in', 'mdot_out', 'dWv_dt'),)
         # simulate with a maximum resolution of 1 deg crank angle
         dt = 1. / (360 * f)
         t_stop = sim_n_revolutions / f
@@ -382,7 +407,8 @@ class ModelBase(object):
                 dWv_dt = - (cyl.thermo.P - ambient_air.thermo.P) * A_piston * \
                     piston_speed(self.net.time)
                 # append output data
-                states.append(cyl.thermo.state, t=self.net.time, ca=crank_angle(self.net.time), V=cyl.volume, m=cyl.mass, mdot_in=inlet_valve.mass_flow_rate, mdot_out=outlet_valve.mass_flow_rate, dWv_dt=dWv_dt)
+                states.append(cyl.thermo.state, t=self.net.time, ca=crank_angle(self.net.time), V=cyl.volume,
+                              m=cyl.mass, mdot_in=inlet_valve.mass_flow_rate, mdot_out=outlet_valve.mass_flow_rate, dWv_dt=dWv_dt)
         # Run a loop over decreasing residence times, until the reactor is extinguished,
         # saving the state after each iteration.
         if self.write:
@@ -391,7 +417,6 @@ class ModelBase(object):
             csvName = os.path.join(self.dataDir, csvName)
             states.write_csv(csvName, cols=('T', 'D', 'X'))
             self.currRun.update({"writefile": csvName.split("/")[-1]})
-
 
     @problem
     def volume_problem_mixing(self):
@@ -443,7 +468,8 @@ class ModelBase(object):
         gas_b.TPX = T0, P0, self.air
         mixer = ct.IdealGasMoleReactor(gas_b)
         # add properties to yaml
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas_b.n_reactions, "nspecies":gas_b.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": -1, "T0":T0, "P0":P0, "V0":mixer.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas_b.n_reactions,
+                                "nspecies": gas_b.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": -1, "T0": T0, "P0": P0, "V0": mixer.volume}})
         # create two mass flow controllers connecting the upstream reservoirs to the
         # mixer, and set their mass flow rates to values corresponding to
         # stoichiometric combustion.
@@ -469,7 +495,6 @@ class ModelBase(object):
             csvName = os.path.join(self.dataDir, csvName)
             states.write_csv(csvName, cols=('T', 'D', 'X'))
             self.currRun.update({"writefile": csvName.split("/")[-1]})
-
 
     @problem
     def volume_problem_combustor(self):
@@ -508,7 +533,8 @@ class ModelBase(object):
         combustor = ct.IdealGasMoleReactor(gas)
         combustor.volume = 1.0
         # add properties to yaml
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0":P0, "V0":combustor.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
         # Create a reservoir for the exhaust
         exhaust = ct.Reservoir(gas)
         # Use a variable mass flow rate to keep the residence time in the reactor
@@ -524,7 +550,8 @@ class ModelBase(object):
         # MassFlowController, with an additional pressure-dependent term. By explicitly
         # including the upstream mass flow rate, the pressure is kept constant without
         # needing to use a large value for 'K', which can introduce undesired stiffness.
-        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        outlet_mfc = ct.PressureController(
+            combustor, exhaust, master=inlet_mfc, K=0.01)
         # the simulation only contains one reactor
         # Create the reactor network
         self.net = ct.ReactorNet([combustor])
@@ -595,7 +622,8 @@ class ModelBase(object):
 
         mfc = ct.MassFlowController(inlet, reactor, mdot=fuel_mdot)
         # add thermo props to run dictionary
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0":P0, "V0":reactor.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
         # Create the reactor network
         self.net = ct.ReactorNet([reactor])
         # apply numerical options
@@ -603,7 +631,7 @@ class ModelBase(object):
         # Integrate
         tf = 10.0
         self.sim_end_time = 0.0
-        states = ct.SolutionArray(gas, extra=['tnow',])
+        states = ct.SolutionArray(gas, extra=['tnow', ])
         while self.sim_end_time < tf:
             # perform time integration
             try:
@@ -709,7 +737,8 @@ class ModelBase(object):
         inlet_valve = ct.Valve(inlet, cyl)
         inlet_delta = np.mod(inlet_close - inlet_open, 4 * np.pi)
         inlet_valve.valve_coeff = inlet_valve_coeff
-        inlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
+        inlet_valve.set_time_function(lambda t: np.mod(
+            crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
         # define injector state (gaseous!)
         gas.TPX = T_injector, p_injector, comp_injector
         injector = ct.Reservoir(gas)
@@ -718,7 +747,8 @@ class ModelBase(object):
         injector_delta = np.mod(injector_close - injector_open, 4 * np.pi)
         injector_t_open = (injector_close - injector_open) / 2. / np.pi / f
         injector_mfc.mass_flow_coeff = injector_mass / injector_t_open
-        injector_mfc.set_time_function(lambda t: np.mod(crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
+        injector_mfc.set_time_function(lambda t: np.mod(
+            crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
         # define outlet pressure (temperature and composition don't matter)
         gas.TPX = T_ambient, p_outlet, comp_ambient
         # outlet constant pressure reactor here
@@ -730,11 +760,13 @@ class ModelBase(object):
         outlet_valve = ct.Valve(cyl, outlet_reactor)
         outlet_delta = np.mod(outlet_close - outlet_open, 4 * np.pi)
         outlet_valve.valve_coeff = outlet_valve_coeff
-        outlet_valve.set_time_function(lambda t: np.mod(crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
+        outlet_valve.set_time_function(lambda t: np.mod(
+            crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
         # outlet reservoir
         outlet_reservoir = ct.Reservoir(gas)
         # Pressure controller for mass into atmosphere
-        outlet_mfc = ct.PressureController(outlet_reactor, outlet_reservoir, master=outlet_valve)
+        outlet_mfc = ct.PressureController(
+            outlet_reactor, outlet_reservoir, master=outlet_valve)
         # define ambient pressure (temperature and composition don't matter)
         gas.TPX = T_ambient, p_ambient, comp_ambient
         ambient_air = ct.Reservoir(gas)
@@ -753,7 +785,8 @@ class ModelBase(object):
         #####################################################################
         # set up output data arrays
         if self.write:
-            states = ct.SolutionArray(cyl.thermo, extra=('t', 'ca', 'V', 'm', 'mdot_in', 'mdot_out', 'dWv_dt'),)
+            states = ct.SolutionArray(cyl.thermo, extra=(
+                't', 'ca', 'V', 'm', 'mdot_in', 'mdot_out', 'dWv_dt'),)
         # simulate with a maximum resolution of 1 deg crank angle
         dt = 1. / (360 * f)
         t_stop = sim_n_revolutions / f
@@ -770,7 +803,8 @@ class ModelBase(object):
                 dWv_dt = - (cyl.thermo.P - ambient_air.thermo.P) * A_piston * \
                     piston_speed(self.net.time)
                 # append output data
-                states.append(cyl.thermo.state, t=self.net.time, ca=crank_angle(self.net.time), V=cyl.volume, m=cyl.mass, mdot_in=inlet_valve.mass_flow_rate, mdot_out=outlet_valve.mass_flow_rate, dWv_dt=dWv_dt)
+                states.append(cyl.thermo.state, t=self.net.time, ca=crank_angle(self.net.time), V=cyl.volume,
+                              m=cyl.mass, mdot_in=inlet_valve.mass_flow_rate, mdot_out=outlet_valve.mass_flow_rate, dWv_dt=dWv_dt)
         # Run a loop over decreasing residence times, until the reactor is extinguished,
         # saving the state after each iteration.
         if self.write:
@@ -813,8 +847,10 @@ class ModelBase(object):
         combustor.volume = 0.001
         atmosphere.volume = 1
         # add thermo props to run dictionary
-        self.thermo_data.update({"thermo":{"model": self.model.split("/")[-1], "mole-reactor":self.moles, "nreactions":gas.n_reactions, "nspecies":gas.n_species, "fuel":self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0":T0, "P0-air":P0, "P0-fuel":20*P0, "V0-air":atmosphere.volume, "V0-fuel":combustor.volume}})
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions, "nspecies": gas.n_species, "fuel": self.fuel,
+                                "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0-air": P0, "P0-fuel": 20*P0, "V0-air": atmosphere.volume, "V0-fuel": combustor.volume}})
         # Use a variable mass flow rate to keep the residence time in
+
         def fuel_mdot(t):
             """Create an inlet for the fuel, supplied as a Gaussian
             pulse"""
@@ -830,9 +866,11 @@ class ModelBase(object):
         # Set mass flow controller
         inlet_mfc = ct.MassFlowController(inlet, combustor, mdot=fuel_mdot)
         # Entrainment mass flow controller
-        inlet_mfc_air = ct.MassFlowController(inletAir, atmosphere, mdot=entrainment)
+        inlet_mfc_air = ct.MassFlowController(
+            inletAir, atmosphere, mdot=entrainment)
         # Pressure controller for mass into atmosphere
-        outlet_mfc = ct.PressureController(combustor, atmosphere, master=inlet_mfc, K=0.01)
+        outlet_mfc = ct.PressureController(
+            combustor, atmosphere, master=inlet_mfc, K=0.01)
         # the simulation only contains one reactor
         self.net = ct.ReactorNet([combustor, atmosphere])
         # apply numerical options
@@ -865,12 +903,14 @@ class ModelBase(object):
                 working_array[1:state_len] = gas.X
                 working_array[state_len:state_len + 1] = combustor.T
                 working_array[state_len+1:] = gas.X
-                state_array = np.append(state_array, np.array((working_array,)), axis=0)
+                state_array = np.append(
+                    state_array, np.array((working_array,)), axis=0)
         # write data out
         if self.write:
             csvName = self.runName + "-" + "network" + ".csv"
             csvName = os.path.join(self.dataDir, csvName)
-            np.savetxt(csvName, state_array, delimiter=", ", header=", ".join(names_array))
+            np.savetxt(csvName, state_array, delimiter=", ",
+                       header=", ".join(names_array))
             self.currRun.update({"writefile": csvName.split("/")[-1]})
 
     def __call__(self):

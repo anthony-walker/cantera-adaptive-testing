@@ -6,7 +6,7 @@
 
 #SBATCH -n 10                                # number of MPI tasks (default 1)
 
-#SBATCH -p mime4							# name of partition or queue
+#SBATCH -p mime4, share							# name of partition or queue
 
 #SBATCH --time=7-00:00:00
 
@@ -40,7 +40,7 @@ do
     else
         THR="0"
     fi
-    export PRECON_OPTS="$CURR_MODEL -L -v -M -P -T $THR $ADD_ARGS"
+    export PRECON_OPTS="$CURR_MODEL -L -v -M -P -T $THR $ADD_ARGS --prefix approx"
     echo $PRECON_OPTS
     mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $PRECON_OPTS
     sleep 0.1

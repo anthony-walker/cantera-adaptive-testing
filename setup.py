@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/anthony-walker/cantera-adaptive-testing",
     entry_points={
-        'console_scripts': ['adaptive-testing=cantera_adaptive_testing.commandline:commandLineMain', 'adaptive-testing.mpi_run_all=cantera_adaptive_testing.commandline:MPIRunAll', 'adaptive-testing.omp_run_all=cantera_adaptive_testing.commandline:MultiProcessingRunAll', 'adaptive-testing.mpi_run_same=cantera_adaptive_testing.commandline:MPIRunLoop', 'adaptive-utilities=cantera_adaptive_testing.commandline:commandLineUtilities']
+        'console_scripts': ['adaptive-testing=cantera_adaptive_testing.commandline:commandLineMain', 'adaptive-testing.mpi_run_all=cantera_adaptive_testing.commandline:mpi_run_all', 'adaptive-testing.omp_run_all=cantera_adaptive_testing.commandline:omp_run_all', 'adaptive-testing.mpi_run_same=cantera_adaptive_testing.commandline:mpi_run_loop', 'adaptive-utilities=cantera_adaptive_testing.commandline:commandLineUtilities']
     },
     packages=setuptools.find_packages(),
     include_package_data=True,

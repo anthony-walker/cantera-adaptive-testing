@@ -28,12 +28,22 @@ do
         set -- $j;
         export CURR_MODEL=$1
         export AMS=$2
-        echo "Launching $CURR_MODEL-prec-approx -- $AMS"
-        sbatch -J "apprec-$CURR_MODEL" approx-precon.sh --mem=$AMS
-        sleep 0.1
+        # Approximate preconditioner
+        if [ -z "$SKIP_APPROX" ]
+        then
+            echo "Launching approx-$CURR_MODEL -- $AMS"
+            sbatch -J "approx-$CURR_MODEL" ./slurm-batches/approx-precon.sh --mem=$AMS
+            sleep 0.1
+        fi
+        # Analytical preconditioner
+        if [ -z "$SKIP_ANALYT" ]
+        then
+            echo "Launching analyt-$CURR_MODEL -- $AMS"
+            sbatch -J "analyt-$CURR_MODEL" ./slurm-batches/analyt-precon.sh --mem=$AMS
+            sleep 0.1
+        fi
     done
 done
-
 # Run mole and mass studies
 for i in {0..9}
 do
@@ -44,11 +54,19 @@ do
         set -- $j;
         export CURR_MODEL=$1
         export AMS=$2
-        echo "Launching $CURR_MODEL-mass-$i -- $AMS"
-        sbatch -J "mass-$CURR_MODEL" mass.sh --mem=$AMS
-        sleep 0.1
-        echo "Launching $CURR_MODEL-moles-$i -- $AMS"
-	    sbatch -J "moles-$CURR_MODEL" moles.sh --mem=$AMS
-        sleep 0.1
+        # Mass run
+        if [ -z "$SKIP_MASS" ]
+        then
+            echo "Launching mass-$CURR_MODEL -- $AMS"
+            sbatch -J "mass-$CURR_MODEL" ./slurm-batches/mass.sh --mem=$AMS
+            sleep 0.1
+        fi
+        # Moles run
+        if [ -z "$SKIP_MOLES" ]
+        then
+            echo "Launching moles-$CURR_MODEL -- $AMS"
+            sbatch -J "moles-$CURR_MODEL" ./slurm-batches/moles.sh --mem=$AMS
+            sleep 0.1
+        fi
     done
 done

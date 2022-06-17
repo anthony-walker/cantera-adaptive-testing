@@ -2,6 +2,9 @@
 scripts/press-data/*
 scripts/vol-data/*
 scripts/net-data/*
+scripts/cancel_jobs.sh
+scripts/missed_jobs.sh
+
 __pycache__/
 *.py[cod]
 *$py.class

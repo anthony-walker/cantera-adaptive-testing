@@ -29,11 +29,13 @@ class DME(ModelBase):
         self.model = self.get_test_set_path('dme-propane-122.yaml')
         self.fuel = 'CH3OCH3:1.0, C3H8:1.0'
 
+
 class Butane(ModelBase):
     def __init__(self, *args, **kwargs):
         super(Butane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('butane-230-2461.yaml')
         self.fuel = 'C4H10:1.0'
+
 
 class JetA(ModelBase):
     def __init__(self, *args, **kwargs):
@@ -41,17 +43,21 @@ class JetA(ModelBase):
         self.model = self.get_test_set_path('jetA-detailed-NOx-203.yaml')
         self.fuel = 'POSF10325:1.0'
 
+
 class TwoButonane(ModelBase):
     def __init__(self, *args, **kwargs):
         super(TwoButonane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('2-butonane-ch3coch2ch3-315-1803.yaml')
+        self.model = self.get_test_set_path(
+            '2-butonane-ch3coch2ch3-315-1803.yaml')
         self.fuel = 'C4H8O1-2:1.0'
+
 
 class IsoButene(ModelBase):
     def __init__(self, *args, **kwargs):
         super(IsoButene, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('isobutene-ic4h8-493-2716.yaml')
         self.fuel = 'IC4H8:1.0'
+
 
 class NHeptane(ModelBase):
     def __init__(self, *args, **kwargs):
@@ -73,9 +79,11 @@ under engine conditions | Elsevier Enhanced Reader.”
 https://reader.elsevier.com/reader/sd/pii/S1540748910000787?token=7EE5B546D255AEA89A00CA8C8015063F3A98600E157AFBC19AB73BD38F1A5A81EE4B8F923AE3DF3629DC10661C6C81D2&originRegion=us-east-1&originCreation=20211027184033
 (accessed Oct. 27, 2021).
     """
+
     def __init__(self, *args, **kwargs):
         super(ThreeMethylHeptane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('3-methylheptane-c8h18-3-1378-8143.yaml')
+        self.model = self.get_test_set_path(
+            '3-methylheptane-c8h18-3-1378-8143.yaml')
         self.fuel = 'c8h18-3:1.0'
 
 
@@ -83,6 +91,7 @@ class NHexadecane(ModelBase):
     """
     LNLL n-hexadecane
     """
+
     def __init__(self, *args, **kwargs):
         super(NHexadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('nhexadecane-2115-13341.yaml')
@@ -93,6 +102,7 @@ class MethylFiveDeconate(ModelBase):
     """
     LNLL methyl-5-deconate
     """
+
     def __init__(self, *args, **kwargs):
         super(MethylFiveDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md5d-2649.yaml')
@@ -103,6 +113,7 @@ class MethylNineDeconate(ModelBase):
     """
     LNLL methyl-9-deconate
     """
+
     def __init__(self, *args, **kwargs):
         super(MethylNineDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md9d-3298.yaml')
@@ -113,6 +124,7 @@ class MethylDeconateNHeptane(ModelBase):
     """
     LNLL methyldeconate with nheptane
     """
+
     def __init__(self, *args, **kwargs):
         super(MethylDeconateNHeptane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md-nc7-3787.yaml')
@@ -127,6 +139,7 @@ class TwoMethylnonadecane(ModelBase):
     kinetic modeling of the oxidation of 2-methylalkanes from C7 to C20
     Combustion and Flame 2011
     """
+
     def __init__(self, *args, **kwargs):
         super(TwoMethylnonadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('mmc5-7171-38324.yaml')
