@@ -46,7 +46,7 @@ fi
 # run over number of runs
 for j in $(seq 1 $4)
 do
-    SCRIPT="$3.sh"
+    SCRIPT="./slurm-batches/$3-single.sh"
     export CURR_MODEL=$2
     sbatch -J "$2-$3" $SCRIPT --mem=$AMS
 done

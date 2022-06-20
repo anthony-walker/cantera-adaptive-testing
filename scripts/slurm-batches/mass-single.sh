@@ -6,7 +6,7 @@
 
 #SBATCH -n 1                                # number of MPI tasks (default 1)
 
-#SBATCH -p mime4, share							# name of partition or queue
+#SBATCH -p mime4,share							# name of partition or queue
 
 #SBATCH --time=7-00:00:00
 

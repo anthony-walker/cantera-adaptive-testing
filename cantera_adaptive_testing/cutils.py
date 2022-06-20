@@ -3,6 +3,7 @@ import warnings
 import ruamel.yaml
 import numpy as np
 import cantera as ct
+import subprocess
 import multiprocessing as mp
 import matplotlib.pyplot as plt
 import cantera_adaptive_testing.iutils as iutils
@@ -23,7 +24,7 @@ def count_uniq_yamls(*args, **kwargs):
     pool_size = mp.cpu_count()
     with mp.Pool(pool_size) as mpool:
         res = mpool.map(iutils.get_fnames_mp, files)
-        files_lists = split_list(res)
+        files_lists = iutils.split_list(res)
         res = mpool.map(iutils.get_count_mp, files_lists)
         for r in res:
             sums = 0
@@ -39,8 +40,8 @@ def count_uniq_yamls(*args, **kwargs):
         keys = list(count.keys())
         keys.sort()
         counts = [(k, count[k]) for k in keys]
-        for a, b in counts:
-            print("{:s}: {:d}".format(a, b))
+        # for a, b in counts:
+        #     print("{:s}: {:d}".format(a, b))
     return counts
 
 
@@ -333,14 +334,14 @@ def make_missing_jobs_script(*args, **kwargs):
     datadir = kwargs["data"]
     if kwargs["options"] != "":
         counts = count_uniq_yamls(datadir, *args, **kwargs)
+        opts_type = kwargs["options"]
         # opts_file model script_prefix nruns memory(optional)
         launch_cmd = "./one-launch.sh {:s} {:s} {:s} {:d}"
         # define thresh_id so it won't fail for mass/mole cases
         thresh_id = 0
         with open("missed_jobs.sh", "w") as missed:
-            for f in outlist:
-                name, nruns = f.split(" ")
-                nruns = 100 - int(nruns)
+            for name, nrs in counts:
+                nruns = 100 - int(nrs)
                 if nruns > 0:
                     nlist = name.split("-")
                     # preconditioned run
@@ -358,7 +359,7 @@ def make_missing_jobs_script(*args, **kwargs):
                     # mass or mole run
                     else:
                         model = nlist[0]
-                        script_prefix = nlist[1][:-1]
+                        script_prefix = nlist[1]
                         curr_cmd = launch_cmd.format(
                             opts_type, model, script_prefix, nruns) + "\n"
                     missed.write(curr_cmd)
