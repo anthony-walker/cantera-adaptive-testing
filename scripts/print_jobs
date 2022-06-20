@@ -1,1 +1,0 @@
-squeue -u walkanth --format="%.18i %.40j"

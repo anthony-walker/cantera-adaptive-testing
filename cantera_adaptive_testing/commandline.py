@@ -122,7 +122,7 @@ def commandLineUtilities():
                         help="Use this flag to set the problem type for functions that take one.")
     parser.add_argument('-o', '--options', type=str, default="",
                         help="Use this flag to pass the name of the options file used in a run.")
-    parser.add_argument('-c', '--cancel-type', type=str, default="",
+    parser.add_argument('-c', '--cancel', type=str, default="",
                         help="Use this flag to the cancel type to cancel slurm jobs")
     args = parser.parse_args()
     options = inspect.getmembers(cutils, inspect.isfunction)

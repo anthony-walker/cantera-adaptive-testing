@@ -20,7 +20,9 @@
 
 # run my jobs
 echo "Slurm ID: $SLURM_JOB_ID"
-export MASS_OPTS="$CURR_MODEL -L -v $ADD_ARGS"
-echo "Options: $MASS_OPTS"
-# run mass
-adaptive-testing $MASS_OPTS
+echo
+echo $JOB_OPTIONS
+for i in {0..20}
+do
+    adaptive-testing $JOB_OPTIONS
+done

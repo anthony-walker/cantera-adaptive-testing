@@ -1,4 +1,5 @@
 import os
+import re
 import warnings
 import ruamel.yaml
 import numpy as np
@@ -40,8 +41,8 @@ def count_uniq_yamls(*args, **kwargs):
         keys = list(count.keys())
         keys.sort()
         counts = [(k, count[k]) for k in keys]
-        # for a, b in counts:
-        #     print("{:s}: {:d}".format(a, b))
+        for a, b in counts:
+            print("{:s}: {:d}".format(a, b))
     return counts
 
 
@@ -370,27 +371,20 @@ def make_missing_jobs_script(*args, **kwargs):
         print("No options file supplied to the command, use --options OPTS_FILE")
 
 
-def cancel_slurm_jobs(*args, **kwargs):
-    if kwargs["cancel-type"] != "":
+def make_cancel_script(*args, **kwargs):
+    if kwargs["cancel"] != "":
         # get cancel jobs
-        ftype = kwargs["cancel-type"]
-        os.remove("curr_jobs")
-        get_curr_job_file = "squeue -u walkanth > curr_jobs"
-        subprocess.Popen(get_curr_job_file.split(), stdout=subprocess.PIPE)
+        ftype = kwargs["cancel"]
+        proc = subprocess.Popen("./job-print.sh", shell=True, stdout=subprocess.PIPE)
+        out, err = proc.communicate()
+        jobs = out.decode("UTF-8").split("\n")
         cancel_jobs = []
-        with open("curr_jobs", "r") as f:
-            line = f.readline()
-            while line:
-                if ftype in line:
-                    jid = line.split()[0]
-                    cancel_jobs.append("scancel {:s}".format(
-                        jid))
-                line = f.readline()
-        os.remove("curr_jobs")
-        # write cancel jobs script
+        for j in jobs:
+            if ftype in j:
+                cancel_jobs.append(re.sub("[\s]+", " ", j.strip()).split())
         with open("cancel_jobs.sh", "w") as f:
-            for cj in cancel_jobs:
-                f.write(cj+"\n")
+            for cj, comment in cancel_jobs:
+                f.write("scancel {:s} #{:s}\n".format(cj, comment))
         subprocess.Popen("chmod +x cancel_jobs.sh".split())
     else:
-        print("No cancel type specified, use --cancel-type CANCEL_TYPE")
+        print("No cancel type specified, use --cancel CANCEL_TYPE")
