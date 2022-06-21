@@ -1,10 +1,12 @@
+# intermediate data directories
+data/
+pv-data/
+vol-data/
+net-data/
+press-data/
+cancel_jobs.sh
+missed_jobs.sh
 # Byte-compiled / optimized / DLL files
-scripts/press-data/*
-scripts/vol-data/*
-scripts/net-data/*
-scripts/cancel_jobs.sh
-scripts/missed_jobs.sh
-
 __pycache__/
 *.py[cod]
 *$py.class

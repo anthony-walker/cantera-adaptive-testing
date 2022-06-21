@@ -1,14 +1,17 @@
 import os
 import re
+import inspect
+import sqlite3
 import warnings
+import subprocess
 import ruamel.yaml
 import numpy as np
 import cantera as ct
-import subprocess
 import multiprocessing as mp
 import matplotlib.pyplot as plt
 import cantera_adaptive_testing.iutils as iutils
 import cantera_adaptive_testing.plotter as plotter
+import cantera_adaptive_testing.models as models
 
 
 # set plot font computer modern
@@ -304,8 +307,9 @@ def plot_rtype_figure(*args, **kwargs):
     pdata = []
     for f in files:
         curr_file = os.path.join(directory, f)
-        gas = ct.Solution(curr_file)
-
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(curr_file)
         R = ct.Reaction.listFromFile(curr_file, gas)
         data = {"Falloff": 0, "ThreeBody": 0}
         for reaction in R:
@@ -388,3 +392,81 @@ def make_cancel_script(*args, **kwargs):
         subprocess.Popen("chmod +x cancel_jobs.sh".split())
     else:
         print("No cancel type specified, use --cancel CANCEL_TYPE")
+
+
+def vol_prob_add(model):
+    mod_name, mod_class = model
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(800, 1650, 50))]
+    V0 = 1.0
+    for T0, P0 in ics:
+        # preconditioned
+        model_object = mod_class(**{"verbose": False})
+        s1 = model_object.volume_problem(T0=T0, P0=P0, V0=V0)
+        # fully analytical
+        model_object = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False})
+        s2 = model_object.volume_problem(T0=T0, P0=P0, V0=V0)
+        if s1 and s2:
+            print(f"Found conditions {mod_name} volume_problem {T0} {V0} {P0}")
+            return mod_name, "volume_problem", T0, P0, V0
+
+
+def press_prob_add(model):
+    mod_name, mod_class = model
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(800, 1650, 50))]
+    V0 = 1.0
+    for T0, P0 in ics:
+        # preconditioned
+        model_object = mod_class(**{"verbose": False})
+        s1 = model_object.pressure_problem(T0=T0, P0=P0, V0=V0)
+        # fully analytical
+        model_object = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False})
+        s2 = model_object.pressure_problem(T0=T0, P0=P0, V0=V0)
+        if s1 and s2:
+            print(f"Found conditions {mod_name} pressure_problem {T0} {V0} {P0}")
+            return mod_name, "pressure_problem", T0, P0, V0
+
+
+def create_database(*args, **kwargs):
+    """
+        Create database initial conditions for each problem
+    """
+    # create database file
+    direc = os.path.dirname(os.path.abspath(__file__))
+    direc = os.path.join(direc, "models")
+    database_file = os.path.join(direc, "initial_conditions.db")
+    if os.path.isfile(database_file):
+        os.remove(database_file)
+    connection = sqlite3.connect(database_file)
+    cursor = connection.cursor()
+    # Creating table
+    table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
+    cursor.execute(table)
+    # get all models
+    mods = inspect.getmembers(models, inspect.isclass)
+    mods = {element[0]: element[1] for element in mods}
+    del mods['ModelBase']  # delete model because it is not a valid option
+    models_list = sorted([(mod, mods[mod]) for mod in mods])
+    entries = []
+    # create process pool
+    pool_size = mp.cpu_count()-2
+    with mp.Pool(pool_size) as mpool:
+        res = mpool.map(vol_prob_add, models_list)
+        entries += list(res)
+        res = mpool.map(press_prob_add, models_list)
+        entries += list(res)
+    # write entries into db
+    for entry in entries:
+        command = """INSERT INTO MODELS VALUES (\'{:s}\', \'{:s}\', {:.1f}, {:.1f}, {:.1f})"""
+        cursor.execute(command.format(*entry))
+    # Check that all models made it into the database
+    for mod, __ in models_list:
+        for prob in ["volume_problem", "pressure_problem"]:
+            select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
+            data = list(cursor.execute(select_cmd.format(mod, prob)))
+            if not data:
+                warnings.warn("No conditions for {:s}: {:s}".format(mod, prob))
+    # Commit your changes in the database
+    connection.commit()
+    # Closing the connection
+    connection.close()
+

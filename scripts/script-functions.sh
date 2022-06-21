@@ -50,7 +50,7 @@ approximate_precon_single() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-single" ./slurm-batches/jobs-single.sh
+        sbatch -J "$CURR_MODEL-approx-single" ./batches/jobs-single.sh
     done
 }
 
@@ -71,7 +71,7 @@ approximate_precon_mpi() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-mpi" ./slurm-batches/jobs-mpi.sh
+        sbatch -J "$CURR_MODEL-approx-mpi" ./batches/jobs-mpi.sh
     done
 }
 
@@ -92,7 +92,7 @@ analytical_precon_single() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-analyt-single" ./slurm-batches/jobs-single.sh
+        sbatch -J "$CURR_MODEL-analyt-single" ./batches/jobs-single.sh
     done
 }
 
@@ -113,7 +113,7 @@ analytical_precon_mpi() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-analyt-mpi" ./slurm-batches/jobs-mpi.sh
+        sbatch -J "$CURR_MODEL-analyt-mpi" ./batches/jobs-mpi.sh
     done
 }
 
@@ -123,7 +123,7 @@ mass_single() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" ./slurm-batches/jobs-single.sh
+    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-single.sh
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -132,7 +132,7 @@ mass_mpi() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" ./slurm-batches/jobs-mpi.sh
+    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-mpi.sh
 }
 
 # function to run fully analytical preconditioned single jobs
@@ -141,7 +141,7 @@ moles_single() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" ./slurm-batches/jobs-single.sh
+    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-single.sh
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -150,7 +150,7 @@ moles_mpi() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" ./slurm-batches/jobs-mpi.sh
+    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-mpi.sh
 }
 
 skip_mass() {
@@ -196,4 +196,25 @@ define_runners() {
     then
         RUNNERS+=("moles_$1")
     fi
+}
+
+# TODO: current not functional
+profile_preconditioning() {
+    source ~/.functions
+    export CURR_DIR=$(pwd)
+    export EX_DIR='../examples'
+    export CANTERA_DIR='../../cantera/'
+    # Rebuild cantera
+    cd $CANTERA_DIR
+    scons build -j 12
+    scons install prefix=$CONDA_PREFIX
+    # Build example
+    cd $CURR_DIR
+    cd $EX_DIR
+    scons;
+    ./dev-test.out;
+    # profile example
+    gprof -Q -b dev-test.out gmon.out>$CURR_DIR/profiles/$1
+    # -Q no call graph
+    # -D ignore non-functions
 }

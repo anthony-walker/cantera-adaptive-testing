@@ -1,6 +1,6 @@
 #!/bin/bash
 # get slurm script functions
-source ./slurm-scripts.sh
+source ./script-functions.sh
 # use launch slurm scripts for testing
 # pass opts as argument and make output data dir
 check_args_and_dirs $1

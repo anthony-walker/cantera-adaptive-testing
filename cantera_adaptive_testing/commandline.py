@@ -78,8 +78,6 @@ def parserSetup(add_mod=True):
         parser.add_argument(
             "model", type=str, help="Specify the model you would like to run. List all models by using \"list\" as the positional argument.")
     # Configurable options
-    parser.add_argument('-w', '--write', action='store_true',
-                        help="If this flag is added and the study has an associated data output, it will be generated.")
     parser.add_argument('-L', '--log', action='store_true',
                         help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
     parser.add_argument('-v', '--verbose', action='store_true',
@@ -88,7 +86,7 @@ def parserSetup(add_mod=True):
                         default=False, help="Enable use of different preconditioners")
     parser.add_argument('-f', '--prefix', type=str, default="",
                         help="Add a prefix to the output name")
-    parser.add_argument('-T', '--threshold', type=float, default=1e-8,
+    parser.add_argument('-T', '--threshold', type=float, default=0,
                         help="Set a threshold value used for the preconditioned simulation.")
     parser.add_argument('-M', '--moles', action='store_true',
                         default=False, help="Use mole based reactors.")
@@ -108,6 +106,8 @@ def parserSetup(add_mod=True):
                         help="Set a fixed max time step value.")
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
+    parser.add_argument('--update_database', action='store_true', default=False,
+                        help="Use this as a utility to create the database file for model conditions.")
     return parser
 
 
