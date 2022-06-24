@@ -124,6 +124,8 @@ def commandLineUtilities():
                         help="Use this flag to pass the name of the options file used in a run.")
     parser.add_argument('-c', '--cancel', type=str, default="",
                         help="Use this flag to the cancel type to cancel slurm jobs")
+    parser.add_argument('-de', '--db_entry', type=str, default="",
+                        help="Use this flag to add a database entry")
     args = parser.parse_args()
     options = inspect.getmembers(cutils, inspect.isfunction)
     options = {element[0]: element[1] for element in options}

@@ -1,5 +1,6 @@
 import os
 import re
+import copy
 import inspect
 import sqlite3
 import warnings
@@ -396,34 +397,65 @@ def make_cancel_script(*args, **kwargs):
 
 def vol_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(800, 1650, 50))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 50))]
     V0 = 1.0
+    # Analytical and approximate models
+    approx_model = mod_class(**{"verbose": False, "log": False})
+    analyt_model = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False, "log": False})
+    # standard arguments
+    s1 = approx_model.volume_problem(db_conds=False)
+    s2 = analyt_model.volume_problem(db_conds=False)
+    # test arguments
     for T0, P0 in ics:
-        # preconditioned
-        model_object = mod_class(**{"verbose": False})
-        s1 = model_object.volume_problem(T0=T0, P0=P0, V0=V0)
-        # fully analytical
-        model_object = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False})
-        s2 = model_object.volume_problem(T0=T0, P0=P0, V0=V0)
         if s1 and s2:
-            print(f"Found conditions {mod_name} volume_problem {T0} {V0} {P0}")
+            print(f"Found conditions {mod_name} volume_problem {T0} {P0} {V0}")
             return mod_name, "volume_problem", T0, P0, V0
+        s1 = approx_model.volume_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+        s2 = analyt_model.volume_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
 
 
 def press_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(800, 1650, 50))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 50))]
     V0 = 1.0
+    # Analytical and approximate models
+    approx_model = mod_class(**{"verbose": False, "log": False})
+    analyt_model = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False, "log": False})
+    # standard arguments
+    s1 = approx_model.pressure_problem(db_conds=False)
+    s2 = analyt_model.pressure_problem(db_conds=False)
+    # test arguments
     for T0, P0 in ics:
-        # preconditioned
-        model_object = mod_class(**{"verbose": False})
-        s1 = model_object.pressure_problem(T0=T0, P0=P0, V0=V0)
-        # fully analytical
-        model_object = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False})
-        s2 = model_object.pressure_problem(T0=T0, P0=P0, V0=V0)
         if s1 and s2:
-            print(f"Found conditions {mod_name} pressure_problem {T0} {V0} {P0}")
+            print(f"Found conditions {mod_name} pressure_problem {T0} {P0} {V0}")
             return mod_name, "pressure_problem", T0, P0, V0
+        s1 = approx_model.pressure_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+        s2 = analyt_model.pressure_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+
+
+def add_db_entry(*args, **kwargs):
+    if kwargs["db_entry"] != "":
+        # create database file
+        direc = os.path.dirname(os.path.abspath(__file__))
+        direc = os.path.join(direc, "models")
+        database_file = os.path.join(direc, "initial_conditions.db")
+        # create database connection
+        connection = sqlite3.connect(database_file)
+        cursor = connection.cursor()
+        cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND
+                    name='MODELS' ''')
+        # Creating table if it does not exist
+        if cursor.fetchone()[0] != 1:
+            table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
+            cursor.execute(table)
+        model, problem, T0, P0, V0 = kwargs["db_entry"].strip().split()
+        insert_statement = f''' INSERT INTO MODELS(Name,Problem,T0,P0,V0)
+                VALUES(\'{model}\',\'{problem}\',{float(T0)},{float(P0)},{float(V0)}) '''
+        cursor.execute(insert_statement)
+        connection.commit()
+        connection.close()
+    else:
+        print("No database entry specified, use --db_entry DB_ENTRY")
 
 
 def create_database(*args, **kwargs):
@@ -434,26 +466,74 @@ def create_database(*args, **kwargs):
     direc = os.path.dirname(os.path.abspath(__file__))
     direc = os.path.join(direc, "models")
     database_file = os.path.join(direc, "initial_conditions.db")
-    if os.path.isfile(database_file):
-        os.remove(database_file)
+    # create database connection
     connection = sqlite3.connect(database_file)
     cursor = connection.cursor()
-    # Creating table
-    table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
-    cursor.execute(table)
+    cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND
+                   name='MODELS' ''')
+    # Creating table if it does not exist
+    if cursor.fetchone()[0] != 1:
+        table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
+        cursor.execute(table)
     # get all models
     mods = inspect.getmembers(models, inspect.isclass)
     mods = {element[0]: element[1] for element in mods}
-    del mods['ModelBase']  # delete model because it is not a valid option
+    # remove models set to skip
+    tempmods = copy.deepcopy(mods)
+    for m in tempmods:
+        cm = mods[m]()
+        if cm.skip_database_build:
+            warnings.warn(f"Model set to skip: {m}")
+            del mods[m]
+    del tempmods
     models_list = sorted([(mod, mods[mod]) for mod in mods])
     entries = []
     # create process pool
-    pool_size = mp.cpu_count()-2
+    pool_size = mp.cpu_count()-1
     with mp.Pool(pool_size) as mpool:
-        res = mpool.map(vol_prob_add, models_list)
-        entries += list(res)
-        res = mpool.map(press_prob_add, models_list)
-        entries += list(res)
+        # remove models and problems that already exist
+        vol_mod_list = copy.deepcopy(models_list)
+        for m, __ in models_list:
+            select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
+            data = list(cursor.execute(select_cmd.format(m, "volume_problem")))
+            if data:
+                for i in range(len(vol_mod_list)):
+                    cm, ___ = vol_mod_list[i]
+                    if m == cm:
+                        vol_mod_list.pop(i)
+                        break
+        print(10 * "*" + "Volume" + 10 * "*")
+        for v, __ in vol_mod_list:
+            print(v)
+        print(25 * "*")
+        # remove models and problems that already exist
+        press_mod_list = copy.deepcopy(models_list)
+        for m, __ in models_list:
+            select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
+            data = list(cursor.execute(select_cmd.format(m, "pressure_problem")))
+            if data:
+                for i in range(len(press_mod_list)):
+                    cm, ___ = press_mod_list[i]
+                    if m == cm:
+                        press_mod_list.pop(i)
+                        break
+        print(10 * "*" + "Pressure" + 10 * "*")
+        for v, __ in press_mod_list:
+            print(v)
+        print(25 * "*")
+        # find remaining entries
+        if vol_mod_list:
+            vol_res = mpool.map_async(vol_prob_add, vol_mod_list)
+        if press_mod_list:
+            press_res = mpool.map_async(press_prob_add, press_mod_list)
+        # wait for results
+        if vol_mod_list:
+            vol_res.wait()
+            entries += list(vol_res.get())
+        if press_mod_list:
+            press_res.wait()
+            entries += list(press_res.get())
+
     # write entries into db
     for entry in entries:
         command = """INSERT INTO MODELS VALUES (\'{:s}\', \'{:s}\', {:.1f}, {:.1f}, {:.1f})"""

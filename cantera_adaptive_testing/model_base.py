@@ -14,7 +14,9 @@ class ModelBase(object):
     def __init__(self, *args, **kwargs):
         # current date and time
         self.currRunTime = datetime.datetime.now().strftime("%X-%d-%m-%y")
+        self.skip_database_build = True
         # numerical options
+        self.update_db = kwargs.get("update_database", False)
         self.verbose = kwargs.get("verbose", True)
         self.preconditioner = kwargs.get("preconditioner", True)
         self.press_prob = kwargs.get("no_press_prob", True)
@@ -119,14 +121,32 @@ class ModelBase(object):
         database_file = os.path.join(direc, "initial_conditions.db")
         connection = sqlite3.connect(database_file)
         cursor = connection.cursor()
+        cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND
+                   name='MODELS' ''')
+        # Creating table if it does not exist
+        if cursor.fetchone()[0] != 1:
+            table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
+            cursor.execute(table)
+        # Get all model info
         select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
         data = list(cursor.execute(select_cmd.format(model, problem)))
         if data:
             name, prob, T0, P0, V0 = data[0]
-            return T0, V0, P0
+            return T0, P0, V0
         else:
             warnings.warn(f"Conditions not found for {model}, {problem}")
             return None
+
+    def update_database_conditions(self, model, problem, T0, P0, V0):
+        direc = os.path.dirname(os.path.abspath(__file__))
+        direc = os.path.join(direc, "models")
+        database_file = os.path.join(direc, "initial_conditions.db")
+        connection = sqlite3.connect(database_file)
+        cursor = connection.cursor()
+        insert_statement = f''' INSERT INTO MODELS(Name,Problem,T0,P0,V0)
+              VALUES(\'{model}\',\'{problem}\',{T0},{P0},{V0}) '''
+        cursor.execute(insert_statement)
+        connection.commit()
 
     def apply_numerical_options(self):
         """
@@ -186,7 +206,7 @@ class ModelBase(object):
         return wrapped
 
     @problem
-    def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0):
+    def pressure_problem(self, T0=1000, P0=ct.one_atm, V0=1.0, db_conds=True):
         """
         This problem is adapted from
         https://cantera.org/examples/python/reactors/pfr.py.html and is
@@ -200,9 +220,10 @@ class ModelBase(object):
         Requires: cantera >= 2.5.0
         """
         # get database conditions if available
-        ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
-        if ics is not None:
-            T0, P0, V0 = ics
+        if db_conds:
+            ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
+            if ics is not None:
+                T0, P0, V0 = ics
         # if not try with set conditions
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
@@ -234,15 +255,18 @@ class ModelBase(object):
             ret_succ = False
         finally:
             self.sim_end_time = self.net.time
+            if self.update_db and ret_succ:
+                self.update_database_conditions(self.__class__.__name__, "pressure_problem", T0, P0, V0)
         return ret_succ
 
     @problem
-    def volume_problem(self, T0=1000, P0=ct.one_atm, V0=1.0):
+    def volume_problem(self, T0=1000, P0=ct.one_atm, V0=1.0, db_conds=True):
         "A simple well-stirred reactor volume problem"
         # get database conditions if available
-        ics = self.get_database_conditions(self.__class__.__name__, "volume_problem")
-        if ics is not None:
-            T0, P0, V0 = ics
+        if db_conds:
+            ics = self.get_database_conditions(self.__class__.__name__, "volume_problem")
+            if ics is not None:
+                T0, P0, V0 = ics
         # if not try with set conditions
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
@@ -255,6 +279,9 @@ class ModelBase(object):
         else:
             combustor = ct.IdealGasReactor(gas)
         combustor.volume = V0
+        exhaust = ct.Reservoir(gas)
+        inlet_mfc = ct.MassFlowController(inlet, combustor)
+        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc)
        # add properties to yaml
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
                                 "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
@@ -274,10 +301,12 @@ class ModelBase(object):
             ret_succ = False
         finally:
             self.sim_end_time = self.net.time
+            if self.update_db and ret_succ:
+                self.update_database_conditions(self.__class__.__name__, "volume_problem", T0, P0, V0)
         return ret_succ
 
     @problem
-    def network_problem(self, T0=300, P0=1600e5, V0=.5e-3):
+    def network_problem(self, T0=300, P0=1600e5, V0=.5e-3, db_conds=True):
         """
         This problem was adapted from
         https://cantera.org/examples/python/reactors/ic_engine.py.html
@@ -426,7 +455,6 @@ class ModelBase(object):
             except Exception as e:
                 self.exception = {"exception": str(e)}
                 ret_succ = False
-                break
             finally:
                 self.sim_end_time = self.net.time
         return ret_succ
