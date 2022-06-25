@@ -32,11 +32,11 @@ fi
 # Run preconditioned studies because they are faster
 declare -a RUNNERS=()
 declare -a MODELS=(`cat models`)
-define_runners $RTYPE
+define_runners "$RTYPE"
 # run jobs
 for job in "${RUNNERS[@]}"
 do
-        for j in "${MODELS[@]}"
+    for j in "${MODELS[@]}"
     do
         # break model arguments up
         IFS=",";
@@ -44,7 +44,7 @@ do
         export CURR_MODEL=$1
         export AMS=$2
         # evaluate jobs 10 times
-        for i in {1..$LOOPS}
+        for (( i = 1; i <= ${LOOPS}; i++ ))
         do
             eval $job
         done

@@ -11,19 +11,15 @@ import cantera as ct
 import multiprocessing as mp
 import matplotlib.pyplot as plt
 import cantera_adaptive_testing.iutils as iutils
-import cantera_adaptive_testing.plotter as plotter
 import cantera_adaptive_testing.models as models
+import cantera_adaptive_testing.plotter as plotter
 
 
-# set plot font computer modern
-plt.rcParams['mathtext.fontset'] = 'cm'
-plt.rcParams['mathtext.rm'] = 'serif'
-plt.rcParams["font.family"] = 'serif'
 # getting yaml for use in functions
 yaml = ruamel.yaml.YAML()
 
 
-def count_uniq_yamls(*args, **kwargs):
+def count_uniq_yamls(*args, print_count=True, **kwargs):
     datadir = kwargs["data"]
     files = os.listdir(datadir)
     pool_size = mp.cpu_count()
@@ -45,15 +41,16 @@ def count_uniq_yamls(*args, **kwargs):
         keys = list(count.keys())
         keys.sort()
         counts = [(k, count[k]) for k in keys]
-        for a, b in counts:
-            print("{:s}: {:d}".format(a, b))
+        if print_count:
+            for a, b in counts:
+                print("{:s}: {:d}".format(a, b))
     return counts
 
 
 def trim_to_one_hundred(*args, **kwargs):
     datadir = kwargs["data"]
     files = os.listdir(datadir)
-    counts = count_uniq_yamls(datadir, *args, **kwargs)
+    counts = count_uniq_yamls(datadir, *args, **kwargs, print_count=False)
     for name, count in counts:
         curr_count = count
         idx = 0
@@ -112,122 +109,6 @@ def average_logfile(*args, **kwargs):
         yaml.dump(avgdata, f)
 
 
-def plot_model_based(*args, **kwargs):
-    datafile = kwargs["data"]
-    problem = kwargs['problem']
-    kwargs['reverse'] = False
-    sorted_data = iutils.get_plot_data(datafile, *args, **kwargs)
-    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(
-        *sorted_data)
-    mnames = [k.split("-")[0] for k in keys]
-    midxs = get_range_pts(mnames)
-    for mix, miy in midxs:
-        # labels
-        labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
-        labels = ["$10^{{{:d}}}$".format(
-            int(lbl.split("e")[-1])) for lbl in labels]
-        labels = ["$0$", ] + labels[1:-2] + ["Y", "M"]
-        # data
-        curr_runtimes = np.array(runtimes[mix:miy])
-        # plot speedup
-        speedup = curr_runtimes[-2]/curr_runtimes[:]
-        fig, ax = plotter.plot_precon_species_barchart(
-            labels[:-2], speedup[:-2], 1)
-        ax.set_ylabel('Speed-up', fontsize=14)
-        plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
-        # plot liniters
-        crr_liniters = np.array([linsols[i]['lin_iters']
-                                for i in range(mix, miy-2, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(
-            labels[:-2], crr_liniters, 1)
-        ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
-        # plot nonliniters
-        crr_nonliniters = np.array(
-            [nonlinsols[i]['nonlinear_iters'] for i in range(mix, miy, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(
-            labels, crr_nonliniters, 3)
-        ax.set_ylabel('Nonlinear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
-        plt.close()
-
-
-def plot_log_based(*args, **kwargs):
-    datafile = kwargs["data"]
-    problem = kwargs['problem']
-    sorted_data = iutils.get_plot_data(datafile, *args, **kwargs)
-    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(
-        *sorted_data)
-    # getting names
-    mnames = [k.split("-")[0] for k in keys]
-    midxs = iutils.get_range_pts(mnames)
-    X, Y, M, Best, Worst = zip(
-        *get_min_max("Clocktime", runtimes, midxs, mnames, species, thresholds))
-    # plot clock time
-    fig, ax = plt.subplots()
-    alpha = 0.5
-    plt.loglog([10**1, 10**4], [10**-2, 10**1], linestyle="--",
-               color='k', label="$O(n)$", alpha=alpha)
-    plt.loglog([10**1, 10**4], [10**0, 10**6], linestyle=":",
-               color='k', label="$O(n^2)$", alpha=alpha)
-    plt.loglog(X, Best, marker="s", color='#7570b3',
-               label="Preconditioned Best")
-    plt.loglog(X, Y, marker="^", color='#1b9e77', label="Mass Fractions")
-    plt.loglog(X, M, marker="o", color='#d95f02', label="Moles")
-    # labels and ticks
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    ax.set_ylabel("Clocktime [s]", fontsize=14)
-    ax.set_xlabel("Number of Species", fontsize=14)
-    ax.legend(loc='upper left')
-    plt.savefig(os.path.join(
-        "figures", "Clocktime-Nspecies-{:s}.pdf".format(problem)))
-    plt.close()
-    # plot iterations
-    liniters = np.array([linsols[i]['lin_iters'] for i in range(len(linsols))])
-    X, Y, M, Best, Worst = zip(
-        *get_min_max("Linear iters", liniters, midxs, mnames, species, thresholds))
-    fig, ax = plt.subplots()
-    alpha = 0.5
-    plt.scatter(X, Best, marker="s", color='#7570b3',
-                label="Preconditioned Best")
-    # labels and ticks
-    plt.xscale("log")
-    plt.yscale("log")
-    plt.xticks(fontsize=14)
-    plt.yticks([10**i for i in range(3, 6, 1)], fontsize=14)
-    ax.set_ylabel("Linear Iterations", fontsize=14)
-    ax.set_xlabel("Number of Species", fontsize=14)
-    plt.savefig(os.path.join(
-        "figures", "LinIters-Nspecies-{:s}.pdf".format(problem)))
-    plt.close()
-    # plot nonlinear iterations
-    nonliniters = np.array([nonlinsols[i]['nonlinear_iters']
-                           for i in range(len(nonlinsols))])
-    X, Y, M, Best, Worst = zip(
-        *get_min_max("Nonlinear Iters", nonliniters, midxs, mnames, species, thresholds))
-    fig, ax = plt.subplots()
-    alpha = 0.5
-    plt.loglog(X, Best, marker="s", color='#7570b3',
-               label="Preconditioned Best")
-    plt.loglog(X, Y, marker="^", color='#1b9e77', label="Mass Fractions")
-    plt.loglog(X, M, marker="o", color='#d95f02', label="Moles")
-    # labels and ticks
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    ax.set_ylabel("Nonlinear Iterations", fontsize=14)
-    ax.set_xlabel("Number of Species", fontsize=14)
-    ax.legend(loc='upper left')
-    plt.savefig(os.path.join(
-        "figures", "NonlinIters-Nspecies-{:s}.pdf".format(problem)))
-    plt.close()
-
-
 def count_reaction_types(*args, **kwargs):
     datadir = kwargs["data"]
     directory = os.path.join(os.path.dirname(
@@ -262,114 +143,64 @@ def count_reaction_types(*args, **kwargs):
         print("---------------------------------------")
 
 
-def plot_box_threshold(*args, **kwargs):
-    datafile = kwargs["data"]
-    problem = kwargs['problem']
-    sorted_data = iutils.get_plot_data(datafile, *args, **kwargs)
-    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(
-        *sorted_data)
-    mnames = [k.split("-")[0] for k in keys]
-    midxs = get_range_pts(mnames)
-    unique_species = sorted(list(set(species)))
-    labels = ["{:0.0f}".format(x) for x in unique_species]
-    normalized_runtimes = []
-    w = 0.1
-    def width(p, w): return 10**(np.log10(p)+w/2.)-10**(np.log10(p)-w/2.)
-    medianprops = {'linestyle': '-', 'linewidth': 2, 'color': '#d95f02'}
-    runtimes = np.array(runtimes)
-    for mix, miy in midxs:
-        # data
-        normalized_runtimes.append(runtimes[miy-2]/runtimes[mix:miy-2])
-    fig = plt.figure(figsize=(6, 10))
-    plt.boxplot(normalized_runtimes, positions=unique_species, widths=width(
-        unique_species, w), showfliers=False, medianprops=medianprops)
-    # labels and ticks
-    plt.xscale('log')
-    plt.yscale('log')
-    # plt.xticks([10**i for i in range()], fontsize=14)
-    plt.yticks(fontsize=14)
-    plt.ylabel("Speed-up", fontsize=14)
-    plt.xlabel("Number of Species", fontsize=14)
-    plt.autoscale()
-    plt.tight_layout()
-    plt.savefig(os.path.join(
-        "figures", "Threshold-BoxWhisker-{:s}.pdf".format(problem)))
-    plt.close()
-
-
-def plot_rtype_figure(*args, **kwargs):
-    datadir = kwargs["data"]
-    directory = os.path.join(os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), "models"), "study-test-set")
-    files = os.listdir(directory)
-    files.sort()
-    yaml = ruamel.yaml.YAML()
-    # open the rest of the files
-    pdata = []
-    for f in files:
-        curr_file = os.path.join(directory, f)
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(curr_file)
-        R = ct.Reaction.listFromFile(curr_file, gas)
-        data = {"Falloff": 0, "ThreeBody": 0}
-        for reaction in R:
-            rtype = str(type(reaction)).replace(
-                "Reaction'>", "").split('.')[-1].strip()
-            if rtype in data:
-                data[rtype] += 1
-        pdata.append((gas.n_species, data['Falloff'], data['ThreeBody']))
-    pdata.sort()
-    species, falloff, thirdbody = zip(*pdata)
-    falloff = np.array(falloff)
-    thirdbody = np.array(thirdbody)
-    falloff += thirdbody
-    fig, ax = plt.subplots()
-    plt.semilogx(species, falloff, marker="s",
-                 color='#7570b3', label="falloff")
-    # plt.semilogx(species, thirdbody, marker="^", color='#1b9e77', label="third-body")
-    # labels and ticks
-    ax.set_ylabel("Number of Reactions")
-    ax.set_xlabel("Number of Species")
-    # ax.legend(loc='upper left')
-    plt.savefig(os.path.join("figures", "ReactionTypes-Nspecies.pdf"))
-    plt.close()
-
-
-def make_missing_jobs_script(*args, **kwargs):
+def make_missing_jobs(*args, **kwargs):
     datadir = kwargs["data"]
     if kwargs["options"] != "":
-        counts = count_uniq_yamls(datadir, *args, **kwargs)
+        counts = count_uniq_yamls(datadir, *args, **kwargs, print_count=False)
+        counts = {k:v for k, v in counts}
         opts_type = kwargs["options"]
+        opts_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        opts_path = os.path.join(os.path.join(opts_path, "scripts"), "options")
+        with open(os.path.join(opts_path, opts_type), "r") as f:
+            opts_str = f.readline().strip()
         # opts_file model script_prefix nruns memory(optional)
-        launch_cmd = "./one-launch.sh {:s} {:s} {:s} {:d}"
-        # define thresh_id so it won't fail for mass/mole cases
-        thresh_id = 0
-        with open("missed_jobs.sh", "w") as missed:
-            for name, nrs in counts:
-                nruns = 100 - int(nrs)
-                if nruns > 0:
-                    nlist = name.split("-")
-                    # preconditioned run
-                    if len(nlist) > 2:
-                        model = nlist[0]
-                        script_prefix = "-".join(nlist[1:3])
-                        curr_cmd = launch_cmd.format(
-                            opts_type, model, script_prefix, nruns)
-                        if nlist[-1][:-1] == "0.0e+00":
-                            thresh_id = 0
-                        else:
-                            thresh_id = int(nlist[-1][:-1])
-                        curr_cmd = "export TSTART={:d}; export TEND={:d}; ".format(
-                            thresh_id, thresh_id) + curr_cmd+"\n"
-                    # mass or mole run
+        with open("models", "r") as f:
+            lines = f.read().split("\n")[:-1]
+        models, mems = zip(*[ss.split(",") for ss in lines])
+        mem_dict = {models[i]:mems[i] for i in range(len(models))}
+        total_keys = []
+        for m in models:
+            for ty in ["mass", "moles", "approx-precon", "analyt-precon"]:
+                if ty == "approx-precon" or ty == "analyt-precon":
+                    total_keys.append("{:s}-{:s}-{:0.1e}".format(m, ty, 0))
+                    for i in range(1, 19, 1):
+                        total_keys.append("{:s}-{:s}-{:0.1e}".format(m, ty, 1/(10)**i))
+                else:
+                    total_keys.append("{:s}-{:s}".format(m, ty, 0))
+        with open("missed_jobs.sh", "w") as mj:
+            for tk in total_keys:
+                cc = counts.get(tk, 0)
+                if cc != 100:
+                    sj = cc%10
+                    mpij = cc//10
+                    model = tk.split("-")[0]
+                    if "precon" in tk:
+                        thresh = tk.split("precon-")[-1]
+                    # make job options
+                    if "analyt" in tk:
+                        st = "analyt"
+                        jo = f"export JOB_OPTIONS=\"{model} -L -v -M -P -T {thresh} --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs {opts_str}\""
+                    elif "approx" in tk:
+                        st = "approx"
+                        jo = f"export JOB_OPTIONS=\"{model} -L -v -M -P -T {thresh} --prefix approx {opts_str}\""
+                    elif "moles" in tk:
+                        st = "moles"
+                        jo = f"export JOB_OPTIONS=\"{model} -L -v -M {opts_str}\""
+                    elif "mass" in tk:
+                        st = "mass"
+                        jo = f"export JOB_OPTIONS=\"{model} -L -v {opts_str}\""
                     else:
-                        model = nlist[0]
-                        script_prefix = nlist[1]
-                        curr_cmd = launch_cmd.format(
-                            opts_type, model, script_prefix, nruns) + "\n"
-                    missed.write(curr_cmd)
-                    missed.write("sleep 3.5\n")
+                        raise Exception("Invalid option")
+                    mj.write(jo+"\n")
+                    mj.write("echo $JOB_OPTIONS\n")
+                    # singles
+                    for i in range(sj):
+                        ls = f"sbatch -J \"{model}-{st}-single\" ./batches/jobs-single.sh -p mime4"
+                        mj.write(ls+"\n")
+                    # mpis
+                    for i in range(10-mpij):
+                        ls = f"sbatch -J \"{model}-{st}-mpi\" ./batches/jobs-mpi.sh -p mime4"
+                        mj.write(ls+"\n")
         # make file executable
         process = subprocess.Popen("chmod +x missed_jobs.sh".split())
     else:
@@ -397,7 +228,7 @@ def make_cancel_script(*args, **kwargs):
 
 def vol_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 50))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(1200, 2000, 100))]
     V0 = 1.0
     # Analytical and approximate models
     approx_model = mod_class(**{"verbose": False, "log": False})
@@ -416,7 +247,7 @@ def vol_prob_add(model):
 
 def press_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 50))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(1200, 2000, 100))]
     V0 = 1.0
     # Analytical and approximate models
     approx_model = mod_class(**{"verbose": False, "log": False})

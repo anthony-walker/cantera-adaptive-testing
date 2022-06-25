@@ -24,7 +24,7 @@ echo "MPI"
 echo
 echo $JOB_OPTIONS
 echo
-for i in {1..$BATCH_LOOPS}
+for (( i = 1; i <= ${BATCH_LOOPS}; i++ ))
 do
     mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $JOB_OPTIONS
 done

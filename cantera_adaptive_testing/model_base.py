@@ -17,6 +17,7 @@ class ModelBase(object):
         self.skip_database_build = True
         # numerical options
         self.update_db = kwargs.get("update_database", False)
+        self.energy_off = 'off' if kwargs.get("energy_off", False) else 'on'
         self.verbose = kwargs.get("verbose", True)
         self.preconditioner = kwargs.get("preconditioner", True)
         self.press_prob = kwargs.get("no_press_prob", True)
@@ -27,7 +28,7 @@ class ModelBase(object):
         "skip-third-bodies": kwargs.get("skip_thirdbody", True),
         "analytical-temp-derivs": kwargs.get("analyt_temp_derivs", False)}
         self.threshold = kwargs.get("threshold", 0)
-        self.moles = kwargs.get("moles", True)
+        self.moles = True if self.preconditioner else kwargs.get("moles", True)
         self.precon = None
         # standard physical parameters/options
         self.fuel = None
@@ -206,7 +207,7 @@ class ModelBase(object):
         return wrapped
 
     @problem
-    def pressure_problem(self, T0=1000, P0=ct.one_atm, V0=1.0, db_conds=True):
+    def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
         """
         This problem is adapted from
         https://cantera.org/examples/python/reactors/pfr.py.html and is
@@ -232,9 +233,9 @@ class ModelBase(object):
         gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
         # create a new reactor
         if self.moles:
-            reactor = ct.IdealGasConstPressureMoleReactor(gas)
+            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
         else:
-            reactor = ct.IdealGasConstPressureReactor(gas)
+            reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
         reactor.volume = V0
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
                                 "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
@@ -275,13 +276,10 @@ class ModelBase(object):
         gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
         inlet = ct.Reservoir(gas)
         if self.moles:
-            combustor = ct.IdealGasMoleReactor(gas)
+            combustor = ct.IdealGasMoleReactor(gas, energy=self.energy_off)
         else:
-            combustor = ct.IdealGasReactor(gas)
+            combustor = ct.IdealGasReactor(gas, energy=self.energy_off)
         combustor.volume = V0
-        exhaust = ct.Reservoir(gas)
-        inlet_mfc = ct.MassFlowController(inlet, combustor)
-        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc)
        # add properties to yaml
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
                                 "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
@@ -386,9 +384,9 @@ class ModelBase(object):
         # define initial state and set up reactor
         gas.TPX = T_inlet, p_inlet, comp_inlet
         if self.moles:
-            cyl = ct.IdealGasMoleReactor(gas)
+            cyl = ct.IdealGasMoleReactor(gas, energy=self.energy_off)
         else:
-            cyl = ct.IdealGasReactor(gas)
+            cyl = ct.IdealGasReactor(gas, energy=self.energy_off)
         cyl.volume = V_oT
         # define inlet state
         gas.TPX = T_inlet, p_inlet, comp_inlet
@@ -413,9 +411,9 @@ class ModelBase(object):
         gas.TPX = T_ambient, p_outlet, comp_ambient
         # outlet constant pressure reactor here
         if self.moles:
-            outlet_reactor = ct.IdealGasConstPressureMoleReactor(gas)
+            outlet_reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
         else:
-            outlet_reactor = ct.IdealGasConstPressureReactor(gas)
+            outlet_reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
         # outlet_reactor valve
         outlet_valve = ct.Valve(cyl, outlet_reactor)
         outlet_delta = np.mod(outlet_close - outlet_open, 4 * np.pi)

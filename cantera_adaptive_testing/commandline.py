@@ -1,14 +1,15 @@
-import argparse
-import inspect
-import os
-import importlib
+import sys
 import random
-import cantera_adaptive_testing.cutils as cutils
-import cantera_adaptive_testing.models as models
+import inspect
+import argparse
+import importlib
+import numpy as np
+import cantera as ct
 from mpi4py import MPI
 import multiprocessing as mp
-import cantera as ct
-import numpy as np
+import cantera_adaptive_testing.cutils as cutils
+import cantera_adaptive_testing.models as models
+import cantera_adaptive_testing.plotter as plotter
 
 
 def mpi_run_all(*args, **kwargs):
@@ -102,6 +103,8 @@ def parserSetup(add_mod=True):
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
     parser.add_argument('--analyt_temp_derivs', action='store_true', default=False,
                         help="Use a finite difference based temperature derivative.")
+    parser.add_argument('--energy_off', action='store_true', default=False,
+                        help="Use this flag to turn of energy in the simulation.")
     parser.add_argument('-MTS', '--max_time_step', type=float,
                         help="Set a fixed max time step value.")
     parser.add_argument('-O', "--out_dir", type=str, default="data",
@@ -126,12 +129,47 @@ def commandLineUtilities():
                         help="Use this flag to the cancel type to cancel slurm jobs")
     parser.add_argument('-de', '--db_entry', type=str, default="",
                         help="Use this flag to add a database entry")
+    parser.add_argument('-P', '--pipe_file', type=str, default="",
+                        help="Redirect output to a given file name.")
     args = parser.parse_args()
     options = inspect.getmembers(cutils, inspect.isfunction)
     options = {element[0]: element[1] for element in options}
     kwargs = vars(args)
+    if args.pipe_file != "":
+        f = open(args.pipe_file, 'w')
+        sys.stdout = f
+        sys.stderr = f
     if args.utility in options:
         options[args.utility](**kwargs)
+    else:
+        print("Valid options are:")
+        for k in options:
+            print(k)
+
+
+def commandLinePlotter():
+    parser = argparse.ArgumentParser(description="""adaptive-plotter:
+    Plot data in a useful form.""")
+    parser.add_argument(
+        "data", type=str, help="Specify either the directory or specific yaml file used")
+    parser.add_argument("plot_type", type=str,
+                        help="Specify the utility to be applied")
+    parser.add_argument('-p', '--problem', type=str, default="pressure_problem",
+                        help="Use this flag to set the problem type for functions that take one.")
+    parser.add_argument('-o', '--options', type=str, default="",
+                        help="Use this flag to pass the name of the options file used in a run.")
+    parser.add_argument('-P', '--pipe_file', type=str, default="",
+                        help="Redirect output to a given file name.")
+    args = parser.parse_args()
+    options = inspect.getmembers(plotter, inspect.isfunction)
+    options = {element[0]: element[1] for element in options}
+    kwargs = vars(args)
+    if args.pipe_file != "":
+        f = open(args.pipe_file, 'w')
+        sys.stdout = f
+        sys.stderr = f
+    if args.plot_type in options:
+        options[args.plot_type](**kwargs)
     else:
         print("Valid options are:")
         for k in options:

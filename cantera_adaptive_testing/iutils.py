@@ -1,6 +1,8 @@
+import os
 import operator
 import ruamel.yaml
 import numpy as np
+import warnings
 import multiprocessing as mp
 
 yaml = ruamel.yaml.YAML()
@@ -41,7 +43,6 @@ def sort_yaml_data(data, reverse=False, sortkey=operator.itemgetter(0, 1, 2, 3))
 
 def get_plot_data(datafile, *args, **kwargs):
     problem = kwargs['problem']
-    prec_type = kwargs['precontype']
     reverse = kwargs['reverse'] if 'reverse' in kwargs else False
     data = get_logfile_yaml_data(datafile, *args, **kwargs)
     sorted_data = sort_yaml_data(data, reverse=reverse)
@@ -79,14 +80,14 @@ def get_min_max(run_name, runtimes, midxs, mnames, species, thresholds):
     moddata = []
     runtimes = np.array(runtimes)
     for mix, miy in midxs:
-        threshs = thresholds[mix:miy]
-        best = np.amin(runtimes[mix:miy-2])
-        worst = np.amax(runtimes[mix:miy-2])
-        locb = np.where(best == runtimes[mix:miy-2])[0][0]
-        locw = np.where(worst == runtimes[mix:miy-2])[0][0]
-        entry = (species[mix], runtimes[miy-2], runtimes[miy-1], best, worst)
-        print("{:s}: {:s}:{:0.0f} max:{:0.6f}, thresh:{:0.0e}, min:{:0.6f}, thresh:{:0.0e}, ratio max:{:0.6f}, ratio min:{:0.6f}".format(
-            run_name, mnames[mix], species[mix], worst, threshs[locw], best, threshs[locb], runtimes[miy-2]/worst, runtimes[miy-2]/best))
+        threshs = thresholds[mix+1:miy]
+        best = np.amin(runtimes[mix+1:miy-2])
+        worst = np.amax(runtimes[mix+1:miy-2])
+        locb = np.where(best == runtimes[mix+1:miy-2])[0][0]
+        locw = np.where(worst == runtimes[mix+1:miy-2])[0][0]
+        entry = (species[mix], runtimes[miy-2], runtimes[miy-1], runtimes[mix], best, worst)
+        print(f"{run_name}: {mnames[mix]}: {species[mix]} max:{worst}, thresh:{threshs[locw]: 0.0e}, min:{best}, thresh:{threshs[locb]: 0.0e}")
+        print(f"ratio max:{runtimes[miy-2]/worst}, ratio min:{runtimes[miy-2]/best}, analyt max:{runtimes[mix]/worst}, analyt min:{runtimes[mix]/best}\n")
         moddata.append(entry)
     print('-----------------------------------------------------------')
     return moddata
@@ -151,12 +152,25 @@ def get_data_from_dir(datadir):
 def compute_average_from_keylist(data_for_avg):
     key_list, data_list = data_for_avg
     avgdata = data_list[0]
+    # problem type lengths
+    pts_lens = {}
+    for d in data_list:
+        for pt in d:
+            if pt in pts_lens:
+                pts_lens[pt] += 1
+            else:
+                pts_lens[pt] = 1
+    # averaging data
     data_len = len(data_list)
     for curr_data in data_list[1:]:
         for pt in curr_data:
-            avgdata[pt]['simulation_info']['runtime_seconds'] += curr_data[pt]['simulation_info']['runtime_seconds']
+            if pt in avgdata:
+                avgdata[pt]['simulation_info']['runtime_seconds'] += curr_data[pt]['simulation_info']['runtime_seconds']
+            else:
+                avgdata[pt] = curr_data[pt]
     for pt in avgdata:
-        avgdata[pt]['simulation_info']['runtime_seconds'] /= data_len
+        avgdata[pt]['simulation_info']['runtime_seconds'] /= pts_lens[pt]
+        avgdata[pt]['simulation_info']['samples'] = pts_lens[pt]
     return {"-".join(key_list[0].split("-")[:-1]): avgdata}
 
 

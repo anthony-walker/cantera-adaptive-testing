@@ -8,7 +8,8 @@ IsoButene,6G
 NHeptane,6G
 IsoOctane,8G
 ThreeMethylHeptane,8G
-NHexadecane,10G
-IsoOctaneDetailed,10G
-MethylDeconateNHeptane,12G
-TwoMethylnonadecane,20G
+NHexadecane,14G
+MethylFiveDeconate,16G
+IsoOctaneDetailed,16G
+MethylDeconateNHeptane,20G
+TwoMethylnonadecane,30G

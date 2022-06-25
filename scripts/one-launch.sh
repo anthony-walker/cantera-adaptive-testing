@@ -1,6 +1,7 @@
 #!/bin/bash
 # use launch slurm scripts for testing
 # pass opts as argument and make output data dir
+source ./script-functions.sh
 if [ -z "$1" ]
 then
     echo "No arguements file given!"
@@ -34,20 +35,34 @@ fi
 # memory argument with a default
 if [ -z "$5" ]
 then
-    AMS="10G"
+    export AMS="10G"
 else
-    AMS=$5
+    export AMS=$5
+fi
+# loops in batch script
+if [ -z "$6" ]
+then
+    echo "Number of batch loops not set, running 1 loop."
+    export BATCH_LOOPS=1
+else
+    export BATCH_LOOPS=$4
 fi
 # make slurm-output dir
 if [ ! -d "slurm-output" ]
 then
     mkdir slurm-output
 fi
-# run over number of runs
-for j in $(seq 1 $4)
+# get runners
+declare -a RUNNERS=()
+define_runners "$3"
+# run jobs
+for job in "${RUNNERS[@]}"
 do
-    SCRIPT="./batches/$3-single.sh"
     export CURR_MODEL=$2
-    sbatch -J "$2-$3" $SCRIPT --mem=$AMS
+    # evaluate jobs 10 times
+    for (( i = 1; i <= ${4}; i++ ))
+    do
+        eval $job
+    done
 done
 

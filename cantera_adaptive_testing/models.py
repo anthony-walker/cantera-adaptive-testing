@@ -64,7 +64,7 @@ class NHexanal(ModelBase):
         super(NHexanal, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('n-hexanal-482-5182.yaml')
         self.fuel = 'C6H14:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class IsoButene(ModelBase):
@@ -80,7 +80,7 @@ class IsoPentanol(ModelBase):
         super(IsoPentanol, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('i-pentanol-511.yaml')
         self.fuel = 'ic5h10oh:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class T124MCH(ModelBase):
@@ -88,7 +88,7 @@ class T124MCH(ModelBase):
         super(T124MCH, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('t124mch-533-3193.yaml')
         self.fuel = 'T124MCH:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class OneTwoDME(ModelBase):
@@ -96,7 +96,7 @@ class OneTwoDME(ModelBase):
         super(OneTwoDME, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('one-two-dme-570-2960.yaml')
         self.fuel = 'CH3OCH3:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class PropylAcetate(ModelBase):
@@ -104,7 +104,7 @@ class PropylAcetate(ModelBase):
         super(PropylAcetate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('propyl-acetate-628-4182.yaml')
         self.fuel = 'pa:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class NHeptane(ModelBase):
@@ -120,7 +120,7 @@ class DEE(ModelBase):
         super(DEE, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('dee-746-3555.yaml')
         self.fuel = 'DEE:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class IsoOctane(ModelBase):  # Iso-Octane
@@ -164,7 +164,7 @@ class MethylFiveDeconate(ModelBase):
         super(MethylFiveDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md5d-2649.yaml')
         self.fuel = 'md5d:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class IsoOctaneDetailed(ModelBase):  # Iso-Octane
@@ -183,7 +183,7 @@ class MethylNineDeconate(ModelBase):
         super(MethylNineDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md9d-3298.yaml')
         self.fuel = 'md9d:1.0'
-        self.skip_database_build = True
+        self.skip_database_build = False
 
 
 class MethylDeconateNHeptane(ModelBase):
