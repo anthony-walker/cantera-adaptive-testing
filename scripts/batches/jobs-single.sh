@@ -22,7 +22,8 @@
 echo "Slurm ID: $SLURM_JOB_ID"
 echo
 echo $JOB_OPTIONS
-for i in {0..20}
+echo
+for i in {1..$BATCH_LOOPS}
 do
     adaptive-testing $JOB_OPTIONS
 done

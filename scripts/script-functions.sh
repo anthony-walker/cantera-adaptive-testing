@@ -50,7 +50,7 @@ approximate_precon_single() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-single" ./batches/jobs-single.sh
+        sbatch -J "$CURR_MODEL-approx-single" ./batches/jobs-single.sh --mem=$AMS
     done
 }
 
@@ -71,7 +71,7 @@ approximate_precon_mpi() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-mpi" ./batches/jobs-mpi.sh
+        sbatch -J "$CURR_MODEL-approx-mpi" ./batches/jobs-mpi.sh --mem=$AMS
     done
 }
 
@@ -92,7 +92,7 @@ analytical_precon_single() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-analyt-single" ./batches/jobs-single.sh
+        sbatch -J "$CURR_MODEL-analyt-single" ./batches/jobs-single.sh --mem=$AMS
     done
 }
 
@@ -113,7 +113,7 @@ analytical_precon_mpi() {
         echo $JOB_OPTIONS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-analyt-mpi" ./batches/jobs-mpi.sh
+        sbatch -J "$CURR_MODEL-analyt-mpi" ./batches/jobs-mpi.sh --mem=$AMS
     done
 }
 
@@ -123,7 +123,7 @@ mass_single() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-single.sh
+    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-single.sh --mem=$AMS
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -132,7 +132,7 @@ mass_mpi() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-mpi.sh
+    sbatch -J "$CURR_MODEL-mass-mpi" ./batches/jobs-mpi.sh --mem=$AMS
 }
 
 # function to run fully analytical preconditioned single jobs
@@ -141,7 +141,7 @@ moles_single() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-single.sh
+    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-single.sh --mem=$AMS
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -150,7 +150,7 @@ moles_mpi() {
     echo $JOB_OPTIONS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-mpi.sh
+    sbatch -J "$CURR_MODEL-moles-mpi" ./batches/jobs-mpi.sh --mem=$AMS
 }
 
 skip_mass() {

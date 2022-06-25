@@ -20,6 +20,11 @@
 
 # run my jobs
 echo "Slurm ID: $SLURM_JOB_ID"
+echo "MPI"
 echo
 echo $JOB_OPTIONS
-mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $JOB_OPTIONS
+echo
+for i in {1..$BATCH_LOOPS}
+do
+    mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $JOB_OPTIONS
+done
