@@ -1,5 +1,6 @@
 import os
 import random
+import inspect
 import operator
 import warnings
 import ruamel.yaml
@@ -8,6 +9,7 @@ import cantera as ct
 import matplotlib as mpl
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.iutils as iutils
 
 
@@ -174,13 +176,13 @@ def plot_model_based(*args, **kwargs):
     pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(
         *sorted_data)
     mnames = [k.split("-")[0] for k in keys]
-    midxs = get_range_pts(mnames)
+    midxs = iutils.get_range_pts(mnames)
     for mix, miy in midxs:
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
         labels = ["$10^{{{:d}}}$".format(
             int(lbl.split("e")[-1])) for lbl in labels]
-        labels = ["$0$", ] + labels[1:-2] + ["Y", "M"]
+        labels = ["A", "$0$"] + labels[1:-2] + ["Y", "M"]
         # data
         curr_runtimes = np.array(runtimes[mix:miy])
         # plot speedup

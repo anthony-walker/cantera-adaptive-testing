@@ -7,6 +7,13 @@ import cantera as ct
 import numpy as np
 import random
 import sqlite3
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+# change font
+plt.rcParams['mathtext.fontset'] = 'cm'
+plt.rcParams['mathtext.rm'] = 'serif'
+plt.rcParams["font.family"] = 'serif'
 
 
 class ModelBase(object):
@@ -23,6 +30,7 @@ class ModelBase(object):
         self.press_prob = kwargs.get("no_press_prob", True)
         self.vol_prob = kwargs.get("no_vol_prob", True)
         self.net_prob = kwargs.get("no_net_prob", True)
+        self.sparse_prob = kwargs.get("sparsity_prob", True)
         self.max_time_step = kwargs.get("max_time_step", None)
         self.derv_settings = {"skip-falloff": kwargs.get("skip_falloff", True),
         "skip-third-bodies": kwargs.get("skip_thirdbody", True),
@@ -35,6 +43,11 @@ class ModelBase(object):
         self.air = 'O2:1.0, N2:3.76'
         self.equiv_ratio = 1  # equivalence ratio
         self.thermo_data = dict()
+        if self.sparse_prob:
+            self.net_prob = False
+            self.press_prob = False
+            self.vol_prob = False
+            self.verbose_print(self.verbose, "Turning off all other problems.")
         # output data options
         if self.preconditioner:
             self.fprefix = "-" + kwargs.get("prefix", "")
@@ -205,6 +218,53 @@ class ModelBase(object):
             self.logdata.update(self.currRun)
             return ret_succ
         return wrapped
+
+    @problem
+    def sparsity_problem(self, T0=1500, P0=ct.one_atm, V0=1.0):
+        """
+        This problem is adapted from
+        https://cantera.org/examples/python/reactors/pfr.py.html and is
+        not entirely my own work
+
+        This example solves a plug-flow reactor problem of
+        hydrogen-oxygen combustion. The PFR is computed by two
+        approaches: The simulation of a Lagrangian fluid particle, and
+        the simulation of a chain of reactors.
+
+        Requires: cantera >= 2.5.0
+        """
+        ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
+        if ics is not None:
+            T0, P0, V0 = ics
+        # if not try with set conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model)
+        gas.TP = T0, P0
+        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
+        # create a new reactor
+        reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
+        reactor.volume = V0
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
+        # create a reactor network for performing time integration
+        self.net = ct.ReactorNet([reactor, ])
+        # apply numerical options
+        precon = ct.AdaptivePreconditioner()
+        self.net.preconditioner = precon
+        # approximate a time step to achieve a similar resolution as in
+        # the next method
+        try:
+            # self.net.advance_to_steady_state()
+            self.net.advance(0.01)
+
+            ret_succ = True
+        except Exception as e:
+            self.exception = {"exception": str(e)}
+            ret_succ = False
+        finally:
+            self.sim_end_time = self.net.time
+        return ret_succ
 
     @problem
     def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
@@ -470,3 +530,7 @@ class ModelBase(object):
         if self.net_prob:
             self.verbose_print(self.verbose, "Running Network Problem.")
             self.network_problem()
+        # Run sparsity problem
+        if self.sparse_prob:
+            self.verbose_print(self.verbose, "Running Sparsity Problem.")
+            self.sparsity_problem()
