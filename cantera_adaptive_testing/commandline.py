@@ -160,6 +160,8 @@ def commandLinePlotter():
                         help="Use this flag to pass the name of the options file used in a run.")
     parser.add_argument('-P', '--pipe_file', type=str, default="",
                         help="Redirect output to a given file name.")
+    parser.add_argument('-e', '--extension', type=str, default="pdf",
+                        help="Output plot file extension.")
     args = parser.parse_args()
     options = inspect.getmembers(plotter, inspect.isfunction)
     options = {element[0]: element[1] for element in options}

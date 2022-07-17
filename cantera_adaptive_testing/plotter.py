@@ -49,7 +49,7 @@ def plot_box_threshold(*args, **kwargs):
     plt.autoscale()
     plt.tight_layout()
     plt.savefig(os.path.join(
-        "figures", "Threshold-BoxWhisker-{:s}.pdf".format(problem)))
+        "figures", f"Threshold-BoxWhisker-{problem}.{kwargs['extension']}"))
     plt.close()
 
 
@@ -85,7 +85,7 @@ def plot_box_iterations(*args, **kwargs):
     plt.autoscale()
     plt.tight_layout()
     plt.savefig(os.path.join(
-        "figures", "Iterations-BoxWhisker-{:s}.pdf".format(problem)))
+        "figures", f"Iterations-BoxWhisker-{problem}.{kwargs['extension']}"))
     plt.close()
 
 
@@ -118,7 +118,7 @@ def plot_contour_iterations(*args, **kwargs):
     plt.xlabel("Number of Species", fontsize=14)
     plt.autoscale()
     plt.tight_layout()
-    plt.savefig(os.path.join("figures", "Iterations-Contour-{:s}.pdf".format(problem)))
+    plt.savefig(os.path.join("figures", f"Iterations-Contour-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def plot_rtype_figure(*args, **kwargs):
@@ -188,8 +188,7 @@ def plot_model_based(*args, **kwargs):
         fig, ax = plotter.plot_precon_species_barchart(
             labels[:-2], speedup[:-2], 1)
         ax.set_ylabel('Speed-up', fontsize=14)
-        plt.savefig(os.path.join("figures", "Speed-up-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.savefig(os.path.join("figures", f"Speed-up-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
         plt.close()
         # plot liniters
         crr_liniters = np.array([linsols[i]['lin_iters']
@@ -197,8 +196,7 @@ def plot_model_based(*args, **kwargs):
         fig, ax = plotter.plot_precon_species_barchart(
             labels[:-2], crr_liniters, 1)
         ax.set_ylabel('Linear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "LinIters-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.savefig(os.path.join("figures", f"LinIters-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
         plt.close()
         # plot nonliniters
         crr_nonliniters = np.array(
@@ -206,8 +204,7 @@ def plot_model_based(*args, **kwargs):
         fig, ax = plotter.plot_precon_species_barchart(
             labels, crr_nonliniters, 3)
         ax.set_ylabel('Nonlinear Iterations', fontsize=14)
-        plt.savefig(os.path.join("figures", "NonlinIters-{:s}-{:s}-{:0.0f}.pdf".format(
-            mnames[mix], problem[:3], species[mix])), bbox_inches='tight')
+        plt.savefig(os.path.join("figures", f"NonlinIters-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
         plt.close()
 
 
@@ -239,7 +236,7 @@ def plot_log_clocktime(*args, **kwargs):
     ax.legend(loc='upper left')
     if not os.path.isdir("figures"):
         os.makedirs("figures")
-    plt.savefig(os.path.join("figures", "Clocktime-Nspecies-{:s}.pdf".format(problem)))
+    plt.savefig(os.path.join("figures", f"Clocktime-Nspecies-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def plot_log_linear(*args, **kwargs):
@@ -266,7 +263,7 @@ def plot_log_linear(*args, **kwargs):
     ax.set_xlabel("Number of Species", fontsize=14)
     ax.legend(loc='upper left')
     plt.savefig(os.path.join(
-        "figures", "LinIters-Nspecies-{:s}.pdf".format(problem)))
+        "figures", f"LinIters-Nspecies-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def plot_log_nonlinear(*args, **kwargs):
@@ -293,7 +290,7 @@ def plot_log_nonlinear(*args, **kwargs):
     ax.set_xlabel("Number of Species", fontsize=14)
     ax.legend(loc='upper left')
     plt.savefig(os.path.join(
-        "figures", "NonlinIters-Nspecies-{:s}.pdf".format(problem)))
+        "figures", f"NonlinIters-Nspecies-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def plot_analyt_speedup(*args, **kwargs):
@@ -319,7 +316,7 @@ def plot_analyt_speedup(*args, **kwargs):
     ax.set_ylim([0, 25])
     if not os.path.isdir("figures"):
         os.makedirs("figures")
-    plt.savefig(os.path.join("figures", "Analyt-Speedup-Nspecies-{:s}.pdf".format(problem)))
+    plt.savefig(os.path.join("figures", f"Analyt-Speedup-Nspecies-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def plot_mass_mole_speedup(*args, **kwargs):
@@ -347,7 +344,7 @@ def plot_mass_mole_speedup(*args, **kwargs):
     ax.legend(loc='upper left')
     if not os.path.isdir("figures"):
         os.makedirs("figures")
-    plt.savefig(os.path.join("figures", "MM-Speedup-Nspecies-{:s}.pdf".format(problem)))
+    plt.savefig(os.path.join("figures", f"MM-Speedup-Nspecies-{problem}.{kwargs['extension']}"))
     plt.close()
 
 def compute_average_speedup(*args, **kwargs):
