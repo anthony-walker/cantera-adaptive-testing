@@ -143,6 +143,79 @@ def count_reaction_types(*args, **kwargs):
         print("---------------------------------------")
 
 
+def plot_box_threshold(*args, **kwargs):
+    datafile = kwargs["data"]
+    problem = kwargs['problem']
+    sorted_data = iutils.get_plot_data(datafile, *args, **kwargs)
+    pts, species, keys, runtimes, thresholds, siminfos, thermos, linsols, nonlinsols = zip(
+        *sorted_data)
+    mnames = [k.split("-")[0] for k in keys]
+    midxs = get_range_pts(mnames)
+    unique_species = sorted(list(set(species)))
+    labels = ["{:0.0f}".format(x) for x in unique_species]
+    normalized_runtimes = []
+    w = 0.1
+    def width(p, w): return 10**(np.log10(p)+w/2.)-10**(np.log10(p)-w/2.)
+    medianprops = {'linestyle': '-', 'linewidth': 2, 'color': '#d95f02'}
+    runtimes = np.array(runtimes)
+    for mix, miy in midxs:
+        # data
+        normalized_runtimes.append(runtimes[miy-2]/runtimes[mix:miy-2])
+    fig = plt.figure(figsize=(6, 10))
+    plt.boxplot(normalized_runtimes, positions=unique_species, widths=width(
+        unique_species, w), showfliers=False, medianprops=medianprops)
+    # labels and ticks
+    plt.xscale('log')
+    plt.yscale('log')
+    # plt.xticks([10**i for i in range()], fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.ylabel("Speed-up", fontsize=14)
+    plt.xlabel("Number of Species", fontsize=14)
+    plt.autoscale()
+    plt.tight_layout()
+    plt.savefig(os.path.join(
+        "figures", "Threshold-BoxWhisker-{:s}.pdf".format(problem)))
+    plt.close()
+
+
+def plot_rtype_figure(*args, **kwargs):
+    datadir = kwargs["data"]
+    directory = os.path.join(os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), "models"), "study-test-set")
+    files = os.listdir(directory)
+    files.sort()
+    yaml = ruamel.yaml.YAML()
+    # open the rest of the files
+    pdata = []
+    for f in files:
+        curr_file = os.path.join(directory, f)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(curr_file)
+        R = ct.Reaction.listFromFile(curr_file, gas)
+        data = {"Falloff": 0, "ThreeBody": 0}
+        for reaction in R:
+            rtype = str(type(reaction)).replace(
+                "Reaction'>", "").split('.')[-1].strip()
+            if rtype in data:
+                data[rtype] += 1
+        pdata.append((gas.n_species, data['Falloff'], data['ThreeBody']))
+    pdata.sort()
+    species, falloff, thirdbody = zip(*pdata)
+    falloff = np.array(falloff)
+    thirdbody = np.array(thirdbody)
+    falloff += thirdbody
+    fig, ax = plt.subplots()
+    plt.semilogx(species, falloff, marker="s",
+                 color='#7570b3', label="falloff")
+    # plt.semilogx(species, thirdbody, marker="^", color='#1b9e77', label="third-body")
+    # labels and ticks
+    ax.set_ylabel("Number of Reactions")
+    ax.set_xlabel("Number of Species")
+    # ax.legend(loc='upper left')
+    plt.savefig(os.path.join("figures", "ReactionTypes-Nspecies.pdf"))
+    plt.close()
+
 def make_missing_jobs(*args, **kwargs):
     datadir = kwargs["data"]
     if kwargs["options"] != "":
@@ -228,7 +301,7 @@ def make_cancel_script(*args, **kwargs):
 
 def vol_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(1200, 2000, 100))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 100))]
     V0 = 1.0
     # Analytical and approximate models
     approx_model = mod_class(**{"verbose": False, "log": False})
@@ -247,7 +320,7 @@ def vol_prob_add(model):
 
 def press_prob_add(model):
     mod_name, mod_class = model
-    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(1200, 2000, 100))]
+    ics = [(T, ct.one_atm * i) for i in range(1, 21, 1) for T in list(range(600, 2000, 100))]
     V0 = 1.0
     # Analytical and approximate models
     approx_model = mod_class(**{"verbose": False, "log": False})
@@ -380,4 +453,72 @@ def create_database(*args, **kwargs):
     connection.commit()
     # Closing the connection
     connection.close()
+
+def check_averaged_yaml(*args, **kwargs):
+    pass
+
+def model_update_database(*args, **kwargs):
+    """
+        Create database initial conditions for each problem
+    """
+    # create database file
+    direc = os.path.join(os.path.dirname(os.path.abspath(__file__)),'models')
+    database_file = os.path.join(direc, "initial_conditions.db")
+    # create database connection
+    connection = sqlite3.connect(database_file)
+    cursor = connection.cursor()
+    cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND
+                   name='MODELS' ''')
+    # Creating table if it does not exist
+    if cursor.fetchone()[0] != 1:
+        table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
+        cursor.execute(table)
+    # get all models
+    mods = inspect.getmembers(models, inspect.isclass)
+    mods = {element[0]: element[1] for element in mods}
+    mod_str = kwargs['model']
+    for k in mods:
+        if k == mod_str:
+            cmod = mods[k]
+            break
+    # create process pool
+    pool_size = mp.cpu_count()-1
+    with mp.Pool(pool_size) as mpool:
+        ics = [(T, ct.one_atm * i, 1.0) for i in range(1, 2, 1) for T in list(range(600, 2000, 100))]
+        ics = [(cmod, kwargs['problem']) + ic for ic in ics]
+        res = mpool.map(get_db_prob_results, ics)
+        conds = []
+        for i in range(len(ics)):
+            if res[i]:
+                conds.append(ics[i])
+    __, prob, T0, P0, V0 = conds[len(conds)//2]
+    # delete old entry
+    select_cmd = "DELETE FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
+    cursor.execute(select_cmd.format(mod_str, prob))
+    # insert new
+    command = """INSERT INTO MODELS VALUES (\'{:s}\', \'{:s}\', {:.1f}, {:.1f}, {:.1f})"""
+    cursor.execute(command.format(*(mod_str, prob, T0, P0, V0)))
+    # Check that update made it into the database
+    select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
+    data = list(cursor.execute(select_cmd.format(mod_str, prob)))[0]
+    assert data[2] == conds[len(conds)//2][2]
+    assert data[3] == conds[len(conds)//2][3]
+    assert data[4] == conds[len(conds)//2][4]
+    # Commit your changes in the database
+    connection.commit()
+    # Closing the connection
+    connection.close()
+
+def get_db_prob_results(conds):
+    mod_class, prob_type, T0, P0, V0  = conds
+    # Analytical and approximate models
+    approx_model = mod_class(**{"verbose": False, "log": False})
+    analyt_model = mod_class(**{"skip_thirdbody": False, "skip_falloff": False, "analyt_temp_derivs": True, "verbose": False, "log": False})
+    if prob_type == 'volume_problem':
+        s1 = approx_model.volume_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+        s2 = analyt_model.volume_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+    elif prob_type == 'pressure_problem':
+        s1 = approx_model.pressure_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+        s2 = analyt_model.pressure_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
+    return s1 and s2
 
