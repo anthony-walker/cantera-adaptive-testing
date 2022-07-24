@@ -281,12 +281,22 @@ class ModelBase(object):
                          "analytical-temp-derivs": False}
         no_assume_mat = get_precon_matrix(no_assume_sets)
         plot_sparsity_array(no_assume_mat, "no_assume_sparse.jpg")
+        # no assumption
+        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
+        plot_sparsity_array(no_assume_mat, "no_assume_sparse_thresh.jpg")
         # no three body
         no_assume_sets = {"skip-falloff": False, "skip-third-bodies": True,
                          "analytical-temp-derivs": False}
         no_assume_mat = get_precon_matrix(no_assume_sets)
         plot_sparsity_array(no_assume_mat, "no_threebody_sparse.jpg")
         # no falloff
+        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": False,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "no_falloff_sparse.jpg")
+        # no falloff or three body
         no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
                          "analytical-temp-derivs": False}
         no_assume_mat = get_precon_matrix(no_assume_sets)
@@ -296,6 +306,16 @@ class ModelBase(object):
                          "analytical-temp-derivs": True}
         no_assume_mat = get_precon_matrix(no_assume_sets)
         plot_sparsity_array(no_assume_mat, "analyt_sparse.jpg")
+        # analyttemp
+        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
+                         "analytical-temp-derivs": True}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "analyt_sparse_none.jpg")
+        # analyttemp
+        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
+                         "analytical-temp-derivs": True}
+        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
+        plot_sparsity_array(no_assume_mat, "analyt_sparse_none_thresh.jpg")
         # applythresh
         no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
                          "analytical-temp-derivs": False}
@@ -306,28 +326,7 @@ class ModelBase(object):
                          "analytical-temp-derivs": True}
         no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
         plot_sparsity_array(no_assume_mat, "analyt_thresh_sparse.jpg")
-
-        # # approximate a time step to achieve a similar resolution as in
-        # # the next method
-        # if self.preconditioner:
-        #     self.precon = ct.AdaptivePreconditioner()
-        #     self.precon.threshold = self.threshold
-        #     self.net.preconditioner = self.precon
-        #     self.net.derivative_settings = self.derv_settings
-        # if self.max_time_step is not None:
-        #     self.net.max_time_step = self.max_time_step
-
-        # try:
-        #     # self.net.advance_to_steady_state()
-        #     self.net.advance(0.01)
-        #     print(precon.matrix)
-        #     ret_succ = True
-        # except Exception as e:
-        #     self.exception = {"exception": str(e)}
-        #     ret_succ = False
-        # finally:
-        #     self.sim_end_time = self.net.time
-        # return ret_succ
+        
 
     @problem
     def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
