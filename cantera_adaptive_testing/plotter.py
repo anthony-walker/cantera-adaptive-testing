@@ -1,4 +1,5 @@
 import os
+import time
 import random
 import inspect
 import operator
@@ -12,13 +13,15 @@ import matplotlib.pyplot as plt
 import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.iutils as iutils
 
-
+# use appropriate backend
+mpl.use('Qt5Agg')
 # change font
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
 # getting yaml for use in functions
 yaml = ruamel.yaml.YAML()
+
 
 def plot_box_threshold(*args, **kwargs):
     datafile = kwargs["data"]
@@ -167,6 +170,33 @@ def plot_rtype_figure(*args, **kwargs):
     plt.savefig(os.path.join("figures", "ReactionTypes-Nspecies.pdf"))
     plt.close()
 
+def plot_precon_species_barchart(labels, y, xend, manual_max=None):
+    # make plots
+    x = np.arange(len(labels))  # the label locations
+    width = 0.5  # the width of the bars
+    fig, ax = plt.subplots(figsize=(15, 10))
+    rects1 = ax.bar(x, y, width, color='#7570b3', label="speed-up")
+    # labels and ticks
+    if manual_max is None:
+        ymax = np.ceil(max(y) + max(y) * 0.05)
+    else:
+        ymax = manual_max
+    yticks = np.linspace(0, ymax, 5)
+    if ymax > 1:
+        ylbls, yticks = zip(*[(str(int(yt)), int(yt)) for yt in yticks])
+    else:
+        ylbls, yticks = zip(*[(str(yt), yt) for yt in yticks])
+    ax.set_yticks(yticks)
+    ax.set_yticklabels(ylbls, fontsize=14)
+    trim = list(zip(x, labels))
+    newlabels = [(trim[i][0], trim[i][1]) for i in range(0, len(trim)-xend, 2)]
+    newlabels += [(trim[i][0], trim[i][1])
+                  for i in range(len(trim)-xend, len(trim), 1)]
+    newx, newlabels = zip(*newlabels)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=14)
+    ax.set_xlabel('Threshold', fontsize=14)
+    return fig, ax
 
 def plot_model_based(*args, **kwargs):
     datafile = kwargs["data"]
@@ -182,12 +212,12 @@ def plot_model_based(*args, **kwargs):
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
         labels = ["$10^{{{:d}}}$".format(
             int(lbl.split("e")[-1])) for lbl in labels]
-        labels = ["A", "$0$"] + labels[1:-2] + ["Y", "M"]
+        labels = ["A", "$0$"] + labels[2:-2] + ["Y", "M"]
         # data
         curr_runtimes = np.array(runtimes[mix:miy])
         # plot speedup
         speedup = curr_runtimes[-2]/curr_runtimes[:]
-        fig, ax = plotter.plot_precon_species_barchart(
+        fig, ax = plot_precon_species_barchart(
             labels[:-2], speedup[:-2], 1)
         ax.set_ylabel('Speed-up', fontsize=14)
         plt.savefig(os.path.join("figures", f"Speed-up-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
@@ -195,7 +225,7 @@ def plot_model_based(*args, **kwargs):
         # plot liniters
         crr_liniters = np.array([linsols[i]['lin_iters']
                                 for i in range(mix, miy-2, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(
+        fig, ax = plot_precon_species_barchart(
             labels[:-2], crr_liniters, 1)
         ax.set_ylabel('Linear Iterations', fontsize=14)
         plt.savefig(os.path.join("figures", f"LinIters-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
@@ -203,7 +233,7 @@ def plot_model_based(*args, **kwargs):
         # plot nonliniters
         crr_nonliniters = np.array(
             [nonlinsols[i]['nonlinear_iters'] for i in range(mix, miy, 1)])
-        fig, ax = plotter.plot_precon_species_barchart(
+        fig, ax = plot_precon_species_barchart(
             labels, crr_nonliniters, 3)
         ax.set_ylabel('Nonlinear Iterations', fontsize=14)
         plt.savefig(os.path.join("figures", f"NonlinIters-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
@@ -382,3 +412,31 @@ def threshold_stats(*args, **kwargs):
         threshs_worst.append(threshs[locw])
         print(f'{mnames[mix]}: best:{threshs[locb]}, worst:{threshs[locw]}')
     print(f'best:{stats.mode(threshs_best)}, worst:{stats.mode(threshs_worst)}')
+
+
+def plot_species_example_figure(*args, **kwargs):
+    def prod_random_plot(n):
+        random.seed(time.time())
+        color = iter(plt.cm.rainbow(np.linspace(0, 1, n)))
+        for i in range(n):
+            c = next(color)
+            plt.scatter(random.randrange(1, n), random.randrange(1, n), color=c)
+        plt.xlim([0, n+1])
+        plt.ylim([0, n+1])
+        ax = plt.gca()
+        ax.spines['bottom'].set_color('0.0')
+        ax.spines['top'].set_color('0.0')
+        ax.spines['right'].set_color('0.0')
+        ax.spines['left'].set_color('0.0')
+        plt.tick_params( axis='both',          # changes apply to the x-axis
+                            which='both',      # both major and minor ticks are affected
+                            bottom=False,      # ticks along the bottom edge are off
+                            top=False,         # ticks along the top edge are off
+                            left=False,
+                            labelbottom=False,
+                            labelleft=False)  # labels along the bottom edge are off
+        plt.savefig(os.path.join("figures", f"species-example-{n}.{kwargs['extension']}"))
+        plt.close()
+    prod_random_plot(50)
+    prod_random_plot(1000)
+    prod_random_plot(7172)

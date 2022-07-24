@@ -10,6 +10,8 @@ import sqlite3
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
+# Use appropriate backend
+mpl.use('Qt5Agg')
 # change font
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
@@ -222,49 +224,110 @@ class ModelBase(object):
     @problem
     def sparsity_problem(self, T0=1500, P0=ct.one_atm, V0=1.0):
         """
-        This problem is adapted from
-        https://cantera.org/examples/python/reactors/pfr.py.html and is
-        not entirely my own work
 
-        This example solves a plug-flow reactor problem of
-        hydrogen-oxygen combustion. The PFR is computed by two
-        approaches: The simulation of a Lagrangian fluid particle, and
-        the simulation of a chain of reactors.
-
-        Requires: cantera >= 2.5.0
         """
-        ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
-        if ics is not None:
-            T0, P0, V0 = ics
-        # if not try with set conditions
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        gas.TP = T0, P0
-        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-        # create a new reactor
-        reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
-        reactor.volume = V0
-        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
-                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
-        # create a reactor network for performing time integration
-        self.net = ct.ReactorNet([reactor, ])
-        # apply numerical options
-        precon = ct.AdaptivePreconditioner()
-        self.net.preconditioner = precon
-        # approximate a time step to achieve a similar resolution as in
-        # the next method
-        try:
-            # self.net.advance_to_steady_state()
+        def get_precon_matrix(derv_sets, threshold=0):
+            ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
+            if ics is not None:
+                T0, P0, V0 = ics
+            # if not try with set conditions
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                gas = ct.Solution(self.model)
+            gas.TP = T0, P0
+            gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
+            # create a new reactor
+            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
+            reactor.volume = V0
+            # create a reactor network for performing time integration
+            self.net = ct.ReactorNet([reactor, ])
+            # apply numerical options
+            precon = ct.AdaptivePreconditioner()
+            precon.threshold = threshold
+            self.net.preconditioner = precon
+            self.net.derivative_settings = derv_sets
             self.net.advance(0.01)
+            return precon.matrix
 
-            ret_succ = True
-        except Exception as e:
-            self.exception = {"exception": str(e)}
-            ret_succ = False
-        finally:
-            self.sim_end_time = self.net.time
-        return ret_succ
+        def plot_sparsity_array(arr, fname):
+            x = []
+            y = []
+            xdim, ydim = np.shape(arr)
+            for xi in range(xdim):
+                for yi in range(ydim):
+                    if arr[xi,yi] > 0:
+                        x.append(xi)
+                        y.append(ydim-yi)
+            fig = plt.figure()
+            fig.tight_layout()
+            plt.scatter(x, y, marker='.', color='#7570b3')
+            ax = plt.gca()
+            ax.spines['bottom'].set_color('0.0')
+            ax.spines['top'].set_color('0.0')
+            ax.spines['right'].set_color('0.0')
+            ax.spines['left'].set_color('0.0')
+            plt.tick_params( axis='both',          # changes apply to the x-axis
+                             which='both',      # both major and minor ticks are affected
+                             bottom=False,      # ticks along the bottom edge are off
+                             top=False,         # ticks along the top edge are off
+                             left=False,
+                             labelbottom=False,
+                             labelleft=False)  # labels along the bottom edge are off
+            fname = os.path.join("figures", fname)
+            plt.savefig(fname)
+            plt.close()
+        # no assumption
+        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "no_assume_sparse.jpg")
+        # no three body
+        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": True,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "no_threebody_sparse.jpg")
+        # no falloff
+        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "no_tb_or_fo_sparse.jpg")
+        # analyttemp
+        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
+                         "analytical-temp-derivs": True}
+        no_assume_mat = get_precon_matrix(no_assume_sets)
+        plot_sparsity_array(no_assume_mat, "analyt_sparse.jpg")
+        # applythresh
+        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
+                         "analytical-temp-derivs": False}
+        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
+        plot_sparsity_array(no_assume_mat, "all_thresh_sparse.jpg")
+        # applythresh and analyt
+        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
+                         "analytical-temp-derivs": True}
+        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
+        plot_sparsity_array(no_assume_mat, "analyt_thresh_sparse.jpg")
+
+        # # approximate a time step to achieve a similar resolution as in
+        # # the next method
+        # if self.preconditioner:
+        #     self.precon = ct.AdaptivePreconditioner()
+        #     self.precon.threshold = self.threshold
+        #     self.net.preconditioner = self.precon
+        #     self.net.derivative_settings = self.derv_settings
+        # if self.max_time_step is not None:
+        #     self.net.max_time_step = self.max_time_step
+
+        # try:
+        #     # self.net.advance_to_steady_state()
+        #     self.net.advance(0.01)
+        #     print(precon.matrix)
+        #     ret_succ = True
+        # except Exception as e:
+        #     self.exception = {"exception": str(e)}
+        #     ret_succ = False
+        # finally:
+        #     self.sim_end_time = self.net.time
+        # return ret_succ
 
     @problem
     def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
