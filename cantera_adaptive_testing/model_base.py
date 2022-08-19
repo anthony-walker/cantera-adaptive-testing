@@ -221,6 +221,56 @@ class ModelBase(object):
         return wrapped
 
     @problem
+    def plugflow_reactor_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
+        # get database conditions if available
+        if db_conds:
+            ics = self.get_database_conditions(self.__class__.__name__, "plugflow_reactor_problem")
+            if ics is not None:
+                T0, P0, V0 = ics
+        # import the gas model and set the initial conditions
+        # if not try with set conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model)
+        gas.TP = T0, P0
+        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
+        # other initial conditions
+        length = 1.5e-7  # *approximate* PFR length [m]
+        u_0 = .006  # inflow velocity [m/s]
+        area = 1.e-4  # cross-sectional area [m**2]
+        mass_flow_rate1 = u_0 * gas1.density * area
+        # create a new reactor
+        if self.moles:
+            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
+        else:
+            reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
+        reactor.volume = V0
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
+                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
+        #####################################################################
+        # create a reactor network for performing time integration
+        self.net = ct.ReactorNet([reactor, ])
+        # apply numerical options
+        self.apply_numerical_options()
+        # approximate a time step to achieve a similar resolution as in
+        # the next method
+        tf = 1.0
+        self.sim_end_time = 0
+        try:
+            # self.net.advance_to_steady_state()
+            self.net.advance(tf)
+            ret_succ = True
+        except Exception as e:
+            self.exception = {"exception": str(e)}
+            ret_succ = False
+        finally:
+            self.sim_end_time = self.net.time
+            if self.update_db and ret_succ:
+                self.update_database_conditions(self.__class__.__name__, "pressure_problem", T0, P0, V0)
+        return ret_succ
+
+
+    @problem
     def sparsity_problem(self, T0=1500, P0=ct.one_atm, V0=1.0):
         """
 
