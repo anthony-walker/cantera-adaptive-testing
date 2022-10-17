@@ -1,2 +1,2 @@
 __all__ = ['models',]
-import cantera_adaptive_testing.models
+from cantera_adaptive_testing.models import Hydrogen, PropanePlatinum, MethaneGRI

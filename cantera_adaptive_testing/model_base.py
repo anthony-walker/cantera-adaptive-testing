@@ -1,105 +1,281 @@
 import os
 import time
-import datetime
-import ruamel_yaml
-import warnings
-import cantera as ct
-import numpy as np
 import random
-import sqlite3
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+import datetime
+import warnings
+import numpy as np
+import ruamel.yaml
+import cantera as ct
+from .database_utils import *
 
-# Use appropriate backend
-# change font
-plt.rcParams['mathtext.fontset'] = 'cm'
-plt.rcParams['mathtext.rm'] = 'serif'
-plt.rcParams["font.family"] = 'serif'
+# # Use appropriate backend
+# # change font
+# plt.rcParams['mathtext.fontset'] = 'cm'
+# plt.rcParams['mathtext.rm'] = 'serif'
+# plt.rcParams["font.family"] = 'serif'
 
 
 class ModelBase(object):
+    model = None
+    # A dictionary to store thermo data
+    thermo_data = dict()
+    log_data = dict()
+    options = dict()
+
 
     def __init__(self, *args, **kwargs):
-        # current date and time
-        self.currRunTime = datetime.datetime.now().strftime("%X-%d-%m-%y")
-        self.skip_database_build = True
-        # numerical options
-        self.update_db = kwargs.get("update_database", False)
-        self.energy_off = 'off' if kwargs.get("energy_off", False) else 'on'
-        self.verbose = kwargs.get("verbose", True)
-        self.preconditioner = kwargs.get("preconditioner", True)
-        self.press_prob = kwargs.get("no_press_prob", True)
-        self.vol_prob = kwargs.get("no_vol_prob", True)
-        self.net_prob = kwargs.get("no_net_prob", True)
-        self.sparse_prob = kwargs.get("sparsity_prob", True)
-        self.max_time_step = kwargs.get("max_time_step", None)
-        self.derv_settings = {"skip-falloff": kwargs.get("skip_falloff", True),
-        "skip-third-bodies": kwargs.get("skip_thirdbody", True),
-        "analytical-temp-derivs": kwargs.get("analyt_temp_derivs", False)}
-        self.threshold = kwargs.get("threshold", 0)
-        self.moles = True if self.preconditioner else kwargs.get("moles", True)
-        self.precon = None
-        # standard physical parameters/options
-        self.fuel = None
-        self.air = 'O2:1.0, N2:3.76'
-        self.equiv_ratio = 1  # equivalence ratio
-        self.thermo_data = dict()
-        if self.sparse_prob:
-            self.net_prob = False
-            self.press_prob = False
-            self.vol_prob = False
-            self.verbose_print(self.verbose, "Turning off all other problems.")
+        # dictionary containing all options
+        self.options.update(**kwargs)
+        # setting defaults for all of the options
+        self.options.setdefault("date", datetime.datetime.now().strftime("%X-%d-%m-%y"))
+        self.options.setdefault("energy", "on")
+        self.options.setdefault("verbose", False)
+        self.options.setdefault("preconditioned", False)
+        self.options.setdefault("threshold", 0)
+        self.options.setdefault("moles", self.preconditioned)
+        self.options.setdefault("database", True)
+        self.options.setdefault("problems", [])
+        self.options.setdefault("advance_kwargs", {})
+        self.options.setdefault("skip_falloff", True)
+        self.options.setdefault("skip_thirdbody", True)
+        self.options.setdefault("fuel", None)
+        self.options.setdefault("air", "O2:1.0, N2:3.76")
+        self.options.setdefault("surface", None)
+        self.options.setdefault("phi", 1)
+        self.options.setdefault("prefix", "")
+        self.options.setdefault("log", True)
+        self.options.setdefault("remove_falloff", False)
+        self.options.setdefault("remove_thirdbody", False)
+        # runtype can be performance or analysis with the difference being that during
+        # the performance run no stats are recorded and during the analysis run, all
+        # stats are recorded.
+        self.options.setdefault("runtype", "performance")
+        # create file name
         # output data options
-        if self.preconditioner:
-            self.fprefix = "-" + kwargs.get("prefix", "")
-            self.fprefix = "" if self.fprefix == "-" else self.fprefix
-            self.precName = self.fprefix + "-precon-{:0.1e}".format(self.threshold)
+        self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
+        if self.preconditioned:
+            self.classifiers.append("{:0.1e}".format(self.threshold))
         elif self.moles:
-            self.precName = "-moles"
+            self.classifiers.append("moles")
         else:
-            self.precName = "-mass"
-        self.dataDir, self.figDir = self.get_directories(data_name=kwargs.get("out_dir", "data"))
+            self.classifiers.append("mass")
+        # get directors for figures and data
+        self.data_dir, self.fig_dir = self.get_directories(data_name=kwargs.get("out_dir", "data"))
+        self.log_file = os.path.join(self.data_dir,
+            "-".join(filter(None, self.classifiers + [str(random.randint(0, 1e9)),]))) + ".yaml"
         # log variables
-        self.runName = self.__class__.__name__ + \
-            self.precName + "-" + str(random.randint(0, 1e9))
-        while (os.path.exists(os.path.join(self.dataDir, self.runName+".yaml"))):
-            self.runName = self.__class__.__name__ + \
-                self.precName + "-" + str(random.randint(0, 1e9))
-        self.log = kwargs.get("log", True)
-        self.logfile = self.runName+".yaml"
-        self.logdata = dict()
+        while (os.path.exists(self.log_file)):
+            self.log_file = os.path.join(self.data_dir,
+                "-".join(filter(None, self.classifiers + [str(random.randint(0, 1e9)),]))) + ".yaml"
         # making directories
-        if not os.path.isdir(self.dataDir):
+        if not os.path.isdir(self.data_dir):
             try:
-                os.mkdir(self.dataDir)
-                self.verbose_print(
-                    self.verbose, "Making data directory: " + self.dataDir)
+                os.mkdir(self.data_dir)
+                self.vprint(f"Making data directory: {self.data_dir}")
             except Exception as e:
                 print(e)
 
     def __del__(self):
         if self.verbose:
-            self.print_entry(self.logdata)
-        if self.log and self.logdata:
+            self.print_entry(self.log_data)
+        if self.log and self.log_data:
             self.append_yaml(os.path.join(
-                self.dataDir, self.logfile), self.logdata)
+                self.data_dir, self.log_file), self.log_data)
 
-    def set_verbose(self, verbose):
-        self.verbose = verbose
+    @property
+    def remove_thirdbody(self):
+        return self.options["remove_thirdbody"]
 
-    def set_threshold(self, threshold):
-        self.threshold = threshold
+    @remove_thirdbody.setter
+    def remove_thirdbody(self, value):
+        self.options["remove_thirdbody"] = value
+
+    @property
+    def remove_falloff(self):
+        return self.options["remove_falloff"]
+
+    @remove_falloff.setter
+    def remove_falloff(self, value):
+        self.options["remove_falloff"] = value
+
+    @property
+    def runtype(self):
+        return self.options["runtype"]
+
+    @runtype.setter
+    def runtype(self, value):
+        self.options["runtype"] = value
+
+    @property
+    def date(self):
+        return self.options["date"]
+
+    @date.setter
+    def date(self, value):
+        self.options["date"] = value
+
+    @property
+    def verbose(self):
+        return self.options["verbose"]
+
+    @verbose.setter
+    def verbose(self, value):
+        self.options["verbose"] = value
+
+    @property
+    def energy(self):
+        return self.options["energy"]
+
+    @energy.setter
+    def energy(self, value):
+        self.options["energy"] = value
+
+    @property
+    def preconditioned(self):
+        return self.options["preconditioned"]
+
+    @preconditioned.setter
+    def preconditioned(self, value):
+        self.options["preconditioned"] = value
+
+    @property
+    def threshold(self):
+        return self.options["threshold"]
+
+    @threshold.setter
+    def threshold(self, value):
+        self.options["threshold"] = value
+
+    @property
+    def moles(self):
+        return self.options["moles"]
+
+    @moles.setter
+    def moles(self, value):
+        self.options["moles"] = value
+
+    @property
+    def database(self):
+        return self.options["database"]
+
+    @database.setter
+    def database(database, value):
+        self.options["database"] = value
+
+    @property
+    def problems(self):
+        return self.options["problems"]
+
+    @problems.setter
+    def problems(self, value):
+        self.options["problems"] = value
+
+    @property
+    def advance_kwargs(self):
+        return self.options["advance_kwargs"]
+
+    @advance_kwargs.setter
+    def advance_kwargs(self, value):
+        self.options["advance_kwargs"] = value
+
+    @property
+    def skip_falloff(self):
+        return self.options["skip_falloff"]
+
+    @skip_falloff.setter
+    def skip_falloff(self, value):
+        self.options["skip_falloff"] = value
+
+    @property
+    def skip_thirdbody(self):
+        return self.options["skip_thirdbody"]
+
+    @skip_thirdbody.setter
+    def skip_thirdbody(self, value):
+        self.options["skip_thirdbody"] = value
+
+    @property
+    def fuel(self):
+        return self.options["fuel"]
+
+    @fuel.setter
+    def fuel(self, value):
+        self.options["fuel"] = value
+
+    @property
+    def air(self):
+        return self.options["air"]
+
+    @air.setter
+    def air(self, value):
+        self.options["air"] = value
+
+    @property
+    def phi(self):
+        return self.options["phi"]
+
+    @phi.setter
+    def phi(self, value):
+        self.options["phi"] = value
+
+    @property
+    def log(self):
+        return self.options["log"]
+
+    @log.setter
+    def log(self, value):
+        self.options["log"] = value
+
+    @property
+    def surface(self):
+        return self.options["surface"]
+
+    @surface.setter
+    def surface(self, value):
+        self.options["surface"] = value
+
+    def modify_model(self):
+        yaml = ruamel.yaml.YAML()
+        model = self.model
+        new_model = model.split(".")[0]
+        new_model += "-stb" if self.remove_thirdbody else ""
+        new_model += "-sf" if self.remove_falloff else ""
+        new_model += "-test.yaml"
+        self.model = new_model
+        # check if model already exists
+        if not os.path.isfile(new_model):
+            # read in model
+            with open(model, 'r') as f:
+                data = yaml.load(f)
+            # remove appropriate reactions
+            reactions = []
+            for k in data["reactions"]:
+                if "type" in k.keys():
+                    if k["type"] == "falloff" and self.remove_falloff:
+                        k.pop("type", None)
+                        k.pop("Troe", None)
+                        k.pop("high-P-rate-constant", None)
+                        k.pop("efficiencies", None)
+                        k["rate-constant"] = k.pop("low-P-rate-constant")
+                    elif k["type"] == "three-body" and self.remove_thirdbody:
+                        k.pop("type", None)
+                        k.pop("efficiencies", None)
+                    reactions.append(k)
+            # write new file
+            data["reactions"] = ruamel.yaml.comments.CommentedSeq(reactions)
+            with open(self.model, 'w') as f:
+                data = yaml.dump(data, f)
 
     def get_directories(self, data_name="data", fig_name="figures"):
         cwd = os.getcwd()
         return os.path.join(cwd, data_name), os.path.join(cwd, fig_name)
 
     def get_test_set_path(self, model):
-        return os.path.join(os.path.join(os.path.dirname(__file__), "models"), model)
+        return os.path.join(os.path.dirname(__file__), "models", model)
 
-    def verbose_print(self, verbose, printStr):
-        if verbose:
-            print(printStr)
+    def vprint(self, print_str):
+        if self.verbose:
+            print(print_str)
 
     def print_entry(self, entry, tab=""):
         for key in entry:
@@ -118,7 +294,7 @@ class ModelBase(object):
                 print(tab+"\t"+key+": "+subentry)
 
     def append_yaml(self, yamlName, run):
-        yaml = ruamel_yaml.YAML()
+        yaml = ruamel.yaml.YAML()
         yaml.default_flow_style = False
         if os.path.isfile(yamlName):
             with open(yamlName, 'r') as f:
@@ -130,526 +306,124 @@ class ModelBase(object):
             with open(yamlName, 'w') as f:
                 ruamel_yaml.dump(run, f)
 
-    def get_database_conditions(self, model, problem):
-        direc = os.path.dirname(os.path.abspath(__file__))
-        direc = os.path.join(direc, "models")
-        database_file = os.path.join(direc, "initial_conditions.db")
-        connection = sqlite3.connect(database_file)
-        cursor = connection.cursor()
-        cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND
-                   name='MODELS' ''')
-        # Creating table if it does not exist
-        if cursor.fetchone()[0] != 1:
-            table = """CREATE TABLE MODELS(Name VARCHAR(255), Problem VARCHAR(255), T0 float, P0 float, V0 float);"""
-            cursor.execute(table)
-        # Get all model info
-        select_cmd = "SELECT * FROM MODELS WHERE Name = \'{:s}\' AND Problem = \'{:s}\'"
-        data = list(cursor.execute(select_cmd.format(model, problem)))
-        if data:
-            name, prob, T0, P0, V0 = data[0]
-            return T0, P0, V0
-        else:
-            warnings.warn(f"Conditions not found for {model}, {problem}")
-            return None
-
-    def update_database_conditions(self, model, problem, T0, P0, V0):
-        direc = os.path.dirname(os.path.abspath(__file__))
-        direc = os.path.join(direc, "models")
-        database_file = os.path.join(direc, "initial_conditions.db")
-        connection = sqlite3.connect(database_file)
-        cursor = connection.cursor()
-        insert_statement = f''' INSERT INTO MODELS(Name,Problem,T0,P0,V0)
-              VALUES(\'{model}\',\'{problem}\',{T0},{P0},{V0}) '''
-        cursor.execute(insert_statement)
-        connection.commit()
-
     def apply_numerical_options(self):
-        """
-            Use this function to apply numerical configurations to the
+        """ Use this function to apply numerical configurations to the
             network
         """
-        if self.preconditioner:
+        if self.preconditioned:
             self.precon = ct.AdaptivePreconditioner()
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
-            self.net.derivative_settings = self.derv_settings
-        if self.max_time_step is not None:
-            self.net.max_time_step = self.max_time_step
+            self.net.derivative_settings = {"skip-falloff": self.skip_falloff,
+                "skip-third-bodies": self.skip_thirdbody}
+        self.net.initialize()
 
     def get_numerical_stats(self):
-        # linear solver stats
-        lin_opts = ['jac_evals', 'rhs_fd_jac_evals', 'iters', 'conv_fails',
-                    'prec_evals', 'prec_solvs', 'jac_vec_setups', 'jac_vec_prod_evals']
-        lin_stats = self.net.linear_solver_stats
-        lin_stats['threshold'] = self.threshold
-        lin_stats['preconditioned'] = self.preconditioner
-        # nonlinear solver stats
-        nonlin_opts = ['iters', 'conv_fails']
-        nonlin_stats = self.net.nonlinear_solver_stats
-        # numerical dictionary
-        return {"linear_solver": lin_stats, "nonlinear_solver": nonlin_stats}
+        stats = self.net.solver_stats
+        # add other solver stats here if you want
+        stats["time"] = self.net.time
+        stats["preconditioned"] = self.preconditioned
+        if self.preconditioned:
+            stats["condition"] = float(np.linalg.cond(self.precon.matrix))
+            stats["threshold"] = self.threshold
+        return stats
 
     def problem(func, *args, **kwargs):
-        """This is a decorator wrap simulations in common functions"""
-
+        """ This is a decorator wrap simulations in common functions
+        """
         def wrapped(self, *args, **kwargs):
+            # modify model if set to do so
+            if self.remove_falloff or self.remove_thirdbody:
+                self.modify_model()
             # pre-run operations
-            self.currRun = {func.__name__: {}}
+            self.curr_run = {func.__name__: {}}
             self.sim_end_time = 0
             self.exception = {}
+            self.curr_name = "_".join(filter(None, self.classifiers + [func.__name__, ]))
+            self.curr_name = self.curr_name.replace(".", "_")
+            self.curr_name = self.curr_name.replace("+", "")
+            if self.runtype == "analysis":
+                create_simulation_table(self.curr_name)
             # run problem
             t0 = time.time_ns()
             ret_succ = func(self, *args, **kwargs)
             tf = time.time_ns()
-            # post function analysis
-            num_stats = self.get_numerical_stats()
-            self.currRun[func.__name__].update({"simulation_info": {"runtime_seconds": round(
-                (tf-t0) * 1e-9, 8), "sim_end_time": self.sim_end_time, "date": self.currRunTime}})
-
-            self.currRun[func.__name__].update(self.thermo_data)
-            if self.preconditioner:
-                self.currRun[func.__name__].update({"derivative_settings":
-                self.derv_settings})
-            self.currRun[func.__name__].update(num_stats)
-            if self.max_time_step is not None:
-                self.currRun[func.__name__]['nonlinear_solver'].update(
-                    {"maxtimestep": self.max_time_step})
-            if self.exception:
-                self.currRun[func.__name__].update(self.exception)
-            self.logdata.update(self.currRun)
+            # append runtime to runtime table
+            if self.runtype == "performance":
+                append_runtime_table(self.curr_name, round((tf-t0) * 1e-9, 8))
+            # add to thermo database
+            if self.runtype == "performance":
+                add_to_thermo_table(self.curr_name, self.thermo_data["thermo"])
             return ret_succ
         return wrapped
 
     @problem
-    def plugflow_reactor_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
-        # get database conditions if available
-        if db_conds:
-            ics = self.get_database_conditions(self.__class__.__name__, "plugflow_reactor_problem")
-            if ics is not None:
-                T0, P0, V0 = ics
-        # import the gas model and set the initial conditions
-        # if not try with set conditions
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        gas.TP = T0, P0
-        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-        # other initial conditions
-        length = 1.5e-7  # *approximate* PFR length [m]
-        u_0 = .006  # inflow velocity [m/s]
-        area = 1.e-4  # cross-sectional area [m**2]
-        mass_flow_rate1 = u_0 * gas1.density * area
-        # create a new reactor
+    def network_combustor_exhaust(self, *args, **kwargs):
+        """ This problem is meant to simulate a combustor that flows into some form
+            of exhaust
+        """
+        # Create inlet to the combustor at atmospheric conditions
+        gas1 = ct.Solution(self.model, 'gas')
+        gas1.TP = 300, ct.one_atm
+        gas1.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        gas1.equilibrate('HP')
+        inlet = ct.Reservoir(gas1)
+        # create combustor
+        gas2 = ct.Solution(self.model, 'gas')
+        gas2.TP = 300, ct.one_atm
+        gas2.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        gas2.equilibrate('HP')
         if self.moles:
-            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
+            combustor = ct.IdealGasMoleReactor(gas2)
         else:
-            reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
-        reactor.volume = V0
-        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
-                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
-        #####################################################################
-        # create a reactor network for performing time integration
-        self.net = ct.ReactorNet([reactor, ])
-        # apply numerical options
-        self.apply_numerical_options()
-        # approximate a time step to achieve a similar resolution as in
-        # the next method
-        tf = 1.0
-        self.sim_end_time = 0
-        try:
-            # self.net.advance_to_steady_state()
-            self.net.advance(tf)
-            ret_succ = True
-        except Exception as e:
-            self.exception = {"exception": str(e)}
-            ret_succ = False
-        finally:
-            self.sim_end_time = self.net.time
-            if self.update_db and ret_succ:
-                self.update_database_conditions(self.__class__.__name__, "pressure_problem", T0, P0, V0)
-        return ret_succ
-
-
-    @problem
-    def sparsity_problem(self, T0=1500, P0=ct.one_atm, V0=1.0):
-        """
-
-        """
-        def get_precon_matrix(derv_sets, threshold=0, dense=False):
-            ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
-            if ics is not None:
-                T0, P0, V0 = ics
-            # if not try with set conditions
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore")
-                gas = ct.Solution(self.model)
-            gas.TP = T0, P0
-            gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-            # create a new reactor
-            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
-            reactor.volume = V0
-            # create a reactor network for performing time integration
-            self.net = ct.ReactorNet([reactor, ])
-            # apply numerical options
-            precon = ct.AdaptivePreconditioner()
-            precon.threshold = threshold
-            self.net.preconditioner = precon
-            if dense:
-                self.net.initialize()
-                return np.ones((self.net.n_vars, self.net.n_vars))
-            self.net.derivative_settings = derv_sets
-            self.net.advance(0.01)
-            return precon.matrix
-
-        def plot_sparsity_array(arr, fname):
-            x = []
-            y = []
-            xdim, ydim = np.shape(arr)
-            for xi in range(xdim):
-                for yi in range(ydim):
-                    if arr[xi,yi] != 0:
-                        x.append(xi)
-                        y.append(ydim-yi)
-            fig = plt.figure()
-            fig.tight_layout()
-            plt.scatter(x, y, marker='.', color='#7570b3')
-            ax = plt.gca()
-            ax.spines['bottom'].set_color('0.0')
-            ax.spines['top'].set_color('0.0')
-            ax.spines['right'].set_color('0.0')
-            ax.spines['left'].set_color('0.0')
-            plt.tick_params( axis='both',          # changes apply to the x-axis
-                             which='both',      # both major and minor ticks are affected
-                             bottom=False,      # ticks along the bottom edge are off
-                             top=False,         # ticks along the top edge are off
-                             left=False,
-                             labelbottom=False,
-                             labelleft=False)  # labels along the bottom edge are off
-            fname = os.path.join("figures", fname)
-            plt.savefig(fname)
-            plt.close()
-        # plot dense
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets, dense=True)
-        plot_sparsity_array(no_assume_mat, "no_assume_dense.jpg")
-        # no assumption
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "no_assume_sparse.jpg")
-        # no assumption
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
-        plot_sparsity_array(no_assume_mat, "no_assume_sparse_thresh.jpg")
-        # no three body
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": True,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "no_threebody_sparse.jpg")
-        # no falloff
-        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": False,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "no_falloff_sparse.jpg")
-        # no falloff or three body
-        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "no_tb_or_fo_sparse.jpg")
-        # analyttemp
-        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
-                         "analytical-temp-derivs": True}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "analyt_sparse.jpg")
-        # analyttemp
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
-                         "analytical-temp-derivs": True}
-        no_assume_mat = get_precon_matrix(no_assume_sets)
-        plot_sparsity_array(no_assume_mat, "analyt_sparse_none.jpg")
-        # analyttemp
-        no_assume_sets = {"skip-falloff": False, "skip-third-bodies": False,
-                         "analytical-temp-derivs": True}
-        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
-        plot_sparsity_array(no_assume_mat, "analyt_sparse_none_thresh.jpg")
-        # applythresh
-        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
-                         "analytical-temp-derivs": False}
-        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
-        plot_sparsity_array(no_assume_mat, "all_thresh_sparse.jpg")
-        # applythresh and analyt
-        no_assume_sets = {"skip-falloff": True, "skip-third-bodies": True,
-                         "analytical-temp-derivs": True}
-        no_assume_mat = get_precon_matrix(no_assume_sets, threshold=1e-8)
-        plot_sparsity_array(no_assume_mat, "analyt_thresh_sparse.jpg")
-
-
-    @problem
-    def pressure_problem(self, T0=1500, P0=ct.one_atm, V0=1.0, db_conds=True):
-        """
-        This problem is adapted from
-        https://cantera.org/examples/python/reactors/pfr.py.html and is
-        not entirely my own work
-
-        This example solves a plug-flow reactor problem of
-        hydrogen-oxygen combustion. The PFR is computed by two
-        approaches: The simulation of a Lagrangian fluid particle, and
-        the simulation of a chain of reactors.
-
-        Requires: cantera >= 2.5.0
-        """
-        # get database conditions if available
-        if db_conds:
-            ics = self.get_database_conditions(self.__class__.__name__, "pressure_problem")
-            if ics is not None:
-                T0, P0, V0 = ics
-        # if not try with set conditions
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        gas.TP = T0, P0
-        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-        # create a new reactor
+            combustor = ct.IdealGasReactor(gas2)
+        combustor.volume = 1.0
+        # create exhaust
+        gas3 = ct.Solution(self.model, 'gas')
+        gas3.TPX = 300, ct.one_atm, self.air
         if self.moles:
-            reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
+            exhaust = ct.IdealGasConstPressureMoleReactor(gas3)
         else:
-            reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
-        reactor.volume = V0
-        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
-                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": reactor.volume}})
-        # create a reactor network for performing time integration
-        self.net = ct.ReactorNet([reactor, ])
-        # apply numerical options
-        self.apply_numerical_options()
-        # approximate a time step to achieve a similar resolution as in
-        # the next method
-        tf = 1.0
-        self.sim_end_time = 0
-        try:
-            # self.net.advance_to_steady_state()
-            self.net.advance(tf)
-            ret_succ = True
-        except Exception as e:
-            self.exception = {"exception": str(e)}
-            ret_succ = False
-        finally:
-            self.sim_end_time = self.net.time
-            if self.update_db and ret_succ:
-                self.update_database_conditions(self.__class__.__name__, "pressure_problem", T0, P0, V0)
-        return ret_succ
-
-    @problem
-    def volume_problem(self, T0=1000, P0=ct.one_atm, V0=1.0, db_conds=True):
-        "A simple well-stirred reactor volume problem"
-        # get database conditions if available
-        if db_conds:
-            ics = self.get_database_conditions(self.__class__.__name__, "volume_problem")
-            if ics is not None:
-                T0, P0, V0 = ics
-        # if not try with set conditions
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        gas.TP = T0, P0
-        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-        inlet = ct.Reservoir(gas)
-        if self.moles:
-            combustor = ct.IdealGasMoleReactor(gas, energy=self.energy_off)
-        else:
-            combustor = ct.IdealGasReactor(gas, energy=self.energy_off)
-        combustor.volume = V0
-       # add properties to yaml
-        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
-                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
+            exhaust = ct.IdealGasConstPressureReactor(gas3)
+        exhaust.volume = 1.0
+        # Add surface if it exists
+        if self.surface is not None:
+            # create platinum surface
+            surf = ct.Interface(self.model, 'surface', [gas3])
+            surf.coverages = self.surface
+            rsurf = ct.ReactorSurface(surf, exhaust, A=1.0)
+        # Create a reservoir for the exhaust
+        atmosphere = ct.Reservoir(gas1)
+        # Setup thermo data dictionary
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas1.n_reactions,
+            "gas_species": gas1.n_species, "fuel": self.fuel, "air": self.air,
+            "phi": self.phi, "T0": gas2.T, "P0": gas2.P, "V0": combustor.volume,
+            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            }})
+        # Add surface data if it exists
+        if self.surface is not None:
+            self.thermo_data["thermo"].update({"surface":self.surface,
+                "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
+                "surf_area":rsurf.area,})
+        # setup mass flow controllers
+        residence_time = 0.1
+        inlet_mfc = ct.MassFlowController(inlet, combustor,
+            mdot=combustor.mass / residence_time)
+        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        outlet_mfc2 = ct.PressureController(exhaust, atmosphere, master=outlet_mfc)
         # the simulation only contains one reactor
-        # Create the reactor network
-        self.net = ct.ReactorNet([combustor])
+        self.net = ct.ReactorNet([combustor, exhaust])
         # apply numerical options
         self.apply_numerical_options()
-        # Run a loop over decreasing residence times, until the reactor is extinguished,
-        # saving the state after each iteration.
-        try:
-            # self.net.advance_to_steady_state()
-            self.net.advance(1.0)
-            ret_succ = True
-        except Exception as e:
-            self.exception = {"exception": str(e)}
-            ret_succ = False
-        finally:
-            self.sim_end_time = self.net.time
-            if self.update_db and ret_succ:
-                self.update_database_conditions(self.__class__.__name__, "volume_problem", T0, P0, V0)
-        return ret_succ
-
-    @problem
-    def network_problem(self, T0=300, P0=1600e5, V0=.5e-3, db_conds=True):
-        """
-        This problem was adapted from
-        https://cantera.org/examples/python/reactors/ic_engine.py.html
-
-        Simulation of a (gaseous) Diesel-type internal combustion engine.
-
-        The simulation uses n-Dodecane as fuel, which is injected close to top dead
-        center. Note that this example uses numerous simplifying assumptions and
-        thus serves for illustration purposes only.
-
-        Requires: cantera >= 2.5.0, scipy >= 0.19, matplotlib >= 2.0
-        """
-
-        #########################################################################
-        # Input Parameters
-        #########################################################################
-        T0 = 300
-        P0 = 1600e5
-        f = 3000. / 60.  # engine speed [1/s] (3000 rpm)
-        V0 = .5e-3  # displaced volume [m**3]
-        epsilon = 20.  # compression ratio [-]
-        d_piston = 0.083  # piston diameter [m]
-        # turbocharger temperature, pressure, and composition
-        T_inlet = T0  # K
-        p_inlet = 1.3e5  # Pa
-        comp_inlet = self.air
-        # outlet pressure
-        p_outlet = 1.2e5  # Pa
-        # fuel properties (gaseous!)
-        T_injector = T0  # K
-        p_injector = P0  # Pa
-        comp_injector = self.fuel
-        # ambient properties
-        T_ambient = T0  # K
-        p_ambient = ct.one_atm  # Pa
-        comp_ambient = self.air
-        # Inlet valve friction coefficient, open and close timings
-        inlet_valve_coeff = 1.e-6
-        inlet_open = -18. / 180. * np.pi
-        inlet_close = 198. / 180. * np.pi
-        # Outlet valve friction coefficient, open and close timings
-        outlet_valve_coeff = 1.e-6
-        outlet_open = 522. / 180 * np.pi
-        outlet_close = 18. / 180. * np.pi
-        # Fuel mass, injector open and close timings
-        injector_open = 350. / 180. * np.pi
-        injector_close = 365. / 180. * np.pi
-        injector_mass = 3.2e-5  # kg
-        # Simulation time and parameters
-        sim_n_revolutions = 4
-        delta_T_max = 20.
-        rtol = 1.e-12
-        atol = 1.e-16
-        #####################################################################
-        # Set up IC engine Parameters and Functions
-        #####################################################################
-
-        V_oT = V0 / (epsilon - 1.)
-        A_piston = .25 * np.pi * d_piston ** 2
-        stroke = V0 / A_piston
-
-        def crank_angle(t):
-            """Convert time to crank angle"""
-            return np.remainder(2 * np.pi * f * t, 4 * np.pi)
-
-        def piston_speed(t):
-            """Approximate piston speed with sinusoidal velocity profile"""
-            return - stroke / 2 * 2 * np.pi * f * np.sin(crank_angle(t))
-
-        #####################################################################
-        # Set up Reactor Network
-        #####################################################################
-        # load reaction mechanism
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        # define initial state and set up reactor
-        gas.TPX = T_inlet, p_inlet, comp_inlet
-        if self.moles:
-            cyl = ct.IdealGasMoleReactor(gas, energy=self.energy_off)
-        else:
-            cyl = ct.IdealGasReactor(gas, energy=self.energy_off)
-        cyl.volume = V_oT
-        # define inlet state
-        gas.TPX = T_inlet, p_inlet, comp_inlet
-        inlet = ct.Reservoir(gas)
-        # inlet valve
-        inlet_valve = ct.Valve(inlet, cyl)
-        inlet_delta = np.mod(inlet_close - inlet_open, 4 * np.pi)
-        inlet_valve.valve_coeff = inlet_valve_coeff
-        inlet_valve.set_time_function(lambda t: np.mod(
-            crank_angle(t) - inlet_open, 4 * np.pi) < inlet_delta)
-        # define injector state (gaseous!)
-        gas.TPX = T_injector, p_injector, comp_injector
-        injector = ct.Reservoir(gas)
-        # injector is modeled as a mass flow controller
-        injector_mfc = ct.MassFlowController(injector, cyl)
-        injector_delta = np.mod(injector_close - injector_open, 4 * np.pi)
-        injector_t_open = (injector_close - injector_open) / 2. / np.pi / f
-        injector_mfc.mass_flow_coeff = injector_mass / injector_t_open
-        injector_mfc.set_time_function(lambda t: np.mod(
-            crank_angle(t) - injector_open, 4 * np.pi) < injector_delta)
-        # define outlet pressure (temperature and composition don't matter)
-        gas.TPX = T_ambient, p_outlet, comp_ambient
-        # outlet constant pressure reactor here
-        if self.moles:
-            outlet_reactor = ct.IdealGasConstPressureMoleReactor(gas, energy=self.energy_off)
-        else:
-            outlet_reactor = ct.IdealGasConstPressureReactor(gas, energy=self.energy_off)
-        # outlet_reactor valve
-        outlet_valve = ct.Valve(cyl, outlet_reactor)
-        outlet_delta = np.mod(outlet_close - outlet_open, 4 * np.pi)
-        outlet_valve.valve_coeff = outlet_valve_coeff
-        outlet_valve.set_time_function(lambda t: np.mod(
-            crank_angle(t) - outlet_open, 4 * np.pi) < outlet_delta)
-        # outlet reservoir
-        outlet_reservoir = ct.Reservoir(gas)
-        # Pressure controller for mass into atmosphere
-        outlet_mfc = ct.PressureController(
-            outlet_reactor, outlet_reservoir, master=outlet_valve)
-        # define ambient pressure (temperature and composition don't matter)
-        gas.TPX = T_ambient, p_ambient, comp_ambient
-        ambient_air = ct.Reservoir(gas)
-        # piston is modeled as a moving wall
-        piston = ct.Wall(ambient_air, cyl)
-        piston.area = A_piston
-        piston.set_velocity(piston_speed)
-        # create a reactor network containing the cylinder and limit advance step
-        self.net = ct.ReactorNet([cyl, outlet_reactor])
-        self.net.rtol, self.net.atol = rtol, atol
-        cyl.set_advance_limit('temperature', delta_T_max)
-        # apply numerical options
-        self.apply_numerical_options()
-        #####################################################################
-        # Run Simulation
-        #####################################################################
-        # simulate with a maximum resolution of 1 deg crank angle
-        dt = 1. / (360 * f)
-        t_stop = sim_n_revolutions / f
-        self.sim_end_time = 0
-        while self.net.time < t_stop:
-            # perform time integration
-            try:
-                self.net.advance(self.net.time + dt)
-                ret_succ = True
-            except Exception as e:
-                self.exception = {"exception": str(e)}
-                ret_succ = False
-            finally:
-                self.sim_end_time = self.net.time
-        return ret_succ
-
-    def __call__(self):
-        # run all three problems
-        if self.press_prob:
-            self.verbose_print(self.verbose, "Running Pressure Problem.")
-            self.pressure_problem()
-        # Run volume problem
-        if self.vol_prob:
-            self.verbose_print(self.verbose, "Running Volume Problem.")
-            self.volume_problem()
-        # Run network problem
-        if self.net_prob:
-            self.verbose_print(self.verbose, "Running Network Problem.")
-            self.network_problem()
-        # Run sparsity problem
-        if self.sparse_prob:
-            self.verbose_print(self.verbose, "Running Sparsity Problem.")
-            self.sparsity_problem()
+        # get connection if analysis
+        if self.runtype == "analysis":
+            connection = get_database_connection(self.curr_name)
+            id = first_time_step(connection, self.curr_name, self.get_numerical_stats())
+        # run simulation
+        tf = 1.0
+        while (tf > self.net.time):
+            self.net.step()
+            if self.runtype == "analysis":
+                id += 1
+                add_time_step(connection, id, self.curr_name, self.get_numerical_stats())
+        return True

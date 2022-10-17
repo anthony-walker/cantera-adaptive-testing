@@ -15,7 +15,7 @@ date: Wed, 11 Dec 2019 16:59:02 -0500
 units: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}
 
 phases:
-- name: gri30
+- name: gas
   thermo: ideal-gas
   elements: [O, H, C, N, Ar]
   species: [H2, H, O, O2, OH, H2O, HO2, H2O2, C, CH, CH2, CH2(S), CH3, CH4,

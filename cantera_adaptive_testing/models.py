@@ -25,6 +25,14 @@ class MethaneGRI(ModelBase):  # Hydrogen with more species
         self.fuel = 'CH4:1.0'
         self.skip_database_build = False
 
+class PropanePlatinum(ModelBase):  # Hydrogen with more species
+    def __init__(self, *args, **kwargs):
+        super(PropanePlatinum, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('pt_methane.yaml')
+        self.fuel = 'C3H8(26):1.0'
+        self.air = "O2(6):1.0, N2:3.76"
+        self.surface = 'Pt(9):1'
+        self.skip_database_build = False
 
 class DME(ModelBase):
     def __init__(self, *args, **kwargs):

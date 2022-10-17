@@ -1,0 +1,11 @@
+Create a full exhaust problem with a catalytic converter surface
+
+Create possibility to record condition number and turn off timing
+
+Create means to remove a reaction type from a mechanism
+
+Create some sort of database for simulation data which can be referenced with a key
+
+Create new table or not
+
+Pick a couple representative mechanisms
