@@ -18,11 +18,36 @@ class Hydrogen(ModelBase):
         self.skip_database_build = False
 
 
-class MethaneGRI(ModelBase):  # Hydrogen with more species
+class PlatinumSmallAramco(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
-        super(MethaneGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
+        super(PlatinumSmallAramco, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('pt-small-aramco.yaml')
         self.fuel = 'CH4:1.0'
+        self.surface = 'PT(S):1.0'
+        self.skip_database_build = False
+
+class PlatinumMediumAramco(ModelBase):  # Hydrogen with more species
+    def __init__(self, *args, **kwargs):
+        super(PlatinumMediumAramco, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('pt-med-aramco.yaml')
+        self.fuel = 'CH4:1.0'
+        self.surface = 'Pt(9):1.0'
+        self.skip_database_build = False
+
+class PlatinumSmallGRI(ModelBase):  # Hydrogen with more species
+    def __init__(self, *args, **kwargs):
+        super(PlatinumSmallGRI, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('pt-small-gri.yaml')
+        self.fuel = 'CH4:1.0'
+        self.surface = 'PT(S):1.0'
+        self.skip_database_build = False
+
+class PlatinumMediumGRI(ModelBase):  # Hydrogen with more species
+    def __init__(self, *args, **kwargs):
+        super(PlatinumMediumGRI, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('pt-med-gri.yaml')
+        self.fuel = 'CH4:1.0'
+        self.surface = 'Pt(9):1.0'
         self.skip_database_build = False
 
 class PropanePlatinum(ModelBase):  # Hydrogen with more species

@@ -20,16 +20,18 @@ elements:
 phases:
 - name: gas
   thermo: ideal-gas
-  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
-    X]
-  species: [Ar, He, Ne, N2, CH4(1), CO2(2), H2O(3), H2(4), CO(5), O2(6),
-    C2H4(7), C2H6(8), C3H8(26)]
+  elements: [C, H, N, O, Ar, He]
+  species:
+  - aramco-493-2716.yaml/species: all
+  skip-undeclared-elements: true
   kinetics: gas
-  reactions: none
+  reactions:
+  - aramco-493-2716.yaml/reactions: all
   transport: mixture-averaged
   state:
     T: 300.0
     P: 1.01325e+05
+    X: {CH4: 0.095, O2: 0.21, AR: 0.79}
 - name: surface
   thermo: ideal-surface
   elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
@@ -104,7 +106,7 @@ species:
     well-depth: 97.53
     polarizability: 1.76
     rotational-relaxation: 4.0
-- name: CH4(1)
+- name: CH4
   composition: {C: 1, H: 4}
   thermo:
     model: NASA7
@@ -121,7 +123,7 @@ species:
     well-depth: 141.4
     polarizability: 2.6
     rotational-relaxation: 13.0
-- name: CO2(2)
+- name: CO2
   composition: {C: 1, O: 2}
   thermo:
     model: NASA7
@@ -136,7 +138,7 @@ species:
     geometry: linear
     diameter: 3.941
     well-depth: 195.201
-- name: H2O(3)
+- name: H2O
   composition: {H: 2, O: 1}
   thermo:
     model: NASA7
@@ -153,7 +155,7 @@ species:
     well-depth: 809.102
     polarizability: 1.76
     rotational-relaxation: 4.0
-- name: H2(4)
+- name: H2
   composition: {H: 2}
   thermo:
     model: NASA7
@@ -168,7 +170,7 @@ species:
     geometry: linear
     diameter: 2.833
     well-depth: 59.7
-- name: CO(5)
+- name: CO
   composition: {C: 1, O: 1}
   thermo:
     model: NASA7
@@ -185,7 +187,7 @@ species:
     well-depth: 91.7
     polarizability: 1.76
     rotational-relaxation: 4.0
-- name: O2(6)
+- name: O2
   composition: {O: 2}
   thermo:
     model: NASA7
@@ -200,7 +202,7 @@ species:
     geometry: linear
     diameter: 3.467
     well-depth: 106.7
-- name: C2H4(7)
+- name: C2H4
   composition: {C: 2, H: 4}
   thermo:
     model: NASA7
@@ -216,7 +218,7 @@ species:
     diameter: 3.971
     well-depth: 280.8
     rotational-relaxation: 1.5
-- name: C2H6(8)
+- name: C2H6
   composition: {C: 2, H: 6}
   thermo:
     model: NASA7
@@ -232,7 +234,7 @@ species:
     diameter: 4.302
     well-depth: 252.3
     rotational-relaxation: 1.5
-- name: C3H8(26)
+- name: C3H8
   composition: {C: 3, H: 8}
   thermo:
     model: NASA7
@@ -582,21 +584,21 @@ species:
       -2.23198421e+04, -31.1097315]
 
 reactions:
-- equation: Pt(9) + H2O(3) <=> H2OX(31)  # Reaction 1
+- equation: Pt(9) + H2O <=> H2OX(31)  # Reaction 1
   sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
-- equation: Pt(9) + CO2(2) <=> CO2X(12)  # Reaction 2
+- equation: Pt(9) + CO2 <=> CO2X(12)  # Reaction 2
   sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
-- equation: Pt(9) + CO(5) <=> OCX(10)  # Reaction 3
+- equation: Pt(9) + CO <=> OCX(10)  # Reaction 3
   sticking-coefficient: {A: 0.8, b: 0.0, Ea: 0.0}
 - equation: OX(11) + OCX(10) <=> Pt(9) + CO2X(12)  # Reaction 4
   rate-constant: {A: 7.27e+19, b: 0.0, Ea: 26.969}
-- equation: Pt(9) + Pt(9) + O2(6) <=> OX(11) + OX(11)  # Reaction 5
+- equation: Pt(9) + Pt(9) + O2 <=> OX(11) + OX(11)  # Reaction 5
   sticking-coefficient: {A: 0.064, b: 0.0, Ea: 0.0}
-- equation: Pt(9) + Pt(9) + H2(4) <=> HX(15) + HX(15)  # Reaction 6
+- equation: Pt(9) + Pt(9) + H2 <=> HX(15) + HX(15)  # Reaction 6
   sticking-coefficient: {A: 0.1, b: 0.0, Ea: 1.195}
-- equation: Pt(9) + C2H4(7) <=> C2H4X(20)  # Reaction 7
+- equation: Pt(9) + C2H4 <=> C2H4X(20)  # Reaction 7
   sticking-coefficient: {A: 0.67, b: 0.0, Ea: 0.0}
-- equation: Pt(9) + Pt(9) + C2H4(7) <=> C2H4X2(13)  # Reaction 8
+- equation: Pt(9) + Pt(9) + C2H4 <=> C2H4X2(13)  # Reaction 8
   sticking-coefficient: {A: 0.67, b: 0.0, Ea: 0.0}
 - equation: Pt(9) + C2H4X(20) <=> C2H4X2(13)  # Reaction 9
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 0.7}
@@ -610,7 +612,7 @@ reactions:
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 16.799}
 - equation: Pt(9) + Pt(9) + C2H5X(23) <=> HX(15) + C2H4X2(13)  # Reaction 14
   rate-constant: {A: 1.748e+30, b: 0.0, Ea: 11.9}
-- equation: Pt(9) + Pt(9) + C2H6(8) <=> HX(15) + C2H5X(23)  # Reaction 15
+- equation: Pt(9) + Pt(9) + C2H6 <=> HX(15) + C2H5X(23)  # Reaction 15
   sticking-coefficient: {A: 2.052, b: 0.0, Ea: 10.206}
 - equation: HOX(34) + C2H5X(23) <=> H2OX(31) + C2H4X(20)  # Reaction 16
   rate-constant: {A: 4.179e+21, b: 0.0, Ea: 28.093}
@@ -618,7 +620,7 @@ reactions:
   rate-constant: {A: 4.179e+21, b: 0.0, Ea: 40.497}
 - equation: OX(11) + C2H5X(23) <=> HOX(34) + C2H4X(20)  # Reaction 18
   rate-constant: {A: 4.179e+21, b: 0.0, Ea: 55.407}
-- equation: Pt(9) + C2H6(8) <=> C2H6X(33)  # Reaction 19
+- equation: Pt(9) + C2H6 <=> C2H6X(33)  # Reaction 19
   sticking-coefficient: {A: 1.0e-14, b: 0.0, Ea: 0.0}
 - equation: Pt(9) + C2H6X(33) <=> HX(15) + C2H5X(23)  # Reaction 20
   rate-constant: {A: 4.14e+21, b: 0.0, Ea: 18.743}
@@ -640,11 +642,11 @@ reactions:
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 0.0}
 - equation: Pt(9) + CHO2X(36) <=> OX(11) + CHOX(38)  # Reaction 29
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 49.228}
-- equation: Pt(9) + Pt(9) + CH4(1) <=> HX(15) + CH3X(29)  # Reaction 30
+- equation: Pt(9) + Pt(9) + CH4 <=> HX(15) + CH3X(29)  # Reaction 30
   sticking-coefficient: {A: 6.04, b: 0.0, Ea: 13.862}
 - equation: Pt(9) + C2H6X(33) <=> CH3X(29) + CH3X(29)  # Reaction 31
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 33.188}
-- equation: Pt(9) + CH4(1) <=> CH4X(30)  # Reaction 32
+- equation: Pt(9) + CH4 <=> CH4X(30)  # Reaction 32
   sticking-coefficient: {A: 1.0e-14, b: 0.0, Ea: 0.0}
 - equation: Pt(9) + CH4X(30) <=> HX(15) + CH3X(29)  # Reaction 33
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 19.547}
@@ -846,7 +848,7 @@ reactions:
   rate-constant: {A: 4.29e+13, b: 0.0, Ea: 38.5}
 - equation: Pt(9) + CHCH3X(18) <=> C2H4X2(13)  # Reaction 130
   rate-constant: {A: 4.18e+21, b: 0.0, Ea: 54.1}
-- equation: Pt(9) + Pt(9) + C3H8(26) <=> HX(15) + C3H7X(27)  # Reaction 131
+- equation: Pt(9) + Pt(9) + C3H8 <=> HX(15) + C3H7X(27)  # Reaction 131
   sticking-coefficient: {A: 1.19, b: 0.0, Ea: 8.031}
-- equation: Pt(9) + Pt(9) + C3H8(26) <=> HX(15) + C3H7X(28)  # Reaction 132
+- equation: Pt(9) + Pt(9) + C3H8 <=> HX(15) + C3H7X(28)  # Reaction 132
   sticking-coefficient: {A: 1.19, b: 0.0, Ea: 8.031}
