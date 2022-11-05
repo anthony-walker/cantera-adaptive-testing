@@ -109,7 +109,6 @@ def full_performance(curr_model):
 
 if __name__ == '__main__':
     # Run all models and tests
-
     models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
     with mp.Pool(os.cpu_count()) as p:
         if sys.argv[1] == '1':
@@ -138,17 +137,17 @@ if __name__ == '__main__':
             for m in res:
                 all_models += m
             # test all models to see which fail and skip those runs
-            res = p.map(plug_flow_reactor, all_models)
+            res = p.map(pfr_problem, all_models)
             res_models = []
             for r, m in zip(res, all_models):
                 if r:
                     res_models.append(m)
             # run remaining trials
             for i in range(99):
-                p.map(plug_flow_reactor, res_models)
+                p.map(pfr_problem, res_models)
             # run analysis
             for m in res_models:
                 m.runtype = 'analysis'
-            p.map(plug_flow_reactor, res_models)
+            p.map(pfr_problem, res_models)
         else:
             raise Exception("No option specified: surf-analysis.py")
