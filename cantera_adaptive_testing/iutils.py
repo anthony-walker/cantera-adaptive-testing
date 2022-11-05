@@ -7,6 +7,26 @@ import multiprocessing as mp
 
 yaml = ruamel.yaml.YAML()
 
+def remove_model_notes(model):
+    model = os.path.join(os.path.dirname(__file__), "models", model)
+    # read in model
+    with open(model, 'r') as f:
+        data = yaml.load(f)
+    # remove notes from reactions
+    reactions = []
+    for k in data["reactions"]:
+        k.pop("note", None)
+        reactions.append(k)
+    species = []
+    for k in data["species"]:
+        k.pop("note", None)
+        species.append(k)
+    # write new file
+    data["reactions"] = ruamel.yaml.comments.CommentedSeq(reactions)
+    data["species"] = ruamel.yaml.comments.CommentedSeq(species)
+    new_model = model.split(".")[0]+"_new.yaml"
+    with open(new_model, 'w') as f:
+        data = yaml.dump(data, f)
 
 def get_zero_dict(keys):
     return {k: 0 for k in keys}

@@ -12,7 +12,6 @@ import multiprocessing as mp
 import matplotlib.pyplot as plt
 import cantera_adaptive_testing.iutils as iutils
 import cantera_adaptive_testing.models as models
-import cantera_adaptive_testing.plotter as plotter
 
 
 # getting yaml for use in functions

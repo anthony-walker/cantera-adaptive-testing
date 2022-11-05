@@ -9,7 +9,6 @@ class GAS_DEF(ModelBase):
         self.fuel = 'CH4:1.0'
         self.skip_database_build = True
 
-
 class Hydrogen(ModelBase):
     def __init__(self, *args, **kwargs):
         super(Hydrogen, self).__init__(*args, **kwargs)
@@ -17,46 +16,85 @@ class Hydrogen(ModelBase):
         self.fuel = 'H2:1.0'
         self.skip_database_build = False
 
+class PlatinumSmallHydrogen(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(PlatinumSmallHydrogen, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
+        self.fuel = 'H2:1.0'
+        self.surface = 'PT(S):1.0'
+        self.sphase = 'surface-small'
+        self.skip_database_build = False
+
+class PlatinumMediumHydrogen(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(PlatinumMediumHydrogen, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
+        self.fuel = 'H2:1.0'
+        self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-medium'
+        self.skip_database_build = False
+
+class PlatinumLargeHydrogen(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(PlatinumLargeHydrogen, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
+        self.fuel = 'H2:1.0'
+        self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-large'
+        self.skip_database_build = False
 
 class PlatinumSmallAramco(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
         super(PlatinumSmallAramco, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('pt-small-aramco.yaml')
-        self.fuel = 'CH4:1.0'
+        self.model = self.get_test_set_path('aramco-493-2716.yaml')
+        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
         self.surface = 'PT(S):1.0'
-        self.skip_database_build = False
+        self.sphase = 'surface-small'
 
 class PlatinumMediumAramco(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
         super(PlatinumMediumAramco, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('pt-med-aramco.yaml')
-        self.fuel = 'CH4:1.0'
+        self.model = self.get_test_set_path('aramco-493-2716.yaml')
+        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
         self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-medium'
+        self.skip_database_build = False
+
+class PlatinumLargeAramco(ModelBase):  # Hydrogen with more species
+    def __init__(self, *args, **kwargs):
+        super(PlatinumLargeAramco, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('aramco-493-2716.yaml')
+        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
+        self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-large'
         self.skip_database_build = False
 
 class PlatinumSmallGRI(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
         super(PlatinumSmallGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('pt-small-gri.yaml')
+        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
         self.surface = 'PT(S):1.0'
+        self.gphase = 'gas'
+        self.sphase = 'surface-small'
         self.skip_database_build = False
 
 class PlatinumMediumGRI(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
         super(PlatinumMediumGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('pt-med-gri.yaml')
+        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
         self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-medium'
         self.skip_database_build = False
 
-class PropanePlatinum(ModelBase):  # Hydrogen with more species
+class PlatinumLargeGRI(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
-        super(PropanePlatinum, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('pt_methane.yaml')
-        self.fuel = 'C3H8(26):1.0'
-        self.air = "O2(6):1.0, N2:3.76"
-        self.surface = 'Pt(9):1'
+        super(PlatinumLargeGRI, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
+        self.fuel = 'CH4:1.0'
+        self.surface = 'Pt(9):1.0'
+        self.sphase = 'surface-large'
         self.skip_database_build = False
 
 class DME(ModelBase):

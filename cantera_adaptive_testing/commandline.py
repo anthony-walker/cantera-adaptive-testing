@@ -12,7 +12,7 @@ from mpi4py import MPI
 import multiprocessing as mp
 import cantera_adaptive_testing.cutils as cutils
 import cantera_adaptive_testing.models as models
-import cantera_adaptive_testing.plotter as plotter
+import cantera_adaptive_testing.yaml_plotter as yaml_plotter
 
 
 def mpi_run_all(*args, **kwargs):
@@ -154,8 +154,8 @@ def commandLineUtilities():
             print(k)
 
 
-def commandLinePlotter():
-    parser = argparse.ArgumentParser(description="""adaptive-plotter:
+def cli_yaml_plotter():
+    parser = argparse.ArgumentParser(description="""adaptive-yaml-plotter:
     Plot data in a useful form.""")
     parser.add_argument("data", type=str, help="Specify either the directory or specific yaml file used")
     parser.add_argument("plot_type", type=str,
@@ -173,7 +173,7 @@ def commandLinePlotter():
     parser.add_argument('-T', '--threshold', type=float, default=1e-8,
                         help="Use this flag to pass the name of threshold for the sparisty plot.")
     args = parser.parse_args()
-    options = inspect.getmembers(plotter, inspect.isfunction)
+    options = inspect.getmembers(yaml_plotter, inspect.isfunction)
     options = {element[0]: element[1] for element in options}
     kwargs = vars(args)
     if args.pipe_file != "":

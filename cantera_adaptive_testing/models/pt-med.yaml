@@ -18,6 +18,22 @@ elements:
   atomic-weight: 195.083
 
 phases:
+- name: gas
+  thermo: ideal-gas
+  elements: [O, H, C, N, Ar]
+  species:
+  - gri30.yaml/species: [H2, H, O, O2, OH, H2O, HO2, H2O2, C, CH, CH2, CH2(S),
+      CH3, CH4, CO, CO2, HCO, CH2O, CH2OH, CH3O, CH3OH, C2H, C2H2, C2H3,
+      C2H4, C2H5, C2H6, HCCO, CH2CO, HCCOH, AR, N2, C3H8]
+  skip-undeclared-elements: true
+  kinetics: gas
+  reactions:
+  - gri30.yaml/reactions: declared-species
+  transport: mixture-averaged
+  state:
+    T: 300.0
+    P: 1.01325e+05
+    X: {CH4: 0.095, O2: 0.21, AR: 0.79}
 - name: surface
   thermo: ideal-surface
   elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
