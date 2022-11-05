@@ -1,4 +1,5 @@
 import os
+import sys
 import multiprocessing as mp
 from cantera_adaptive_testing.models import *
 
@@ -108,41 +109,46 @@ def full_performance(curr_model):
 
 if __name__ == '__main__':
     # Run all models and tests
+
     models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
     with mp.Pool(os.cpu_count()) as p:
-        # network problem
-        res = p.map(get_all_models, models)
-        all_models = []
-        for m in res:
-            all_models += m
-        # test all models to see which fail and skip those runs
-        res = p.map(network_problem, all_models)
-        res_models = []
-        for r, m in zip(res, all_models):
-            if r:
-                res_models.append(m)
-        # run remaining trials
-        for i in range(99):
+        if sys.argv[1] == '1':
+            # network problem
+            res = p.map(get_all_models, models)
+            all_models = []
+            for m in res:
+                all_models += m
+            # test all models to see which fail and skip those runs
+            res = p.map(network_problem, all_models)
+            res_models = []
+            for r, m in zip(res, all_models):
+                if r:
+                    res_models.append(m)
+            # run remaining trials
+            for i in range(99):
+                p.map(network_problem, res_models)
+            # run analysis
+            for m in res_models:
+                m.runtype = 'analysis'
             p.map(network_problem, res_models)
-        # run analysis
-        for m in res_models:
-            m.runtype = 'analysis'
-        p.map(network_problem, res_models)
-        # pfr problem
-        res = p.map(get_all_models, models)
-        all_models = []
-        for m in res:
-            all_models += m
-        # test all models to see which fail and skip those runs
-        res = p.map(plug_flow_reactor, all_models)
-        res_models = []
-        for r, m in zip(res, all_models):
-            if r:
-                res_models.append(m)
-        # run remaining trials
-        for i in range(99):
+        elif sys.argv[1] == '2':
+            # pfr problem
+            res = p.map(get_all_models, models)
+            all_models = []
+            for m in res:
+                all_models += m
+            # test all models to see which fail and skip those runs
+            res = p.map(plug_flow_reactor, all_models)
+            res_models = []
+            for r, m in zip(res, all_models):
+                if r:
+                    res_models.append(m)
+            # run remaining trials
+            for i in range(99):
+                p.map(plug_flow_reactor, res_models)
+            # run analysis
+            for m in res_models:
+                m.runtype = 'analysis'
             p.map(plug_flow_reactor, res_models)
-        # run analysis
-        for m in res_models:
-            m.runtype = 'analysis'
-        p.map(plug_flow_reactor, res_models)
+        else:
+            raise Exception("No option specified: surf-analysis.py")
