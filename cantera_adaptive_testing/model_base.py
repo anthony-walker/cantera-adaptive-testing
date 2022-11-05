@@ -385,8 +385,21 @@ class ModelBase(object):
             stats["min_eigenvalue"] = float(np.amin(eigvals))
             stats["max_eigenvalue"] = float(np.amax(eigvals))
             stats["threshold"] = self.threshold
-            stats["sparsity"] = f"{np.count_nonzero(prec_mat==0)}/{np.prod(prec_mat.shape)}"
+            stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
+            stats["total_elements"] = np.prod(prec_mat.shape)
         return stats
+
+    def add_numerical_stats(self, arr=None, sid=0):
+        stats = self.get_numerical_stats()
+        stats_row = np.ndarray((1, len(stats)+1))
+        stats_row[0, :] = np.array([sid,] + [ v for k, v in sorted(stats.items())])
+        if arr is None:
+            return stats_row
+        else:
+            return np.append(arr, stats_row, 0)
+
+    def get_stats_keys(self):
+        return sorted(list(self.get_numerical_stats().keys()))
 
     def problem(func, *args, **kwargs):
         """ This is a decorator wrap simulations in common functions
@@ -402,8 +415,6 @@ class ModelBase(object):
             self.curr_name = "_".join(filter(None, self.classifiers + [func.__name__, ]))
             self.curr_name = self.curr_name.replace(".", "_")
             self.curr_name = self.curr_name.replace("+", "")
-            if self.runtype == "analysis":
-                create_simulation_table(self.curr_name, database=self.database)
             if self.runtype == "analysis" or self.runtype == "plot":
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
@@ -415,7 +426,7 @@ class ModelBase(object):
                 ret_succ = func(self, *args, **kwargs)
                 tf = time.time_ns()
             except Exception as e:
-                print(e)
+                print(self.curr_name, e)
                 append_exception_table(self.curr_name, format_exc(), database=self.database)
                 return False
             # append runtime to runtime table
@@ -487,13 +498,21 @@ class ModelBase(object):
         self.apply_numerical_options()
         # add total number of variables
         self.thermo_data["thermo"].update({"n_vars": self.net.n_vars})
-        # get connection if analysis
+        # array for numerical_stats
         if self.runtype == "analysis":
-            connection = get_database_connection(self.curr_name, database=self.database)
-            sid = first_time_step(connection, self.curr_name, self.get_numerical_stats())
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
         # try to run simulation
         if self.runtype == "performance":
             self.net.advance_to_steady_state()
+        elif self.runtype == "analysis":
+            while (self.sstime > self.net.time):
+                for i in range(1, self.record_steps + 1, 1):
+                    self.net.step()
+                sid += i
+                stats = self.add_numerical_stats(stats, sid)
+            add_analysis_stats(self.curr_name, stats, stats_keys, database=self.database)
         elif self.runtype == "plot":
             # create plot categories
             products = ["CO", "CO2", "H2O"]
@@ -535,47 +554,27 @@ class ModelBase(object):
             cax.legend(loc='upper right')
             eax.legend(loc='upper right')
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
-        elif self.runtype == "analysis":
-            while (self.sstime > self.net.time):
-                for i in range(1, self.record_steps + 1, 1):
-                    self.net.step()
-                sid += i
-                add_time_step(connection, sid, self.curr_name, self.get_numerical_stats())
         else:
             raise Exception("Invalid runtype specified.")
 
     @problem
     def plug_flow_reactor(self, *args, **kwargs):
-        # unit conversion factors to SI
-        cm = 0.01
-        minute = 60.0
-        tc = 800.0  # Temperature in Celsius
-        length = 0.3 * cm  # Catalyst bed length
-        area = 1.0 * cm**2  # Catalyst bed area
-        cat_area_per_vol = 1000.0 / cm  # Catalyst particle surface area per unit volume
-        velocity = 40.0 * cm / minute  # gas velocity
-        porosity = 0.3  # Catalyst bed porosity
-        # The PFR will be simulated by a chain of 'NReactors' stirred reactors.
-        NReactors = 201
-        dt = 1.0
-        #####################################################################
-        t = tc + 273.15  # convert to Kelvin
         # import the gas model and set the initial conditions
         gas = ct.Solution(self.model, self.gphase)
-        gas.TP = t, ct.one_atm
+        gas.TP = 1600, ct.one_atm
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # import the surface model
         surf = ct.Interface(self.model, self.sphase, [gas])
-        surf.TP = t, ct.one_atm
+        surf.TP = gas.T, gas.P
         surf.coverages = self.surface
-        rlen = length/(NReactors-1)
-        rvol = area * rlen * porosity
+        area = 1
+        vol = 1
+        velocity = 15 # m / s
         # catalyst area in one reactor
-        cat_area = cat_area_per_vol * rvol
         mass_flow_rate = velocity * gas.density * area
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
-        r.volume = rvol
+        r.volume = vol
         # create a reservoir to represent the reactor immediately upstream. Note
         # that the gas object is set already to the state of the upstream reactor
         upstream = ct.Reservoir(gas, name='upstream')
@@ -584,7 +583,7 @@ class ModelBase(object):
         downstream = ct.Reservoir(gas, name='downstream')
         # Add the reacting surface to the reactor. The area is set to the desired
         # catalyst area in the reactor.
-        rsurf = ct.ReactorSurface(surf, r, A=cat_area)
+        rsurf = ct.ReactorSurface(surf, r, A=1)
         # The mass flow rate into the reactor will be fixed by using a
         # MassFlowController object.
         m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
@@ -607,8 +606,9 @@ class ModelBase(object):
         self.apply_numerical_options()
         # get connection if analysis
         if self.runtype == "analysis":
-            connection = get_database_connection(self.curr_name, database=self.database)
-            id = first_time_step(connection, self.curr_name, self.get_numerical_stats())
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
         # advance the simulation
         if self.runtype == "performance":
             self.net.advance_to_steady_state()
@@ -619,7 +619,8 @@ class ModelBase(object):
                 for i in range(1, self.record_steps + 1, 1):
                     self.net.step()
                 sid += i
-                add_time_step(connection, sid, self.curr_name, self.get_numerical_stats())
+                stats = self.add_numerical_stats(stats, sid)
+            add_analysis_stats(self.curr_name, stats, stats_keys, database=self.database)
         else:
             raise Exception("Invalid runtype specified.")
 

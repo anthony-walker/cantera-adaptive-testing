@@ -1,5 +1,3 @@
-import argparse
-import inspect
 import sys
 import importlib
 import random
@@ -19,7 +17,7 @@ def mpi_run_all(*args, **kwargs):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     if rank == 0:
-        parser = parserSetup(add_mod=False)
+        parser = parser_setup(add_mod=False)
         args = parser.parse_args()
         data = vars(args)
         mods = inspect.getmembers(models, inspect.isclass)
@@ -40,7 +38,7 @@ def mpi_run_loop():
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     if rank == 0:
-        parser = parserSetup()
+        parser = parser_setup()
         args = parser.parse_args()
         data = vars(args)
     else:
@@ -58,7 +56,7 @@ def mpi_run_loop():
 
 
 def omp_run_all(*args, **kwargs):
-    parser = parserSetup(add_mod=False)
+    parser = parser_setup(add_mod=False)
     args = parser.parse_args()
     data = vars(args)
     mods = inspect.getmembers(models, inspect.isclass)
@@ -70,7 +68,7 @@ def omp_run_all(*args, **kwargs):
     pool.map(processModelRun, modsList)
 
 
-def parserSetup(add_mod=True):
+def parser_setup(add_mod=True):
     """This function is the main call for the commandline interface for
     testing the additions to Cantera."""
     parser = argparse.ArgumentParser(description="""adaptive-testing:
@@ -119,7 +117,7 @@ def parserSetup(add_mod=True):
     return parser
 
 
-def commandLineUtilities():
+def cmd_line_utils():
     parser = argparse.ArgumentParser(description="""adaptive-utilities:
     This configure and plot data in a useful form.""")
     parser.add_argument(
@@ -188,8 +186,8 @@ def cli_yaml_plotter():
             print(k)
 
 
-def commandLineMain():
-    parser = parserSetup()
+def cmd_line_main():
+    parser = parser_setup()
     args = parser.parse_args()
     # Handle models
     mods = inspect.getmembers(models, inspect.isclass)

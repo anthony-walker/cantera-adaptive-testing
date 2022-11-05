@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   entry_points:
-    - 'adaptive-testing=cantera_adaptive_testing.commandline:commandLineMain'
+    - 'adaptive-testing=cantera_adaptive_testing.commandline:cmd_line_main'
   script: "{{ PYTHON }} -m pip install . -vv"
 requirements:
   host:

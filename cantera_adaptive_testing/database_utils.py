@@ -1,8 +1,9 @@
 import os
 import re
 import sqlite3
+import numpy as np
 
-dbt = {int:"INTEGER", float:"REAL", str:"TEXT", type(None):"NULL", bool:"INTEGER"}
+dbt = {int:"INTEGER", float:"REAL", np.float64:"REAL", str:"TEXT", type(None):"NULL", bool:"INTEGER"}
 
 def add_to_thermo_table(name, thermo_data, replace=True, database=None):
     if database is None:
@@ -141,6 +142,29 @@ def add_time_step(connection, id, name, stats):
     cursor = connection.cursor()
     cursor.execute(f"""INSERT INTO {name} ( id ) VALUES ( {id} )""")
     for k, v in stats.items():
-            value = f"\'{v}\'" if isinstance(v, str) else v
-            cursor.execute(f"""UPDATE {name} SET {k} = {value} WHERE id = {id} """)
+        value = f"\'{v}\'" if isinstance(v, str) else v
+        cursor.execute(f"""UPDATE {name} SET {k} = {value} WHERE id = {id} """)
     connection.commit()
+
+
+def add_analysis_stats(name, arr, keys, database=None):
+    if database is None:
+        direc = os.path.dirname(os.path.abspath(__file__))
+        database = os.path.join(direc, "models", "testing.db")
+    connection = sqlite3.connect(database)
+    cursor = connection.cursor()
+    # create table first
+    cursor.execute(f"""DROP TABLE IF EXISTS {name}""")
+    ct_keys = ", ".join([ f"{k} {dbt[type(v)]}" for k, v in zip(keys[1:], arr[0, 1:])])
+    cursor.execute(f"""CREATE TABLE {name} (id REAL PRIMARY KEY, {ct_keys});""")
+    # insert rows into table
+    key_str = ", ".join(keys)
+    placeholders = ', '.join('?' * len(keys))
+    sql = f"INSERT INTO {name} ({key_str}) VALUES ({placeholders})"
+    for row in arr:
+        cursor.execute(sql, row)
+    connection.commit()
+
+
+def get_performance_data(connection, thread):
+    pass

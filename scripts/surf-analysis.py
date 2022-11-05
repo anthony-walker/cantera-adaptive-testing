@@ -107,11 +107,15 @@ def full_analysis(curr_model):
 def full_performance(curr_model):
     full_test_run_model(curr_model, performance_runs)
 
-if __name__ == '__main__':
+def parallel_run_all_configs():
     # Run all models and tests
     models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
+    # cli args
+    option = sys.argv[1] if len(sys.argv) > 1 else '0'
+    runs = int(sys.argv[2]) if len(sys.argv) > 2 else 99
+    # Pool
     with mp.Pool(os.cpu_count()) as p:
-        if sys.argv[1] == '1':
+        if option == '1':
             # network problem
             res = p.map(get_all_models, models)
             all_models = []
@@ -124,13 +128,13 @@ if __name__ == '__main__':
                 if r:
                     res_models.append(m)
             # run remaining trials
-            for i in range(99):
+            for i in range(runs-1):
                 p.map(network_problem, res_models)
             # run analysis
             for m in res_models:
                 m.runtype = 'analysis'
             p.map(network_problem, res_models)
-        elif sys.argv[1] == '2':
+        elif option == '2':
             # pfr problem
             res = p.map(get_all_models, models)
             all_models = []
@@ -143,7 +147,7 @@ if __name__ == '__main__':
                 if r:
                     res_models.append(m)
             # run remaining trials
-            for i in range(99):
+            for i in range(runs-1):
                 p.map(pfr_problem, res_models)
             # run analysis
             for m in res_models:
@@ -151,3 +155,7 @@ if __name__ == '__main__':
             p.map(pfr_problem, res_models)
         else:
             raise Exception("No option specified: surf-analysis.py")
+
+
+if __name__ == '__main__':
+    parallel_run_all_configs()
