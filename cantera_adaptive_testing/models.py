@@ -21,7 +21,7 @@ class PlatinumSmallHydrogen(ModelBase):
         super(PlatinumSmallHydrogen, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('hydrogen-10-28.yaml')
         self.fuel = 'H2:1.0'
-        self.surface = 'PT(S):1.0'
+        self.surface = 'PT(S):10.0'
         self.sphase = 'surface-small'
         self.skip_database_build = False
 
@@ -30,7 +30,7 @@ class PlatinumMediumHydrogen(ModelBase):
         super(PlatinumMediumHydrogen, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('hydrogen-10-28.yaml')
         self.fuel = 'H2:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-medium'
         self.skip_database_build = False
 
@@ -39,7 +39,7 @@ class PlatinumLargeHydrogen(ModelBase):
         super(PlatinumLargeHydrogen, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('hydrogen-10-28.yaml')
         self.fuel = 'H2:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-large'
         self.skip_database_build = False
 
@@ -48,7 +48,7 @@ class PlatinumSmallAramco(ModelBase):  # Hydrogen with more species
         super(PlatinumSmallAramco, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('aramco-493-2716.yaml')
         self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'PT(S):1.0'
+        self.surface = 'PT(S):10.0'
         self.sphase = 'surface-small'
 
 class PlatinumMediumAramco(ModelBase):  # Hydrogen with more species
@@ -56,7 +56,7 @@ class PlatinumMediumAramco(ModelBase):  # Hydrogen with more species
         super(PlatinumMediumAramco, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('aramco-493-2716.yaml')
         self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-medium'
         self.skip_database_build = False
 
@@ -65,7 +65,7 @@ class PlatinumLargeAramco(ModelBase):  # Hydrogen with more species
         super(PlatinumLargeAramco, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('aramco-493-2716.yaml')
         self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-large'
         self.skip_database_build = False
 
@@ -74,7 +74,7 @@ class PlatinumSmallGRI(ModelBase):  # Hydrogen with more species
         super(PlatinumSmallGRI, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
-        self.surface = 'PT(S):1.0'
+        self.surface = 'PT(S):10.0'
         self.gphase = 'gas'
         self.sphase = 'surface-small'
         self.skip_database_build = False
@@ -84,7 +84,7 @@ class PlatinumMediumGRI(ModelBase):  # Hydrogen with more species
         super(PlatinumMediumGRI, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-medium'
         self.skip_database_build = False
 
@@ -93,7 +93,7 @@ class PlatinumLargeGRI(ModelBase):  # Hydrogen with more species
         super(PlatinumLargeGRI, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):10.0'
         self.sphase = 'surface-large'
         self.skip_database_build = False
 
