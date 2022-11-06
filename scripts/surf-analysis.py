@@ -171,11 +171,6 @@ def parallel_run_all_configs():
 
 
 if __name__ == "__main__":
-    # remove old table
-    try:
-        os.remove(database)
-    except Exception as e:
-        pass
     # create new table
     create_all_tables(database)
     # run parallel config
