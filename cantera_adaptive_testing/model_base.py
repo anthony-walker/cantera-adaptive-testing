@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import random
 import datetime
@@ -419,7 +420,29 @@ class ModelBase(object):
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
-                self.sstime = get_steadystate_time(ss_name)
+                ss_res = get_steadystate_time(ss_name)
+                # change max time step to form steady state time
+                if ss_res is not None:
+                    self.sstime = ss_res[0]
+                else:
+                    try:
+                        self.runtype = 'performance'
+                        original_max_ts = self.max_time_step
+                        self.max_time_step = 1e-3
+                        orig_ms = self.max_steps
+                        self.max_steps = 1e9
+                        func(self, *args, **kwargs)
+                        self.max_time_step = original_max_ts
+                        self.max_steps = orig_ms
+                        ss_name = f"{self.__class__.__name__}-{func.__name__}"
+                        ss_name += "-nfo" if self.remove_falloff else ""
+                        ss_name += "-ntb" if self.remove_thirdbody else ""
+                        append_steadystate_time_table(ss_name, self.net.time)
+                    except Exception as e:
+                        print(self.curr_name, e, "FAILED DURING STEADY STATE TIME CALCULATION.")
+                        append_exception_table(self.curr_name, format_exc(), database=self.database)
+                        return False
+                    return True
             # run problem
             try:
                 t0 = time.time_ns()

@@ -109,12 +109,13 @@ def full_performance(curr_model):
 
 def parallel_run_all_configs():
     # Run all models and tests
-    models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
+    models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen]#, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
     # cli args
     option = sys.argv[1] if len(sys.argv) > 1 else '0'
-    runs = int(sys.argv[2]) if len(sys.argv) > 2 else 99
+    runs = int(sys.argv[2]) if len(sys.argv) > 2 else 100
+    cores = int(sys.argv[3]) if len(sys.argv) > 3 else os.cpu_count()
     # Pool
-    with mp.Pool(os.cpu_count()) as p:
+    with mp.Pool(cores) as p:
         if option == '1':
             # network problem
             res = p.map(get_all_models, models)
