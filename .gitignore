@@ -1,4 +1,5 @@
 # intermediate data directories
+.DS_Store
 data/
 pv-data/
 vol-data/
