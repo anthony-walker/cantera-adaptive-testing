@@ -49,6 +49,7 @@ class ModelBase(object):
         self.options.setdefault("record_steps", 10) # take ten steps before recording
         self.options.setdefault("max_time_step", 10) # max time step is 10 seconds by default
         self.options.setdefault("max_steps", 100000) # max steps default 100000
+        self.options.setdefault("skip_log", False) # Skip performance log
         # runtype can be performance or analysis with the difference being that during
         # the performance run no stats are recorded and during the analysis run, all
         # stats are recorded.
@@ -282,6 +283,14 @@ class ModelBase(object):
     def replace_reactions(self, value):
         self.options["replace_reactions"] = value
 
+    @property
+    def skip_log(self):
+        return self.options["skip_log"]
+
+    @skip_log.setter
+    def skip_log(self, value):
+        self.options["skip_log"] = value
+
     def modify_model(self):
         yaml = ruamel.yaml.YAML()
         model = self.model
@@ -416,38 +425,29 @@ class ModelBase(object):
             self.curr_name = "_".join(filter(None, self.classifiers + [func.__name__, ]))
             self.curr_name = self.curr_name.replace(".", "_")
             self.curr_name = self.curr_name.replace("+", "")
+            # try to create all database tables
+            try:
+                create_all_tables(self.database)
+            except Exception as e:
+                pass
+            # get runtime information for these run types
             if self.runtype == "analysis" or self.runtype == "plot":
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
-                ss_res = get_steadystate_time(ss_name)
+                ss_res = get_steadystate_time(ss_name, self.database)
                 # change max time step to form steady state time
                 if ss_res is not None:
                     self.sstime = ss_res[0]
                 else:
-                    try:
-                        self.runtype = 'performance'
-                        original_max_ts = self.max_time_step
-                        self.max_time_step = 1e-3
-                        orig_ms = self.max_steps
-                        self.max_steps = 1e9
-                        func(self, *args, **kwargs)
-                        self.max_time_step = original_max_ts
-                        self.max_steps = orig_ms
-                        ss_name = f"{self.__class__.__name__}-{func.__name__}"
-                        ss_name += "-nfo" if self.remove_falloff else ""
-                        ss_name += "-ntb" if self.remove_thirdbody else ""
-                        append_steadystate_time_table(ss_name, self.net.time)
-                    except Exception as e:
-                        print(self.curr_name, e, "FAILED DURING STEADY STATE TIME CALCULATION.")
-                        append_exception_table(self.curr_name, format_exc(), database=self.database)
-                        return False
-                    return True
+                    raise Exception(f"No steady state time for {self.curr_name}")
             # run problem
             try:
                 t0 = time.time_ns()
                 ret_succ = func(self, *args, **kwargs)
                 tf = time.time_ns()
+                if self.skip_log:
+                    return True
             except Exception as e:
                 print(self.curr_name, e)
                 append_exception_table(self.curr_name, format_exc(), database=self.database)
@@ -459,7 +459,7 @@ class ModelBase(object):
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
-                append_steadystate_time_table(ss_name, self.net.time)
+                append_steadystate_time_table(ss_name, self.net.time, self.database)
             return True
         return wrapped
 
@@ -1030,3 +1030,32 @@ class ModelBase(object):
         if self.sparse_prob:
             self.verbose_print(self.verbose, "Running Sparsity Problem.")
             self.sparsity_problem()
+
+    def get_method_by_name(self, name):
+        if name == "network_combustor_exhaust":
+            return self.network_combustor_exhaust
+        elif name == "plug_flow_reactor":
+            return self.plug_flow_reactor
+        else:
+            raise Exception("Invalid problem given.")
+
+    @classmethod
+    def create_all_sstimes(cls, name, database=None):
+        mts = 1e-3
+        ms = 1e9
+        # base case
+        curr_model = cls(database=database, max_time_step=mts, max_steps=ms, skip_log=True)
+        problem = curr_model.get_method_by_name(name)
+        problem()
+        # skip tb
+        curr_model = cls(database=database, remove_thirdbody=True, max_time_step=mts, max_steps=ms, skip_log=True)
+        problem = curr_model.get_method_by_name(name)
+        problem()
+        # skip fo
+        curr_model = cls(database=database, remove_falloff=True, max_time_step=mts, max_steps=ms, skip_log=True)
+        problem = curr_model.get_method_by_name(name)
+        problem()
+        # skip both
+        curr_model = cls(database=database, remove_thirdbody=True, remove_falloff=True, max_time_step=mts, max_steps=ms, skip_log=True)
+        problem = curr_model.get_method_by_name(name)
+        problem()

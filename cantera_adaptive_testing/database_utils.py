@@ -11,9 +11,6 @@ def add_to_thermo_table(name, thermo_data, replace=True, database=None):
         database = os.path.join(direc, "models", "testing.db")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
-    # create table if it does not exist
-    table = """CREATE TABLE IF NOT EXISTS THERMO_DATA (id INTEGER PRIMARY KEY, Name TEXT);"""
-    cursor.execute(table)
     # delete old entry
     if replace:
         cursor.execute(f"DELETE FROM THERMO_DATA WHERE Name = '{name}'")
@@ -33,26 +30,45 @@ def add_to_thermo_table(name, thermo_data, replace=True, database=None):
     cursor.execute(f"SELECT id FROM THERMO_DATA WHERE Name = '{name}'")
     return cursor.fetchone()[0]
 
-def get_steadystate_time(name, database=None):
-    direc = os.path.dirname(os.path.abspath(__file__))
-    database = os.path.join(direc, "models", "steady_state_times.db")
+def create_all_tables(database=None):
+    # create other tables
+    if database is None:
+        direc = os.path.dirname(os.path.abspath(__file__))
+        database = os.path.join(direc, "models", "testing.db")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
     # create table if it doesn't exist
     table = """CREATE TABLE IF NOT EXISTS STEADY_STATE_TIME (id TEXT PRIMARY KEY, steadytime REAL);"""
     cursor.execute(table)
+    # create performance table if it doesn't exist
+    table = """CREATE TABLE IF NOT EXISTS PERFORMANCE (id TEXT PRIMARY KEY, time REAL, nruns INTEGER);"""
+    cursor.execute(table)
+    # create exceptions table if it doesn't exist
+    table = """CREATE TABLE IF NOT EXISTS EXCEPTIONS (id TEXT PRIMARY KEY, exception TEXT);"""
+    cursor.execute(table)
+    # create thermo_data table if it does not exist
+    table = """CREATE TABLE IF NOT EXISTS THERMO_DATA (id INTEGER PRIMARY KEY, Name TEXT);"""
+    cursor.execute(table)
+    connection.commit()
+    connection.close()
+
+def get_steadystate_time(name, database=None):
     # see if performance data already exists
+    # create other tables
+    if database is None:
+        direc = os.path.dirname(os.path.abspath(__file__))
+        database = os.path.join(direc, "models", "testing.db")
+    connection = sqlite3.connect(database)
+    cursor = connection.cursor()
     cursor.execute(f""" SELECT steadytime FROM STEADY_STATE_TIME WHERE id='{name}' """)
     return cursor.fetchone()
 
 def append_steadystate_time_table(name, sstime, database=None):
-    direc = os.path.dirname(os.path.abspath(__file__))
-    database = os.path.join(direc, "models", "steady_state_times.db")
+    if database is None:
+        direc = os.path.dirname(os.path.abspath(__file__))
+        database = os.path.join(direc, "models", "testing.db")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
-    # create table if it doesn't exist
-    table = """CREATE TABLE IF NOT EXISTS STEADY_STATE_TIME (id TEXT PRIMARY KEY, steadytime REAL);"""
-    cursor.execute(table)
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM STEADY_STATE_TIME WHERE id='{name}' """)
     if cursor.fetchone()[0] == 0:
@@ -65,9 +81,6 @@ def append_runtime_table(name, runtime, database=None):
         database = os.path.join(direc, "models", "testing.db")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
-    # create performance table if it doesn't exist
-    table = """CREATE TABLE IF NOT EXISTS PERFORMANCE (id TEXT PRIMARY KEY, time REAL, nruns INTEGER);"""
-    cursor.execute(table)
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM PERFORMANCE WHERE id='{name}' """)
     if cursor.fetchone()[0] == 0:
@@ -86,9 +99,6 @@ def append_exception_table(name, exception, database=None):
         database = os.path.join(direc, "models", "testing.db")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
-    # create table if it doesn't exist
-    table = """CREATE TABLE IF NOT EXISTS EXCEPTIONS (id TEXT PRIMARY KEY, exception TEXT);"""
-    cursor.execute(table)
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM EXCEPTIONS WHERE id='{name}' """)
     if cursor.fetchone()[0] == 0:

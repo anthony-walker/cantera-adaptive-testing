@@ -2,6 +2,10 @@ import os
 import sys
 import multiprocessing as mp
 from cantera_adaptive_testing.models import *
+from cantera_adaptive_testing.database_utils import create_all_tables
+
+global database
+database = os.path.join(os.path.dirname(__file__), "surf-perf.db")
 
 def analysis_run(curr_model):
     # analysis run
@@ -20,8 +24,6 @@ def performance_runs(curr_model):
             break
 
 def full_test_run_model(model, run_func, mass=True, precon=True):
-    # database name
-    database = os.path.join(os.path.dirname(__file__), "surf-perf.db")
     if mass:
         # mass fraction analysis
         curr_model = model(database=database)
@@ -107,6 +109,12 @@ def full_analysis(curr_model):
 def full_performance(curr_model):
     full_test_run_model(curr_model, performance_runs)
 
+def run_parallell_nce(model):
+    model.create_all_sstimes("network_combustor_exhaust", database=database)
+
+def run_parallell_pfr(model):
+    model.create_all_sstimes("plug_flow_reactor", database=database)
+
 def parallel_run_all_configs():
     # Run all models and tests
     models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen]#, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
@@ -117,6 +125,8 @@ def parallel_run_all_configs():
     # Pool
     with mp.Pool(cores) as p:
         if option == '1':
+            # create steady state times
+            p.map(run_parallell_nce, models)
             # network problem
             res = p.map(get_all_models, models)
             all_models = []
@@ -136,6 +146,8 @@ def parallel_run_all_configs():
                 m.runtype = 'analysis'
             p.map(network_problem, res_models)
         elif option == '2':
+            # create steady state times
+            p.map(run_parallell_pfr, models)
             # pfr problem
             res = p.map(get_all_models, models)
             all_models = []
@@ -158,5 +170,13 @@ def parallel_run_all_configs():
             raise Exception("No option specified: surf-analysis.py")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # remove old table
+    try:
+        os.remove(database)
+    except Exception as e:
+        pass
+    # create new table
+    create_all_tables(database)
+    # run parallel config
     parallel_run_all_configs()
