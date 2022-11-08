@@ -23,4 +23,4 @@
 # run my jobs
 echo "Slurm ID: $SLURM_JOB_ID"
 echo "SURF_OPTION=$SURF_OPTION"
-python surf-analysis.py $SURF_OPTION
+python surf-analysis.py $SURF_OPTION 100 20
