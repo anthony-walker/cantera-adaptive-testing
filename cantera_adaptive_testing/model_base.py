@@ -469,31 +469,23 @@ class ModelBase(object):
             of exhaust
         """
         # Create inlet to the combustor at atmospheric conditions
-        gas1 = ct.Solution(self.model, self.gphase)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas1 = ct.Solution(self.model, self.gphase)
         gas1.TP = 300, ct.one_atm
         gas1.set_equivalence_ratio(self.phi, self.fuel, self.air)
         gas1.equilibrate('HP')
         inlet = ct.Reservoir(gas1)
         # create combustor
-        if self.moles:
-            combustor = ct.IdealGasMoleReactor(gas1)
-        else:
-            combustor = ct.IdealGasReactor(gas1)
+        combustor = ct.IdealGasMoleReactor(gas1) if self.moles else ct.IdealGasReactor(gas1)
         combustor.volume = 1.0
         # create exhaust
-        gas2 = ct.Solution(self.model, self.gphase)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas2 = ct.Solution(self.model, self.gphase)
         gas2.TPX = 300, ct.one_atm, self.air
-        if self.moles:
-            exhaust = ct.IdealGasConstPressureMoleReactor(gas2)
-        else:
-            exhaust = ct.IdealGasConstPressureReactor(gas2)
+        exhaust = ct.IdealGasConstPressureMoleReactor(gas2) if self.moles else ct.IdealGasConstPressureReactor(gas2)
         exhaust.volume = 1.0
-        # Add surface if it exists
-        if self.surface is not None:
-            # create platinum surface
-            surf = ct.Interface(self.model, self.sphase, [gas2])
-            surf.coverages = self.surface
-            rsurf = ct.ReactorSurface(surf, exhaust, A=1.0)
         # Create a reservoir for the exhaustß
         atmosphere = ct.Reservoir(gas2)
         # Setup thermo data dictionary
@@ -504,6 +496,12 @@ class ModelBase(object):
             }})
         # Add surface data if it exists
         if self.surface is not None:
+            # create platinum surface
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas2])
+            surf.coverages = self.surface
+            rsurf = ct.ReactorSurface(surf, exhaust, A=1.0)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
@@ -582,31 +580,28 @@ class ModelBase(object):
 
     @problem
     def plug_flow_reactor(self, *args, **kwargs):
-        # import the gas model and set the initial conditions
-        gas = ct.Solution(self.model, self.gphase)
-        gas.TP = 1600, ct.one_atm
-        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
-        # import the surface model
-        surf = ct.Interface(self.model, self.sphase, [gas])
-        surf.TP = gas.T, gas.P
-        surf.coverages = self.surface
+        # physical params
         area = 1
         vol = 1
         velocity = 15 # m / s
-        # catalyst area in one reactor
-        mass_flow_rate = velocity * gas.density * area
+        # import the gas model and set the initial conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        gas.TP = 300, ct.one_atm
+        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        gas.equilibrate("HP")
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
         r.volume = vol
+        # catalyst area in one reactor
+        mass_flow_rate = velocity * gas.density * area
         # create a reservoir to represent the reactor immediately upstream. Note
         # that the gas object is set already to the state of the upstream reactor
         upstream = ct.Reservoir(gas, name='upstream')
         # create a reservoir for the reactor to exhaust into. The composition of
         # this reservoir is irrelevant.
         downstream = ct.Reservoir(gas, name='downstream')
-        # Add the reacting surface to the reactor. The area is set to the desired
-        # catalyst area in the reactor.
-        rsurf = ct.ReactorSurface(surf, r, A=1)
         # The mass flow rate into the reactor will be fixed by using a
         # MassFlowController object.
         m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
@@ -622,6 +617,13 @@ class ModelBase(object):
             }})
         # Add surface data if it exists
         if self.surface is not None:
+            # import the surface model
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf.TP = gas.T, gas.P
+            surf.coverages = self.surface
+            rsurf = ct.ReactorSurface(surf, r, A=area)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
@@ -634,7 +636,59 @@ class ModelBase(object):
             sid = 0
         # advance the simulation
         if self.runtype == "performance":
-            self.net.advance_to_steady_state()
+            self.net.advance(60)
+        elif self.runtype == "plot":
+            pass
+        elif self.runtype == "analysis":
+            while (self.sstime > self.net.time):
+                for i in range(1, self.record_steps + 1, 1):
+                    self.net.step()
+                sid += i
+                stats = self.add_numerical_stats(stats, sid)
+            add_analysis_stats(self.curr_name, stats, stats_keys, database=self.database)
+        else:
+            raise Exception("Invalid runtype specified.")
+
+    @problem
+    def well_stirred_reactor(self, *args, **kwargs):
+        # import the gas model and set the initial conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        gas.TP = 300, ct.one_atm
+        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        gas.equilibrate("HP")
+        # create a new reactor
+        r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
+        r.volume = 1
+        # Setup thermo data dictionary
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
+            "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
+            "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": r.volume,
+            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            }})
+        # Add surface if it exists
+        if self.surface is not None:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf.TP = gas.T, gas.P
+            surf.coverages = self.surface
+            rsurf = ct.ReactorSurface(surf, r, A=1)
+            self.thermo_data["thermo"].update({"surface":self.surface,
+                "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
+                "surf_area":rsurf.area,})
+        # create network
+        self.net = ct.ReactorNet([r])
+        self.apply_numerical_options()
+        # get connection if analysis
+        if self.runtype == "analysis":
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
+        # advance the simulation
+        if self.runtype == "performance":
+            self.net.advance(60)
         elif self.runtype == "plot":
             pass
         elif self.runtype == "analysis":
@@ -817,49 +871,6 @@ class ModelBase(object):
         return ret_succ
 
     @problem
-    def well_stirred_reactor(self, T0=1000, P0=ct.one_atm, V0=1.0, db_conds=True):
-        "A simple well-stirred reactor volume problem"
-        # get database conditions if available
-        if db_conds:
-            ics = self.get_database_conditions(self.__class__.__name__, "volume_problem")
-            if ics is not None:
-                T0, P0, V0 = ics
-        # if not try with set conditions
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            gas = ct.Solution(self.model)
-        gas.TP = T0, P0
-        gas.set_equivalence_ratio(self.equiv_ratio, self.fuel, self.air)
-        inlet = ct.Reservoir(gas)
-        if self.moles:
-            combustor = ct.IdealGasMoleReactor(gas, energy=self.energy_off)
-        else:
-            combustor = ct.IdealGasReactor(gas, energy=self.energy_off)
-        combustor.volume = V0
-       # add properties to yaml
-        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "mole-reactor": self.moles, "nreactions": gas.n_reactions,
-                                "nspecies": gas.n_species, "fuel": self.fuel, "air": self.air, "equiv_ratio": self.equiv_ratio, "T0": T0, "P0": P0, "V0": combustor.volume}})
-        # the simulation only contains one reactor
-        # Create the reactor network
-        self.net = ct.ReactorNet([combustor])
-        # apply numerical options
-        self.apply_numerical_options()
-        # Run a loop over decreasing residence times, until the reactor is extinguished,
-        # saving the state after each iteration.
-        try:
-            # self.net.advance_to_steady_state()
-            self.net.advance(1.0)
-            ret_succ = True
-        except Exception as e:
-            self.exception = {"exception": str(e)}
-            ret_succ = False
-        finally:
-            self.sim_end_time = self.net.time
-            if self.update_db and ret_succ:
-                self.update_database_conditions(self.__class__.__name__, "volume_problem", T0, P0, V0)
-        return ret_succ
-
-    @problem
     def network_diesel_engine(self, T0=300, P0=1600e5, V0=.5e-3, db_conds=True):
         """
         This problem was adapted from
@@ -1036,6 +1047,8 @@ class ModelBase(object):
             return self.network_combustor_exhaust
         elif name == "plug_flow_reactor":
             return self.plug_flow_reactor
+        elif name == "well_stirred_reactor":
+            return self.well_stirred_reactor
         else:
             raise Exception("Invalid problem given.")
 

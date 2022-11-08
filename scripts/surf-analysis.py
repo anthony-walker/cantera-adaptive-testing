@@ -23,6 +23,10 @@ def pfr_problem(model):
     model.database = "pfr.db"
     return model.plug_flow_reactor()
 
+def wsr_problem(model):
+    model.database = "wsr.db"
+    return model.well_stirred_reactor()
+
 def get_all_models(model, mass=True, precon=True):
     models = []
     if mass:
@@ -67,6 +71,10 @@ def run_parallell_nce(model):
 def run_parallell_pfr(model):
     model.database = "pfr.db"
     model.create_all_sstimes("plug_flow_reactor")
+
+def run_parallell_wsr(model):
+    model.database = "wsr.db"
+    model.create_all_sstimes("well_stirred_reactor")
 
 def parallel_run_all_configs():
     # Run all models and tests
@@ -119,8 +127,30 @@ def parallel_run_all_configs():
             for m in res_models:
                 m.runtype = 'analysis'
             p.map(pfr_problem, res_models)
+        elif option == '3':
+            # create steady state times
+            p.map(run_parallell_wsr, models)
+            # pfr problem
+            res = p.map(get_all_models, models)
+            all_models = []
+            for m in res:
+                all_models += m
+            # test all models to see which fail and skip those runs
+            res = p.map(wsr_problem, all_models)
+            res_models = []
+            for r, m in zip(res, all_models):
+                if r:
+                    res_models.append(m)
+            # run remaining trials
+            for i in range(runs-1):
+                p.map(wsr_problem, res_models)
+            # run analysis
+            for m in res_models:
+                m.runtype = 'analysis'
+            p.map(wsr_problem, res_models)
         else:
             raise Exception("No option specified: surf-analysis.py")
+
 
 
 if __name__ == "__main__":
