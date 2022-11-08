@@ -160,7 +160,7 @@ class ModelBase(object):
         return self.options["database"]
 
     @database.setter
-    def database(database, value):
+    def database(self, value):
         self.options["database"] = value
 
     @property
