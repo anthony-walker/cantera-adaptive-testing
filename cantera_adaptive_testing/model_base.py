@@ -459,7 +459,10 @@ class ModelBase(object):
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
-                append_steadystate_time_table(ss_name, self.net.time, self.database)
+                try:
+                    append_steadystate_time_table(ss_name, self.net.time, self.database)
+                except Exception as e:
+                    print(self.curr_name, e)
             return True
         return wrapped
 
