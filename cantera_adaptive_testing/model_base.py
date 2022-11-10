@@ -455,7 +455,10 @@ class ModelBase(object):
             # append runtime to runtime table
             if self.runtype == "performance":
                 append_runtime_table(self.curr_name, round((tf-t0) * 1e-9, 8), database=self.database)
-                add_to_thermo_table(self.curr_name, self.thermo_data["thermo"], database=self.database)
+                try:
+                    add_to_thermo_table(self.curr_name, self.thermo_data["thermo"], database=self.database)
+                except Exception as e:
+                    print(self.curr_name, e)
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
