@@ -1,5 +1,6 @@
 import os
 import sys
+import copy
 import multiprocessing as mp
 from cantera_adaptive_testing.models import *
 from cantera_adaptive_testing.database_utils import create_all_tables
@@ -99,17 +100,20 @@ def parallel_run_all_configs():
             for r, m in zip(res, all_models):
                 if r:
                     res_models.append(m)
-            # run remaining trials
+            # deep copy res_models n times for performance runs
+            copies = []
             for i in range(runs-1):
-                p.map(network_problem, res_models)
-            # run analysis
+                copies += copy.deepcopy(res_models)
+            # add analysis runs to copies
             for m in res_models:
                 m.runtype = 'analysis'
-            p.map(network_problem, res_models)
+            copies += copy.deepcopy(res_models)
+            # run all copies
+            p.map(network_problem, copies)
         elif option == '2':
             # create steady state times
             p.map(run_parallell_pfr, models)
-            # pfr problem
+            # network problem
             res = p.map(get_all_models, models)
             all_models = []
             for m in res:
@@ -120,17 +124,20 @@ def parallel_run_all_configs():
             for r, m in zip(res, all_models):
                 if r:
                     res_models.append(m)
-            # run remaining trials
+            # deep copy res_models n times for performance runs
+            copies = []
             for i in range(runs-1):
-                p.map(pfr_problem, res_models)
-            # run analysis
+                copies += copy.deepcopy(res_models)
+            # add analysis runs to copies
             for m in res_models:
                 m.runtype = 'analysis'
-            p.map(pfr_problem, res_models)
+            copies += copy.deepcopy(res_models)
+            # run all copies
+            p.map(pfr_problem, copies)
         elif option == '3':
             # create steady state times
             p.map(run_parallell_wsr, models)
-            # pfr problem
+            # network problem
             res = p.map(get_all_models, models)
             all_models = []
             for m in res:
@@ -141,16 +148,18 @@ def parallel_run_all_configs():
             for r, m in zip(res, all_models):
                 if r:
                     res_models.append(m)
-            # run remaining trials
+            # deep copy res_models n times for performance runs
+            copies = []
             for i in range(runs-1):
-                p.map(wsr_problem, res_models)
-            # run analysis
+                copies += copy.deepcopy(res_models)
+            # add analysis runs to copies
             for m in res_models:
                 m.runtype = 'analysis'
-            p.map(wsr_problem, res_models)
+            copies += copy.deepcopy(res_models)
+            # run all copies
+            p.map(wsr_problem, copies)
         else:
             raise Exception("No option specified: surf-analysis.py")
-
 
 
 if __name__ == "__main__":
