@@ -9,7 +9,7 @@ def add_to_thermo_table(name, thermo_data, replace=True, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # delete old entry
     if replace:
@@ -35,7 +35,7 @@ def create_all_tables(database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # create table if it doesn't exist
     table = """CREATE TABLE IF NOT EXISTS STEADY_STATE_TIME (id TEXT PRIMARY KEY, steadytime REAL);"""
@@ -58,7 +58,7 @@ def get_steadystate_time(name, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     cursor.execute(f""" SELECT steadytime FROM STEADY_STATE_TIME WHERE id='{name}' """)
     return cursor.fetchone()
@@ -67,7 +67,7 @@ def append_steadystate_time_table(name, sstime, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM STEADY_STATE_TIME WHERE id='{name}' """)
@@ -79,7 +79,7 @@ def append_runtime_table(name, runtime, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM PERFORMANCE WHERE id='{name}' """)
@@ -97,7 +97,7 @@ def append_exception_table(name, exception, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # see if performance data already exists
     cursor.execute(f""" SELECT count(id) FROM EXCEPTIONS WHERE id='{name}' """)
@@ -112,14 +112,14 @@ def get_database_connection(name, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     return connection
 
 def create_simulation_table(name, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     cursor.execute(f"""DROP TABLE IF EXISTS {name}""")
     cursor.execute(f"""CREATE TABLE {name} (id INTEGER PRIMARY KEY);""")
@@ -152,7 +152,7 @@ def add_analysis_stats(name, arr, keys, database=None):
     if database is None:
         direc = os.path.dirname(os.path.abspath(__file__))
         database = os.path.join(direc, "models", "testing.db")
-    connection = sqlite3.connect(database)
+    connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # create table first
     cursor.execute(f"""DROP TABLE IF EXISTS {name}""")
