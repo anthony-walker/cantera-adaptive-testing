@@ -52,7 +52,9 @@ def mpi_run_loop():
     data = comm.bcast(data, root=0)
     args = comm.bcast(args, root=0)
     selected = mods[args.model](**vars(args))
-    selected()
+    for p in args.problems:
+        curr_method = selected.get_method_by_name(p)
+        curr_method()
 
 
 def omp_run_all(*args, **kwargs):

@@ -6,8 +6,8 @@ check_args_and_dirs() {
         echo "No args file given"
         exit 1
     else
-        export ADD_ARGS="$(<$1)"
-        export DIRNAME=${ADD_ARGS##* }
+        export PROBLEMS="$(<$1)"
+        export DIRNAME=${PROBLEMS##* }
         if [ ! -d $DIRNAME ]
         then
             mkdir $DIRNAME
@@ -46,11 +46,14 @@ approximate_precon_single() {
         else
             THR="0"
         fi
-        export JOB_OPTIONS="$CURR_MODEL -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
+        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
         echo $JOB_OPTIONS $AMS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-single" --mem=$AMS ./batches/jobs-single.sh
+        if [ -z "$SKIP_SBATCH" ]
+        then
+            sbatch -J "$CURR_MODEL-approx-single" --mem=$AMS ./batches/jobs-single.sh
+        fi
     done
 }
 
@@ -67,67 +70,88 @@ approximate_precon_mpi() {
         else
             THR="0"
         fi
-        export JOB_OPTIONS="$CURR_MODEL -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
+        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
         echo $JOB_OPTIONS $AMS
         echo
         # run the job with set options
-        sbatch -J "$CURR_MODEL-approx-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+        if [ -z "$SKIP_SBATCH" ]
+        then
+            sbatch -J "$CURR_MODEL-approx-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+        fi
     done
 }
 
 # function to run fully analytical preconditioned single jobs
 analytical_precon_single() {
-    export JOB_OPTIONS="$CURR_MODEL -L -v -M -P -T 0 --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T 0 --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-analyt-single" --mem=$AMS ./batches/jobs-single.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-analyt-single" --mem=$AMS ./batches/jobs-single.sh
+    fi
 }
 
 # function to run fully analytical preconditioned mpi jobs
 analytical_precon_mpi() {
     # loop through thresholds
-    export JOB_OPTIONS="$CURR_MODEL -L -v -M -P -T 0 --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T 0 --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-analyt-mpi" --mem=$AMS  ./batches/jobs-mpi.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-analyt-mpi" --mem=$AMS  ./batches/jobs-mpi.sh
+    fi
 }
 
 # function to run fully analytical preconditioned single jobs
 mass_single() {
-    export JOB_OPTIONS="$CURR_MODEL -L -v $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-single.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-single.sh
+    fi
 }
 
 # function to run fully analytical preconditioned mpi jobs
 mass_mpi() {
-    export JOB_OPTIONS="$CURR_MODEL -L -v $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+    fi
 }
 
 # function to run fully analytical preconditioned single jobs
 moles_single() {
-    export JOB_OPTIONS="$CURR_MODEL -L -v -M $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-single.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-single.sh
+    fi
 }
 
 # function to run fully analytical preconditioned mpi jobs
 moles_mpi() {
-    export JOB_OPTIONS="$CURR_MODEL -L -v -M $ADD_ARGS"
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M $ADD_ARGS"
     echo $JOB_OPTIONS $AMS
     echo
     # run the job with set options
-    sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+    fi
 }
 
 skip_mass() {
@@ -146,11 +170,16 @@ skip_analyt() {
     export SKIP_ANALYT=1
 }
 
+skip_sbatch() {
+    export SKIP_SBATCH=1
+}
+
 reset_skips() {
     unset SKIP_ANALYT
     unset SKIP_APPROX
     unset SKIP_MASS
     unset SKIP_MOLES
+    unset SKIP_SBATCH
 }
 
 # Define single jobs

@@ -29,9 +29,25 @@ then
 else
     export BATCH_LOOPS=$4
 fi
+# MODEL FILE
+echo $5
+if [ -z "$5" ]
+then
+    echo "Default models file being used."
+    export MODELS_FILE="./model_lists/models"
+else
+    export MODELS_FILE=$5
+fi
+
+# Make extra arguments
+for i in "${@:6}"
+do
+    export ADD_ARGS="$ADD_ARGS $i"
+done
+echo "Additional arguments: $ADD_ARGS"
 # Run preconditioned studies because they are faster
 declare -a RUNNERS=()
-declare -a MODELS=(`cat models`)
+declare -a MODELS=(`cat $MODELS_FILE`)
 define_runners "$RTYPE"
 # run jobs
 for job in "${RUNNERS[@]}"
