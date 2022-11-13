@@ -16,7 +16,7 @@
 
 #SBATCH --mail-user=walkanth@oregonstate.edu		# send email to this address
 
-#SBATCH -o surf-%j.out
+#SBATCH -o %j-surf.out
 
 # load any software environment module required for app
 
