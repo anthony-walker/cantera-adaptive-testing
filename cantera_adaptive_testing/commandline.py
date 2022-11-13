@@ -68,7 +68,7 @@ def omp_run_all(*args, **kwargs):
     pool.map(processModelRun, modsList)
 
 
-def parser_setup(add_mod=True):
+def parser_setup(add_mod=True, add_probs=True):
     """This function is the main call for the commandline interface for
     testing the additions to Cantera."""
     parser = argparse.ArgumentParser(description="""adaptive-testing:
@@ -79,8 +79,13 @@ def parser_setup(add_mod=True):
     if add_mod:
         parser.add_argument(
             "model", type=str, help="Specify the model you would like to run. List all models by using \"list\" as the positional argument.")
+    if add_probs:
+        parser.add_argument("problems", type=str, nargs="+", help="Specify the problems to run.")
     # Configurable options
-    parser.add_argument('-L', '--log', action='store_true',
+    parser.add_argument('-R', '--runtype', type=str, default="performance",
+                        help="Runtype for the simulation.")
+    parser.add_argument('-D', '--database', type=str, help="Name of database for the run.")
+    parser.add_argument('-L', '--log', action='store_false', default=True,
                         help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help="Enable verbose simulation.")
@@ -92,36 +97,23 @@ def parser_setup(add_mod=True):
                         help="Set a threshold value used for the preconditioned simulation.")
     parser.add_argument('-M', '--moles', action='store_true',
                         default=False, help="Use mole based reactors.")
-    parser.add_argument('--no_press_prob', action='store_false',
-                        default=True, help="Turn off solving the pressure problem.")
-    parser.add_argument('--no_vol_prob', action='store_false',
-                        default=True, help="Turn off solving the volume problem.")
-    parser.add_argument('--no_net_prob', action='store_false',
-                        default=True, help="Turn off solving the network problem.")
-    parser.add_argument('--sparsity_prob', action='store_true',
-                        default=False, help="Turn on solving the sparsity problem which turns off all others.")
-    parser.add_argument('--skip_falloff', action='store_false', default=True,
+    parser.add_argument('--remove_falloff', action='store_true', default=False,
                         help="Turn on the falloff reaction evaluation for preconditioning")
-    parser.add_argument('--skip_thirdbody', action='store_false', default=True,
+    parser.add_argument('--remove_thirdbody', action='store_true', default=False,
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
-    parser.add_argument('--analyt_temp_derivs', action='store_true', default=False,
-                        help="Use a finite difference based temperature derivative.")
-    parser.add_argument('--energy_off', action='store_true', default=False,
-                        help="Use this flag to turn of energy in the simulation.")
     parser.add_argument('-MTS', '--max_time_step', type=float,
-                        help="Set a fixed max time step value.")
+                         default=1e5, help="Set a fixed max time step value.")
+    parser.add_argument('-MS', '--max_steps', type=int,
+                         default=1e5, help="Set a fixed max number of steps.")
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
-    parser.add_argument('--update_database', action='store_true', default=False,
-                        help="Use this as a utility to create the database file for model conditions.")
     return parser
 
 
 def cmd_line_utils():
     parser = argparse.ArgumentParser(description="""adaptive-utilities:
     This configure and plot data in a useful form.""")
-    parser.add_argument(
-        "data", type=str, help="Specify either the directory or specific yaml file used")
+    parser.add_argument("data", type=str, help="Specify either the directory or specific yaml file used")
     parser.add_argument("utility", type=str,
                         help="Specify the utility to be applied")
     parser.add_argument('-p', '--problem', type=str, default="pressure_problem",
@@ -200,4 +192,6 @@ def cmd_line_main():
             print("\t"+mod)
     else:
         selected = mods[args.model](**vars(args))
-        selected()
+        for p in args.problems:
+            curr_method = selected.get_method_by_name(p)
+            curr_method()
