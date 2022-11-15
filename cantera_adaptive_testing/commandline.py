@@ -87,11 +87,11 @@ def parser_setup(add_mod=True, add_probs=True):
     parser.add_argument('-R', '--runtype', type=str, default="performance",
                         help="Runtype for the simulation.")
     parser.add_argument('-D', '--database', type=str, help="Name of database for the run.")
-    parser.add_argument('-L', '--log', action='store_false', default=True,
+    parser.add_argument('-L', '--log', action='store_true', default=False,
                         help="Flag to log the simulation if possible in \"log.yaml\". Specify -n to override the log file name.")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help="Enable verbose simulation.")
-    parser.add_argument('-P', '--preconditioner', action='store_true',
+    parser.add_argument('-P', '--preconditioned', action='store_true',
                         default=False, help="Enable use of different preconditioners")
     parser.add_argument('-f', '--prefix', type=str, default="",
                         help="Add a prefix to the output name")
@@ -105,7 +105,7 @@ def parser_setup(add_mod=True, add_probs=True):
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
     parser.add_argument('-MTS', '--max_time_step', type=float,
                          default=1e5, help="Set a fixed max time step value.")
-    parser.add_argument('-MS', '--max_steps', type=int,
+    parser.add_argument('-MS', '--max_steps', type=float,
                          default=1e5, help="Set a fixed max number of steps.")
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")

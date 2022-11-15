@@ -63,6 +63,7 @@ do
         for (( i = 1; i <= ${LOOPS}; i++ ))
         do
             eval $job
+            sleep 1
         done
     done
 done

@@ -471,6 +471,7 @@ class ModelBase(object):
             if self.log:
                 self.curr_run[func.__name__]["runtime"] = round((tf-t0) * 1e-9, 8)
                 self.curr_run[func.__name__]["endtime"] = self.net.time
+                self.curr_run[func.__name__]["nruns"] = 1
                 self.curr_run[func.__name__].update(self.thermo_data)
                 self.curr_run[func.__name__].update({"config":self.options})
                 self.yaml_data[self.__class__.__name__].update(self.curr_run)
@@ -505,7 +506,7 @@ class ModelBase(object):
         # Setup thermo data dictionary
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas1.n_reactions,
             "gas_species": gas1.n_species, "fuel": self.fuel, "air": self.air,
-            "phi": self.phi, "T0": gas2.T, "P0": gas2.P, "V0": combustor.volume,
+            "phi": self.phi, "T0": gas1.T, "P0": gas1.P, "V0": combustor.volume,
             "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
             }})
         # Add surface data if it exists

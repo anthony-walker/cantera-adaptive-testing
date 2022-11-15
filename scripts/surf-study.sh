@@ -2,7 +2,7 @@
 
 source ./script-functions.sh
 
-export MLIST=./model_lists/test-list
+export MLIST=./model_lists/surf-models
 
 skip_moles
 skip_analyt
@@ -14,6 +14,6 @@ reset_skips
 skip_moles
 skip_analyt
 
-# ./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D "surf-data.db"
 
-# ./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance

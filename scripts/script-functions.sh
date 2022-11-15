@@ -46,7 +46,7 @@ approximate_precon_single() {
         else
             THR="0"
         fi
-        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
+        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR $ADD_ARGS"
         echo $JOB_OPTIONS $AMS
         echo
         # run the job with set options
@@ -70,7 +70,7 @@ approximate_precon_mpi() {
         else
             THR="0"
         fi
-        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR --prefix approx $ADD_ARGS"
+        export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -L -v -M -P -T $THR $ADD_ARGS"
         echo $JOB_OPTIONS $AMS
         echo
         # run the job with set options

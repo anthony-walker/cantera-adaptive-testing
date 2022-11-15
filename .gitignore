@@ -4,6 +4,7 @@ data/
 pv-data/
 vol-data/
 net-data/
+surf-data/
 press-data/
 cancel_jobs.sh
 missed_jobs.sh

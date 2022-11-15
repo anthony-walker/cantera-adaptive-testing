@@ -27,4 +27,5 @@ echo
 for (( i = 1; i <= ${BATCH_LOOPS}; i++ ))
 do
     mpirun -n 10 -hosts=$HOSTNAME adaptive-testing.mpi_run_same $JOB_OPTIONS
+    sleep 1
 done
