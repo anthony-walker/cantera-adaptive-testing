@@ -54,6 +54,7 @@ approximate_precon_single() {
         then
             sbatch -J "$CURR_MODEL-approx-single" --mem=$AMS ./batches/jobs-single.sh
         fi
+        sleep $SLEEP_TIMER
     done
 }
 
@@ -78,6 +79,7 @@ approximate_precon_mpi() {
         then
             sbatch -J "$CURR_MODEL-approx-mpi" --mem=$AMS ./batches/jobs-mpi.sh
         fi
+        sleep $SLEEP_TIMER
     done
 }
 
@@ -91,6 +93,7 @@ analytical_precon_single() {
     then
         sbatch -J "$CURR_MODEL-analyt-single" --mem=$AMS ./batches/jobs-single.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -104,6 +107,7 @@ analytical_precon_mpi() {
     then
         sbatch -J "$CURR_MODEL-analyt-mpi" --mem=$AMS  ./batches/jobs-mpi.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 # function to run fully analytical preconditioned single jobs
@@ -116,6 +120,7 @@ mass_single() {
     then
         sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-single.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -128,6 +133,7 @@ mass_mpi() {
     then
         sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-mpi.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 # function to run fully analytical preconditioned single jobs
@@ -140,6 +146,7 @@ moles_single() {
     then
         sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-single.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 # function to run fully analytical preconditioned mpi jobs
@@ -152,6 +159,7 @@ moles_mpi() {
     then
         sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-mpi.sh
     fi
+    sleep $SLEEP_TIMER
 }
 
 skip_mass() {

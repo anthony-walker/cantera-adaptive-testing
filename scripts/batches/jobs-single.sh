@@ -26,5 +26,5 @@ echo
 for i in {1..$BATCH_LOOPS}
 do
     adaptive-testing $JOB_OPTIONS
-    sleep 1
+    sleep $SLEEP_TIMER
 done

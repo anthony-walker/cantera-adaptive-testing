@@ -38,7 +38,12 @@ then
 else
     export MODELS_FILE=$5
 fi
-
+# SLEEP TIMER
+echo $SLEEP_TIMER
+if [ -z "$SLEEP_TIMER" ]
+then
+    export SLEEP_TIMER=1
+fi
 # Make extra arguments
 for i in "${@:6}"
 do
@@ -63,7 +68,6 @@ do
         for (( i = 1; i <= ${LOOPS}; i++ ))
         do
             eval $job
-            sleep 1
         done
     done
 done
