@@ -3,39 +3,55 @@
 source ./script-functions.sh
 
 export MLIST=./model_lists/surf-models
+export SDATABASE=surf.db
+export SURF_DIR=surface_data
 
 skip_moles
 skip_analyt
 skip_approx
 
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9
+declare -a ss_arr
 
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
 
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_thirdbody
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
 
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff --remove_thirdbody
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_thirdbody -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
 
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff --remove_thirdbody -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
+
+ss_running=true
+while [ $ss_running = true ]
+do
+    ss_running=false
+    OUTPUT=$(./job-print.sh)
+    for ss in "${ss_arr[@]}"
+    do
+        if [[ "$OUTPUT" == *"$ss"* ]]; then
+            echo "$ss: still found"
+            ss_running=true
+        fi
+    done
+    # sleep if ss is still runs
+    if [ $ss_running = true ]; then
+        echo "Steady state runs still active, sleeping for a minute..."
+        sleep 60
+    fi
+done
+
+# skip certain runs
 reset_skips
 skip_moles
 skip_analyt
 
-# normal runs
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D "surf-data.db"
+# performance runs
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_falloff -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody --remove_falloff -O $SURF_DIR -L
 
-./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance
-
-# remove falloff runs
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D "surf-data.db" --remove_falloff
-
-./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_falloff
-
-# remove thirdbody runs
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D "surf-data.db" --remove_thirdbody
-
-./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody
-
-# remove both runs
-./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D "surf-data.db" --remove_thirdbody --remove_falloff
-
-./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody --remove_falloff
+# analysis runs
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE -O $SURF_DIR
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_falloff -O $SURF_DIR
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_thirdbody -O $SURF_DIR
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_thirdbody --remove_falloff -O $SURF_DIR

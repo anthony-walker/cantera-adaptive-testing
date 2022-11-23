@@ -81,7 +81,7 @@ class ModelBase(object):
                 print(e)
         # dictionary for logging yaml
         self.yaml_data = {self.__class__.__name__:{}}
-        self.yaml_file = "-".join([self.__class__.__name__, str(random.randint(1e8, 1e9))]) + ".yaml"
+        self.yaml_file = "-".join(filter(None, self.classifiers + [str(random.randint(1e12, 1e13))])) + ".yaml"
         # flag to stop extra modification
         self.not_modified = True
 
@@ -472,6 +472,7 @@ class ModelBase(object):
                 self.curr_run[func.__name__]["runtime"] = round((tf-t0) * 1e-9, 8)
                 self.curr_run[func.__name__]["endtime"] = self.net.time
                 self.curr_run[func.__name__]["nruns"] = 1
+                self.curr_run[func.__name__]["runtype"] = self.options["runtype"]
                 self.curr_run[func.__name__].update(self.thermo_data)
                 self.curr_run[func.__name__].update({"config":self.options})
                 self.yaml_data[self.__class__.__name__].update(self.curr_run)
