@@ -6,6 +6,7 @@ import argparse
 import importlib
 import numpy as np
 import cantera as ct
+import warnings
 from mpi4py import MPI
 import multiprocessing as mp
 import cantera_adaptive_testing.cutils as cutils
@@ -197,3 +198,14 @@ def cmd_line_main():
         for p in args.problems:
             curr_method = selected.get_method_by_name(p)
             curr_method()
+
+
+def cli_check_model():
+    parser = argparse.ArgumentParser(description="""check-model.""")
+    parser.add_argument("model", type=str, help="Path to model file")
+    args = parser.parse_args()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        gas = ct.Solution(args.model)
+    print(f"{args.model}: species: {gas.n_species}")
+    print(f"{args.model}: reactions: {gas.n_reactions}")

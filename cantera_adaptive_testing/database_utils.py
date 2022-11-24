@@ -50,7 +50,7 @@ def get_steadystate_time(name):
     # see if performance data already exists
     # create other tables
     direc = os.path.dirname(os.path.abspath(__file__))
-    database = os.path.join(direc, "models", "steady_state_times.db")
+    database = os.path.join(direc, "models", "conditions.db")
     connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     cursor.execute(f""" SELECT steadytime FROM STEADY_STATE_TIME WHERE id='{name}' """)
@@ -59,7 +59,7 @@ def get_steadystate_time(name):
 
 def append_steadystate_time_table(name, sstime):
     direc = os.path.dirname(os.path.abspath(__file__))
-    database = os.path.join(direc, "models", "steady_state_times.db")
+    database = os.path.join(direc, "models", "conditions.db")
     connection = sqlite3.connect(database, timeout=100000)
     cursor = connection.cursor()
     # create table if it doesn't exist
@@ -72,6 +72,30 @@ def append_steadystate_time_table(name, sstime):
     cursor.execute(f"""INSERT INTO STEADY_STATE_TIME ( id, steadytime ) VALUES ( '{name}', {sstime} )""")
     connection.commit()
 
+def get_ics_time(name):
+    # see if performance data already exists
+    # create other tables
+    direc = os.path.dirname(os.path.abspath(__file__))
+    database = os.path.join(direc, "models", "conditions.db")
+    connection = sqlite3.connect(database, timeout=100000)
+    cursor = connection.cursor()
+    cursor.execute(f""" SELECT * FROM INITIAL_CONDITIONS WHERE id='{name}' """)
+    return cursor.fetchone()[1:]
+
+def append_initial_conds_table(name, T, P):
+    direc = os.path.dirname(os.path.abspath(__file__))
+    database = os.path.join(direc, "models", "conditions.db")
+    connection = sqlite3.connect(database, timeout=100000)
+    cursor = connection.cursor()
+    # create table if it doesn't exist
+    table = """CREATE TABLE IF NOT EXISTS INITIAL_CONDITIONS (id TEXT PRIMARY KEY, temperature REAL, pressure REAL);"""
+    cursor.execute(table)
+    # see if performance data already exists
+    cursor.execute(f""" SELECT count(id) FROM INITIAL_CONDITIONS WHERE id='{name}' """)
+    if cursor.fetchone()[0] != 0:
+        cursor.execute(f"DELETE FROM INITIAL_CONDITIONS WHERE id='{name}'")
+    cursor.execute(f"""INSERT INTO INITIAL_CONDITIONS ( id, temperature, pressure ) VALUES ( '{name}', {T}, {P} )""")
+    connection.commit()
 
 def append_runtime_table(name, runtime, database):
     connection = sqlite3.connect(database, timeout=100000)

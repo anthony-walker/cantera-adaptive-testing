@@ -7,6 +7,7 @@ import warnings
 import numpy as np
 import ruamel.yaml
 import cantera as ct
+from functools import wraps
 from .database_utils import *
 import matplotlib.pyplot as plt
 from traceback import format_exc
@@ -54,6 +55,7 @@ class ModelBase(object):
         # stats are recorded.
         self.options.setdefault("runtype", "performance")
         self.options.setdefault("replace_reactions", False) # replace reactions of discarded types with generic reaction or skip them with False
+        self.options.setdefault("use_icdb", True)
         # create file name
         # output data options
         self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
@@ -77,6 +79,12 @@ class ModelBase(object):
             try:
                 os.mkdir(self.data_dir)
                 self.vprint(f"Making data directory: {self.data_dir}")
+            except Exception as e:
+                print(e)
+        if not os.path.isdir(self.fig_dir):
+            try:
+                os.mkdir(self.fig_dir)
+                self.vprint(f"Making data directory: {self.fig_dir}")
             except Exception as e:
                 print(e)
         # dictionary for logging yaml
@@ -287,6 +295,14 @@ class ModelBase(object):
     def replace_reactions(self, value):
         self.options["replace_reactions"] = value
 
+    @property
+    def use_icdb(self):
+        return self.options["use_icdb"]
+
+    @use_icdb.setter
+    def use_icdb(self, value):
+        self.options["use_icdb"] = value
+
     def __del__(self):
         if self.log:
             yaml = ruamel.yaml.YAML()
@@ -416,6 +432,7 @@ class ModelBase(object):
     def problem(func, *args, **kwargs):
         """ This is a decorator wrap simulations in common functions
         """
+        @wraps(func)
         def wrapped(self, *args, **kwargs):
             # modify model if set to do so
             if (self.remove_falloff or self.remove_thirdbody) and self.not_modified:
@@ -424,8 +441,8 @@ class ModelBase(object):
             # create run name for database
             self.curr_run = {func.__name__: {}}
             # try to create all database tables
+            self.curr_name = "_".join(filter(None, self.classifiers + [func.__name__, ]))
             if self.database is not None:
-                self.curr_name = "_".join(filter(None, self.classifiers + [func.__name__, ]))
                 self.curr_name = self.curr_name.replace(".", "_")
                 self.curr_name = self.curr_name.replace("+", "")
                 create_all_tables(self.database)
@@ -488,9 +505,11 @@ class ModelBase(object):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             gas1 = ct.Solution(self.model, self.gphase)
-        gas1.TP = 300, ct.one_atm
+        if self.use_icdb:
+            gas1.TP = get_ics_time(self.__class__.__name__+"_network_combustor_exhaust")
+        else:
+            gas1.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
         gas1.set_equivalence_ratio(self.phi, self.fuel, self.air)
-        gas1.equilibrate('HP')
         inlet = ct.Reservoir(gas1)
         # create combustor
         combustor = ct.IdealGasMoleReactor(gas1) if self.moles else ct.IdealGasReactor(gas1)
@@ -499,10 +518,10 @@ class ModelBase(object):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             gas2 = ct.Solution(self.model, self.gphase)
-        gas2.TPX = 300, ct.one_atm, self.air
+        gas2.TPX = gas1.T, ct.one_atm, self.air
         exhaust = ct.IdealGasConstPressureMoleReactor(gas2) if self.moles else ct.IdealGasConstPressureReactor(gas2)
         exhaust.volume = 1.0
-        # Create a reservoir for the exhaustß
+        # Create a reservoir for the exhaust
         atmosphere = ct.Reservoir(gas2)
         # Setup thermo data dictionary
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas1.n_reactions,
@@ -525,7 +544,7 @@ class ModelBase(object):
         residence_time = 0.1
         inlet_mfc = ct.MassFlowController(inlet, combustor,
             mdot=combustor.mass / residence_time)
-        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc, K=0.01)
+        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc)
         outlet_mfc2 = ct.PressureController(exhaust, atmosphere, master=outlet_mfc)
         # the simulation only contains one reactor
         self.net = ct.ReactorNet([combustor, exhaust])
@@ -556,7 +575,11 @@ class ModelBase(object):
             add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
         elif self.runtype == "plot":
             # create plot categories
-            products = ["CO", "CO2", "H2O"]
+            products = []
+            species = [combustor.component_name(i) for i in range(combustor.n_vars)]
+            for prod in ["CO", "CO2", "H2O"]:
+                if prod in species:
+                    products.append(prod)
             fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
             surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
             comb_contents = fuels + products
@@ -608,9 +631,11 @@ class ModelBase(object):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             gas = ct.Solution(self.model, self.gphase)
-        gas.TP = 300, ct.one_atm
+        if self.use_icdb:
+            gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
+        else:
+            gas.TP = kwargs.get('T', 1200), kwargs.get('P', ct.one_atm)
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
-        gas.equilibrate("HP")
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
         r.volume = vol
@@ -660,7 +685,40 @@ class ModelBase(object):
         elif self.runtype == "performance":
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
-            pass
+            # create plot categories
+            products = []
+            species = [r.component_name(i) for i in range(r.n_vars)]
+            for prod in ["CO", "CO2", "H2O"]:
+                if prod in species:
+                    products.append(prod)
+            fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
+            surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
+            comb_contents = fuels + products + surfaces
+            combust_idxs = [r.component_index(f) for f in comb_contents]
+            time = []
+            comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
+            def append_row(r, idxs, arr):
+                state = r.get_state()
+                keep = np.transpose(np.array([[state[i] for i in idxs ]]))
+                return np.append(arr, keep, 1)
+            comb_array = append_row(r, combust_idxs, comb_array)
+            time.append(self.net.time)
+            while (self.sstime * 0.00005 > self.net.time):
+                for i in range(self.record_steps):
+                    self.net.step()
+                    if self.sstime < self.net.time:
+                        break
+                # create plot data
+                comb_array = append_row(r, combust_idxs, comb_array)
+                time.append(self.net.time)
+            # now plot data
+            fig, cax = plt.subplots(1, 1)
+            fig.tight_layout()
+            for i, name in enumerate(comb_contents):
+                cax.plot(time, comb_array[i, :], label=name)
+            cax.set_title("PFR")
+            cax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
             if self.database is None:
                 raise Exception("No database file for analysis run.")
@@ -679,9 +737,11 @@ class ModelBase(object):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             gas = ct.Solution(self.model, self.gphase)
-        gas.TP = 300, ct.one_atm
+        if self.use_icdb:
+            gas.TP = get_ics_time(self.__class__.__name__+"_well_stirred_reactor")
+        else:
+            gas.TP = kwargs.get('T', 1200), kwargs.get('P', ct.one_atm)
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
-        gas.equilibrate("HP")
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
         r.volume = 1
@@ -717,7 +777,40 @@ class ModelBase(object):
         elif self.runtype == "performance":
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
-            pass
+            # create plot categories
+            products = []
+            species = [r.component_name(i) for i in range(r.n_vars)]
+            for prod in ["CO", "CO2", "H2O"]:
+                if prod in species:
+                    products.append(prod)
+            fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
+            surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
+            comb_contents = fuels + products + surfaces
+            combust_idxs = [r.component_index(f) for f in comb_contents]
+            time = []
+            comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
+            def append_row(r, idxs, arr):
+                state = r.get_state()
+                keep = np.transpose(np.array([[state[i] for i in idxs ]]))
+                return np.append(arr, keep, 1)
+            comb_array = append_row(r, combust_idxs, comb_array)
+            time.append(self.net.time)
+            while (self.sstime > self.net.time):
+                for i in range(self.record_steps):
+                    self.net.step()
+                    if self.sstime < self.net.time:
+                        break
+                # create plot data
+                comb_array = append_row(r, combust_idxs, comb_array)
+                time.append(self.net.time)
+            # now plot data
+            fig, cax = plt.subplots(1, 1)
+            fig.tight_layout()
+            for i, name in enumerate(comb_contents):
+                cax.plot(time, comb_array[i, :], label=name)
+            cax.set_title("PFR")
+            cax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
             if self.database is None:
                 raise Exception("No database file for analysis run.")
@@ -745,3 +838,27 @@ class ModelBase(object):
             return self.well_stirred_reactor
         else:
             raise Exception("Invalid problem given.")
+
+    @classmethod
+    def create_initial_conditions(cls):
+        curr_model = cls(runtype="steady", use_icdb=False, moles=True)
+        fcns = [curr_model.well_stirred_reactor, curr_model.plug_flow_reactor, curr_model.network_combustor_exhaust]
+        temperatures = list(range(600, 1700, 100))[::-1]
+        opts = [(T, P * ct.one_atm) for T in temperatures for P in range(1, 10)]
+        found = {}
+        for f in fcns:
+            found[f.__name__] = False
+            for T, P in opts:
+                try:
+                    if not f(T=T, P=P):
+                        raise Exception("Failed")
+                    name = cls.__name__+"_"+f.__name__
+                    append_initial_conds_table(name, T, P)
+                    print(f"Success:{cls.__name__}: {f.__name__} ({T}, {P}).")
+                    found[f.__name__] = True
+                    break
+                except Exception as e:
+                    print(f"Failed:{cls.__name__}: {f.__name__} ({T}, {P}).")
+        for k, v in found.items():
+            if not v:
+                warnings.warn(f"{cls.__name__}:{k} not conditions found.")

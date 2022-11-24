@@ -5,6 +5,7 @@ import multiprocessing as mp
 from cantera_adaptive_testing.models import *
 from cantera_adaptive_testing.database_utils import create_all_tables
 
+global_models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallNDodecane, PlatinumMediumNDodecane, PlatinumLargeNDodecane, PlatinumSmallIsoOctane, PlatinumMediumIsoOctane, PlatinumLargeIsoOctane]
 
 def analysis_run(curr_model):
     # analysis run
@@ -79,7 +80,6 @@ def run_parallell_wsr(model):
 
 def parallel_run_all_configs():
     # Run all models and tests
-    models = [PlatinumSmallHydrogen, PlatinumMediumHydrogen, PlatinumLargeHydrogen, PlatinumSmallGRI, PlatinumMediumGRI, PlatinumLargeGRI, PlatinumSmallAramco, PlatinumMediumAramco, PlatinumLargeAramco]
     # cli args
     option = sys.argv[1] if len(sys.argv) > 1 else '0'
     runs = int(sys.argv[2]) if len(sys.argv) > 2 else 100
@@ -88,9 +88,9 @@ def parallel_run_all_configs():
     with mp.Pool(cores) as p:
         if option == '1':
             # create steady state times
-            p.map(run_parallell_nce, models)
+            p.map(run_parallell_nce, global_models)
             # network problem
-            res = p.map(get_all_models, models)
+            res = p.map(get_all_models, global_models)
             all_models = []
             for m in res:
                 all_models += m
@@ -112,9 +112,9 @@ def parallel_run_all_configs():
             p.map(network_problem, copies)
         elif option == '2':
             # create steady state times
-            p.map(run_parallell_pfr, models)
+            p.map(run_parallell_pfr, global_models)
             # network problem
-            res = p.map(get_all_models, models)
+            res = p.map(get_all_models, global_models)
             all_models = []
             for m in res:
                 all_models += m
@@ -136,9 +136,9 @@ def parallel_run_all_configs():
             p.map(pfr_problem, copies)
         elif option == '3':
             # create steady state times
-            p.map(run_parallell_wsr, models)
+            p.map(run_parallell_wsr, global_models)
             # network problem
-            res = p.map(get_all_models, models)
+            res = p.map(get_all_models, global_models)
             all_models = []
             for m in res:
                 all_models += m
@@ -162,6 +162,16 @@ def parallel_run_all_configs():
             raise Exception("No option specified: surf-analysis.py")
 
 
+def create_map_fcn(model):
+    model.create_initial_conditions()
+
+
+def create_all_conditions():
+    with mp.Pool(os.cpu_count()) as p:
+        p.map(create_map_fcn, global_models)
+
 if __name__ == "__main__":
     # run parallel config
-    parallel_run_all_configs()
+    # parallel_run_all_configs()
+    create_all_conditions()
+    
