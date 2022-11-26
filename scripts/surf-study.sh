@@ -12,13 +12,13 @@ skip_approx
 
 declare -a ss_arr
 
-ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR | grep -o -E '[0-9]{3,10}'))
 
-ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff -O $SURF_DIR | grep -o -E '[0-9]{3,10}'))
 
-ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_thirdbody -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_thirdbody -O $SURF_DIR | grep -o -E '[0-9]{3,10}'))
 
-ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff --remove_thirdbody -O $SURF_DIR | tail -n 1 | tr -dc '0-9'))
+ss_arr+=($(./launch.sh ./options/surf-opts single 1 1 $MLIST -R steady -MTS 1e-3 -MS 1e9 --remove_falloff --remove_thirdbody -O $SURF_DIR | grep -o -E '[0-9]{3,10}'))
 
 ss_running=true
 while [ $ss_running = true ]
