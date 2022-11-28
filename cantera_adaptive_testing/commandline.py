@@ -203,9 +203,16 @@ def cmd_line_main():
 def cli_check_model():
     parser = argparse.ArgumentParser(description="""check-model.""")
     parser.add_argument("model", type=str, help="Path to model file")
+    parser.add_argument('-S', '--surface', action='store_true', default=False,
+                        help="Specify that the model is a surface model")
     args = parser.parse_args()
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        gas = ct.Solution(args.model)
-    print(f"{args.model}: species: {gas.n_species}")
-    print(f"{args.model}: reactions: {gas.n_reactions}")
+        if args.surface:
+            surf = ct.Interface(args.model, "surface")
+            print(f"{args.model}: species: {surf.n_species}")
+            print(f"{args.model}: reactions: {surf.n_reactions}")
+        else:
+            gas = ct.Solution(args.model)
+            print(f"{args.model}: species: {gas.n_species}")
+            print(f"{args.model}: reactions: {gas.n_reactions}")

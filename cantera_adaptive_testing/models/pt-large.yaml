@@ -28,7 +28,7 @@ phases:
   state:
     T: 300.0
     P: 1.01325e+05
-- name: surface1
+- name: surface
   thermo: ideal-surface
   elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
     X]
@@ -42,7 +42,7 @@ phases:
     SX(173), SX(174), C4H8X(178), C5H7X(180), C4H7X(193), C4H6X(194), C3H2X(196),
     C4H5X(201), C4H7X(213), SX(305), C4H7X(418), C4H8X(812)]
   kinetics: surface
-  reactions: all
+  reactions: declared-species
   state:
     T: 300.0
     P: 1.01325e+05

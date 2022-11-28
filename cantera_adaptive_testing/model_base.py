@@ -596,7 +596,7 @@ class ModelBase(object):
             comb_array = append_row(combustor, combust_idxs, comb_array)
             exhaust_array = append_row(exhaust, exhaust_idxs, exhaust_array)
             time.append(self.net.time)
-            while (self.sstime > self.net.time):
+            while (self.sstime * 0.0001 > self.net.time):
                 for i in range(self.record_steps):
                     self.net.step()
                     if self.sstime < self.net.time:
@@ -605,19 +605,25 @@ class ModelBase(object):
                 comb_array = append_row(combustor, combust_idxs, comb_array)
                 exhaust_array = append_row(exhaust, exhaust_idxs, exhaust_array)
                 time.append(self.net.time)
-            # now plot data
-            fig, ax = plt.subplots(1, 2)
+            # plot cax
+            fig, cax = plt.subplots(1, 1)
             fig.tight_layout()
-            cax, eax = ax
+            cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
+            # cax.set_title("Combustor")
+            cax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-combustor.pdf"))
+            plt.close()
+            # plot eax
+            fig, eax = plt.subplots(1, 1)
+            fig.tight_layout()
+            eax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(exhaust_contents):
                 eax.plot(time, exhaust_array[i, :], label=name)
-            cax.set_title("Combustor")
-            eax.set_title("Exhaust")
-            cax.legend(loc='upper right')
+            # eax.set_title("Exhaust")
             eax.legend(loc='upper right')
-            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-exhaust.pdf"))
         else:
             raise Exception("Invalid runtype specified.")
 
@@ -714,9 +720,10 @@ class ModelBase(object):
             # now plot data
             fig, cax = plt.subplots(1, 1)
             fig.tight_layout()
+            cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
-            cax.set_title("PFR")
+            # cax.set_title("PFR")
             cax.legend(loc='upper right')
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
@@ -806,9 +813,10 @@ class ModelBase(object):
             # now plot data
             fig, cax = plt.subplots(1, 1)
             fig.tight_layout()
+            cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
-            cax.set_title("PFR")
+            # cax.set_title("WSR")
             cax.legend(loc='upper right')
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
