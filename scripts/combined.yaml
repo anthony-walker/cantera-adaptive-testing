@@ -58863,9 +58863,9 @@ PlatinumSmallNDodecane-8-ntb-nfo:
     config: *id548
 PlatinumSmallNDodecane-mass:
   network_combustor_exhaust:
-    runtime: 778.3201649307547
+    runtime: 3203.2308596654016
     endtime: 1.5282268150693121
-    nruns: 53
+    nruns: 100
     runtype: performance
     thermo:
       model: jetsurf2.0-348-2163.yaml
@@ -58919,9 +58919,9 @@ PlatinumSmallNDodecane-mass:
       replace_reactions: false
       use_icdb: true
   plug_flow_reactor:
-    runtime: 272.42365125811324
+    runtime: 1482.2034655971008
     endtime: 4.159119489771324
-    nruns: 53
+    nruns: 100
     runtype: performance
     thermo:
       model: jetsurf2.0-348-2163.yaml
