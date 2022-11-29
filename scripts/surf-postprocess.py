@@ -31,6 +31,31 @@ def add_nruns_to_older_files():
             with open(os.path.join("surf-data", fi), "w") as f:
                 yaml.dump(data, f)
 
+def trim_to_one_hundred(direc="surface_data"):
+    yaml = ruamel.yaml.YAML()
+    files = os.listdir(direc)
+    files = list(filter(lambda x: ".yaml" in x, files))
+    mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
+    mods = list(filter(lambda x: "Platinum" in x, mods))
+    # sort all files into cases
+    fp = lambda x: os.path.join(direc, x)
+    cases = {}
+    for m in mods:
+        curr_files = list(filter(lambda x: m in x, files))
+        for cf in curr_files:
+            case_key = "-".join(cf.split("-")[:-1])
+            if case_key in cases:
+                cases[case_key].append(cf)
+            else:
+                cases[case_key] = [cf]
+    for c, k in cases.items():
+        if len(k) > 100:
+            print(f"{c}: {len(k)}")
+        while len(k) > 100:
+            cf = k.pop(0)
+            os.remove(fp(cf))
+        print(f"final: {c}: {len(k)}")
+
 
 def combine_surf_yamls(direc="surface_data"):
     yaml = ruamel.yaml.YAML()
@@ -146,6 +171,8 @@ def plot_data_one(problem, add_filters=[], colors={}, markers={}):
             ax.loglog(x, y, label=k, color=c)
         else:
             ax.loglog(x, y, label=k)
+    ax.set_xlabel("Threshold")
+    ax.set_ylabel("Speed-up")
     ax.set_ylim([10**-3, 10**3])
     return fig, ax
 
@@ -286,3 +313,5 @@ def plot_data_nfo_ntb(model_name, problem, markers={}, colors={}):
 # plot_data_nfo_ntb("PlatinumLargeIsoOctane", "network_combustor_exhaust", colors=colors)
 # plt.legend()
 # plt.show()
+# trim_to_one_hundred()
+combine_surf_yamls()
