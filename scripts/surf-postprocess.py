@@ -1,5 +1,6 @@
 import os
 import re
+import copy
 import inspect
 import ruamel.yaml
 import cantera_adaptive_testing.models as models
@@ -31,6 +32,35 @@ def add_nruns_to_older_files():
             with open(os.path.join("surf-data", fi), "w") as f:
                 yaml.dump(data, f)
 
+
+def check_for_all_cases(direc="surface_data"):
+    yaml = ruamel.yaml.YAML()
+    files = os.listdir(direc)
+    files = list(filter(lambda x: ".yaml" in x, files))
+    mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
+    mods = list(filter(lambda x: "Platinum" in x, mods))
+    cases = {}
+    check_mods = []
+    for keep in ["Hydrogen", "GRI", "NDodecane", "IsoOctane"]:
+        check_mods += list(filter(lambda x: keep in x, mods))
+    # mass, precon cases
+    for cm in check_mods:
+        cases[f"{cm}-mass"] = []
+        for i in range(0, 19, 1):
+            cases[f"{cm}-{i}"] = []
+    std_keys = copy.deepcopy(list(cases.keys()))
+    for md in ["ntb", "nfo", "ntb-nfo"]:
+        for k in std_keys:
+            cases[f"{k}-{md}"] = []
+    for f in files:
+        cases["-".join(f.split("-")[:-1])].append(f)
+    for c, k in cases.items():
+        if len(k) > 100:
+            print(f"MORE THAN {c}: {len(k)}")
+        elif len(k) < 100:
+            print(f"LESS THAN {c}: {len(k)}")
+
+
 def trim_to_one_hundred(direc="surface_data"):
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
@@ -51,10 +81,12 @@ def trim_to_one_hundred(direc="surface_data"):
     for c, k in cases.items():
         if len(k) > 100:
             print(f"{c}: {len(k)}")
-        while len(k) > 100:
-            cf = k.pop(0)
-            os.remove(fp(cf))
-        print(f"final: {c}: {len(k)}")
+            while len(k) > 100:
+                cf = k.pop(0)
+                os.remove(fp(cf))
+            print(f"final: {c}: {len(k)}")
+        elif len(k) < 100:
+            print(f"LESS THAN {c}: {len(k)}")
 
 
 def combine_surf_yamls(direc="surface_data"):
