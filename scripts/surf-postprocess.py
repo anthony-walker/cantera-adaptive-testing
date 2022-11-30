@@ -2,7 +2,9 @@ import os
 import re
 import copy
 import inspect
+import sqlite3
 import ruamel.yaml
+import numpy as np
 import cantera_adaptive_testing.models as models
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
@@ -214,7 +216,7 @@ def make_total_runtime_figures():
     # Full NCE performance
     fig, ax = plot_data_one("network_combustor_exhaust", colors=colors, markers=markers)
     font_props = FontProperties()
-    font_props.set_size('xx-small')
+    font_props.set_size('x-small')
     lines = []
     leg_labels = []
     for k, v in colors.items():
@@ -223,14 +225,14 @@ def make_total_runtime_figures():
     for k, v in markers.items():
         lines.append(Line2D([0], [0], linestyle="", marker=v, color="k"))
         leg_labels.append(f"Platinum{k}")
-    plt.legend(lines, leg_labels, loc="lower left", bbox_to_anchor=(-0.1,-0.125), prop=font_props, ncol=len(leg_labels))
-    # fig.subplots_adjust(bottom=0.1)
+    plt.legend(lines, leg_labels, loc="lower center", bbox_to_anchor=(0.5,1.0), prop=font_props, ncol=4)
+    fig.subplots_adjust(bottom=0.15)
     plt.savefig("figures/nce-all-models.pdf")
     plt.close()
     # Full WSR performance
     fig, ax = plot_data_one("well_stirred_reactor", colors=colors, markers=markers)
     font_props = FontProperties()
-    font_props.set_size('xx-small')
+    font_props.set_size('x-small')
     lines = []
     leg_labels = []
     for k, v in colors.items():
@@ -239,14 +241,14 @@ def make_total_runtime_figures():
     for k, v in markers.items():
         lines.append(Line2D([0], [0], linestyle="", marker=v, color="k"))
         leg_labels.append(f"Platinum{k}")
-    plt.legend(lines, leg_labels, loc="lower left", bbox_to_anchor=(-0.1,-0.125), prop=font_props, ncol=len(leg_labels))
-    # fig.subplots_adjust(bottom=0.1)
+    plt.legend(lines, leg_labels, loc="lower center", bbox_to_anchor=(0.5,1.0), prop=font_props, ncol=4)
+    fig.subplots_adjust(bottom=0.15)
     plt.savefig("figures/wsr-all-models.pdf")
     plt.close()
     # Full PFR performance
     fig, ax = plot_data_one("plug_flow_reactor", colors=colors, markers=markers)
     font_props = FontProperties()
-    font_props.set_size('xx-small')
+    font_props.set_size('x-small')
     lines = []
     leg_labels = []
     for k, v in colors.items():
@@ -255,8 +257,8 @@ def make_total_runtime_figures():
     for k, v in markers.items():
         lines.append(Line2D([0], [0], linestyle="", marker=v, color="k"))
         leg_labels.append(f"Platinum{k}")
-    plt.legend(lines, leg_labels, loc="lower left", bbox_to_anchor=(-0.1,-0.125), prop=font_props, ncol=len(leg_labels))
-    # fig.subplots_adjust(bottom=0.1)
+    plt.legend(lines, leg_labels, loc="lower center", bbox_to_anchor=(0.5,1.0), prop=font_props, ncol=4)
+    fig.subplots_adjust(bottom=0.15)
     plt.savefig("figures/pfr-all-models.pdf")
     plt.close()
 
@@ -294,7 +296,6 @@ def plot_data_nfo_ntb(model_name, problem, markers={}, colors={}):
             if "mass" in k:
                 mass_key = k
                 break
-        print(mass_key)
         # get plot data of mass key exists
         if mass_key:
             x = []
@@ -330,20 +331,132 @@ def plot_data_nfo_ntb(model_name, problem, markers={}, colors={}):
     for k, v in plot_data.items():
         x,y = v
         m,c = color_by_mod[k]
+        its = k.split("-")
+        its.pop(1)
+        lab = "-".join(its)
         if c is not None and m is not None:
-            ax.loglog(x, y, label=k, color=c, marker=m)
+            ax.loglog(x, y, label=lab, color=c, marker=m)
         elif c is None and m is not None:
-            ax.loglog(x, y, label=k, marker=m)
+            ax.loglog(x, y, label=lab, marker=m)
         elif c is not None and m is None:
-            ax.loglog(x, y, label=k, color=c)
+            ax.loglog(x, y, label=lab, color=c)
         else:
-            ax.loglog(x, y, label=k)
+            ax.loglog(x, y, label=lab)
+        ax.set_xlabel("Threshold")
+        ax.set_ylabel("Speed-up")
     return fig, ax
 
-# colors = {"GRI-mass-nfo":'#a6cee3', "GRI-mass":'#1f78b4', "GRI-mass-ntb":'#b2df8a', "GRI-mass-ntb-nfo":'#33a02c'}
-# markers = {"Small":"s", "Medium":"o", "Large":"d"}
-# plot_data_nfo_ntb("PlatinumLargeIsoOctane", "network_combustor_exhaust", colors=colors)
-# plt.legend()
-# plt.show()
-# trim_to_one_hundred()
-combine_surf_yamls()
+def make_reaction_analysis_figures(problem="network_combustor_exhaust", surface="Medium"):
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for m in ["Hydrogen", "GRI", "NDodecane", "IsoOctane"]:
+        colors = {f"{m}-mass-nfo":'#a6cee3', f"{m}-mass":'#1f78b4', f"{m}-mass-ntb":'#b2df8a', f"{m}-mass-ntb-nfo":'#33a02c'}
+        markers = {"Small":"s", "Medium":"o", "Large":"d"}
+        fig, ax = plot_data_nfo_ntb(f"Platinum{surface}{m}", problem, colors=colors, markers=markers)
+        ax.set_ylim([10**-3, 10**3])
+        plt.legend(loc="lower center", ncol=2, prop=font_props, bbox_to_anchor=(0.5, 1.0))
+        plt.savefig(f"figures/speedup-{m}-{surface}-{problem}.pdf".lower())
+        plt.close()
+
+
+def make_all_reaction_figures():
+    for p in ["network_combustor_exhaust", "plug_flow_reactor", "well_stirred_reactor"]:
+        for s in ["Small", "Medium", "Large"]:
+            make_reaction_analysis_figures(surface=s, problem=p)
+
+def required_paper_numbers():
+    models.PlatinumSmallGRI.print_model_information()
+    models.PlatinumLargeGRI.print_model_information()
+    models.PlatinumSmallIsoOctane.print_model_information()
+    models.PlatinumLargeIsoOctane.print_model_information()
+
+def threshold_database_plot(value, model="GRI", surface="Small", mean=True):
+    # get database connection
+    connection = sqlite3.connect("surf.db", timeout=100000)
+    cursor = connection.cursor()
+    colors = {"_nfo":'#a6cee3', "":'#1f78b4', "_ntb":'#b2df8a', "_ntb_nfo":'#33a02c'}
+    markers = {"Small":"s", "Medium":"o", "Large":"d"}
+    fig, ax = plt.subplots(1, 1)
+    for mod in ["", "_ntb", "_nfo", "_ntb_nfo"]:
+        x = []
+        y = []
+        for i in range(0, 19, 1):
+            try:
+                cursor.execute(f""" SELECT {value} FROM Platinum{surface}{model}_{i}{mod}_network_combustor_exhaust """)
+                condition = cursor.fetchall()
+                condition = np.array([c[0] for c in condition])
+                # get mean or max condition
+                if mean:
+                    max_condition = np.mean(condition)
+                else:
+                    max_condition = np.amax(condition)
+                    if value == "lin_iters":
+                        cursor.execute(f""" SELECT time FROM Platinum{surface}{model}_{i}{mod}_network_combustor_exhaust """)
+                        time = cursor.fetchall()[-1][0]
+                        max_condition /= time
+                if i == 0:
+                    x.append(0)
+                else:
+                    x.append(10**-i)
+                y.append(max_condition)
+            except Exception as e:
+                pass
+        clabel = re.sub("[_]","-", f"Platinum{surface}{model}{mod}")
+        x = np.array(x)
+        y = np.array(y)
+        x,y = zip(*sorted(list(zip(x, y))))
+        ax.loglog(x, y, color=colors[mod], marker=markers[surface], label=clabel)
+        ax.set_xlabel("Threshold")
+    return fig, ax
+
+def make_mean_condition_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("condition", m, s)
+            ax.set_ylim(np.float64(10**10), np.float64(10**32))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Mean Condition Number")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/condition_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_mean_eigenvalue_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("max_eigenvalue", m, s)
+            ax.set_ylim(np.float64(10**8), np.float64(10**14))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Mean Maximum Eigenvalue")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/max_eigen_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_mean_linear_iterations():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("lin_iters", m, s, mean=False)
+            ax.set_ylim(np.float64(10**1), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Linear Iterations")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/lin_iters_{m}_{s}.pdf".lower())
+            plt.close()
+
+make_all_reaction_figures()
+# make_mean_condition_plots()
+# make_mean_eigenvalue_plots()
+# make_mean_linear_iterations()
+
+# make_total_runtime_figures()
+# make_all_reaction_figures()
+# required_paper_numbers()

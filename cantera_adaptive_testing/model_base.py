@@ -870,3 +870,38 @@ class ModelBase(object):
         for k, v in found.items():
             if not v:
                 warnings.warn(f"{cls.__name__}:{k} not conditions found.")
+
+    @classmethod
+    def print_model_information(cls, *args, **kwargs):
+        # import the gas model and set the initial conditions
+        curr_model = cls()
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(curr_model.model, curr_model.gphase)
+        print(cls.__name__)
+        print(f"\nReactants: {curr_model.fuel}, {curr_model.air}, Phi: {curr_model.phi}")
+        print(f"Gas phase: Species: {gas.n_species}, Reactions: {gas.n_reactions}")
+        # Add surface if it exists
+        if curr_model.surface is not None:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(curr_model.model, curr_model.sphase, [gas])
+            print(f"\nSurface Reactants: {curr_model.surface}")
+            print(f"Surface phase: Species: {surf.n_species}, Reactions: {surf.n_reactions}")
+            print(f"Total: Species: {gas.n_species + surf.n_species}, Reactions: {surf.n_reactions + gas.n_reactions}")
+            rlen = surf.n_reactions + gas.n_reactions
+            data = {"Surface": surf.n_reactions}
+        else:
+            print(f"\nTotal: Species: {gas.n_species}, Reactions: {gas.n_reactions}")
+            rlen = gas.n_reactions
+            data = {}
+        print(f"\nReaction Breakdown:")
+        R = ct.Reaction.list_from_file(curr_model.model, gas)
+        for reaction in R:
+            curr_type = reaction.reaction_type
+            if curr_type in data:
+                data[curr_type] += 1
+            else:
+                data[curr_type] = 1
+        for k, v in data.items():
+            print(f"{k}: {v}, {v/rlen*100: .2f}%")
