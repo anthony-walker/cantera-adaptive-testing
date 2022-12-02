@@ -452,11 +452,12 @@ def make_mean_linear_iterations():
             plt.savefig(f"figures/lin_iters_{m}_{s}.pdf".lower())
             plt.close()
 
+combine_surf_yamls()
 make_all_reaction_figures()
-# make_mean_condition_plots()
-# make_mean_eigenvalue_plots()
-# make_mean_linear_iterations()
+make_mean_condition_plots()
+make_mean_eigenvalue_plots()
+make_mean_linear_iterations()
 
-# make_total_runtime_figures()
-# make_all_reaction_figures()
+make_total_runtime_figures()
+make_all_reaction_figures()
 # required_paper_numbers()
