@@ -1,4 +1,21 @@
 #!/bin/bash
+# check and wait so as not to exceed slurm job limit
+slurm_job_wait() {
+    n_jobs=$(squeue -u walkanth | wc -l)
+    stime=1
+    while [ $n_jobs -ge 100 ]
+    do
+        echo "Number of jobs over 100, waiting $stime seconds..."
+        sleep $stime
+        n_jobs=$(squeue -u walkanth | wc -l)
+        # adjust sleep time
+        if [ $stime -lt 10 ]
+        then
+            ((stime=stime+1))
+        fi
+    done
+    echo "Currently queued jobs: $n_jobs"
+}
 # create directorys
 check_args_and_dirs() {
     if [ -z "$1" ]
@@ -46,6 +63,7 @@ approximate_precon_single() {
         # run the job with set options
         if [ -z "$SKIP_SBATCH" ]
         then
+            slurm_job_wait
             sbatch -J "$CURR_MODEL-approx-single" --mem=$AMS ./batches/jobs-single.sh
         fi
         sleep $SLEEP_TIMER
@@ -71,6 +89,7 @@ approximate_precon_mpi() {
         # run the job with set options
         if [ -z "$SKIP_SBATCH" ]
         then
+            slurm_job_wait
             sbatch -J "$CURR_MODEL-approx-mpi" --mem=$AMS ./batches/jobs-mpi.sh
         fi
         sleep $SLEEP_TIMER
@@ -85,6 +104,7 @@ analytical_precon_single() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-analyt-single" --mem=$AMS ./batches/jobs-single.sh
     fi
     sleep $SLEEP_TIMER
@@ -99,6 +119,7 @@ analytical_precon_mpi() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-analyt-mpi" --mem=$AMS  ./batches/jobs-mpi.sh
     fi
     sleep $SLEEP_TIMER
@@ -112,6 +133,7 @@ mass_single() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-mass-single" --mem=$AMS ./batches/jobs-single.sh
     fi
     sleep $SLEEP_TIMER
@@ -125,6 +147,7 @@ mass_mpi() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-mass-mpi" --mem=$AMS ./batches/jobs-mpi.sh
     fi
     sleep $SLEEP_TIMER
@@ -138,6 +161,7 @@ moles_single() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-moles-single" --mem=$AMS ./batches/jobs-single.sh
     fi
     sleep $SLEEP_TIMER
@@ -151,6 +175,7 @@ moles_mpi() {
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
     then
+        slurm_job_wait
         sbatch -J "$CURR_MODEL-moles-mpi" --mem=$AMS ./batches/jobs-mpi.sh
     fi
     sleep $SLEEP_TIMER

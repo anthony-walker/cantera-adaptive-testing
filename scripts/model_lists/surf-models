@@ -1,12 +1,8 @@
 PlatinumSmallHydrogen,2G
-PlatinumMediumHydrogen,2G
 PlatinumLargeHydrogen,2G
 PlatinumSmallGRI,4G
-PlatinumMediumGRI,4G
 PlatinumLargeGRI,4G
 PlatinumSmallNDodecane,6G
-PlatinumMediumNDodecane,6G
 PlatinumLargeNDodecane,6G
-PlatinumSmallIsoOctane,8G
-PlatinumMediumIsoOctane,8G
-PlatinumLargeIsoOctane,8G
+PlatinumSmallIsoOctane,10G
+PlatinumLargeIsoOctane,10G

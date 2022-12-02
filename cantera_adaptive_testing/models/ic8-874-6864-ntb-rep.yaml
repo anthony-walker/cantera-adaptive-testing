@@ -15467,6 +15467,22 @@ species:
   note: 3/4/96THRM
 
 reactions:
+- equation: H2 + M => H + H + M  # Reaction 9
+  rate-constant: {A: 4.577e+19, b: -1.4, Ea: 1.044e+05}
+- equation: H + H + M => H2 + M  # Reaction 10
+  rate-constant: {A: 1.145e+20, b: -1.676, Ea: 820.0}
+- equation: O2 + M => O + O + M  # Reaction 11
+  rate-constant: {A: 4.42e+17, b: -0.634, Ea: 1.189e+05}
+- equation: O + O + M => O2 + M  # Reaction 12
+  rate-constant: {A: 6.165e+15, b: -0.5, Ea: 0.0}
+- equation: OH + M => O + H + M  # Reaction 13
+  rate-constant: {A: 9.78e+17, b: -0.743, Ea: 1.021e+05}
+- equation: O + H + M => OH + M  # Reaction 14
+  rate-constant: {A: 4.714e+18, b: -1.0, Ea: 0.0}
+- equation: H2O + M => H + OH + M  # Reaction 15
+  rate-constant: {A: 1.907e+23, b: -1.83, Ea: 1.185e+05}
+- equation: H + OH + M => H2O + M  # Reaction 16
+  rate-constant: {A: 4.5e+22, b: -2.0, Ea: 0.0}
 - equation: H + O2 (+ M) <=> HO2 (+ M)  # Reaction 17
   type: falloff
   low-P-rate-constant: {A: 3.482e+16, b: -0.411, Ea: -1115.0}
@@ -15487,6 +15503,14 @@ reactions:
   high-P-rate-constant: {A: 1.8e+10, b: 0.0, Ea: 2384.0}
   efficiencies: {AR: 0.5, C2H6: 3.0, CH4: 2.0, CO: 1.5, CO2: 3.5, H2: 2.0, H2O: 6.0,
     HE: 0.5, O2: 6.0}
+- equation: HCO + M => H + CO + M  # Reaction 48
+  rate-constant: {A: 4.75e+11, b: 0.66, Ea: 1.487e+04}
+- equation: H + CO + M => HCO + M  # Reaction 49
+  rate-constant: {A: 3.582e+10, b: 1.041, Ea: -457.3}
+- equation: OCHO + M => H + CO2 + M  # Reaction 71
+  rate-constant: {A: 5.318e+14, b: -0.353, Ea: 1.758e+04}
+- equation: H + CO2 + M => OCHO + M  # Reaction 72
+  rate-constant: {A: 7.5e+13, b: 0.0, Ea: 2.9e+04}
 - equation: HCO + H (+ M) <=> CH2O (+ M)  # Reaction 76
   type: falloff
   low-P-rate-constant: {A: 1.35e+24, b: -2.57, Ea: 1425.0}
@@ -15567,6 +15591,10 @@ reactions:
   type: falloff
   low-P-rate-constant: {A: 1.2e+15, b: 0.0, Ea: 1.2518e+04}
   high-P-rate-constant: {A: 3.0e+12, b: 0.0, Ea: 1.672e+04}
+- equation: CH3CO2 + M => CH3 + CO2 + M  # Reaction 423
+  rate-constant: {A: 4.4e+15, b: 0.0, Ea: 1.05e+04}
+- equation: CH3 + CO2 + M => CH3CO2 + M  # Reaction 424
+  rate-constant: {A: 4.548e+08, b: 1.378, Ea: 1.752e+04}
 - equation: CH2 + CO (+ M) <=> CH2CO (+ M)  # Reaction 428
   type: falloff
   low-P-rate-constant: {A: 2.69e+33, b: -5.11, Ea: 7095.0}
@@ -15574,6 +15602,10 @@ reactions:
   Troe: {A: 0.5907, T3: 275.0, T1: 1226.0, T2: 5185.0}
   efficiencies: {AR: 0.7, C2H6: 3.0, CH4: 2.0, CO: 1.5, CO2: 2.0, H2: 2.0, H2O: 6.0,
     HE: 0.7}
+- equation: HCCO + M => CH + CO + M  # Reaction 448
+  rate-constant: {A: 6.5e+15, b: 0.0, Ea: 5.882e+04}
+- equation: CH + CO + M => HCCO + M  # Reaction 449
+  rate-constant: {A: 1.391e+11, b: 1.033, Ea: -1.372e+04}
 - equation: C2H3 + H (+ M) <=> C2H4 (+ M)  # Reaction 454
   type: falloff
   low-P-rate-constant: {A: 1.4e+30, b: -3.86, Ea: 3320.0}
@@ -15626,6 +15658,10 @@ reactions:
   high-P-rate-constant: {A: 7.24e+11, b: 0.095, Ea: 9.101e+04}
   Troe: {A: 0.9, T3: 900.0, T1: 1100.0, T2: 3500.0}
   efficiencies: {H2O: 5.0}
+- equation: SC2H4OH + M => CH3CHO + H + M  # Reaction 568
+  rate-constant: {A: 1.0e+14, b: 0.0, Ea: 2.5e+04}
+- equation: CH3CHO + H + M => SC2H4OH + M  # Reaction 569
+  rate-constant: {A: 2.742e+12, b: 0.462, Ea: -470.0}
 - equation: CH3COCH3 (+ M) <=> CH3CO + CH3 (+ M)  # Reaction 575
   type: falloff
   low-P-rate-constant: {A: 7.013e+89, b: -20.38, Ea: 1.0715e+05}
@@ -15648,6 +15684,14 @@ reactions:
   Troe: {A: 0.31, T3: 50.0, T1: 3000.0, T2: 9000.0}
   efficiencies: {AR: 0.7, C2H6: 3.0, CH4: 2.0, CO: 1.5, CO2: 2.0, H2: 2.0, H2O: 6.0,
     HE: 0.7}
+- equation: C3H4-A + M => C3H3 + H + M  # Reaction 990
+  rate-constant: {A: 1.143e+17, b: 0.0, Ea: 7.0e+04}
+- equation: C3H3 + H + M => C3H4-A + M  # Reaction 991
+  rate-constant: {A: 1.798e+15, b: -0.38, Ea: 1.061e+04}
+- equation: C3H4-P + M => C3H3 + H + M  # Reaction 1014
+  rate-constant: {A: 1.143e+17, b: 0.0, Ea: 7.0e+04}
+- equation: C3H3 + H + M => C3H4-P + M  # Reaction 1015
+  rate-constant: {A: 6.708e+11, b: 0.61, Ea: 6420.0}
 - equation: C4H10 (+ M) <=> C2H5 + C2H5 (+ M)  # Reaction 1247
   type: falloff
   low-P-rate-constant: {A: 4.72e+18, b: 0.0, Ea: 4.9576e+04}

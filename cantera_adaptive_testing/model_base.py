@@ -56,6 +56,8 @@ class ModelBase(object):
         self.options.setdefault("runtype", "performance")
         self.options.setdefault("replace_reactions", False) # replace reactions of discarded types with generic reaction or skip them with False
         self.options.setdefault("use_icdb", True)
+        # adjust moles if preconditioned but not moles
+        self.options["moles"] = self.preconditioned if self.preconditioned else self.options["moles"]
         # create file name
         # output data options
         self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
@@ -70,6 +72,8 @@ class ModelBase(object):
             self.classifiers.append("ntb")
         if self.remove_falloff:
             self.classifiers.append("nfo")
+        if self.replace_reactions and (self.remove_thirdbody or self.remove_falloff):
+            self.classifiers.append('rep')
         # get directors for figures and data
         self.data_dir, self.fig_dir = self.get_directories(data_name=kwargs.get("out_dir", "data"))
         if self.database is not None:
@@ -313,10 +317,14 @@ class ModelBase(object):
         yaml = ruamel.yaml.YAML()
         model = self.model
         new_model = model.split(".")[0]
-        new_model += "-stb" if self.remove_thirdbody else ""
-        new_model += "-sf" if self.remove_falloff else ""
+        new_model += "-ntb" if self.remove_thirdbody else ""
+        new_model += "-nfo" if self.remove_falloff else ""
+        if self.remove_thirdbody or self.remove_falloff:
+            new_model += "-rep" if self.replace_reactions else ""
         new_model += ".yaml"
         self.model = new_model
+        has_thirdbody = False
+        has_falloff = False
         # check if model already exists
         if not os.path.isfile(self.model):
             # read in model
@@ -327,6 +335,7 @@ class ModelBase(object):
             for k in data["reactions"]:
                 if "type" in k.keys():
                     if k["type"] == "falloff" and self.remove_falloff:
+                        has_falloff = True
                         if self.replace_reactions:
                             k.pop("type", None)
                             k.pop("Troe", None)
@@ -335,12 +344,20 @@ class ModelBase(object):
                             k["rate-constant"] = k.pop("low-P-rate-constant")
                             reactions.append(k)
                     elif k["type"] == "three-body" and self.remove_thirdbody:
+                        has_thirdbody = True
                         if self.replace_reactions:
                             k.pop("type", None)
                             k.pop("efficiencies", None)
                             reactions.append(k)
                     else:
                         reactions.append(k)
+            # if code is called with remove falloff or thirdbody but doesn't have them
+            if has_thirdbody != self.remove_thirdbody:
+                warnings.warn("Model does not have thirdbody reactions to remove, exiting.")
+                sys.exit()
+            elif has_falloff != self.remove_falloff:
+                warnings.warn("Model does not have falloff reactions to remove, exiting.")
+                sys.exit()
             # write new file
             data["reactions"] = ruamel.yaml.comments.CommentedSeq(reactions)
             with open(self.model, 'w') as f:
@@ -451,6 +468,8 @@ class ModelBase(object):
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
+                if self.remove_thirdbody or self.remove_falloff:
+                    ss_name += "-rep" if self.replace_reactions else ""
                 # add to the steady state time table
                 ss_res = get_steadystate_time(ss_name)
                 # change max time step to form steady state time
@@ -477,6 +496,8 @@ class ModelBase(object):
                 ss_name = f"{self.__class__.__name__}-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
+                if self.remove_thirdbody or self.remove_falloff:
+                    ss_name += "-rep" if self.replace_reactions else ""
                 append_steadystate_time_table(ss_name, self.net.time)
             # append runtime to runtime table
             elif self.database is not None:

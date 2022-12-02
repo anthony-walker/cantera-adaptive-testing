@@ -42,7 +42,7 @@ fi
 echo $SLEEP_TIMER
 if [ -z "$SLEEP_TIMER" ]
 then
-    export SLEEP_TIMER=1
+    export SLEEP_TIMER=0
 fi
 # Make extra arguments
 for i in "${@:6}"

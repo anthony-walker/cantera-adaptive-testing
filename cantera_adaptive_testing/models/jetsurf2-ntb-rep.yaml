@@ -6147,6 +6147,14 @@ species:
   note: SDT18
 
 reactions:
+- equation: H + H + M <=> H2 + M  # Reaction 5
+  rate-constant: {A: 1.78e+18, b: -1.0, Ea: 0.0}
+- equation: H + OH + M <=> H2O + M  # Reaction 9
+  rate-constant: {A: 4.4e+22, b: -2.0, Ea: 0.0}
+- equation: O + H + M <=> OH + M  # Reaction 10
+  rate-constant: {A: 9.428e+18, b: -1.0, Ea: 0.0}
+- equation: O + O + M <=> O2 + M  # Reaction 11
+  rate-constant: {A: 1.2e+17, b: -1.0, Ea: 0.0}
 - equation: H + O2 (+ M) <=> HO2 (+ M)  # Reaction 12
   type: falloff
   low-P-rate-constant: {A: 6.328e+19, b: -1.4, Ea: 0.0}
@@ -6164,6 +6172,8 @@ reactions:
   low-P-rate-constant: {A: 1.173e+24, b: -2.79, Ea: 4191.0}
   high-P-rate-constant: {A: 1.362e+10, b: 0.0, Ea: 2384.0}
   efficiencies: {CO2: 3.6, H2O: 12.0, H2: 2.0, CO: 1.75, AR: 0.7}
+- equation: HCO + M <=> CO + H + M  # Reaction 35
+  rate-constant: {A: 1.87e+17, b: -1.0, Ea: 1.7e+04}
 - equation: CO + H2 (+ M) <=> CH2O (+ M)  # Reaction 38
   type: falloff
   low-P-rate-constant: {A: 5.07e+27, b: -3.42, Ea: 8.435e+04}
@@ -6331,6 +6341,14 @@ reactions:
   Troe: {A: 0.6173, T3: 13.076, T1: 2078.0, T2: 5093.0}
   efficiencies: {CH4: 2.0, CO: 1.5, H2O: 6.0, C2H4: 3.0, CO2: 2.0, C2H2: 3.0, C2H6: 3.0,
     H2: 2.0}
+- equation: CH2OCH + M <=> CH3 + CO + M  # Reaction 241
+  rate-constant: {A: 3.16e+14, b: 0.0, Ea: 1.2e+04}
+- equation: CH2OCH + M <=> CH2CHO + M  # Reaction 242
+  rate-constant: {A: 5.0e+09, b: 0.0, Ea: 0.0}
+- equation: CH2OCH + M <=> CH2CO + H + M  # Reaction 243
+  rate-constant: {A: 3.0e+13, b: 0.0, Ea: 8000.0}
+- equation: C2H4 + M <=> H2 + H2CC + M  # Reaction 244
+  rate-constant: {A: 7.86e+14, b: 0.0, Ea: 5.4245e+04}
 - equation: C2H4 + H (+ M) <=> C2H5 (+ M)  # Reaction 245
   type: falloff
   low-P-rate-constant: {A: 2.027e+39, b: -6.642, Ea: 5769.0}
@@ -8492,3 +8510,7 @@ reactions:
   low-P-rate-constant: {A: 2.66e+60, b: -12.0, Ea: 5967.8}
   high-P-rate-constant: {A: 2.0e+14, b: 0.0, Ea: 0.0}
   efficiencies: {CH4: 2.0, CO: 1.5, H2O: 6.0, CO2: 2.0, C2H6: 3.0, H2: 2.0}
+- equation: CH* + M => CH + M  # Reaction 2149
+  rate-constant: {A: 4.0e+10, b: 0.5, Ea: 0.0}
+- equation: H + O + M <=> OH* + M  # Reaction 2152
+  rate-constant: {A: 3.1e+14, b: 0.0, Ea: 1.0e+04}

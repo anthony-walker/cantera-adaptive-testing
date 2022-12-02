@@ -1017,4 +1017,110 @@ species:
     diameter: 3.97
     rotational-relaxation: 2.0
 
-reactions: []
+reactions:
+- equation: 2 O + M <=> O2 + M  # Reaction 1
+  type: three-body
+  rate-constant: {A: 1.2e+17, b: -1.0, Ea: 0.0}
+  efficiencies: {H2: 2.4, H2O: 15.4, CH4: 2.0, CO: 1.75, CO2: 3.6, C2H6: 3.0, AR: 0.83}
+- equation: O + H + M <=> OH + M  # Reaction 2
+  type: three-body
+  rate-constant: {A: 5.0e+17, b: -1.0, Ea: 0.0}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: O + CO (+M) <=> CO2 (+M)  # Reaction 12
+  rate-constant: {A: 6.02e+14, b: 0.0, Ea: 3000.0}
+- equation: H + O2 + M <=> HO2 + M  # Reaction 33
+  type: three-body
+  rate-constant: {A: 2.8e+18, b: -0.86, Ea: 0.0}
+  efficiencies: {O2: 0.0, H2O: 0.0, CO: 0.75, CO2: 1.5, C2H6: 1.5, N2: 0.0, AR: 0.0}
+- equation: 2 H + M <=> H2 + M  # Reaction 39
+  type: three-body
+  rate-constant: {A: 1.0e+18, b: -1.0, Ea: 0.0}
+  efficiencies: {H2: 0.0, H2O: 0.0, CH4: 2.0, CO2: 0.0, C2H6: 3.0, AR: 0.63}
+- equation: H + OH + M <=> H2O + M  # Reaction 43
+  type: three-body
+  rate-constant: {A: 2.2e+22, b: -2.0, Ea: 0.0}
+  efficiencies: {H2: 0.73, H2O: 3.65, CH4: 2.0, C2H6: 3.0, AR: 0.38}
+- equation: H + CH2 (+M) <=> CH3 (+M)  # Reaction 50
+  rate-constant: {A: 1.04e+26, b: -2.76, Ea: 1600.0}
+- equation: H + CH3 (+M) <=> CH4 (+M)  # Reaction 52
+  rate-constant: {A: 2.62e+33, b: -4.76, Ea: 2440.0}
+- equation: H + HCO (+M) <=> CH2O (+M)  # Reaction 54
+  rate-constant: {A: 2.47e+24, b: -2.57, Ea: 425.0}
+- equation: H + CH2O (+M) <=> CH2OH (+M)  # Reaction 56
+  rate-constant: {A: 1.27e+32, b: -4.82, Ea: 6530.0}
+- equation: H + CH2O (+M) <=> CH3O (+M)  # Reaction 57
+  rate-constant: {A: 2.2e+30, b: -4.8, Ea: 5560.0}
+- equation: H + CH2OH (+M) <=> CH3OH (+M)  # Reaction 59
+  rate-constant: {A: 4.36e+31, b: -4.65, Ea: 5080.0}
+- equation: H + CH3O (+M) <=> CH3OH (+M)  # Reaction 63
+  rate-constant: {A: 4.66e+41, b: -7.44, Ea: 1.408e+04}
+- equation: H + C2H (+M) <=> C2H2 (+M)  # Reaction 70
+  rate-constant: {A: 3.75e+33, b: -4.8, Ea: 1900.0}
+- equation: H + C2H2 (+M) <=> C2H3 (+M)  # Reaction 71
+  rate-constant: {A: 3.8e+40, b: -7.27, Ea: 7220.0}
+- equation: H + C2H3 (+M) <=> C2H4 (+M)  # Reaction 72
+  rate-constant: {A: 1.4e+30, b: -3.86, Ea: 3320.0}
+- equation: H + C2H4 (+M) <=> C2H5 (+M)  # Reaction 74
+  rate-constant: {A: 6.0e+41, b: -7.62, Ea: 6970.0}
+- equation: H + C2H5 (+M) <=> C2H6 (+M)  # Reaction 76
+  rate-constant: {A: 1.99e+41, b: -7.08, Ea: 6685.0}
+- equation: H2 + CO (+M) <=> CH2O (+M)  # Reaction 83
+  rate-constant: {A: 5.07e+27, b: -3.42, Ea: 8.435e+04}
+- equation: 2 OH (+M) <=> H2O2 (+M)  # Reaction 85
+  rate-constant: {A: 2.3e+18, b: -0.9, Ea: -1700.0}
+- equation: OH + CH3 (+M) <=> CH3OH (+M)  # Reaction 95
+  rate-constant: {A: 4.0e+36, b: -5.92, Ea: 3140.0}
+- equation: CH + CO (+M) <=> HCCO (+M)  # Reaction 131
+  rate-constant: {A: 2.69e+28, b: -3.74, Ea: 1936.0}
+- equation: CH2 + CO (+M) <=> CH2CO (+M)  # Reaction 140
+  rate-constant: {A: 2.69e+33, b: -5.11, Ea: 7095.0}
+- equation: CH2(S) + H2O (+M) <=> CH3OH (+M)  # Reaction 147
+  rate-constant: {A: 1.88e+38, b: -6.36, Ea: 5040.0}
+- equation: 2 CH3 (+M) <=> C2H6 (+M)  # Reaction 158
+  rate-constant: {A: 3.4e+41, b: -7.03, Ea: 2762.0}
+- equation: HCO + M <=> H + CO + M  # Reaction 167
+  type: three-body
+  rate-constant: {A: 1.87e+17, b: -1.0, Ea: 1.7e+04}
+  efficiencies: {H2: 2.0, H2O: 0.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0}
+- equation: C2H4 (+M) <=> H2 + C2H2 (+M)  # Reaction 174
+  rate-constant: {A: 1.58e+51, b: -9.3, Ea: 9.78e+04}
+- equation: N2O (+M) <=> N2 + O (+M)  # Reaction 185
+  rate-constant: {A: 6.37e+14, b: 0.0, Ea: 5.664e+04}
+- equation: NO + O + M <=> NO2 + M  # Reaction 187
+  type: three-body
+  rate-constant: {A: 1.06e+20, b: -1.41, Ea: 0.0}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: NNH + M <=> N2 + H + M  # Reaction 205
+  type: three-body
+  rate-constant: {A: 1.3e+14, b: -0.11, Ea: 4980.0}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: H + NO + M <=> HNO + M  # Reaction 212
+  type: three-body
+  rate-constant: {A: 4.48e+19, b: -1.32, Ea: 740.0}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: NCO + M <=> N + CO + M  # Reaction 227
+  type: three-body
+  rate-constant: {A: 3.1e+14, b: 0.0, Ea: 5.405e+04}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: HCN + M <=> H + CN + M  # Reaction 230
+  type: three-body
+  rate-constant: {A: 1.04e+29, b: -3.3, Ea: 1.266e+05}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: H + HCN (+M) <=> H2CN (+M)  # Reaction 237
+  rate-constant: {A: 1.4e+26, b: -3.4, Ea: 1900.0}
+- equation: CH + N2 (+M) <=> HCNN (+M)  # Reaction 241
+  rate-constant: {A: 1.3e+25, b: -3.16, Ea: 740.0}
+- equation: HNCO + M <=> NH + CO + M  # Reaction 269
+  type: three-body
+  rate-constant: {A: 1.18e+16, b: 0.0, Ea: 8.472e+04}
+  efficiencies: {H2: 2.0, H2O: 6.0, CH4: 2.0, CO: 1.5, CO2: 2.0, C2H6: 3.0, AR: 0.7}
+- equation: CH + H2 (+M) <=> CH3 (+M)  # Reaction 289
+  rate-constant: {A: 4.82e+25, b: -2.8, Ea: 590.0}
+- equation: H + CH2CO (+M) <=> CH2CHO (+M)  # Reaction 304
+  rate-constant: {A: 1.012e+42, b: -7.63, Ea: 3854.0}
+- equation: CH3 + C2H5 (+M) <=> C3H8 (+M)  # Reaction 312
+  rate-constant: {A: 2.71e+74, b: -16.82, Ea: 1.3065e+04}
+- equation: CH3 + C2H4 (+M) <=> C3H7 (+M)  # Reaction 318
+  rate-constant: {A: 3.0e+63, b: -14.6, Ea: 1.817e+04}
+- equation: H + C3H7 (+M) <=> C3H8 (+M)  # Reaction 320
+  rate-constant: {A: 4.42e+61, b: -13.545, Ea: 1.1357e+04}

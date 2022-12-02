@@ -6146,4 +6146,833 @@ species:
     rotational-relaxation: 1.0
   note: SDT18
 
-reactions: []
+reactions:
+- equation: H + H + M <=> H2 + M  # Reaction 5
+  type: three-body
+  rate-constant: {A: 1.78e+18, b: -1.0, Ea: 0.0}
+  efficiencies: {CO2: 0.0, H2O: 0.0, H2: 0.0, AR: 0.63}
+- equation: H + OH + M <=> H2O + M  # Reaction 9
+  type: three-body
+  rate-constant: {A: 4.4e+22, b: -2.0, Ea: 0.0}
+  efficiencies: {CO2: 3.6, H2O: 6.3, H2: 2.0, CO: 1.75, AR: 0.38}
+- equation: O + H + M <=> OH + M  # Reaction 10
+  type: three-body
+  rate-constant: {A: 9.428e+18, b: -1.0, Ea: 0.0}
+  efficiencies: {CO2: 3.6, H2O: 12.0, H2: 2.0, CO: 1.75, AR: 0.7}
+- equation: O + O + M <=> O2 + M  # Reaction 11
+  type: three-body
+  rate-constant: {A: 1.2e+17, b: -1.0, Ea: 0.0}
+  efficiencies: {CO2: 3.6, H2O: 15.4, H2: 2.4, CO: 1.75, AR: 0.83}
+- equation: H + O2 (+ M) <=> HO2 (+ M)  # Reaction 12
+  rate-constant: {A: 6.328e+19, b: -1.4, Ea: 0.0}
+- equation: OH + OH (+ M) <=> H2O2 (+ M)  # Reaction 14
+  rate-constant: {A: 2.01e+17, b: -0.584, Ea: -2293.0}
+- equation: CO + O (+ M) <=> CO2 (+ M)  # Reaction 26
+  rate-constant: {A: 1.173e+24, b: -2.79, Ea: 4191.0}
+- equation: HCO + M <=> CO + H + M  # Reaction 35
+  type: three-body
+  rate-constant: {A: 1.87e+17, b: -1.0, Ea: 1.7e+04}
+  efficiencies: {CO2: 3.6, H2: 2.0, CO: 1.75, H2O: 0.0}
+- equation: CO + H2 (+ M) <=> CH2O (+ M)  # Reaction 38
+  rate-constant: {A: 5.07e+27, b: -3.42, Ea: 8.435e+04}
+- equation: CH + CO (+ M) <=> HCCO (+ M)  # Reaction 47
+  rate-constant: {A: 2.69e+28, b: -3.74, Ea: 1936.0}
+- equation: HCO + H (+ M) <=> CH2O (+ M)  # Reaction 49
+  rate-constant: {A: 1.35e+24, b: -2.57, Ea: 1425.0}
+- equation: CH2 + H (+ M) <=> CH3 (+ M)  # Reaction 50
+  rate-constant: {A: 3.2e+27, b: -3.14, Ea: 1230.0}
+- equation: CH2 + CO (+ M) <=> CH2CO (+ M)  # Reaction 59
+  rate-constant: {A: 2.69e+33, b: -5.11, Ea: 7095.0}
+- equation: CH2* + H2O (+ M) <=> CH3OH (+ M)  # Reaction 71
+  rate-constant: {A: 2.7e+38, b: -6.3, Ea: 3100.0}
+- equation: CH2O + H (+ M) <=> CH2OH (+ M)  # Reaction 76
+  rate-constant: {A: 1.27e+32, b: -4.82, Ea: 6530.0}
+- equation: CH2O + H (+ M) <=> CH3O (+ M)  # Reaction 77
+  rate-constant: {A: 2.2e+30, b: -4.8, Ea: 5560.0}
+- equation: CH3 + H (+ M) <=> CH4 (+ M)  # Reaction 84
+  rate-constant: {A: 2.477e+33, b: -4.76, Ea: 2440.0}
+- equation: CH3 + OH (+ M) <=> CH3OH (+ M)  # Reaction 86
+  rate-constant: {A: 2.7e+38, b: -6.3, Ea: 3100.0}
+- equation: CH3 + CH3 (+ M) <=> C2H6 (+ M)  # Reaction 100
+  rate-constant: {A: 1.77e+50, b: -9.67, Ea: 6220.0}
+- equation: CH3O + H (+ M) <=> CH3OH (+ M)  # Reaction 104
+  rate-constant: {A: 8.6e+28, b: -4.0, Ea: 3025.0}
+- equation: CH2OH + H (+ M) <=> CH3OH (+ M)  # Reaction 112
+  rate-constant: {A: 3.0e+31, b: -4.8, Ea: 3300.0}
+- equation: C2H + H (+ M) <=> C2H2 (+ M)  # Reaction 134
+  rate-constant: {A: 3.75e+33, b: -4.8, Ea: 1900.0}
+- equation: C2H2 (+ M) <=> H2CC (+ M)  # Reaction 150
+  rate-constant: {A: 2.45e+15, b: -0.64, Ea: 4.97e+04}
+- equation: C2H3 (+ M) <=> C2H2 + H (+ M)  # Reaction 151
+  rate-constant: {A: 2.565e+27, b: -3.4, Ea: 3.579872e+04}
+- equation: C2H2 + C2H (+ M) <=> nC4H3 (+ M)  # Reaction 163
+  rate-constant: {A: 1.24e+31, b: -4.718, Ea: 1871.0}
+- equation: C2H2 + C2H (+ M) <=> iC4H3 (+ M)  # Reaction 164
+  rate-constant: {A: 1.24e+31, b: -4.718, Ea: 1871.0}
+- equation: H2CC + C2H2 (+ M) <=> C4H4 (+ M)  # Reaction 174
+  rate-constant: {A: 1.4e+60, b: -12.599, Ea: 7417.0}
+- equation: CH2CO + H (+ M) <=> CH2CHO (+ M)  # Reaction 176
+  rate-constant: {A: 3.8e+41, b: -7.64, Ea: 1.19e+04}
+- equation: C2H3 + H (+ M) <=> C2H4 (+ M)  # Reaction 183
+  rate-constant: {A: 1.4e+30, b: -3.86, Ea: 3320.0}
+- equation: C2H3 + CH3 (+ M) <=> C3H6 (+ M)  # Reaction 197
+  rate-constant: {A: 4.27e+58, b: -11.94, Ea: 9769.8}
+- equation: CH2CHO + H (+ M) <=> CH3CHO (+ M)  # Reaction 207
+  rate-constant: {A: 5.2e+39, b: -7.297, Ea: 4700.0}
+- equation: CH3 + CO (+ M) <=> CH3CO (+ M)  # Reaction 215
+  rate-constant: {A: 7.8e+30, b: -5.395, Ea: 8600.0}
+- equation: CH3CO + H (+ M) <=> CH3CHO (+ M)  # Reaction 216
+  rate-constant: {A: 3.85e+44, b: -8.569, Ea: 5500.0}
+- equation: CH3 + HCO (+ M) <=> CH3CHO (+ M)  # Reaction 224
+  rate-constant: {A: 2.2e+48, b: -9.588, Ea: 5100.0}
+- equation: CH2OCH + M <=> CH3 + CO + M  # Reaction 241
+  type: three-body
+  rate-constant: {A: 3.16e+14, b: 0.0, Ea: 1.2e+04}
+- equation: CH2OCH + M <=> CH2CHO + M  # Reaction 242
+  type: three-body
+  rate-constant: {A: 5.0e+09, b: 0.0, Ea: 0.0}
+- equation: CH2OCH + M <=> CH2CO + H + M  # Reaction 243
+  type: three-body
+  rate-constant: {A: 3.0e+13, b: 0.0, Ea: 8000.0}
+- equation: C2H4 + M <=> H2 + H2CC + M  # Reaction 244
+  type: three-body
+  rate-constant: {A: 7.86e+14, b: 0.0, Ea: 5.4245e+04}
+  efficiencies: {CH4: 2.0, CO: 1.5, AR: 0.7, CO2: 2.0, H2O: 6.0, C2H6: 3.0, H2: 2.0}
+- equation: C2H4 + H (+ M) <=> C2H5 (+ M)  # Reaction 245
+  rate-constant: {A: 2.027e+39, b: -6.642, Ea: 5769.0}
+- equation: C2H5 + H (+ M) <=> C2H6 (+ M)  # Reaction 263
+  rate-constant: {A: 1.99e+41, b: -7.08, Ea: 6685.0}
+- equation: C2H5 + CH3 (+ M) <=> C3H8 (+ M)  # Reaction 272
+  rate-constant: {A: 6.8e+61, b: -13.42, Ea: 6000.0}
+- equation: C2H5 + C2H3 (+ M) <=> C4H81 (+ M)  # Reaction 273
+  rate-constant: {A: 1.55e+56, b: -11.79, Ea: 8984.5}
+- equation: C3H3 + CH3 (+ M) <=> C4H612 (+ M)  # Reaction 292
+  rate-constant: {A: 2.6e+57, b: -11.94, Ea: 9770.0}
+- equation: aC3H5 + H (+ M) <=> C3H6 (+ M)  # Reaction 321
+  rate-constant: {A: 1.33e+60, b: -12.0, Ea: 5967.8}
+- equation: aC3H5 + CH3 (+ M) <=> C4H81 (+ M)  # Reaction 332
+  rate-constant: {A: 3.91e+60, b: -12.81, Ea: 6250.0}
+- equation: C3H6 + H (+ M) <=> nC3H7 (+ M)  # Reaction 353
+  rate-constant: {A: 6.26e+38, b: -6.66, Ea: 7000.0}
+- equation: C3H6 + H (+ M) <=> iC3H7 (+ M)  # Reaction 354
+  rate-constant: {A: 8.7e+42, b: -7.5, Ea: 4721.8}
+- equation: iC3H7 + H (+ M) <=> C3H8 (+ M)  # Reaction 387
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: nC3H7 + H (+ M) <=> C3H8 (+ M)  # Reaction 396
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: C4H7 + H (+ M) <=> C4H81 (+ M)  # Reaction 535
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: iC4H7 + H (+ M) <=> iC4H8 (+ M)  # Reaction 542
+  rate-constant: {A: 1.33e+60, b: -12.0, Ea: 5967.8}
+- equation: C4H81 + H (+ M) <=> pC4H9 (+ M)  # Reaction 546
+  rate-constant: {A: 6.26e+38, b: -6.66, Ea: 7000.0}
+- equation: C4H81 + H (+ M) <=> sC4H9 (+ M)  # Reaction 547
+  rate-constant: {A: 8.7e+42, b: -7.5, Ea: 4721.8}
+- equation: C4H82 + H (+ M) <=> sC4H9 (+ M)  # Reaction 558
+  rate-constant: {A: 8.7e+42, b: -7.5, Ea: 4721.8}
+- equation: iC4H8 + H (+ M) <=> iC4H9 (+ M)  # Reaction 565
+  rate-constant: {A: 6.26e+38, b: -6.66, Ea: 7000.0}
+- equation: pC4H9 + H (+ M) <=> C4H10 (+ M)  # Reaction 576
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: C3H6 + CH3 (+ M) <=> sC4H9 (+ M)  # Reaction 585
+  rate-constant: {A: 2.31e+28, b: -4.27, Ea: 1831.0}
+- equation: sC4H9 + H (+ M) <=> C4H10 (+ M)  # Reaction 586
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C3H6 + CH3 (+ M) <=> iC4H9 (+ M)  # Reaction 599
+  rate-constant: {A: 1.3e+28, b: -4.27, Ea: 2431.1}
+- equation: iC4H9 + H (+ M) <=> iC4H10 (+ M)  # Reaction 600
+  rate-constant: {A: 3.27e+56, b: -11.74, Ea: 6430.8}
+- equation: tC4H9 (+ M) <=> iC4H8 + H (+ M)  # Reaction 609
+  rate-constant: {A: 1.9e+41, b: -7.36, Ea: 3.66317e+04}
+- equation: tC4H9 + H (+ M) <=> iC4H10 (+ M)  # Reaction 610
+  rate-constant: {A: 1.47e+61, b: -12.94, Ea: 8000.0}
+- equation: nC3H7 + CH3 (+ M) <=> C4H10 (+ M)  # Reaction 623
+  rate-constant: {A: 2.68e+61, b: -13.24, Ea: 6000.0}
+- equation: C2H5 + C2H5 (+ M) <=> C4H10 (+ M)  # Reaction 624
+  rate-constant: {A: 2.61e+61, b: -13.42, Ea: 6000.0}
+- equation: iC3H7 + CH3 (+ M) <=> iC4H10 (+ M)  # Reaction 637
+  rate-constant: {A: 4.16e+61, b: -13.33, Ea: 3903.4}
+- equation: C6H5CH2 + H (+ M) <=> C6H5CH3 (+ M)  # Reaction 672
+  rate-constant: {A: 1.1e+103, b: -24.63, Ea: 1.459e+04}
+- equation: OC6H4CH3 + H (+ M) <=> HOC6H4CH3 (+ M)  # Reaction 694
+  rate-constant: {A: 4.0e+93, b: -21.84, Ea: 1.388e+04}
+- equation: C6H5 + H (+ M) <=> C6H6 (+ M)  # Reaction 702
+  rate-constant: {A: 6.6e+75, b: -16.3, Ea: 7000.0}
+- equation: C6H5 (+ M) <=> o-C6H4 + H (+ M)  # Reaction 708
+  rate-constant: {A: 1.0e+84, b: -18.866, Ea: 9.0064e+04}
+- equation: C5H5 + H (+ M) <=> C5H6 (+ M)  # Reaction 745
+  rate-constant: {A: 4.4e+80, b: -18.28, Ea: 1.2994e+04}
+- equation: PXC5H9 + H (+ M) <=> C5H10 (+ M)  # Reaction 781
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC5H11 (+ M) <=> C2H4 + nC3H7 (+ M)  # Reaction 807
+  rate-constant: {A: 7.1e-35, b: 15.411, Ea: -600.0}
+- equation: SXC5H11 (+ M) <=> C3H6 + C2H5 (+ M)  # Reaction 808
+  rate-constant: {A: 3.7e-33, b: 14.91, Ea: -600.0}
+- equation: S2XC5H11 (+ M) <=> C4H81 + CH3 (+ M)  # Reaction 809
+  rate-constant: {A: 4.0e-39, b: 16.782, Ea: -600.4}
+- equation: SXC5H11 + H (+ M) <=> NC5H12 (+ M)  # Reaction 810
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC5H11 + H (+ M) <=> NC5H12 (+ M)  # Reaction 819
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC6H11 + H (+ M) <=> C6H12 (+ M)  # Reaction 848
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC6H13 (+ M) <=> C2H4 + pC4H9 (+ M)  # Reaction 869
+  rate-constant: {A: 7.1e-35, b: 15.411, Ea: -600.0}
+- equation: SXC6H13 (+ M) <=> C3H6 + nC3H7 (+ M)  # Reaction 870
+  rate-constant: {A: 3.7e-33, b: 14.91, Ea: -600.0}
+- equation: S2XC6H13 (+ M) <=> C2H5 + C4H81 (+ M)  # Reaction 871
+  rate-constant: {A: 4.5e-26, b: 13.09, Ea: -600.5}
+- equation: S2XC6H13 (+ M) <=> C5H10 + CH3 (+ M)  # Reaction 872
+  rate-constant: {A: 4.0e-39, b: 16.782, Ea: -600.4}
+- equation: SXC6H13 + H (+ M) <=> NC6H14 (+ M)  # Reaction 881
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC7H13 + H (+ M) <=> C7H14 (+ M)  # Reaction 912
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC7H15 (+ M) <=> C2H4 + PXC5H11 (+ M)  # Reaction 928
+  rate-constant: {A: 2.8e-44, b: 18.729, Ea: -602.5}
+- equation: SXC7H15 (+ M) <=> pC4H9 + C3H6 (+ M)  # Reaction 929
+  rate-constant: {A: 8.9e-39, b: 16.934, Ea: -602.5}
+- equation: S2XC7H15 (+ M) <=> nC3H7 + C4H81 (+ M)  # Reaction 930
+  rate-constant: {A: 2.0e-38, b: 16.814, Ea: -602.4}
+- equation: S2XC7H15 (+ M) <=> C6H12 + CH3 (+ M)  # Reaction 931
+  rate-constant: {A: 1.06e-42, b: 18.004, Ea: -602.4}
+- equation: S3XC7H15 (+ M) <=> C2H5 + C5H10 (+ M)  # Reaction 932
+  rate-constant: {A: 2.1e-38, b: 16.897, Ea: -602.5}
+- equation: PXC7H15 + H (+ M) <=> NC7H16 (+ M)  # Reaction 933
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC8H15 + H (+ M) <=> C8H16 (+ M)  # Reaction 979
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC8H17 (+ M) <=> C2H4 + PXC6H13 (+ M)  # Reaction 995
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC8H17 (+ M) <=> PXC5H11 + C3H6 (+ M)  # Reaction 996
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC8H17 (+ M) <=> pC4H9 + C4H81 (+ M)  # Reaction 997
+  rate-constant: {A: 3.0e-43, b: 18.43, Ea: -602.8}
+- equation: S2XC8H17 (+ M) <=> C7H14 + CH3 (+ M)  # Reaction 998
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC8H17 (+ M) <=> nC3H7 + C5H10 (+ M)  # Reaction 999
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC8H17 (+ M) <=> C6H12 + C2H5 (+ M)  # Reaction 1000
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: PXC8H17 + H (+ M) <=> NC8H18 (+ M)  # Reaction 1001
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC8H17 + H (+ M) <=> NC8H18 (+ M)  # Reaction 1010
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC9H17 + H (+ M) <=> C9H18 (+ M)  # Reaction 1049
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC9H19 (+ M) <=> C2H4 + PXC7H15 (+ M)  # Reaction 1065
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC9H19 (+ M) <=> C3H6 + PXC6H13 (+ M)  # Reaction 1066
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC9H19 (+ M) <=> PXC5H11 + C4H81 (+ M)  # Reaction 1067
+  rate-constant: {A: 3.0e-43, b: 18.43, Ea: -602.8}
+- equation: S2XC9H19 (+ M) <=> C8H16 + CH3 (+ M)  # Reaction 1068
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC9H19 (+ M) <=> pC4H9 + C5H10 (+ M)  # Reaction 1069
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC9H19 (+ M) <=> C7H14 + C2H5 (+ M)  # Reaction 1070
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: S4XC9H19 (+ M) <=> nC3H7 + C6H12 (+ M)  # Reaction 1071
+  rate-constant: {A: 6.2e-43, b: 18.418, Ea: -602.9}
+- equation: PXC9H19 + H (+ M) <=> NC9H20 (+ M)  # Reaction 1072
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC9H19 + H (+ M) <=> NC9H20 (+ M)  # Reaction 1081
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC10H19 + H (+ M) <=> C10H20 (+ M)  # Reaction 1127
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC10H21 (+ M) <=> C2H4 + PXC8H17 (+ M)  # Reaction 1143
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC10H21 (+ M) <=> C3H6 + PXC7H15 (+ M)  # Reaction 1144
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC10H21 (+ M) <=> PXC6H13 + C4H81 (+ M)  # Reaction 1145
+  rate-constant: {A: 3.0e-43, b: 18.43, Ea: -602.8}
+- equation: S2XC10H21 (+ M) <=> C9H18 + CH3 (+ M)  # Reaction 1146
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC10H21 (+ M) <=> PXC5H11 + C5H10 (+ M)  # Reaction 1147
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC10H21 (+ M) <=> C8H16 + C2H5 (+ M)  # Reaction 1148
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: S4XC10H21 (+ M) <=> pC4H9 + C6H12 (+ M)  # Reaction 1149
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S4XC10H21 (+ M) <=> C7H14 + nC3H7 (+ M)  # Reaction 1150
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: PXC10H21 + H (+ M) <=> NC10H22 (+ M)  # Reaction 1151
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC10H21 + H (+ M) <=> NC10H22 (+ M)  # Reaction 1160
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC11H21 + H (+ M) <=> C11H22 (+ M)  # Reaction 1207
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC11H23 (+ M) <=> C2H4 + PXC9H19 (+ M)  # Reaction 1223
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC11H23 (+ M) <=> PXC8H17 + C3H6 (+ M)  # Reaction 1224
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC11H23 (+ M) <=> PXC7H15 + C4H81 (+ M)  # Reaction 1225
+  rate-constant: {A: 3.0e-43, b: 18.43, Ea: -602.8}
+- equation: S2XC11H23 (+ M) <=> C10H20 + CH3 (+ M)  # Reaction 1226
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC11H23 (+ M) <=> PXC6H13 + C5H10 (+ M)  # Reaction 1227
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC11H23 (+ M) <=> C9H18 + C2H5 (+ M)  # Reaction 1228
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: S4XC11H23 (+ M) <=> PXC5H11 + C6H12 (+ M)  # Reaction 1229
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S4XC11H23 (+ M) <=> C8H16 + nC3H7 (+ M)  # Reaction 1230
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S5XC11H23 (+ M) <=> pC4H9 + C7H14 (+ M)  # Reaction 1231
+  rate-constant: {A: 6.2e-43, b: 18.418, Ea: -602.9}
+- equation: PXC11H23 + H (+ M) <=> NC11H24 (+ M)  # Reaction 1232
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC11H23 + H (+ M) <=> NC11H24 (+ M)  # Reaction 1241
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC12H23 + H (+ M) <=> C12H24 (+ M)  # Reaction 1295
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC12H25 (+ M) <=> C2H4 + PXC10H21 (+ M)  # Reaction 1311
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC12H25 (+ M) <=> C3H6 + PXC9H19 (+ M)  # Reaction 1312
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC12H25 (+ M) <=> C4H81 + PXC8H17 (+ M)  # Reaction 1313
+  rate-constant: {A: 3.0e-43, b: 18.43, Ea: -602.8}
+- equation: S2XC12H25 (+ M) <=> C11H22 + CH3 (+ M)  # Reaction 1314
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC12H25 (+ M) <=> C5H10 + PXC7H15 (+ M)  # Reaction 1315
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC12H25 (+ M) <=> C10H20 + C2H5 (+ M)  # Reaction 1316
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: S4XC12H25 (+ M) <=> C6H12 + PXC6H13 (+ M)  # Reaction 1317
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S4XC12H25 (+ M) <=> C9H18 + nC3H7 (+ M)  # Reaction 1318
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S5XC12H25 (+ M) <=> C7H14 + PXC5H11 (+ M)  # Reaction 1319
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S5XC12H25 (+ M) <=> C8H16 + pC4H9 (+ M)  # Reaction 1320
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: PXC12H25 + H (+ M) <=> NC12H26 (+ M)  # Reaction 1321
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: PXC12H25 (+ M) <=> S3XC12H25 (+ M)  # Reaction 1334
+  rate-constant: {A: 5.1e-44, b: 18.749, Ea: -602.9}
+- equation: PXC11H23 (+ M) <=> S3XC11H23 (+ M)  # Reaction 1335
+  rate-constant: {A: 5.1e-44, b: 18.749, Ea: -602.9}
+- equation: PXC10H21 (+ M) <=> S3XC10H21 (+ M)  # Reaction 1336
+  rate-constant: {A: 5.1e-44, b: 18.749, Ea: -602.9}
+- equation: PXC9H19 (+ M) <=> S3XC9H19 (+ M)  # Reaction 1337
+  duplicate: true
+  rate-constant: {A: 5.1e-44, b: 18.749, Ea: -602.9}
+- equation: PXC8H17 (+ M) <=> S3XC8H17 (+ M)  # Reaction 1338
+  duplicate: true
+  rate-constant: {A: 5.1e-44, b: 18.749, Ea: -602.9}
+- equation: PXC7H15 (+ M) <=> S3XC7H15 (+ M)  # Reaction 1339
+  rate-constant: {A: 1.9e-31, b: 14.521, Ea: -599.0}
+- equation: PXC6H13 (+ M) <=> S2XC6H13 (+ M)  # Reaction 1340
+  rate-constant: {A: 2.0e-26, b: 12.833, Ea: -600.7}
+- equation: PXC5H11 (+ M) <=> SXC5H11 (+ M)  # Reaction 1341
+  rate-constant: {A: 2.0e-26, b: 12.833, Ea: -600.7}
+- equation: PXC12H25 (+ M) <=> S4XC12H25 (+ M)  # Reaction 1342
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PXC11H23 (+ M) <=> S4XC11H23 (+ M)  # Reaction 1343
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PXC10H21 (+ M) <=> S4XC10H21 (+ M)  # Reaction 1344
+  duplicate: true
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PXC9H19 (+ M) <=> S4XC9H19 (+ M)  # Reaction 1345
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PXC8H17 (+ M) <=> S3XC8H17 (+ M)  # Reaction 1346
+  duplicate: true
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PXC7H15 (+ M) <=> S2XC7H15 (+ M)  # Reaction 1347
+  rate-constant: {A: 5.4e-26, b: 13.202, Ea: -602.6}
+- equation: PXC6H13 (+ M) <=> SXC6H13 (+ M)  # Reaction 1348
+  rate-constant: {A: 5.4e-26, b: 13.087, Ea: -602.6}
+- equation: PXC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1349
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: -606.2}
+- equation: PXC11H23 (+ M) <=> S5XC11H23 (+ M)  # Reaction 1350
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: -606.2}
+- equation: PXC10H21 (+ M) <=> S4XC10H21 (+ M)  # Reaction 1351
+  duplicate: true
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: -606.2}
+- equation: PXC9H19 (+ M) <=> S3XC9H19 (+ M)  # Reaction 1352
+  duplicate: true
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: -606.2}
+- equation: PXC8H17 (+ M) <=> S2XC8H17 (+ M)  # Reaction 1353
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: -606.2}
+- equation: PXC7H15 (+ M) <=> SXC7H15 (+ M)  # Reaction 1354
+  rate-constant: {A: 3.3e-30, b: 14.309, Ea: -602.5}
+- equation: S3XC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1355
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S2XC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1356
+  duplicate: true
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: SXC12H25 (+ M) <=> S4XC12H25 (+ M)  # Reaction 1357
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S3XC11H23 (+ M) <=> S4XC11H23 (+ M)  # Reaction 1358
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S2XC11H23 (+ M) <=> S5XC11H23 (+ M)  # Reaction 1359
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: SXC11H23 (+ M) <=> S4XC11H23 (+ M)  # Reaction 1360
+  duplicate: true
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S4XC10H21 (+ M) <=> S2XC10H21 (+ M)  # Reaction 1361
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S4XC10H21 (+ M) <=> SXC10H21 (+ M)  # Reaction 1362
+  duplicate: true
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: SXC9H19 (+ M) <=> S4XC9H19 (+ M)  # Reaction 1363
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: S3XC9H19 (+ M) <=> S2XC9H19 (+ M)  # Reaction 1364
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: SXC8H17 (+ M) <=> S3XC8H17 (+ M)  # Reaction 1365
+  rate-constant: {A: 5.2e-30, b: 14.079, Ea: -606.4}
+- equation: SXC7H15 (+ M) <=> S2XC7H15 (+ M)  # Reaction 1366
+  rate-constant: {A: 1.3e-32, b: 14.834, Ea: -602.6}
+- equation: SXC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1367
+  duplicate: true
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: S2XC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1368
+  duplicate: true
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: S3XC12H25 (+ M) <=> S4XC12H25 (+ M)  # Reaction 1369
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: SXC11H23 (+ M) <=> S5XC11H23 (+ M)  # Reaction 1370
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: S2XC11H23 (+ M) <=> S4XC11H23 (+ M)  # Reaction 1371
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: S2XC10H21 (+ M) <=> S3XC10H21 (+ M)  # Reaction 1372
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: SXC10H21 (+ M) <=> S4XC10H21 (+ M)  # Reaction 1373
+  duplicate: true
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: SXC9H19 (+ M) <=> S2XC9H19 (+ M)  # Reaction 1374
+  duplicate: true
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: SXC8H17 (+ M) <=> S2XC8H17 (+ M)  # Reaction 1375
+  rate-constant: {A: 3.0e-27, b: 13.481, Ea: -606.5}
+- equation: S2XC12H25 (+ M) <=> S4XC12H25 (+ M)  # Reaction 1376
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: SXC12H25 (+ M) <=> S5XC12H25 (+ M)  # Reaction 1377
+  duplicate: true
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: S2XC11H23 (+ M) <=> S3XC11H23 (+ M)  # Reaction 1378
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: SXC11H23 (+ M) <=> S4XC11H23 (+ M)  # Reaction 1379
+  duplicate: true
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: SXC10H21 (+ M) <=> S3XC10H21 (+ M)  # Reaction 1380
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: SXC9H19 (+ M) <=> S2XC9H19 (+ M)  # Reaction 1381
+  duplicate: true
+  rate-constant: {A: 3.9e-34, b: 15.855, Ea: 1243.8}
+- equation: PXC4H8cC6H11 (+ M) <=> PXC2H4cC6H11 + C2H4 (+ M)  # Reaction 1497
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC4H8cC6H11 (+ M) <=> PXCH2cC6H11 + C3H6 (+ M)  # Reaction 1498
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC4H8cC6H11 (+ M) <=> cC6H11 + C4H81 (+ M)  # Reaction 1499
+  rate-constant: {A: 8.9e-37, b: 16.685, Ea: -661.7}
+- equation: S2XC4H8cC6H11 (+ M) <=> C3H5cC6H11 + CH3 (+ M)  # Reaction 1500
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: S3XC4H8cC6H11 (+ M) <=> C2H3cC6H11 + C2H5 (+ M)  # Reaction 1501
+  rate-constant: {A: 8.2e-43, b: 18.276, Ea: -602.9}
+- equation: S3XC4H8cC6H11 (+ M) <=> PX10-4C10H19 (+ M)  # Reaction 1502
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9TXcC6H10 (+ M) <=> CH2cC6H10 + nC3H7 (+ M)  # Reaction 1503
+  rate-constant: {A: 1.1e-39, b: 17.57, Ea: -603.1}
+- equation: C4H9TXcC6H10 (+ M) <=> PXC4H8-2-1C6H11 (+ M)  # Reaction 1504
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9S2XcC6H10 (+ M) <=> cC6H10 + pC4H9 (+ M)  # Reaction 1505
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: C4H9S2XcC6H10 (+ M) <=> PX10-5C10H19 (+ M)  # Reaction 1506
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9S2XcC6H10 (+ M) <=> PXC3H6-3-1C7H13 (+ M)  # Reaction 1507
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9S3XcC6H10 (+ M) <=> S4XC10H19 (+ M)  # Reaction 1508
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9S3XcC6H10 (+ M) <=> PXC2H4-4-1C8H15 (+ M)  # Reaction 1509
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C4H9S4XcC6H10 (+ M) <=> PXCH2-5-1C9H17 (+ M)  # Reaction 1510
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: PXC4H8cC6H11 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1511
+  rate-constant: {A: 1.5e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC4H8cC6H11 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1514
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: S2XC4H8cC6H11 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1516
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: S3XC4H8cC6H11 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1518
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C4H9TXcC6H10 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1520
+  rate-constant: {A: 1.47e+61, b: -12.94, Ea: 8000.0}
+- equation: C4H9S2XcC6H10 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1522
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C4H9S3XcC6H10 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1524
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C4H9S4XcC6H10 + H (+ M) <=> C4H9cC6H11 (+ M)  # Reaction 1526
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PX10-4C10H19 (+ M) <=> SAX6-4C10H19 (+ M)  # Reaction 1542
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PX10-4C10H19 (+ M) <=> PX1-4C8H15 + C2H4 (+ M)  # Reaction 1543
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXC4H8-2-1C6H11 (+ M) <=> SAXC4H8-2-1C6H11 (+ M)  # Reaction 1544
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXC4H8-2-1C6H11 (+ M) <=> PXC2H4-2-1C6H11 + C2H4 (+ M)  # Reaction 1545
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX10-5C10H19 (+ M) <=> SAX4-5C10H19 (+ M)  # Reaction 1546
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PX10-5C10H19 (+ M) <=> PX1-3C8H15 + C2H4 (+ M)  # Reaction 1547
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXC3H6-3-1C7H13 (+ M) <=> C3H7-3-TAX1C7H13 (+ M)  # Reaction 1548
+  rate-constant: {A: 8.1e-33, b: 15.214, Ea: -677.4}
+- equation: PXC3H6-3-1C7H13 (+ M) <=> PXCH2-3-1C7H13 + C2H4 (+ M)  # Reaction 1549
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: S4XC10H19 (+ M) <=> SAXC10H19 (+ M)  # Reaction 1550
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: S4XC10H19 (+ M) <=> C6H12 + C4H7 (+ M)  # Reaction 1551
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S4XC10H19 (+ M) <=> C7H12-16 + nC3H7 (+ M)  # Reaction 1552
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: PXC2H4-4-1C8H15 (+ M) <=> C2H5-4-SAX1C8H14 (+ M)  # Reaction 1553
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXC2H4-4-1C8H15 (+ M) <=> S4XC8H15 + C2H4 (+ M)  # Reaction 1554
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXCH2-5-1C9H17 (+ M) <=> CH3-5-SAX1C9H16 (+ M)  # Reaction 1555
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXCH2-5-1C9H17 (+ M) <=> C6H10-15 + pC4H9 (+ M)  # Reaction 1556
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C9H17 (+ M) <=> C4H7 + C6H12 (+ M)  # Reaction 1557
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: SAX6-4C10H19 (+ M) <=> nC3H7 + C7H12-13 (+ M)  # Reaction 1558
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAX6-4C10H19 (+ M) <=> C2H5 + C8H14-13 (+ M)  # Reaction 1559
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAXC4H8-2-1C6H11 (+ M) <=> CH2-3-1C7H12 + C2H5 (+ M)  # Reaction 1560
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAX4-5C10H19 (+ M) <=> C2H5 + C8H14-13 (+ M)  # Reaction 1561
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C3H7-3-TAX1C7H13 (+ M) <=> CH2-3-1C7H12 + C2H5 (+ M)  # Reaction 1562
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C3H7-3-TAX1C7H13 (+ M) <=> CH2-3-1C6H10 + nC3H7 (+ M)  # Reaction 1563
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAXC10H19 (+ M) <=> C4H6 + PXC6H13 (+ M)  # Reaction 1564
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-4-SAX1C8H14 (+ M) <=> C8H14-13 + C2H5 (+ M)  # Reaction 1565
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-4-SAX1C8H14 (+ M) <=> C6H10-13 + pC4H9 (+ M)  # Reaction 1566
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: CH3-5-SAX1C9H16 (+ M) <=> C4H6 + SXC6H13 (+ M)  # Reaction 1567
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: PXC3H6cC6H11 (+ M) <=> PXCH2cC6H11 + C2H4 (+ M)  # Reaction 1625
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: SXC3H6cC6H11 (+ M) <=> cC6H11 + C3H6 (+ M)  # Reaction 1626
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: S2XC3H6cC6H11 (+ M) <=> PX9-3C9H17 (+ M)  # Reaction 1627
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: S2XC3H6cC6H11 (+ M) <=> C2H3cC6H11 + CH3 (+ M)  # Reaction 1628
+  rate-constant: {A: 5.3e-46, b: 19.133, Ea: -602.7}
+- equation: C3H7S2XcC6H10 (+ M) <=> cC6H10 + nC3H7 (+ M)  # Reaction 1629
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: C3H7S2XcC6H10 (+ M) <=> PX9-4C9H17 (+ M)  # Reaction 1630
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C3H7S2XcC6H10 (+ M) <=> PXC3H6-3-1C6H11 (+ M)  # Reaction 1631
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C3H7TXcC6H10 (+ M) <=> CH2cC6H10 + C2H5 (+ M)  # Reaction 1632
+  rate-constant: {A: 1.1e-39, b: 17.57, Ea: -603.1}
+- equation: C3H7TXcC6H10 (+ M) <=> C3H7-2-PXC6H10 (+ M)  # Reaction 1633
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C3H7S3XcC6H10 (+ M) <=> S3XC9H17 (+ M)  # Reaction 1634
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C3H7S3XcC6H10 (+ M) <=> PXC2H4-4-1C7H13 (+ M)  # Reaction 1635
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C3H7S4XcC6H10 (+ M) <=> PXCH2-5-1C8H15 (+ M)  # Reaction 1636
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: PXC3H6cC6H11 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1646
+  rate-constant: {A: 1.5e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC3H6cC6H11 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1649
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: S2XC3H6cC6H11 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1651
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C3H7S2XcC6H10 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1653
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C3H7TXcC6H10 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1655
+  rate-constant: {A: 1.47e+61, b: -12.94, Ea: 8000.0}
+- equation: C3H7S3XcC6H10 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1657
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C3H7S4XcC6H10 + H (+ M) <=> C3H7cC6H11 (+ M)  # Reaction 1659
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PX9-3C9H17 (+ M) <=> PX1-3C7H13 + C2H4 (+ M)  # Reaction 1661
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX9-3C9H17 (+ M) <=> SAX5-3C9H17 (+ M)  # Reaction 1662
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PX9-4C9H17 (+ M) <=> PX1-3C7H13 + C2H4 (+ M)  # Reaction 1663
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX9-4C9H17 (+ M) <=> SAX6-4C9H17 (+ M)  # Reaction 1664
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXC3H6-3-1C6H11 (+ M) <=> PXCH2-3-1C6H11 + C2H4 (+ M)  # Reaction 1665
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXC3H6-3-1C6H11 (+ M) <=> C3H7-3-TAX1C6H10 (+ M)  # Reaction 1666
+  rate-constant: {A: 8.1e-33, b: 15.214, Ea: -677.4}
+- equation: C3H7-2-PXC6H10 (+ M) <=> PXC2H4-2-1C5H9 + C2H4 (+ M)  # Reaction 1667
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: C3H7-2-PXC6H10 (+ M) <=> C3H7-2-SAXC6H10 (+ M)  # Reaction 1668
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: S3XC9H17 (+ M) <=> C7H12-16 + C2H5 (+ M)  # Reaction 1669
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC9H17 (+ M) <=> C5H10 + C4H7 (+ M)  # Reaction 1670
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC9H17 (+ M) <=> SAXC9H17 (+ M)  # Reaction 1671
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXC2H4-4-1C7H13 (+ M) <=> S3XC7H13 + C2H4 (+ M)  # Reaction 1672
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXC2H4-4-1C7H13 (+ M) <=> C2H5-4-SAX1C7H12 (+ M)  # Reaction 1673
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXCH2-5-1C8H15 (+ M) <=> CH3-5-SAX1C8H14 (+ M)  # Reaction 1674
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXCH2-5-1C8H15 (+ M) <=> C5H10 + C4H7 (+ M)  # Reaction 1675
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C8H15 (+ M) <=> C6H10-15 + nC3H7 (+ M)  # Reaction 1676
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: SAX5-3C9H17 (+ M) <=> C6H10-13 + nC3H7 (+ M)  # Reaction 1677
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAX6-4C9H17 (+ M) <=> C7H12-13 + C2H5 (+ M)  # Reaction 1678
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C3H7-3-TAX1C6H10 (+ M) <=> CH2-3-1C6H10 + C2H5 (+ M)  # Reaction 1679
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C3H7-2-SAXC6H10 (+ M) <=> CH2-3-1C6H10 + C2H5 (+ M)  # Reaction 1680
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAXC9H17 (+ M) <=> PXC5H11 + C4H6 (+ M)  # Reaction 1681
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-4-SAX1C7H12 (+ M) <=> C7H12-13 + C2H5 (+ M)  # Reaction 1682
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-4-SAX1C7H12 (+ M) <=> C6H10-12 + nC3H7 (+ M)  # Reaction 1683
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: CH3-5-SAX1C8H14 (+ M) <=> PXC5H11 + C4H6 (+ M)  # Reaction 1684
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: PXC2H4cC6H11 (+ M) <=> cC6H11 + C2H4 (+ M)  # Reaction 1736
+  rate-constant: {A: 1.0e-43, b: 18.591, Ea: -602.5}
+- equation: SXC2H4cC6H11 (+ M) <=> PX8-2C8H15 (+ M)  # Reaction 1737
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5TXcC6H10 (+ M) <=> CH2cC6H10 + CH3 (+ M)  # Reaction 1738
+  rate-constant: {A: 1.1e-39, b: 17.57, Ea: -603.1}
+- equation: C2H5TXcC6H10 (+ M) <=> C2H5-2-PXC6H10 (+ M)  # Reaction 1739
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5S2XcC6H10 (+ M) <=> cC6H10 + C2H5 (+ M)  # Reaction 1740
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: C2H5S2XcC6H10 (+ M) <=> PX8-3C8H15 (+ M)  # Reaction 1741
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5S2XcC6H10 (+ M) <=> C2H5-3-PXC6H10 (+ M)  # Reaction 1742
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5S3XcC6H10 (+ M) <=> S2XC8H15 (+ M)  # Reaction 1743
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5S3XcC6H10 (+ M) <=> PXC2H4-4-1C6H11 (+ M)  # Reaction 1744
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: C2H5S4XcC6H10 (+ M) <=> PXCH2-5-1C7H13 (+ M)  # Reaction 1745
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: PXC2H4cC6H11 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1751
+  rate-constant: {A: 1.5e+48, b: -9.32, Ea: 5833.6}
+- equation: SXC2H4cC6H11 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1754
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C2H5TXcC6H10 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1756
+  rate-constant: {A: 1.47e+61, b: -12.94, Ea: 8000.0}
+- equation: C2H5S2XcC6H10 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1758
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C2H5S3XcC6H10 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1760
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: C2H5S4XcC6H10 + H (+ M) <=> C2H5cC6H11 (+ M)  # Reaction 1762
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PX8-2C8H15 (+ M) <=> SAX4-2C8H15 (+ M)  # Reaction 1764
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: PX8-2C8H15 (+ M) <=> PX6-2C6H11 + C2H4 (+ M)  # Reaction 1765
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: C2H5-2-PXC6H10 (+ M) <=> PXC2H4-2-1C4H7 + C2H4 (+ M)  # Reaction 1766
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX8-3C8H15 (+ M) <=> PX1-3C6H11 + C2H4 (+ M)  # Reaction 1767
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX8-3C8H15 (+ M) <=> SAX5-3C8H15 (+ M)  # Reaction 1768
+  rate-constant: {A: 9.9e-38, b: 17.215, Ea: -603.0}
+- equation: C2H5-3-PXC6H10 (+ M) <=> PXCH2-3-1C5H9 + C2H4 (+ M)  # Reaction 1769
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: S2XC8H15 (+ M) <=> C4H7 + C4H81 (+ M)  # Reaction 1770
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S2XC8H15 (+ M) <=> C7H12-16 + CH3 (+ M)  # Reaction 1771
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S2XC8H15 (+ M) <=> SAXC8H15 (+ M)  # Reaction 1772
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXC2H4-4-1C6H11 (+ M) <=> S2XC6H11 + C2H4 (+ M)  # Reaction 1773
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PXC2H4-4-1C6H11 (+ M) <=> C2H5-4-SAX1C6H10 (+ M)  # Reaction 1774
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXCH2-5-1C7H13 (+ M) <=> C4H7 + C4H81 (+ M)  # Reaction 1775
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C7H13 (+ M) <=> C6H10-15 + C2H5 (+ M)  # Reaction 1776
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C7H13 (+ M) <=> CH3-5-SAX1C7H12 (+ M)  # Reaction 1777
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: SAX4-2C8H15 (+ M) <=> C5H8-13 + nC3H7 (+ M)  # Reaction 1778
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-2-SAX1C6H10 (+ M) <=> CH2-3-1C5H8 + C2H5 (+ M)  # Reaction 1779
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAX5-3C8H15 (+ M) <=> C6H10-13 + C2H5 (+ M)  # Reaction 1781
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-3-TAX1C6H10 (+ M) <=> CH2-3-1C6H10 + CH3 (+ M)  # Reaction 1782
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-3-TAX1C6H10 (+ M) <=> CH2-3-1C5H8 + C2H5 (+ M)  # Reaction 1783
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: SAXC8H15 (+ M) <=> C4H6 + pC4H9 (+ M)  # Reaction 1784
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: C2H5-4-SAX1C6H10 (+ M) <=> C6H10-13 + C2H5 (+ M)  # Reaction 1785
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: CH3-5-SAX1C7H12 (+ M) <=> C4H6 + sC4H9 (+ M)  # Reaction 1786
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: PX1-4C8H15 (+ M) <=> C2H4 + SAXC6H11 (+ M)  # Reaction 1787
+  rate-constant: {A: 5.9e-31, b: 13.982, Ea: -603.1}
+- equation: PXC2H4-2-1C6H11 (+ M) <=> C2H5-2-SAX1C6H10 (+ M)  # Reaction 1788
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: C2H5-2-SAX1C6H10 (+ M) <=> C6H10-12 + C2H5 (+ M)  # Reaction 1789
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: PX1-3C8H15 (+ M) <=> C8H14-13 + H (+ M)  # Reaction 1790
+  rate-constant: {A: 2.2e-38, b: 13.17, Ea: -603.1}
+- equation: PXCH2-3-1C7H13 (+ M) <=> C4H6 + pC4H9 (+ M)  # Reaction 1791
+  rate-constant: {A: 5.8e-28, b: 12.34, Ea: -603.2}
+- equation: S4XC8H15 (+ M) <=> C5H8-14 + nC3H7 (+ M)  # Reaction 1792
+  rate-constant: {A: 9.1e-19, b: 11.346, Ea: -602.9}
+- equation: PXCH2-2-C6H13 (+ M) <=> C6H12 + CH3 (+ M)  # Reaction 1798
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-2-C6H13 (+ M) <=> C3H6 + pC4H9 (+ M)  # Reaction 1799
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: PXCH2-2-C6H13 (+ M) <=> CH3-2-SXC6H12 (+ M)  # Reaction 1800
+  rate-constant: {A: 5.4e-26, b: 13.087, Ea: -602.6}
+- equation: CH3-2-SXC6H12 (+ M) <=> iC4H9 + C3H6 (+ M)  # Reaction 1801
+  rate-constant: {A: 3.7e-33, b: 14.91, Ea: -600.0}
+- equation: PXCH2cC6H11 (+ M) <=> PXC7H13 (+ M)  # Reaction 1841
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: CH3TXcC6H10 (+ M) <=> CH3-2-PXC6H10 (+ M)  # Reaction 1842
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: CH3S2XcC6H10 (+ M) <=> PX7-2C7H13 (+ M)  # Reaction 1843
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: CH3S2XcC6H10 (+ M) <=> cC6H10 + CH3 (+ M)  # Reaction 1844
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: CH3S2XcC6H10 (+ M) <=> CH3-3-PXC6H10 (+ M)  # Reaction 1845
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: CH3S3XcC6H10 (+ M) <=> SXC7H13 (+ M)  # Reaction 1846
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: CH3S3XcC6H10 (+ M) <=> CH3-4-PXC6H10 (+ M)  # Reaction 1847
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: CH3S4XcC6H10 (+ M) <=> PXCH2-5-1C6H11 (+ M)  # Reaction 1848
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: PXCH2cC6H11 + H (+ M) <=> CH3cC6H11 (+ M)  # Reaction 1851
+  rate-constant: {A: 1.5e+48, b: -9.32, Ea: 5833.6}
+- equation: CH3TXcC6H10 + H (+ M) <=> CH3cC6H11 (+ M)  # Reaction 1854
+  rate-constant: {A: 1.47e+61, b: -12.94, Ea: 8000.0}
+- equation: CH3S2XcC6H10 + H (+ M) <=> CH3cC6H11 (+ M)  # Reaction 1856
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: CH3S3XcC6H10 + H (+ M) <=> CH3cC6H11 (+ M)  # Reaction 1858
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: CH3S4XcC6H10 + H (+ M) <=> CH3cC6H11 (+ M)  # Reaction 1860
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: SXC7H13 (+ M) <=> SAXC7H13 (+ M)  # Reaction 1862
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: SXC7H13 (+ M) <=> C4H7 + C3H6 (+ M)  # Reaction 1863
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: CH3-4-PXC6H10 (+ M) <=> SXC5H9 + C2H4 (+ M)  # Reaction 1864
+  rate-constant: {A: 2.8e-44, b: 18.729, Ea: -602.5}
+- equation: CH3-4-PXC6H10 (+ M) <=> CH3-4-SAXC6H10 (+ M)  # Reaction 1865
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PXCH2-5-1C6H11 (+ M) <=> C4H7 + C3H6 (+ M)  # Reaction 1866
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C6H11 (+ M) <=> C6H10-15 + CH3 (+ M)  # Reaction 1867
+  rate-constant: {A: 4.7e-39, b: 16.77, Ea: -603.1}
+- equation: PXCH2-5-1C6H11 (+ M) <=> CH3-5-SAXC6H10 (+ M)  # Reaction 1868
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: PX7-2C7H13 (+ M) <=> SAXC5H9 + C2H4 (+ M)  # Reaction 1869
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: PX7-2C7H13 (+ M) <=> SAX4-2C7H13 (+ M)  # Reaction 1870
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: SAX4-2C7H13 (+ M) <=> C5H8-13 + C2H5 (+ M)  # Reaction 1871
+  rate-constant: {A: 2.2e-38, b: 13.17, Ea: -603.1}
+- equation: CH3-2-PXC6H10 (+ M) <=> CH3-2-PXC4H6 + C2H4 (+ M)  # Reaction 1872
+  rate-constant: {A: 3.3e-43, b: 18.35, Ea: -602.5}
+- equation: CH3-2-PXC6H10 + H (+ M) <=> CH3-2-1C6H11 (+ M)  # Reaction 1873
+  rate-constant: {A: 3.01e+48, b: -9.32, Ea: 5833.6}
+- equation: CH3-2-PXC6H10 (+ M) <=> CH3-2-SAXC6H10 (+ M)  # Reaction 1874
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: CH3-2-SAXC6H10 (+ M) <=> CH3-2-C4H5-13 + C2H5 (+ M)  # Reaction 1875
+  rate-constant: {A: 2.2e-38, b: 13.17, Ea: -603.1}
+- equation: CH3-3-PXC6H10 (+ M) <=> PXCH2-3-1C4H7 + C2H4 (+ M)  # Reaction 1876
+  rate-constant: {A: 1.8e-57, b: 23.463, Ea: -602.4}
+- equation: CH3-3-PXC6H10 (+ M) <=> CH3-3-TAXC6H10 (+ M)  # Reaction 1877
+  rate-constant: {A: 8.1e-33, b: 15.214, Ea: -677.4}
+- equation: CH3-3-TAXC6H10 (+ M) <=> CH3-2-C4H5-13 + C2H5 (+ M)  # Reaction 1878
+  rate-constant: {A: 5.8e-28, b: 12.34, Ea: -603.2}
+- equation: CH3-4-SAXC6H10 (+ M) <=> C5H8-13 + C2H5 (+ M)  # Reaction 1879
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: CH3-4-SAXC6H10 (+ M) <=> C6H10-13 + CH3 (+ M)  # Reaction 1880
+  rate-constant: {A: 5.8e-28, b: 12.34, Ea: -603.2}
+- equation: SAXC7H13 (+ M) <=> C4H6 + nC3H7 (+ M)  # Reaction 1881
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: CH3-5-SAXC6H10 (+ M) <=> C4H6 + iC3H7 (+ M)  # Reaction 1882
+  rate-constant: {A: 4.0e-42, b: 18.045, Ea: -602.6}
+- equation: PX1-3C7H13 (+ M) <=> C7H12-13 + H (+ M)  # Reaction 1884
+  rate-constant: {A: 3.0e-45, b: 13.55, Ea: -603.1}
+- equation: PXCH2-3-1C6H11 (+ M) <=> nC3H7 + C4H6 (+ M)  # Reaction 1885
+  rate-constant: {A: 5.8e-28, b: 12.34, Ea: -603.2}
+- equation: PXC2H4-2-1C5H9 (+ M) <=> C2H5-2-SAX1C5H9 (+ M)  # Reaction 1886
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: S3XC7H13 (+ M) <=> C5H8-14 + C2H5 (+ M)  # Reaction 1889
+  rate-constant: {A: 3.1e-43, b: 18.418, Ea: -602.9}
+- equation: S3XC7H13 (+ M) <=> C2H3 + C5H10 (+ M)  # Reaction 1890
+  rate-constant: {A: 8.0e-40, b: 15.349, Ea: -603.1}
+- equation: cC6H11 (+ M) <=> PXC6H11 (+ M)  # Reaction 1904
+  rate-constant: {A: 5.1e-33, b: 15.29, Ea: -602.6}
+- equation: cC6H11 (+ M) <=> cC6H10 + H (+ M)  # Reaction 1905
+  rate-constant: {A: 3.0e-40, b: 17.33, Ea: -602.7}
+- equation: cC6H11 + H (+ M) <=> cC6H12 (+ M)  # Reaction 1906
+  rate-constant: {A: 1.7e+58, b: -12.08, Ea: 1.12637e+04}
+- equation: PXC6H11 (+ M) <=> C4H7 + C2H4 (+ M)  # Reaction 1917
+  rate-constant: {A: 3.3e-43, b: 18.35, Ea: -602.5}
+- equation: PXC6H11 (+ M) <=> SAXC6H11 (+ M)  # Reaction 1918
+  rate-constant: {A: 1.5e-30, b: 14.56, Ea: -602.4}
+- equation: SAXC6H11 + H (+ M) <=> C6H12 (+ M)  # Reaction 1919
+  rate-constant: {A: 1.33e+60, b: -12.0, Ea: 5967.8}
+- equation: SAXC6H11 (+ M) <=> C4H6 + C2H5 (+ M)  # Reaction 1920
+  rate-constant: {A: 4.0e-42, b: 18.05, Ea: -602.6}
+- equation: PXC6H11 (+ M) <=> PXCH2cC5H9 (+ M)  # Reaction 1921
+  rate-constant: {A: 2.3e-28, b: 14.28, Ea: -602.5}
+- equation: PXCH2cC5H9 (+ M) <=> CH3S3XcC5H8 (+ M)  # Reaction 1922
+  rate-constant: {A: 1.1e-36, b: 16.12, Ea: -602.5}
+- equation: CH3S3XcC5H8 (+ M) <=> SXC6H11 (+ M)  # Reaction 1923
+  rate-constant: {A: 1.1e-36, b: 16.19, Ea: -602.5}
+- equation: CH3S3XcC5H8 (+ M) <=> PXCH2-4-1C5H9 (+ M)  # Reaction 1924
+  rate-constant: {A: 1.9e-36, b: 15.96, Ea: -578.8}
+- equation: PXCH2-4-1C5H9 (+ M) <=> aC3H5 + C3H6 (+ M)  # Reaction 1925
+  rate-constant: {A: 4.9e-31, b: 14.54, Ea: -578.8}
+- equation: SXC6H11 (+ M) <=> C3H6 + aC3H5 (+ M)  # Reaction 1926
+  rate-constant: {A: 2.5e-31, b: 14.57, Ea: -578.8}
+- equation: S2XC6H11 (+ M) <=> C5H8-14 + CH3 (+ M)  # Reaction 1927
+  rate-constant: {A: 4.0e-39, b: 16.782, Ea: -600.4}
+- equation: S2XC6H11 (+ M) <=> PXCH2-3-1C5H9 (+ M)  # Reaction 1928
+  rate-constant: {A: 9.3e-19, b: 11.698, Ea: -602.9}
+- equation: PXCH2-3-1C5H9 (+ M) <=> C4H6 + C2H5 (+ M)  # Reaction 1929
+  rate-constant: {A: 1.7e-14, b: 9.652, Ea: -603.1}
+- equation: PX1-3C6H11 (+ M) <=> C6H10-13 + H (+ M)  # Reaction 1930
+  rate-constant: {A: 3.0e-45, b: 13.55, Ea: -603.1}
+- equation: PX6-2C6H11 (+ M) <=> SAXC4H7 + C2H4 (+ M)  # Reaction 1932
+  rate-constant: {A: 5.9e-31, b: 13.982, Ea: -603.1}
+- equation: PXC2H4-2-1C4H7 (+ M) <=> C2H3-2-1C4H7 + H (+ M)  # Reaction 1933
+  rate-constant: {A: 3.0e-45, b: 13.55, Ea: -603.1}
+- equation: lC5H7 + CH3 (+ M) <=> C6H10-13 (+ M)  # Reaction 1935
+  rate-constant: {A: 3.91e+60, b: -12.81, Ea: 6250.0}
+- equation: SAXcC6H9 + H (+ M) <=> cC6H10 (+ M)  # Reaction 1950
+  rate-constant: {A: 1.33e+60, b: -12.0, Ea: 5967.8}
+- equation: SAXcC6H7 + H (+ M) <=> cC6H8-13 (+ M)  # Reaction 1961
+  rate-constant: {A: 1.33e+60, b: -12.0, Ea: 5967.8}
+- equation: PXCH2-2-C4H9 (+ M) <=> C3H6 + C2H5 (+ M)  # Reaction 1966
+  rate-constant: {A: 8.5e-37, b: 16.21, Ea: -603.1}
+- equation: CH3-2-PXC4H6 (+ M) <=> CH3-2-C4H5-13 + H (+ M)  # Reaction 1968
+  rate-constant: {A: 3.0e-45, b: 13.55, Ea: -603.1}
+- equation: SAXC4H7 (+ M) <=> C4H6 + H (+ M)  # Reaction 1991
+  rate-constant: {A: 4.6e-37, b: 15.37, Ea: -603.1}
+- equation: SAXC4H7 + H (+ M) <=> C4H81 (+ M)  # Reaction 1992
+  rate-constant: {A: 2.66e+60, b: -12.0, Ea: 5967.8}
+- equation: SAXC4H7 + H (+ M) <=> C4H82 (+ M)  # Reaction 1993
+  rate-constant: {A: 2.66e+60, b: -12.0, Ea: 5967.8}
+- equation: CH* + M => CH + M  # Reaction 2149
+  type: three-body
+  rate-constant: {A: 4.0e+10, b: 0.5, Ea: 0.0}
+- equation: H + O + M <=> OH* + M  # Reaction 2152
+  type: three-body
+  rate-constant: {A: 3.1e+14, b: 0.0, Ea: 1.0e+04}
