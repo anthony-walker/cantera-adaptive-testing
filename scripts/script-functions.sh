@@ -258,3 +258,21 @@ profile_preconditioning() {
     # -Q no call graph
     # -D ignore non-functions
 }
+
+job_wait_loop() {
+    n_jobs=$(squeue -u $USER --format="%.18i %.40j" | grep -E $1 | wc -l)
+    stime=1
+    while [ $n_jobs -gt 0 ]
+    do
+        echo "Currently queued jobs: $n_jobs. Waiting $stime seconds..."
+        sleep $stime
+        n_jobs=$(squeue -u $USER --format="%.18i %.40j" | grep -E $1 | wc -l)
+        # adjust sleep time
+        if [ $stime -lt 10 ]
+        then
+            ((stime=stime+1))
+        fi
+    done
+
+    sbatch -J "JOBS_ALL_COMPLETED" ./batches/completed.sh
+}
