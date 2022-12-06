@@ -268,11 +268,11 @@ job_wait_loop() {
         sleep $stime
         n_jobs=$(squeue -u $USER --format="%.18i %.40j" | grep -E $1 | wc -l)
         # adjust sleep time
-        if [ $stime -lt 10 ]
+        if [ $stime -lt 60 ]
         then
             ((stime=stime+1))
         fi
     done
-
+    python -c "from postprocess_surface import *; combine_surf_yamls()"
     sbatch -J "JOBS_ALL_COMPLETED" ./batches/completed.sh
 }

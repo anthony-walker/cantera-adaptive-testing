@@ -14,6 +14,8 @@ plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
 
+def hello_world():
+    print("Hello World!")
 
 def add_nruns_to_older_files():
     yaml = ruamel.yaml.YAML()
@@ -452,12 +454,14 @@ def make_mean_linear_iterations():
             plt.savefig(f"figures/lin_iters_{m}_{s}.pdf".lower())
             plt.close()
 
-combine_surf_yamls()
-make_all_reaction_figures()
-make_mean_condition_plots()
-make_mean_eigenvalue_plots()
-make_mean_linear_iterations()
 
-make_total_runtime_figures()
-make_all_reaction_figures()
-# required_paper_numbers()
+if __name__ == "__main__":
+    combine_surf_yamls()
+    make_all_reaction_figures()
+    make_mean_condition_plots()
+    make_mean_eigenvalue_plots()
+    make_mean_linear_iterations()
+
+    make_total_runtime_figures()
+    make_all_reaction_figures()
+    # required_paper_numbers()
