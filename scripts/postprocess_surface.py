@@ -454,14 +454,140 @@ def make_mean_linear_iterations():
             plt.savefig(f"figures/lin_iters_{m}_{s}.pdf".lower())
             plt.close()
 
+def make_mean_nnz_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("nonzero_elements", m, s)
+            ax.set_ylim(np.float64(10**1), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Nonzero Elements")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/nnz_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_max_steps_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("steps", m, s, mean=False)
+            ax.set_ylim(np.float64(10**1), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Time Steps")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/nts_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_max_nonlinear_iters():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("nonlinear_iters", m, s, mean=False)
+            ax.set_ylim(np.float64(10**1), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Nonlinear Iterations")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/nonlin_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_max_rhs_evals():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("rhs_evals", m, s, mean=False)
+            ax.set_ylim(np.float64(10**1), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("RHS Evaluations")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/rhs_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_mean_l2_norm():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("l2_norm", m, s)
+            ax.set_ylim(np.float64(10**10), np.float64(10**20))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Mean L2 Norm")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/l2_norm_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_mean_frobenius_norm():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("fro_norm", m, s)
+            ax.set_ylim(np.float64(10**10), np.float64(10**20))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Mean Frobenius Norm")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/fro_norm_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_max_prec_solves():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("prec_solves", m, s, mean=False)
+            ax.set_ylim(np.float64(10**2), np.float64(10**6))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Preconditioner Solves")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/max_prec_solves_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_max_prec_evals():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("prec_evals", m, s, mean=False)
+            ax.set_ylim(np.float64(10**0), np.float64(10**4))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Preconditioner Evaluations")
+            # plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/max_prec_evals_{m}_{s}.pdf".lower())
+            plt.close()
 
 if __name__ == "__main__":
-    combine_surf_yamls()
-    make_all_reaction_figures()
-    make_mean_condition_plots()
-    make_mean_eigenvalue_plots()
-    make_mean_linear_iterations()
-
-    make_total_runtime_figures()
-    make_all_reaction_figures()
+    # combine_surf_yamls()
     # required_paper_numbers()
+    # make_all_reaction_figures()
+    # make_mean_condition_plots()
+    # make_mean_eigenvalue_plots()
+    # make_mean_linear_iterations()
+
+    # make_total_runtime_figures()
+    # make_all_reaction_figures()
+    # make_mean_nnz_plots()
+    # make_max_steps_plots()
+    # make_max_nonlinear_iters()
+    # make_max_rhs_evals()
+    # make_mean_l2_norm()
+    # make_mean_frobenius_norm()
+    make_max_prec_evals()

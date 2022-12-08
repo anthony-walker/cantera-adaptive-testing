@@ -1,0 +1,1737 @@
+description: |-
+  nits(length='cm', time='s', quantity='mol', act_energy='kcal/mol')
+
+generator: cti2yaml
+cantera-version: 3.0.0a3
+date: Mon, 05 Dec 2022 12:12:49 -0500
+input-files: [chem.cti]
+
+units: {length: cm, quantity: mol, activation-energy: kcal/mol}
+
+elements:
+- symbol: Ci
+  atomic-weight: 13.003
+- symbol: D
+  atomic-weight: 2.014
+- symbol: Oi
+  atomic-weight: 18.0
+- symbol: T
+  atomic-weight: 3.016
+- symbol: X
+  atomic-weight: 195.083
+
+phases:
+- name: gas
+  thermo: ideal-gas
+  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
+    X]
+  species: [Ar, He, Ne, N2, CH4(1), CO2(2), H2O(3), H2(4), CO(5), C2H6(6),
+    HCOOH(7), CH3OH(8), C2H4(9), CH2O(10), CH3CHO(11), C3H8(12), C2H5OH(13),
+    C2H4O2(14)]
+  kinetics: gas
+  reactions: none
+  transport: mixture-averaged
+  state:
+    T: 300.0
+    P: 1.01325e+05
+- name: surface
+  thermo: ideal-surface
+  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
+    X]
+  species: [site(15), HX(16), CO2X(17), OX(18), OCX(19), HOX(20), H2OX(21),
+    CX(22), HOCXO(23), CXHO(24), HCOOX(25), CXOH(26), CHX(27), CH2X(28),
+    CH3X(29), CH4X(30), HCXOH(31), H2COX(32), H2CXOH(33), H3COX(34), C2H6X(35),
+    C2H5X(36), CHCH3X(37), CXCH3(38), CXCH2(39), CXHCH2(40), CH3CXO(41),
+    HCOOHX(42), C3H8X(43), nC3H7X(44), iC3H7X(45), H3COHX(46), C2H4OX(47),
+    C2H4X(48), C2H3OX(49), CXCHO(50), C2H3OX(51), SX(52), SX(53), SX(54),
+    C2H6OX(55), C2H3OX(56), CXHCHO(57), CXCO(58), C2H5OX(59), C2H5OX(60)]
+  kinetics: surface
+  reactions: all
+  state:
+    T: 300.0
+    P: 1.01325e+05
+  adjacent-phases: [gas]
+  site-density: 3.16e-09
+
+species:
+- name: Ar
+  composition: {Ar: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 1000.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 4.37967]
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 4.37967]
+  transport:
+    model: gas
+    geometry: atom
+    diameter: 3.33
+    well-depth: 136.5
+- name: He
+  composition: {He: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 1000.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 0.928724]
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 0.928724]
+  transport:
+    model: gas
+    geometry: atom
+    diameter: 2.576
+    well-depth: 10.2
+- name: Ne
+  composition: {Ne: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 1000.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 3.35532]
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 3.35532]
+  transport:
+    model: gas
+    geometry: atom
+    diameter: 3.758
+    well-depth: 148.6
+- name: N2
+  composition: {N: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 1000.0, 6000.0]
+    data:
+    - [3.53101, -1.23661e-04, -5.02999e-07, 2.43531e-09, -1.40881e-12, -1046.98,
+      2.96747]
+    - [2.95258, 1.3969e-03, -4.92632e-07, 7.8601e-11, -4.60755e-15, -923.949,
+      5.87189]
+  transport:
+    model: gas
+    geometry: linear
+    diameter: 3.621
+    well-depth: 97.53
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+- name: CH4(1)
+  composition: {C: 1, H: 4}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1084.12, 5000.0]
+    data:
+    - [4.20541323, -5.35555051e-03, 2.51122487e-05, -2.13761884e-08, 5.97520096e-12,
+      -1.01619432e+04, -0.92127205]
+    - [0.908277288, 0.0114540668, -4.57172753e-06, 8.29189175e-10, -5.6631285e-14,
+      -9719.9795, 13.9930289]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.746
+    well-depth: 141.4
+    polarizability: 2.6
+    rotational-relaxation: 13.0
+- name: CO2(2)
+  composition: {C: 1, O: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 971.23, 5000.0]
+    data:
+    - [3.28046538, 2.51007257e-03, 8.08179781e-06, -1.21535391e-08, 4.74633161e-12,
+      -4.85040769e+04, 5.96202514]
+    - [4.68910653, 2.51978173e-03, -9.08213798e-07, 1.77945004e-10, -1.36412343e-14,
+      -4.90517796e+04, -2.20372917]
+  transport:
+    model: gas
+    geometry: linear
+    diameter: 3.941
+    well-depth: 195.201
+- name: H2O(3)
+  composition: {H: 2, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1130.24, 5000.0]
+    data:
+    - [4.05763552, -7.87932345e-04, 2.90876343e-06, -1.4751749e-09, 2.12837635e-13,
+      -3.02815866e+04, -0.311362934]
+    - [2.84325264, 2.75108191e-03, -7.81029516e-07, 1.07243186e-10, -5.79388555e-15,
+      -2.99586137e+04, 5.91040748]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 2.641
+    well-depth: 809.102
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+- name: H2(4)
+  composition: {H: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1959.09, 5000.0]
+    data:
+    - [3.43536442, 2.12707705e-04, -2.78619037e-07, 3.40262455e-10, -7.76020333e-14,
+      -1031.35986, -3.90841849]
+    - [2.78813395, 5.87682355e-04, 1.58991029e-07, -5.52700115e-11, 4.34282623e-15,
+      -596.125462, 0.11292161]
+  transport:
+    model: gas
+    geometry: linear
+    diameter: 2.833
+    well-depth: 59.7
+- name: CO(5)
+  composition: {C: 1, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1707.67, 5000.0]
+    data:
+    - [3.60390241, -1.05396397e-03, 2.77529381e-06, -1.6893487e-09, 3.2304415e-13,
+      -1.42947003e+04, 3.39307807]
+    - [2.94684168, 1.7564765e-03, -8.10111831e-07, 1.46346779e-10, -9.52339995e-15,
+      -1.42556655e+04, 6.37186223]
+  transport:
+    model: gas
+    geometry: linear
+    diameter: 3.69
+    well-depth: 91.7
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+- name: C2H6(6)
+  composition: {C: 2, H: 6}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 981.6, 5000.0]
+    data:
+    - [3.7467282, 4.52351469e-05, 4.07972118e-05, -4.57425308e-08, 1.56847655e-11,
+      -1.14740722e+04, 4.7413232]
+    - [3.34696347, 0.0161750129, -6.00966068e-06, 1.09622959e-09, -7.72310422e-14,
+      -1.20941968e+04, 3.10403711]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 4.302
+    well-depth: 252.3
+    rotational-relaxation: 1.5
+- name: HCOOH(7)
+  composition: {C: 1, H: 2, O: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 997.62, 5000.0]
+    data:
+    - [3.76623007, -8.67652575e-04, 3.32886885e-05, -3.95821888e-08, 1.39943847e-11,
+      -4.68302039e+04, 7.56889572]
+    - [5.52465265, 7.79122316e-03, -3.35083786e-06, 6.86814524e-10, -5.2390732e-14,
+      -4.79627846e+04, -4.8282769]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.626
+    well-depth: 481.8
+    dipole: 1.7
+    rotational-relaxation: 1.0
+- name: CH3OH(8)
+  composition: {C: 1, H: 4, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 995.37, 5000.0]
+    data:
+    - [3.9100224, -1.31507289e-03, 2.80668674e-05, -2.98995243e-08, 9.91739893e-12,
+      -2.55753744e+04, 5.89067718]
+    - [3.01638723, 0.0112129847, -4.28041805e-06, 7.85995648e-10, -5.52589986e-14,
+      -2.5840188e+04, 7.9739331]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.626
+    well-depth: 481.8
+    rotational-relaxation: 1.0
+- name: C2H4(9)
+  composition: {C: 2, H: 4}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 945.99, 5000.0]
+    data:
+    - [3.98881513, -6.74780447e-03, 5.04422969e-05, -5.70778446e-08, 2.04960307e-11,
+      5047.04515, 3.80474425]
+    - [4.59004274, 8.72753786e-03, -2.66511381e-06, 4.81753523e-10, -3.6072625e-14,
+      4127.09302, -3.32357803]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.971
+    well-depth: 280.8
+    rotational-relaxation: 1.5
+- name: CH2O(10)
+  composition: {C: 1, H: 2, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1041.97, 5000.0]
+    data:
+    - [4.13878515, -4.69510817e-03, 2.25729017e-05, -2.09848372e-08, 6.36116801e-12,
+      -1.43493282e+04, 3.23828572]
+    - [2.36096889, 7.66801802e-03, -3.19769032e-06, 6.04721533e-10, -4.2751516e-14,
+      -1.42794873e+04, 10.4456317]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.59
+    well-depth: 498.0
+    rotational-relaxation: 2.0
+- name: CH3CHO(11)
+  composition: {C: 2, H: 4, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1028.81, 5000.0]
+    data:
+    - [3.57991905, 5.18989282e-03, 2.26895472e-05, -2.73740049e-08, 9.28468818e-12,
+      -2.13697372e+04, 8.9697333]
+    - [4.08566176, 0.0139060813, -5.59367992e-06, 1.04608753e-09, -7.38734296e-14,
+      -2.20391442e+04, 3.76788611]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.97
+    well-depth: 436.0
+    rotational-relaxation: 2.0
+- name: C3H8(12)
+  composition: {C: 3, H: 8}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 990.0, 5000.0]
+    data:
+    - [3.06335235, 0.0129215682, 3.470288e-05, -4.70940862e-08, 1.71381853e-11,
+      -1.43905785e+04, 10.7835925]
+    - [5.60443705, 0.0219528161, -8.2207701e-06, 1.50103141e-09, -1.05634651e-13,
+      -1.58394192e+04, -6.22643913]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 4.982
+    well-depth: 266.801
+    rotational-relaxation: 1.0
+- name: C2H5OH(13)
+  composition: {C: 2, H: 6, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 984.0, 5000.0]
+    data:
+    - [3.24025972, 0.0104859555, 2.63967779e-05, -3.69293677e-08, 1.36710645e-11,
+      -2.99902844e+04, 11.1433012]
+    - [5.68494081, 0.0161313303, -5.96365813e-06, 1.08897225e-09, -7.69621044e-14,
+      -3.12258208e+04, -4.44488784]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 4.53
+    well-depth: 362.6
+    rotational-relaxation: 1.5
+- name: C2H4O2(14)
+  composition: {C: 2, H: 4, O: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1020.01, 5000.0]
+    data:
+    - [3.21747879, 0.0102437296, 2.71471163e-05, -3.76375053e-08, 1.35866599e-11,
+      -5.35456805e+04, 12.0525626]
+    - [6.36123592, 0.015512855, -6.47984204e-06, 1.25442014e-09, -9.10564847e-14,
+      -5.5102453e+04, -7.66393532]
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 5.643
+    well-depth: 452.392
+- name: site(15)
+  composition: {X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1554.81, 5000.0]
+    data:
+    - [7.10133818e-03, -4.25614011e-05, 8.98518429e-08, -7.80180017e-11,
+      2.32461406e-14, -0.876098886, -0.03112091]
+    - [0.160301605, -2.52237853e-04, 1.14182514e-07, -1.21474305e-11, 3.85810394e-16,
+      -70.8109815, -0.909537455]
+- name: HX(16)
+  composition: {H: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 952.91, 5000.0]
+    data:
+    - [-0.380957846, 5.47219393e-03, 2.60946928e-06, -9.65008412e-09, 4.63967474e-12,
+      -8409.41541, 1.01722845]
+    - [2.80337105, -5.41002993e-04, 4.99482316e-07, -7.54902555e-11, 3.06721398e-15,
+      -9350.154, -15.9435356]
+- name: CO2X(17)
+  composition: {C: 1, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 882.28, 5000.0]
+    data:
+    - [-1.54691991, 0.0408804837, -8.54303023e-05, 8.19990171e-08, -2.88120289e-11,
+      -4.97604969e+04, 13.7824001]
+    - [1.80877056, 9.73020137e-03, -5.37619825e-06, 1.03590464e-09, -6.95125102e-14,
+      -4.973236e+04, 1.52855645]
+- name: OX(18)
+  composition: {O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 888.26, 5000.0]
+    data:
+    - [-0.759009823, 0.0189868087, -3.82472168e-05, 3.43556132e-08, -1.13973301e-11,
+      -2.88119331e+04, 1.7601625]
+    - [1.89892804, 2.03296867e-03, -1.19977429e-06, 2.3268272e-10, -1.53510018e-14,
+      -2.90874758e+04, -9.64099527]
+- name: OCX(19)
+  composition: {C: 1, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 891.34, 5000.0]
+    data:
+    - [-1.38212154, 0.0375302921, -8.29748944e-05, 8.09687912e-08, -2.85464392e-11,
+      -3.16768959e+04, 4.35440721]
+    - [1.38085643, 8.05727875e-03, -4.64314213e-06, 8.91183355e-10, -5.90059013e-14,
+      -3.14912007e+04, -4.85289979]
+- name: HOX(20)
+  composition: {H: 1, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 914.55, 5000.0]
+    data:
+    - [-1.29519903, 0.0336483988, -7.0774701e-05, 6.54356032e-08, -2.19429077e-11,
+      -2.44563323e+04, 4.37646819]
+    - [2.43533327, 4.64614253e-03, -2.39996041e-06, 4.26372095e-10, -2.60624806e-14,
+      -2.46081558e+04, -10.3874917]
+- name: H2OX(21)
+  composition: {H: 2, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 912.83, 5000.0]
+    data:
+    - [-1.34345466, 0.0366702201, -7.99505841e-05, 7.74160539e-08, -2.68681689e-11,
+      -3.462029e+04, 11.0239554]
+    - [1.12173883, 8.16613034e-03, -4.02342585e-06, 7.20383711e-10, -4.51411137e-14,
+      -3.43328457e+04, 3.39531865]
+- name: CX(22)
+  composition: {C: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1401.14, 5000.0]
+    data:
+    - [-0.604856006, 0.0110908228, -1.34369314e-05, 7.18235384e-09, -1.40684125e-12,
+      1.08261775e+04, 1.48479882]
+    - [3.08074324, -6.8743939e-04, 5.17575869e-07, -9.72991896e-11, 6.24220254e-15,
+      9916.71122, -17.0990401]
+- name: HOCXO(23)
+  composition: {C: 1, H: 1, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 816.26, 5000.0]
+    data:
+    - [-1.63420492, 0.038830558, -6.43000573e-05, 5.38375213e-08, -1.75478668e-11,
+      -5.03756576e+04, 12.262708]
+    - [3.87904878, 9.05729226e-03, -4.52244271e-06, 8.78587204e-10, -6.09447904e-14,
+      -5.11838897e+04, -12.6538124]
+- name: CXHO(24)
+  composition: {C: 1, H: 1, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 873.22, 5000.0]
+    data:
+    - [-1.43678863, 0.0369242618, -7.17900818e-05, 6.73527629e-08, -2.3517583e-11,
+      -2.5714768e+04, 8.27559411]
+    - [1.83278596, 0.0100779031, -5.28534918e-06, 1.0135238e-09, -6.85187487e-14,
+      -2.58332517e+04, -4.46383212]
+- name: HCOOX(25)
+  composition: {C: 1, H: 1, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 833.17, 5000.0]
+    data:
+    - [-1.79154522, 0.0437079049, -7.60397826e-05, 6.72528399e-08, -2.29592031e-11,
+      -5.10016589e+04, 7.22957223]
+    - [3.32788038, 0.012044888, -6.27963191e-06, 1.22724056e-09, -8.50484775e-14,
+      -5.16088227e+04, -15.0585757]
+- name: CXOH(26)
+  composition: {C: 1, H: 1, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 878.73, 5000.0]
+    data:
+    - [-1.5664903, 0.0383562633, -7.06875128e-05, 6.19527341e-08, -2.04282022e-11,
+      -2.70279188e+04, 5.18254629]
+    - [3.55136763, 7.05345468e-03, -3.58658042e-06, 6.76576495e-10, -4.51242823e-14,
+      -2.76182585e+04, -17.087721]
+- name: CHX(27)
+  composition: {C: 1, H: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1596.81, 5000.0]
+    data:
+    - [-0.966377461, 0.0163179216, -1.75392833e-05, 8.64100935e-09, -1.5550293e-12,
+      356.634371, 2.54983206]
+    - [4.21488904, 2.18274874e-04, 5.15716632e-07, -1.20812353e-10, 8.35419463e-15,
+      -900.221663, -23.6259085]
+- name: CH2X(28)
+  composition: {C: 1, H: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1199.84, 5000.0]
+    data:
+    - [-1.02006572, 0.020377853, -2.17291021e-05, 1.15868493e-08, -2.38469826e-12,
+      2488.56987, 2.99160375]
+    - [3.89285623, 3.99892031e-03, -1.25227793e-06, 2.09081002e-10, -1.39642186e-14,
+      1309.65046, -21.6053785]
+- name: CH3X(29)
+  composition: {C: 1, H: 3, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 848.3, 5000.0]
+    data:
+    - [-1.21090611, 0.0292390831, -4.49011672e-05, 3.86010689e-08, -1.30361474e-11,
+      -4149.85256, 6.80940157]
+    - [1.62291116, 0.0112987225, -5.0831665e-06, 9.46832954e-10, -6.42885005e-14,
+      -4465.91845, -5.42502394]
+- name: CH4X(30)
+  composition: {C: 1, H: 4, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 886.29, 5000.0]
+    data:
+    - [-1.38687336, 0.0400450405, -8.37916633e-05, 8.7565025e-08, -3.27875524e-11,
+      -1.31824802e+04, 17.8811007]
+    - [-2.16848093, 0.0199494248, -9.80013947e-06, 1.83536741e-09, -1.22522043e-13,
+      -1.21161167e+04, 26.7918165]
+- name: HCXOH(31)
+  composition: {C: 1, H: 2, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 648.65, 5000.0]
+    data:
+    - [-1.35001672, 0.0325588777, -4.55906424e-05, 3.22870612e-08, -8.15531053e-12,
+      -2.32609867e+04, 6.84702986]
+    - [2.89878617, 0.010701185, -5.0885248e-06, 9.82688279e-10, -6.86686705e-14,
+      -2.39035529e+04, -12.5161456]
+- name: H2COX(32)
+  composition: {C: 1, H: 2, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 879.3, 5000.0]
+    data:
+    - [-1.46703687, 0.0413880298, -8.87649599e-05, 9.10158804e-08, -3.36629895e-11,
+      -2.25715e+04, 15.7180702]
+    - [-0.892765809, 0.0166193627, -8.71579071e-06, 1.66812547e-09, -1.12500477e-13,
+      -2.18159607e+04, 17.8919256]
+- name: H2CXOH(33)
+  composition: {C: 1, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 813.99, 5000.0]
+    data:
+    - [-1.68229647, 0.039724617, -5.96094442e-05, 4.86900892e-08, -1.58038986e-11,
+      -3.31807016e+04, 8.26679309]
+    - [3.25574926, 0.0130435585, -5.99163441e-06, 1.13139581e-09, -7.77159481e-14,
+      -3.39045932e+04, -14.0486551]
+- name: H3COX(34)
+  composition: {C: 1, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 857.67, 5000.0]
+    data:
+    - [-1.68419015, 0.0428019501, -7.50767021e-05, 7.03657768e-08, -2.5090806e-11,
+      -2.5124657e+04, 7.76412038]
+    - [1.14786825, 0.0171346058, -8.39649108e-06, 1.59810537e-09, -1.0897787e-13,
+      -2.51521987e+04, -2.79261864]
+- name: C2H6X(35)
+  composition: {C: 2, H: 6, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 826.24, 5000.0]
+    data:
+    - [-1.73427143, 0.043269064, -6.15063371e-05, 5.72998521e-08, -2.14165266e-11,
+      -1.63365911e+04, 19.0798127]
+    - [-0.451989055, 0.026624287, -1.23405434e-05, 2.34091664e-09, -1.61301617e-13,
+      -1.61922362e+04, 15.294146]
+- name: C2H5X(36)
+  composition: {C: 2, H: 5, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 803.87, 5000.0]
+    data:
+    - [-1.64624509, 0.0389625446, -4.31125422e-05, 2.97072622e-08, -8.80204779e-12,
+      -8133.52802, 9.27320333]
+    - [1.97599523, 0.0209382479, -9.47915057e-06, 1.81392468e-09, -1.27205932e-13,
+      -8715.88083, -7.4111556]
+- name: CHCH3X(37)
+  composition: {C: 2, H: 4, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 922.99, 5000.0]
+    data:
+    - [-1.5174329, 0.0354363438, -3.8105312e-05, 2.35704072e-08, -6.09797158e-12,
+      -2619.89676, 5.77179171]
+    - [2.83449304, 0.0165755187, -7.45244204e-06, 1.42931291e-09, -1.00636873e-13,
+      -3423.22363, -14.8748233]
+- name: CXCH3(38)
+  composition: {C: 2, H: 3, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 808.72, 5000.0]
+    data:
+    - [-1.45264585, 0.0342706524, -4.40840481e-05, 3.22605237e-08, -9.67614284e-12,
+      -7363.72314, 5.1328071]
+    - [2.64803717, 0.0139871006, -6.46021142e-06, 1.24353482e-09, -8.72723295e-14,
+      -8026.94431, -13.7797872]
+- name: CXCH2(39)
+  composition: {C: 2, H: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1146.92, 5000.0]
+    data:
+    - [-1.35665844, 0.028533787, -3.11240365e-05, 1.70133691e-08, -3.63321496e-12,
+      492.788584, 3.79543093]
+    - [4.86808285, 6.82426722e-03, -2.73109446e-06, 5.0941317e-10, -3.57465995e-14,
+      -935.060749, -27.0886064]
+- name: CXHCH2(40)
+  composition: {C: 2, H: 3, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 921.81, 5000.0]
+    data:
+    - [3.82875067, -9.47916325e-03, 7.34275739e-05, -9.22340562e-08, 3.57938852e-11,
+      2541.44773, -18.0496405]
+    - [9.35135588, 5.70111311e-04, 1.72746921e-06, -3.5145163e-10, 1.90354668e-14,
+      78.1640611, -52.0818916]
+- name: CH3CXO(41)
+  composition: {C: 2, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 959.4, 5000.0]
+    data:
+    - [3.43718935, 5.75763667e-03, 2.83349331e-05, -3.9458567e-08, 1.51213378e-11,
+      -2.18755217e+04, -8.72721015]
+    - [6.61777203, 9.20345321e-03, -3.17290174e-06, 5.86121687e-10, -4.31714379e-14,
+      -2.32546841e+04, -27.9469111]
+- name: HCOOHX(42)
+  composition: {C: 1, H: 2, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 951.9, 5000.0]
+    data:
+    - [3.67321332, -3.70295957e-03, 5.47378137e-05, -6.94666255e-08, 2.63528837e-11,
+      -4.98219384e+04, -8.44606699]
+    - [8.53971138, 3.70803246e-03, -8.43383492e-07, 2.0773707e-10, -2.1335559e-14,
+      -5.2010656e+04, -38.3143137]
+- name: C3H8X(43)
+  composition: {C: 3, H: 8, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1037.08, 5000.0]
+    data:
+    - [2.71700689, 0.0223900749, 1.20437065e-05, -2.46111349e-08, 9.27167096e-12,
+      -1.68885039e+04, 3.15479659]
+    - [5.99092747, 0.0233889412, -9.10987788e-06, 1.65659752e-09, -1.1463594e-13,
+      -1.83003404e+04, -16.2920595]
+- name: nC3H7X(44)
+  composition: {C: 3, H: 7, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 962.23, 5000.0]
+    data:
+    - [2.98506552, 0.0118444441, 4.44607028e-05, -6.24981514e-08, 2.38540312e-11,
+      -9228.57299, -8.2965121]
+    - [7.84460007, 0.0180194569, -6.2823765e-06, 1.1455545e-09, -8.27261519e-14,
+      -1.13848441e+04, -37.898855]
+- name: iC3H7X(45)
+  composition: {C: 3, H: 7, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 984.83, 5000.0]
+    data:
+    - [3.1946013, 8.2273518e-03, 4.8418254e-05, -6.163631e-08, 2.22430952e-11,
+      -1.06869886e+04, -8.79480719]
+    - [5.96239899, 0.0211445283, -8.0528988e-06, 1.50044321e-09, -1.07567594e-13,
+      -1.2403713e+04, -28.0535954]
+- name: H3COHX(46)
+  composition: {C: 1, H: 4, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 850.41, 5000.0]
+    data:
+    - [-1.64010182, 0.040997687, -6.66167251e-05, 6.12113937e-08, -2.17734945e-11,
+      -3.27799976e+04, 13.824547]
+    - [1.0183768, 0.0182966124, -8.5897601e-06, 1.62231227e-09, -1.10732408e-13,
+      -3.28634528e+04, 3.59750989]
+- name: C2H4OX(47)
+  composition: {C: 2, H: 4, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1258.42, 5000.0]
+    data:
+    - [3.23904977, 0.0145284014, 5.08876253e-07, -5.82809153e-09, 1.98748932e-12,
+      -2.27339208e+04, 5.45573879]
+    - [4.9302999, 0.0146081538, -6.08899677e-06, 1.11217072e-09, -7.56502093e-14,
+      -2.35915593e+04, -4.80865653]
+- name: C2H4X(48)
+  composition: {C: 2, H: 4, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 927.05, 5000.0]
+    data:
+    - [3.89608984, -9.6044439e-03, 7.20642645e-05, -8.73583468e-08, 3.3113637e-11,
+      2055.30542, -12.2102135]
+    - [7.68940076, 4.50564153e-03, -7.95647561e-08, -1.54463601e-11, -3.53448234e-15,
+      42.3393322, -37.2869237]
+- name: C2H3OX(49)
+  composition: {C: 2, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 942.7, 5000.0]
+    data:
+    - [3.66115779, -4.78656902e-03, 6.63010995e-05, -8.28662405e-08, 3.13686798e-11,
+      -1.91706661e+04, -7.05108121]
+    - [8.3834936, 6.48591996e-03, -1.45544525e-06, 2.82876652e-10, -2.56856695e-14,
+      -2.14522365e+04, -36.933919]
+- name: CXCHO(50)
+  composition: {C: 2, H: 1, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 922.95, 5000.0]
+    data:
+    - [3.57755998, -2.02372524e-04, 3.97377178e-05, -5.64275942e-08, 2.29842387e-11,
+      -2.69344423e+04, -11.0315032]
+    - [9.48336182, -1.34496162e-03, 1.85330691e-06, -3.56666596e-10, 2.05677844e-14,
+      -2.90660757e+04, -44.6922035]
+- name: C2H3OX(51)
+  composition: {C: 2, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 937.24, 5000.0]
+    data:
+    - [3.38997948, 5.22615894e-03, 3.21809683e-05, -4.72153508e-08, 1.89666002e-11,
+      -2.22385087e+04, -6.19726393]
+    - [8.31423402, 5.09186859e-03, -1.02400733e-06, 1.75428793e-10, -1.53385348e-14,
+      -2.40786959e+04, -34.52757]
+- name: SX(52)
+  composition: {C: 2, H: 4, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1098.77, 5000.0]
+    data:
+    - [2.87743134, 0.0196119307, 4.68100942e-06, -1.54701217e-08, 5.92235185e-12,
+      -5.49099623e+04, 8.53295323]
+    - [6.84071878, 0.0167775119, -7.2766509e-06, 1.38789323e-09, -9.81901943e-14,
+      -5.64807661e+04, -14.1456333]
+- name: SX(53)
+  composition: {C: 2, H: 3, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 954.06, 5000.0]
+    data:
+    - [3.08951048, 0.0106685193, 3.0981268e-05, -4.88660637e-08, 1.96745424e-11,
+      -4.8173482e+04, -4.7308554]
+    - [9.21892722, 8.51390766e-03, -2.64745107e-06, 4.98600402e-10, -3.88040082e-14,
+      -5.04145463e+04, -39.6289764]
+- name: SX(54)
+  composition: {C: 2, H: 3, O: 2, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 980.4, 5000.0]
+    data:
+    - [3.08489594, 8.53791084e-03, 4.39536552e-05, -6.23302292e-08, 2.37932606e-11,
+      -4.97342155e+04, -3.92006112]
+    - [9.63593274, 0.010980243, -4.4131935e-06, 9.07084518e-10, -7.08052224e-14,
+      -5.24206518e+04, -42.5450172]
+- name: C2H6OX(55)
+  composition: {C: 2, H: 6, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 979.22, 5000.0]
+    data:
+    - [3.01266301, 0.0152613121, 1.95739658e-05, -3.27771816e-08, 1.27832813e-11,
+      -2.81446865e+04, -3.22284857]
+    - [6.70655499, 0.0160175263, -5.85679067e-06, 1.06138569e-09, -7.47864236e-14,
+      -2.96277959e+04, -24.8451927]
+- name: C2H3OX(56)
+  composition: {C: 2, H: 3, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 928.34, 5000.0]
+    data:
+    - [3.30564473, 4.18071696e-03, 4.46728701e-05, -6.49962615e-08, 2.63732945e-11,
+      -7524.12598, -5.74660611]
+    - [10.1200631, 3.25910299e-03, 2.08529937e-07, -6.45214143e-11, 2.49517381e-16,
+      -1.00148442e+04, -44.7160394]
+- name: CXHCHO(57)
+  composition: {C: 2, H: 2, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 927.43, 5000.0]
+    data:
+    - [3.57142652, -6.4095399e-03, 7.49836298e-05, -9.96158022e-08, 3.94865091e-11,
+      -2.2926832e+04, -10.8741996]
+    - [12.1141544, -2.56791469e-03, 2.96552738e-06, -5.44447543e-10, 2.97326812e-14,
+      -2.62611655e+04, -60.8777867]
+- name: CXCO(58)
+  composition: {C: 2, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 931.07, 5000.0]
+    data:
+    - [3.23020865, -3.51397181e-03, 4.41584498e-05, -5.87513121e-08, 2.32213864e-11,
+      -407.776279, -14.9308548]
+    - [8.34846739, -1.27369329e-03, 1.5150529e-06, -2.6829387e-10, 1.35497781e-14,
+      -2411.06085, -44.8976612]
+- name: C2H5OX(59)
+  composition: {C: 2, H: 5, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 972.18, 5000.0]
+    data:
+    - [3.0726119, 0.0134244775, 2.22292731e-05, -3.6024326e-08, 1.41287186e-11,
+      -2.47192579e+04, -3.73995272]
+    - [7.16669836, 0.0138332783, -5.02257729e-06, 9.18620008e-10, -6.56656734e-14,
+      -2.63306571e+04, -27.5694977]
+- name: C2H5OX(60)
+  composition: {C: 2, H: 5, O: 1, X: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 977.78, 5000.0]
+    data:
+    - [3.02512056, 0.0144940365, 2.01670024e-05, -3.41829182e-08, 1.34843732e-11,
+      -2.98061533e+04, -8.59274677]
+    - [7.34618959, 0.0139047821, -5.14345836e-06, 9.47772104e-10, -6.78705426e-14,
+      -3.14679999e+04, -33.5193197]
+
+reactions:
+- equation: site(15) + CO(5) <=> OCX(19)  # Reaction 1
+  sticking-coefficient: {A: 0.8, b: 0.0, Ea: 0.0}
+- equation: site(15) + CO2X(17) <=> OX(18) + OCX(19)  # Reaction 2
+  rate-constant: {A: 4.2e+19, b: 0.0, Ea: 9.321}
+- equation: site(15) + site(15) + CH4(1) <=> HX(16) + CH3X(29)  # Reaction 3
+  sticking-coefficient: {A: 0.4, b: 0.0, Ea: 14.327}
+- equation: site(15) + CH4(1) <=> CH4X(30)  # Reaction 4
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + CO2(2) <=> CO2X(17)  # Reaction 5
+  sticking-coefficient: {A: 7.0e-03, b: 0.0, Ea: 0.0}
+- equation: site(15) + H2O(3) <=> H2OX(21)  # Reaction 6
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + H2(4) <=> HX(16) + HX(16)  # Reaction 7
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 3.418}
+- equation: site(15) + site(15) + C2H6(6) <=> CH3X(29) + CH3X(29)  # Reaction 8
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H6(6) <=> HX(16) + C2H5X(36)  # Reaction 9
+  sticking-coefficient: {A: 0.06, b: 0.0, Ea: 8.764}
+- equation: site(15) + C2H6(6) <=> C2H6X(35)  # Reaction 10
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + HCOOH(7) <=> HOX(20) + CXHO(24)  # Reaction 11
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + HCOOH(7) <=> HX(16) + HCOOX(25)  # Reaction 12
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + HCOOH(7) <=> HX(16) + HOCXO(23)  # Reaction 13
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + HCOOH(7) <=> HCOOHX(42)  # Reaction 14
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + CH3OH(8) <=> HOX(20) + CH3X(29)  # Reaction 15
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + CH3OH(8) <=> HX(16) + H3COX(34)  # Reaction 16
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + CH3OH(8) <=> HX(16) + H2CXOH(33)  # Reaction 17
+  sticking-coefficient: {A: 0.03, b: 0.0, Ea: 8.764}
+- equation: site(15) + CH3OH(8) <=> H3COHX(46)  # Reaction 18
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + C2H4(9) <=> HX(16) + CXHCH2(40)  # Reaction 19
+  sticking-coefficient: {A: 0.04, b: 0.0, Ea: 8.764}
+- equation: site(15) + C2H4(9) <=> C2H4X(48)  # Reaction 20
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + CH2O(10) <=> HX(16) + CXHO(24)  # Reaction 21
+  sticking-coefficient: {A: 0.02, b: 0.0, Ea: 8.764}
+- equation: site(15) + CH2O(10) <=> H2COX(32)  # Reaction 22
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + CH3CHO(11) <=> CXHO(24) + CH3X(29)  # Reaction 23
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + CH3CHO(11) <=> HX(16) + C2H3OX(49)  # Reaction 24
+  sticking-coefficient: {A: 0.03, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + CH3CHO(11) <=> HX(16) + CH3CXO(41)  # Reaction 25
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + CH3CHO(11) <=> C2H4OX(47)  # Reaction 26
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + C3H8(12) <=> CH3X(29) + C2H5X(36)  # Reaction 27
+  sticking-coefficient: {A: 0.02, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C3H8(12) <=> HX(16) + iC3H7X(45)  # Reaction 28
+  sticking-coefficient: {A: 0.02, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C3H8(12) <=> HX(16) + nC3H7X(44)  # Reaction 29
+  sticking-coefficient: {A: 0.06, b: 0.0, Ea: 8.764}
+- equation: site(15) + C3H8(12) <=> C3H8X(43)  # Reaction 30
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + site(15) + C2H5OH(13) <=> HOX(20) + C2H5X(36)  # Reaction 31
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H5OH(13) <=> CH3X(29) + H2CXOH(33)  # Reaction 32
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H5OH(13) <=> HX(16) + C2H5OX(60)  # Reaction 33
+  sticking-coefficient: {A: 0.02, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H5OH(13) <=> HX(16) + C2H5OX(59)  # Reaction 34
+  sticking-coefficient: {A: 0.03, b: 0.0, Ea: 8.764}
+- equation: site(15) + C2H5OH(13) <=> C2H6OX(55)  # Reaction 35
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 3.652}
+- equation: site(15) + site(15) + C2H4O2(14) <=> HOX(20) + CH3CXO(41)  # Reaction 36
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 15.282}
+- equation: site(15) + site(15) + C2H4O2(14) <=> HX(16) + SX(53)  # Reaction 37
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H4O2(14) <=> HOCXO(23) + CH3X(29)  # Reaction 38
+  sticking-coefficient: {A: 0.01, b: 0.0, Ea: 8.764}
+- equation: site(15) + site(15) + C2H4O2(14) <=> HX(16) + SX(54)  # Reaction 39
+  sticking-coefficient: {A: 0.03, b: 0.0, Ea: 8.764}
+- equation: site(15) + C2H4O2(14) <=> SX(52)  # Reaction 40
+  sticking-coefficient: {A: 0.1, b: 0.0, Ea: 0.0}
+- equation: site(15) + OCX(19) <=> OX(18) + CX(22)  # Reaction 41
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 51.705}
+- equation: site(15) + HOX(20) <=> OX(18) + HX(16)  # Reaction 42
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.538}
+- equation: site(15) + H2OX(21) <=> HX(16) + HOX(20)  # Reaction 43
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 25.556}
+- equation: site(15) + HOCXO(23) <=> HOX(20) + OCX(19)  # Reaction 44
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.565}
+- equation: site(15) + HOCXO(23) <=> HX(16) + CO2X(17)  # Reaction 45
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.0}
+- equation: site(15) + HOCXO(23) <=> OX(18) + CXOH(26)  # Reaction 46
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.823}
+- equation: site(15) + CXHO(24) <=> HX(16) + OCX(19)  # Reaction 47
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CXHO(24) <=> OX(18) + CHX(27)  # Reaction 48
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.099}
+- equation: site(15) + HCOOX(25) <=> OX(18) + CXHO(24)  # Reaction 49
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 36.43}
+- equation: site(15) + HCOOX(25) <=> HX(16) + CO2X(17)  # Reaction 50
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 5.139}
+- equation: site(15) + CXOH(26) <=> HOX(20) + CX(22)  # Reaction 51
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 56.5}
+- equation: site(15) + CXOH(26) <=> HX(16) + OCX(19)  # Reaction 52
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.88}
+- equation: site(15) + CHX(27) <=> HX(16) + CX(22)  # Reaction 53
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 24.276}
+- equation: site(15) + CH2X(28) <=> HX(16) + CHX(27)  # Reaction 54
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CH3X(29) <=> HX(16) + CH2X(28)  # Reaction 55
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 14.303}
+- equation: site(15) + CH4X(30) <=> HX(16) + CH3X(29)  # Reaction 56
+  rate-constant: {A: 1.28e+22, b: 0.0, Ea: 18.837}
+- equation: site(15) + HCXOH(31) <=> HOX(20) + CHX(27)  # Reaction 57
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.387}
+- equation: site(15) + HCXOH(31) <=> HX(16) + CXOH(26)  # Reaction 58
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + HCXOH(31) <=> HX(16) + CXHO(24)  # Reaction 59
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 6.446}
+- equation: site(15) + H2COX(32) <=> HX(16) + CXHO(24)  # Reaction 60
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 11.151}
+- equation: site(15) + H2CXOH(33) <=> HOX(20) + CH2X(28)  # Reaction 61
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 51.666}
+- equation: site(15) + H2CXOH(33) <=> HX(16) + HCXOH(31)  # Reaction 62
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 22.793}
+- equation: site(15) + H2CXOH(33) <=> HX(16) + H2COX(32)  # Reaction 63
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.197}
+- equation: site(15) + H3COX(34) <=> OX(18) + CH3X(29)  # Reaction 64
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.513}
+- equation: site(15) + H3COX(34) <=> HX(16) + H2COX(32)  # Reaction 65
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 7.987}
+- equation: site(15) + C2H6X(35) <=> CH3X(29) + CH3X(29)  # Reaction 66
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 23.738}
+- equation: site(15) + C2H6X(35) <=> HX(16) + C2H5X(36)  # Reaction 67
+  rate-constant: {A: 1.92e+22, b: 0.0, Ea: 18.386}
+- equation: site(15) + C2H5X(36) <=> CH2X(28) + CH3X(29)  # Reaction 68
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 43.367}
+- equation: site(15) + C2H5X(36) <=> HX(16) + CHCH3X(37)  # Reaction 69
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 11.685}
+- equation: site(15) + C2H5X(36) <=> HX(16) + C2H4X(48)  # Reaction 70
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 25.035}
+- equation: site(15) + CHCH3X(37) <=> CHX(27) + CH3X(29)  # Reaction 71
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.888}
+- equation: site(15) + CHCH3X(37) <=> HX(16) + CXCH3(38)  # Reaction 72
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CHCH3X(37) <=> HX(16) + CXHCH2(40)  # Reaction 73
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 16.859}
+- equation: site(15) + CXCH3(38) <=> CX(22) + CH3X(29)  # Reaction 74
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 52.606}
+- equation: site(15) + CXCH3(38) <=> HX(16) + CXCH2(39)  # Reaction 75
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.108}
+- equation: site(15) + CXCH2(39) <=> CX(22) + CH2X(28)  # Reaction 76
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 68.157}
+- equation: site(15) + CXHCH2(40) <=> HX(16) + CXCH2(39)  # Reaction 77
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CXHCH2(40) <=> CHX(27) + CH2X(28)  # Reaction 78
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 42.562}
+- equation: site(15) + CH3CXO(41) <=> OCX(19) + CH3X(29)  # Reaction 79
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.825}
+- equation: site(15) + CH3CXO(41) <=> OX(18) + CXCH3(38)  # Reaction 80
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.655}
+- equation: site(15) + HCOOHX(42) <=> HOX(20) + CXHO(24)  # Reaction 81
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 18.25}
+- equation: site(15) + HCOOHX(42) <=> HX(16) + HCOOX(25)  # Reaction 82
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.178}
+- equation: site(15) + HCOOHX(42) <=> HX(16) + HOCXO(23)  # Reaction 83
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.519}
+- equation: site(15) + C3H8X(43) <=> CH3X(29) + C2H5X(36)  # Reaction 84
+  rate-constant: {A: 1.28e+22, b: 0.0, Ea: 21.175}
+- equation: site(15) + C3H8X(43) <=> HX(16) + iC3H7X(45)  # Reaction 85
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 16.998}
+- equation: site(15) + C3H8X(43) <=> HX(16) + nC3H7X(44)  # Reaction 86
+  rate-constant: {A: 1.92e+22, b: 0.0, Ea: 17.965}
+- equation: site(15) + nC3H7X(44) <=> CH2X(28) + C2H5X(36)  # Reaction 87
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 39.217}
+- equation: site(15) + nC3H7X(44) <=> CH3X(29) + C2H4X(48)  # Reaction 88
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 35.769}
+- equation: site(15) + iC3H7X(45) <=> CH3X(29) + CHCH3X(37)  # Reaction 89
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 39.822}
+- equation: site(15) + H3COHX(46) <=> HOX(20) + CH3X(29)  # Reaction 90
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 21.346}
+- equation: site(15) + H3COHX(46) <=> HX(16) + H3COX(34)  # Reaction 91
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.076}
+- equation: site(15) + H3COHX(46) <=> HX(16) + H2CXOH(33)  # Reaction 92
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 12.928}
+- equation: site(15) + C2H4OX(47) <=> CXHO(24) + CH3X(29)  # Reaction 93
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 13.742}
+- equation: site(15) + C2H4OX(47) <=> HX(16) + C2H3OX(49)  # Reaction 94
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 15.284}
+- equation: site(15) + C2H4OX(47) <=> HX(16) + CH3CXO(41)  # Reaction 95
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.655}
+- equation: site(15) + C2H4X(48) <=> HX(16) + CXHCH2(40)  # Reaction 96
+  rate-constant: {A: 1.28e+22, b: 0.0, Ea: 13.504}
+- equation: site(15) + C2H3OX(49) <=> CXHO(24) + CH2X(28)  # Reaction 97
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.011}
+- equation: site(15) + C2H3OX(49) <=> HX(16) + CXHCHO(57)  # Reaction 98
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CXCHO(50) <=> CX(22) + CXHO(24)  # Reaction 99
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 49.582}
+- equation: site(15) + CXCHO(50) <=> HX(16) + CXCO(58)  # Reaction 100
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 57.318}
+- equation: site(15) + C2H3OX(51) <=> CX(22) + H2CXOH(33)  # Reaction 101
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 34.587}
+- equation: site(15) + C2H3OX(51) <=> HOX(20) + CXCH2(39)  # Reaction 102
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.265}
+- equation: site(15) + SX(52) <=> HOX(20) + CH3CXO(41)  # Reaction 103
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 24.121}
+- equation: site(15) + SX(52) <=> HX(16) + SX(53)  # Reaction 104
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.383}
+- equation: site(15) + SX(52) <=> HOCXO(23) + CH3X(29)  # Reaction 105
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 18.477}
+- equation: site(15) + SX(52) <=> HX(16) + SX(54)  # Reaction 106
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 16.387}
+- equation: site(15) + SX(53) <=> OX(18) + CH3CXO(41)  # Reaction 107
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 38.075}
+- equation: site(15) + SX(53) <=> CO2X(17) + CH3X(29)  # Reaction 108
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 7.658}
+- equation: site(15) + SX(54) <=> HOCXO(23) + CH2X(28)  # Reaction 109
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.047}
+- equation: site(15) + C2H6OX(55) <=> HOX(20) + C2H5X(36)  # Reaction 110
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 15.526}
+- equation: site(15) + C2H6OX(55) <=> CH3X(29) + H2CXOH(33)  # Reaction 111
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 12.461}
+- equation: site(15) + C2H6OX(55) <=> HX(16) + C2H5OX(60)  # Reaction 112
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 12.128}
+- equation: site(15) + C2H6OX(55) <=> HX(16) + C2H5OX(59)  # Reaction 113
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 15.351}
+- equation: site(15) + C2H3OX(56) <=> HOX(20) + CXCH2(39)  # Reaction 114
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + C2H3OX(56) <=> CXOH(26) + CH2X(28)  # Reaction 115
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 8.846}
+- equation: site(15) + CXHCHO(57) <=> CHX(27) + CXHO(24)  # Reaction 116
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.912}
+- equation: site(15) + CXHCHO(57) <=> HX(16) + CXCHO(50)  # Reaction 117
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: site(15) + CXCO(58) <=> CX(22) + OCX(19)  # Reaction 118
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 2.255}
+- equation: site(15) + C2H5OX(59) <=> CH2X(28) + H2CXOH(33)  # Reaction 119
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 27.398}
+- equation: site(15) + C2H5OX(59) <=> HOX(20) + C2H4X(48)  # Reaction 120
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.621}
+- equation: site(15) + C2H5OX(60) <=> HOX(20) + CHCH3X(37)  # Reaction 121
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.746}
+- equation: site(15) + C2H5OX(60) <=> HCXOH(31) + CH3X(29)  # Reaction 122
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.755}
+- equation: site(15) + C2H5OX(60) <=> HX(16) + C2H4OX(47)  # Reaction 123
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.648}
+- equation: OX(18) + HOCXO(23) <=> HOX(20) + CO2X(17)  # Reaction 124
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 9.859}
+- equation: OX(18) + CXHO(24) <=> HOX(20) + OCX(19)  # Reaction 125
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.763}
+- equation: OX(18) + HCOOX(25) <=> HOX(20) + CO2X(17)  # Reaction 126
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.02}
+- equation: OX(18) + CXOH(26) <=> HOX(20) + OCX(19)  # Reaction 127
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 9.602}
+- equation: HOX(20) + CX(22) <=> OX(18) + CHX(27)  # Reaction 128
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.141}
+- equation: HOX(20) + CHX(27) <=> OX(18) + CH2X(28)  # Reaction 129
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.674}
+- equation: HOX(20) + CH2X(28) <=> OX(18) + CH3X(29)  # Reaction 130
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.167}
+- equation: HOX(20) + CXOH(26) <=> OX(18) + HCXOH(31)  # Reaction 131
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.437}
+- equation: OX(18) + HCXOH(31) <=> HOX(20) + CXHO(24)  # Reaction 132
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.598}
+- equation: HOX(20) + HCXOH(31) <=> OX(18) + H2CXOH(33)  # Reaction 133
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.442}
+- equation: OX(18) + H2CXOH(33) <=> HOX(20) + H2COX(32)  # Reaction 134
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.733}
+- equation: OX(18) + H3COX(34) <=> HOX(20) + H2COX(32)  # Reaction 135
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 39.707}
+- equation: CH2X(28) + H3COX(34) <=> OX(18) + C2H5X(36)  # Reaction 136
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.677}
+- equation: HOX(20) + CHCH3X(37) <=> OX(18) + C2H5X(36)  # Reaction 137
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.699}
+- equation: OX(18) + C2H5X(36) <=> HOX(20) + C2H4X(48)  # Reaction 138
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 55.8}
+- equation: CHX(27) + H3COX(34) <=> OX(18) + CHCH3X(37)  # Reaction 139
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.015}
+- equation: OX(18) + CHCH3X(37) <=> HOX(20) + CXCH3(38)  # Reaction 140
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.661}
+- equation: OX(18) + CHCH3X(37) <=> HOX(20) + CXHCH2(40)  # Reaction 141
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 51.438}
+- equation: CX(22) + H3COX(34) <=> OX(18) + CXCH3(38)  # Reaction 142
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: OX(18) + CXCH3(38) <=> HOX(20) + CXCH2(39)  # Reaction 143
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 56.121}
+- equation: HOX(20) + CXCH2(39) <=> OX(18) + CXHCH2(40)  # Reaction 144
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.863}
+- equation: OX(18) + CH3CXO(41) <=> OCX(19) + H3COX(34)  # Reaction 145
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.274}
+- equation: OX(18) + nC3H7X(44) <=> H3COX(34) + C2H4X(48)  # Reaction 146
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.829}
+- equation: H3COX(34) + CHCH3X(37) <=> OX(18) + iC3H7X(45)  # Reaction 147
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 7.421}
+- equation: HCOOX(25) + CH2X(28) <=> OX(18) + C2H3OX(49)  # Reaction 148
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.22}
+- equation: HOX(20) + CXHCHO(57) <=> OX(18) + C2H3OX(49)  # Reaction 149
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.471}
+- equation: CX(22) + HCOOX(25) <=> OX(18) + CXCHO(50)  # Reaction 150
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.067}
+- equation: OX(18) + CXCHO(50) <=> HOX(20) + CXCO(58)  # Reaction 151
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 96.026}
+- equation: OX(18) + SX(53) <=> CO2X(17) + H3COX(34)  # Reaction 152
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.458}
+- equation: CHX(27) + HCOOX(25) <=> OX(18) + CXHCHO(57)  # Reaction 153
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.748}
+- equation: OX(18) + CXHCHO(57) <=> HOX(20) + CXCHO(50)  # Reaction 154
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.029}
+- equation: HCXOH(31) + H3COX(34) <=> OX(18) + C2H5OX(60)  # Reaction 155
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 9.022}
+- equation: OX(18) + C2H5OX(60) <=> HOX(20) + C2H4OX(47)  # Reaction 156
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.701}
+- equation: OCX(19) + HOCXO(23) <=> CO2X(17) + CXHO(24)  # Reaction 157
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.842}
+- equation: OCX(19) + CXOH(26) <=> OCX(19) + CXHO(24)  # Reaction 158
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 27.517}
+- equation: OCX(19) + HCOOX(25) <=> CO2X(17) + CXHO(24)  # Reaction 159
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.108}
+- equation: CX(22) + HOCXO(23) <=> OCX(19) + CXOH(26)  # Reaction 160
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.491}
+- equation: CX(22) + CXHO(24) <=> OCX(19) + CHX(27)  # Reaction 161
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 10.822}
+- equation: CHX(27) + CXHO(24) <=> OCX(19) + CH2X(28)  # Reaction 162
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.123}
+- equation: CXHO(24) + CH2X(28) <=> OCX(19) + CH3X(29)  # Reaction 163
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.016}
+- equation: CXOH(26) + CH2X(28) <=> OCX(19) + CH3X(29)  # Reaction 164
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.836}
+- equation: CHX(27) + HOCXO(23) <=> OCX(19) + HCXOH(31)  # Reaction 165
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.961}
+- equation: CXHO(24) + CXOH(26) <=> OCX(19) + HCXOH(31)  # Reaction 166
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.328}
+- equation: OCX(19) + HCXOH(31) <=> CXHO(24) + CXHO(24)  # Reaction 167
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.724}
+- equation: HOCXO(23) + CH2X(28) <=> OCX(19) + H2CXOH(33)  # Reaction 168
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 2.457}
+- equation: CXHO(24) + HCXOH(31) <=> OCX(19) + H2CXOH(33)  # Reaction 169
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 11.297}
+- equation: CXOH(26) + HCXOH(31) <=> OCX(19) + H2CXOH(33)  # Reaction 170
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.046}
+- equation: OCX(19) + H2CXOH(33) <=> CXHO(24) + H2COX(32)  # Reaction 171
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.951}
+- equation: OCX(19) + H3COX(34) <=> CXHO(24) + H2COX(32)  # Reaction 172
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 22.773}
+- equation: CH2X(28) + CH3CXO(41) <=> OCX(19) + C2H5X(36)  # Reaction 173
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: CXHO(24) + CHCH3X(37) <=> OCX(19) + C2H5X(36)  # Reaction 174
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.855}
+- equation: CXOH(26) + CHCH3X(37) <=> OCX(19) + C2H5X(36)  # Reaction 175
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.389}
+- equation: OCX(19) + C2H5X(36) <=> CXHO(24) + C2H4X(48)  # Reaction 176
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 32.753}
+- equation: CHX(27) + CH3CXO(41) <=> OCX(19) + CHCH3X(37)  # Reaction 177
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 5.927}
+- equation: CXHO(24) + CXCH3(38) <=> OCX(19) + CHCH3X(37)  # Reaction 178
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.2}
+- equation: OCX(19) + CHCH3X(37) <=> CXHO(24) + CXHCH2(40)  # Reaction 179
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.012}
+- equation: CX(22) + CH3CXO(41) <=> OCX(19) + CXCH3(38)  # Reaction 180
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: OCX(19) + CXCH3(38) <=> CXHO(24) + CXCH2(39)  # Reaction 181
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 34.182}
+- equation: CXHO(24) + CXCH2(39) <=> OCX(19) + CXHCH2(40)  # Reaction 182
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.422}
+- equation: CXOH(26) + CXCH2(39) <=> OCX(19) + CXHCH2(40)  # Reaction 183
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.713}
+- equation: OCX(19) + nC3H7X(44) <=> CH3CXO(41) + C2H4X(48)  # Reaction 184
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 42.513}
+- equation: CH3CXO(41) + CHCH3X(37) <=> OCX(19) + iC3H7X(45)  # Reaction 185
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 1.332}
+- equation: CXHO(24) + CXHCHO(57) <=> OCX(19) + C2H3OX(49)  # Reaction 186
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.38}
+- equation: CXOH(26) + CXHCHO(57) <=> OCX(19) + C2H3OX(49)  # Reaction 187
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 26.344}
+- equation: OCX(19) + CXCHO(50) <=> CXHO(24) + CXCO(58)  # Reaction 188
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 64.566}
+- equation: OCX(19) + C2H3OX(51) <=> HOCXO(23) + CXCH2(39)  # Reaction 189
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.602}
+- equation: OCX(19) + SX(53) <=> CO2X(17) + CH3CXO(41)  # Reaction 190
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.629}
+- equation: OCX(19) + C2H3OX(56) <=> HOCXO(23) + CXCH2(39)  # Reaction 191
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 7.477}
+- equation: CXHO(24) + CXCHO(50) <=> OCX(19) + CXHCHO(57)  # Reaction 192
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.508}
+- equation: OCX(19) + C2H5OX(59) <=> HOCXO(23) + C2H4X(48)  # Reaction 193
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.416}
+- equation: HOCXO(23) + CHCH3X(37) <=> OCX(19) + C2H5OX(60)  # Reaction 194
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 10.967}
+- equation: HCXOH(31) + CH3CXO(41) <=> OCX(19) + C2H5OX(60)  # Reaction 195
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 2.933}
+- equation: OCX(19) + C2H5OX(60) <=> CXHO(24) + C2H4OX(47)  # Reaction 196
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.919}
+- equation: HOX(20) + HOCXO(23) <=> H2OX(21) + CO2X(17)  # Reaction 197
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.781}
+- equation: HOX(20) + HCOOX(25) <=> H2OX(21) + CO2X(17)  # Reaction 198
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.275}
+- equation: HOX(20) + H2CXOH(33) <=> H2OX(21) + H2COX(32)  # Reaction 199
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.781}
+- equation: HOX(20) + H3COX(34) <=> H2OX(21) + H2COX(32)  # Reaction 200
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 18.978}
+- equation: HOX(20) + C2H5X(36) <=> H2OX(21) + C2H4X(48)  # Reaction 201
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 29.175}
+- equation: HOX(20) + nC3H7X(44) <=> H3COHX(46) + C2H4X(48)  # Reaction 202
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.158}
+- equation: HOX(20) + SX(53) <=> CO2X(17) + H3COHX(46)  # Reaction 203
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.343}
+- equation: HOX(20) + C2H5OX(60) <=> H2OX(21) + C2H4OX(47)  # Reaction 204
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.781}
+- equation: CX(22) + CH2X(28) <=> CHX(27) + CHX(27)  # Reaction 205
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 13.86}
+- equation: CX(22) + CH3X(29) <=> CHX(27) + CH2X(28)  # Reaction 206
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 20.967}
+- equation: CX(22) + HCXOH(31) <=> CHX(27) + CXOH(26)  # Reaction 207
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.893}
+  duplicate: true
+- equation: CX(22) + HCXOH(31) <=> CHX(27) + CXOH(26)  # Reaction 208
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.656}
+  duplicate: true
+- equation: CX(22) + H2CXOH(33) <=> CXOH(26) + CH2X(28)  # Reaction 209
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.397}
+- equation: CX(22) + H2CXOH(33) <=> CHX(27) + HCXOH(31)  # Reaction 210
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 23.686}
+- equation: CX(22) + C2H5X(36) <=> CH2X(28) + CXCH3(38)  # Reaction 211
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 11.21}
+- equation: CX(22) + C2H5X(36) <=> CHX(27) + CHCH3X(37)  # Reaction 212
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 20.128}
+- equation: CX(22) + CHCH3X(37) <=> CHX(27) + CXCH3(38)  # Reaction 213
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.872}
+  duplicate: true
+- equation: CX(22) + CHCH3X(37) <=> CHX(27) + CXCH3(38)  # Reaction 214
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 11.783}
+  duplicate: true
+- equation: CX(22) + CXHCH2(40) <=> CHX(27) + CXCH2(39)  # Reaction 215
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.561}
+- equation: CX(22) + iC3H7X(45) <=> CXCH3(38) + CHCH3X(37)  # Reaction 216
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 8.466}
+- equation: CX(22) + C2H3OX(49) <=> CH2X(28) + CXCHO(50)  # Reaction 217
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.211}
+- equation: CX(22) + C2H3OX(49) <=> CHX(27) + CXHCHO(57)  # Reaction 218
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 12.603}
+- equation: CX(22) + C2H3OX(56) <=> CXOH(26) + CXCH2(39)  # Reaction 219
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: CX(22) + CXHCHO(57) <=> CHX(27) + CXCHO(50)  # Reaction 220
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.682}
+  duplicate: true
+- equation: CX(22) + CXHCHO(57) <=> CHX(27) + CXCHO(50)  # Reaction 221
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.476}
+  duplicate: true
+- equation: CX(22) + C2H5OX(59) <=> CH2X(28) + C2H3OX(51)  # Reaction 222
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.797}
+- equation: CX(22) + C2H5OX(60) <=> CXOH(26) + CHCH3X(37)  # Reaction 223
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 7.887}
+- equation: CX(22) + C2H5OX(60) <=> HCXOH(31) + CXCH3(38)  # Reaction 224
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 6.865}
+- equation: HOCXO(23) + HOCXO(23) <=> CO2X(17) + HCOOHX(42)  # Reaction 225
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.81}
+- equation: CXHO(24) + HOCXO(23) <=> CO2X(17) + H2COX(32)  # Reaction 226
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.545}
+- equation: HCOOX(25) + HOCXO(23) <=> CO2X(17) + HCOOHX(42)  # Reaction 227
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.492}
+  duplicate: true
+- equation: HCOOX(25) + HOCXO(23) <=> CO2X(17) + HCOOHX(42)  # Reaction 228
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.492}
+  duplicate: true
+- equation: HOCXO(23) + CH2X(28) <=> CO2X(17) + CH3X(29)  # Reaction 229
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.656}
+- equation: HOCXO(23) + HCXOH(31) <=> CO2X(17) + H2CXOH(33)  # Reaction 230
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.998}
+- equation: HOCXO(23) + H2CXOH(33) <=> CO2X(17) + H3COHX(46)  # Reaction 231
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.99}
+- equation: HOCXO(23) + H2CXOH(33) <=> H2COX(32) + HCOOHX(42)  # Reaction 232
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 43.489}
+- equation: HOCXO(23) + H3COX(34) <=> CO2X(17) + H3COHX(46)  # Reaction 233
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.696}
+- equation: HOCXO(23) + H3COX(34) <=> H2COX(32) + HCOOHX(42)  # Reaction 234
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.195}
+- equation: HOCXO(23) + C2H5X(36) <=> CO2X(17) + C2H6X(35)  # Reaction 235
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.076}
+- equation: HOCXO(23) + C2H5X(36) <=> HCOOHX(42) + C2H4X(48)  # Reaction 236
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 43.392}
+- equation: HOCXO(23) + CHCH3X(37) <=> CO2X(17) + C2H5X(36)  # Reaction 237
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.167}
+- equation: HOCXO(23) + CXCH2(39) <=> CO2X(17) + CXHCH2(40)  # Reaction 238
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.172}
+- equation: HOCXO(23) + CXHCH2(40) <=> CO2X(17) + C2H4X(48)  # Reaction 239
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.839}
+- equation: HOCXO(23) + CH3CXO(41) <=> CO2X(17) + C2H4OX(47)  # Reaction 240
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.536}
+- equation: HOCXO(23) + nC3H7X(44) <=> CO2X(17) + C3H8X(43)  # Reaction 241
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.918}
+- equation: HOCXO(23) + nC3H7X(44) <=> C2H4X(48) + SX(52)  # Reaction 242
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.895}
+- equation: HOCXO(23) + iC3H7X(45) <=> CO2X(17) + C3H8X(43)  # Reaction 243
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.852}
+- equation: HOCXO(23) + C2H3OX(49) <=> CO2X(17) + C2H4OX(47)  # Reaction 244
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.28}
+- equation: HOCXO(23) + SX(53) <=> CO2X(17) + SX(52)  # Reaction 245
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.081}
+  duplicate: true
+- equation: HOCXO(23) + SX(53) <=> CO2X(17) + SX(52)  # Reaction 246
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.081}
+  duplicate: true
+- equation: HOCXO(23) + SX(54) <=> CO2X(17) + SX(52)  # Reaction 247
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.074}
+- equation: HOCXO(23) + CXHCHO(57) <=> CO2X(17) + C2H3OX(49)  # Reaction 248
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.756}
+- equation: HOCXO(23) + C2H5OX(59) <=> CO2X(17) + C2H6OX(55)  # Reaction 249
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.146}
+- equation: HOCXO(23) + C2H5OX(60) <=> CO2X(17) + C2H6OX(55)  # Reaction 250
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.592}
+- equation: HOCXO(23) + C2H5OX(60) <=> HCOOHX(42) + C2H4OX(47)  # Reaction 251
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 38.973}
+- equation: CXHO(24) + HCOOX(25) <=> CO2X(17) + H2COX(32)  # Reaction 252
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 34.226}
+- equation: CH2X(28) + HCXOH(31) <=> CXHO(24) + CH3X(29)  # Reaction 253
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.044}
+- equation: HCXOH(31) + HCXOH(31) <=> CXHO(24) + H2CXOH(33)  # Reaction 254
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.253}
+- equation: CXHO(24) + H2CXOH(33) <=> H2COX(32) + H2COX(32)  # Reaction 255
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 46.223}
+- equation: CXHO(24) + H3COX(34) <=> H2COX(32) + H2COX(32)  # Reaction 256
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 35.929}
+- equation: HCXOH(31) + CHCH3X(37) <=> CXHO(24) + C2H5X(36)  # Reaction 257
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.596}
+- equation: CXHO(24) + C2H5X(36) <=> H2COX(32) + C2H4X(48)  # Reaction 258
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 46.126}
+- equation: HCXOH(31) + CXCH2(39) <=> CXHO(24) + CXHCH2(40)  # Reaction 259
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 26.921}
+- equation: CXHO(24) + nC3H7X(44) <=> C2H4X(48) + C2H4OX(47)  # Reaction 260
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 47.365}
+- equation: HCXOH(31) + CXHCHO(57) <=> CXHO(24) + C2H3OX(49)  # Reaction 261
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 27.552}
+- equation: CXHO(24) + SX(53) <=> CO2X(17) + C2H4OX(47)  # Reaction 262
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.55}
+- equation: CXHO(24) + C2H5OX(59) <=> HCOOHX(42) + C2H4X(48)  # Reaction 263
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.28}
+- equation: CXHO(24) + C2H5OX(60) <=> H2COX(32) + C2H4OX(47)  # Reaction 264
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 41.708}
+- equation: HCOOX(25) + HCOOX(25) <=> CO2X(17) + HCOOHX(42)  # Reaction 265
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.173}
+- equation: HCOOX(25) + CH2X(28) <=> CO2X(17) + CH3X(29)  # Reaction 266
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.922}
+- equation: HCOOX(25) + HCXOH(31) <=> CO2X(17) + H2CXOH(33)  # Reaction 267
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.264}
+- equation: HCOOX(25) + H2CXOH(33) <=> CO2X(17) + H3COHX(46)  # Reaction 268
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.672}
+- equation: HCOOX(25) + H2CXOH(33) <=> H2COX(32) + HCOOHX(42)  # Reaction 269
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 44.17}
+- equation: HCOOX(25) + H3COX(34) <=> CO2X(17) + H3COHX(46)  # Reaction 270
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.378}
+- equation: HCOOX(25) + H3COX(34) <=> H2COX(32) + HCOOHX(42)  # Reaction 271
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.876}
+- equation: HCOOX(25) + C2H5X(36) <=> CO2X(17) + C2H6X(35)  # Reaction 272
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.758}
+- equation: HCOOX(25) + C2H5X(36) <=> HCOOHX(42) + C2H4X(48)  # Reaction 273
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 44.073}
+- equation: HCOOX(25) + CHCH3X(37) <=> CO2X(17) + C2H5X(36)  # Reaction 274
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.434}
+- equation: HCOOX(25) + CXCH2(39) <=> CO2X(17) + CXHCH2(40)  # Reaction 275
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.438}
+- equation: HCOOX(25) + CXHCH2(40) <=> CO2X(17) + C2H4X(48)  # Reaction 276
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.521}
+- equation: HCOOX(25) + CH3CXO(41) <=> CO2X(17) + C2H4OX(47)  # Reaction 277
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.218}
+- equation: HCOOX(25) + nC3H7X(44) <=> CO2X(17) + C3H8X(43)  # Reaction 278
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.6}
+- equation: HCOOX(25) + iC3H7X(45) <=> CO2X(17) + C3H8X(43)  # Reaction 279
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.534}
+- equation: HCOOX(25) + C2H3OX(49) <=> CO2X(17) + C2H4OX(47)  # Reaction 280
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.962}
+- equation: HCOOX(25) + SX(53) <=> CO2X(17) + SX(52)  # Reaction 281
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.763}
+- equation: HCOOX(25) + SX(54) <=> CO2X(17) + SX(52)  # Reaction 282
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.756}
+- equation: HCOOX(25) + CXHCHO(57) <=> CO2X(17) + C2H3OX(49)  # Reaction 283
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.022}
+- equation: HCOOX(25) + C2H5OX(59) <=> CO2X(17) + C2H6OX(55)  # Reaction 284
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.827}
+- equation: HCOOX(25) + C2H5OX(60) <=> CO2X(17) + C2H6OX(55)  # Reaction 285
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.273}
+- equation: HCOOX(25) + C2H5OX(60) <=> HCOOHX(42) + C2H4OX(47)  # Reaction 286
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 39.655}
+- equation: CX(22) + HCXOH(31) <=> CHX(27) + CXOH(26)  # Reaction 287
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.893}
+  duplicate: true
+- equation: CX(22) + HCXOH(31) <=> CHX(27) + CXOH(26)  # Reaction 288
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.893}
+  duplicate: true
+- equation: CHX(27) + HCXOH(31) <=> CXOH(26) + CH2X(28)  # Reaction 289
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.957}
+- equation: CH2X(28) + HCXOH(31) <=> CXOH(26) + CH3X(29)  # Reaction 290
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.85}
+- equation: HCXOH(31) + HCXOH(31) <=> CXOH(26) + H2CXOH(33)  # Reaction 291
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.131}
+- equation: HCXOH(31) + CHCH3X(37) <=> CXOH(26) + C2H5X(36)  # Reaction 292
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.689}
+- equation: CXOH(26) + CHCH3X(37) <=> HCXOH(31) + CXCH3(38)  # Reaction 293
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.289}
+- equation: HCXOH(31) + CXCH2(39) <=> CXOH(26) + CXHCH2(40)  # Reaction 294
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.256}
+- equation: HCXOH(31) + CXHCHO(57) <=> CXOH(26) + C2H3OX(49)  # Reaction 295
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 24.214}
+- equation: CXOH(26) + CXHCHO(57) <=> HCXOH(31) + CXCHO(50)  # Reaction 296
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.981}
+- equation: CH2X(28) + CH2X(28) <=> CHX(27) + CH3X(29)  # Reaction 297
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 17.054}
+- equation: CH2X(28) + HCXOH(31) <=> CHX(27) + H2CXOH(33)  # Reaction 298
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 14.335}
+  duplicate: true
+- equation: CH2X(28) + HCXOH(31) <=> CHX(27) + H2CXOH(33)  # Reaction 299
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 6.859}
+  duplicate: true
+- equation: CH2X(28) + CHCH3X(37) <=> CHX(27) + C2H5X(36)  # Reaction 300
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 17.893}
+  duplicate: true
+- equation: CH2X(28) + CHCH3X(37) <=> CHX(27) + C2H5X(36)  # Reaction 301
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 11.024}
+  duplicate: true
+- equation: CHX(27) + CHCH3X(37) <=> CH2X(28) + CXCH3(38)  # Reaction 302
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.084}
+- equation: CX(22) + CHCH3X(37) <=> CHX(27) + CXCH3(38)  # Reaction 303
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.872}
+  duplicate: true
+- equation: CX(22) + CHCH3X(37) <=> CHX(27) + CXCH3(38)  # Reaction 304
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.872}
+  duplicate: true
+- equation: CHX(27) + CXHCH2(40) <=> CH2X(28) + CXCH2(39)  # Reaction 305
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.862}
+- equation: CHCH3X(37) + CHCH3X(37) <=> CHX(27) + iC3H7X(45)  # Reaction 306
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.769}
+- equation: CHX(27) + C2H3OX(49) <=> CH2X(28) + CXHCHO(57)  # Reaction 307
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.891}
+  duplicate: true
+- equation: CHX(27) + C2H3OX(49) <=> CH2X(28) + CXHCHO(57)  # Reaction 308
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 22.904}
+  duplicate: true
+- equation: CX(22) + CXHCHO(57) <=> CHX(27) + CXCHO(50)  # Reaction 309
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.682}
+  duplicate: true
+- equation: CX(22) + CXHCHO(57) <=> CHX(27) + CXCHO(50)  # Reaction 310
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 4.682}
+  duplicate: true
+- equation: CHX(27) + C2H3OX(56) <=> HCXOH(31) + CXCH2(39)  # Reaction 311
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 3.075}
+- equation: CHX(27) + CXHCHO(57) <=> CH2X(28) + CXCHO(50)  # Reaction 312
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.777}
+- equation: HCXOH(31) + CHCH3X(37) <=> CHX(27) + C2H5OX(60)  # Reaction 313
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.369}
+  duplicate: true
+- equation: HCXOH(31) + CHCH3X(37) <=> CHX(27) + C2H5OX(60)  # Reaction 314
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.369}
+  duplicate: true
+- equation: CH2X(28) + HCXOH(31) <=> CHX(27) + H2CXOH(33)  # Reaction 315
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 6.859}
+  duplicate: true
+- equation: CH2X(28) + HCXOH(31) <=> CHX(27) + H2CXOH(33)  # Reaction 316
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 14.335}
+  duplicate: true
+- equation: HCXOH(31) + CH3X(29) <=> CH2X(28) + H2CXOH(33)  # Reaction 317
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.442}
+- equation: CH2X(28) + H2CXOH(33) <=> H2COX(32) + CH3X(29)  # Reaction 318
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.609}
+- equation: CH2X(28) + H3COX(34) <=> H2COX(32) + CH3X(29)  # Reaction 319
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 16.588}
+- equation: CH2X(28) + C2H5X(36) <=> CH3X(29) + CHCH3X(37)  # Reaction 320
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 23.323}
+- equation: CH2X(28) + C2H5X(36) <=> CH3X(29) + C2H4X(48)  # Reaction 321
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 20.571}
+- equation: CH2X(28) + CHCH3X(37) <=> CHX(27) + C2H5X(36)  # Reaction 322
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 11.024}
+  duplicate: true
+- equation: CH2X(28) + CHCH3X(37) <=> CH3X(29) + CXCH3(38)  # Reaction 323
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.978}
+- equation: CH2X(28) + CHCH3X(37) <=> CHX(27) + C2H5X(36)  # Reaction 324
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 17.893}
+  duplicate: true
+- equation: CH2X(28) + CHCH3X(37) <=> CH3X(29) + CXHCH2(40)  # Reaction 325
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 26.331}
+- equation: CH2X(28) + CXCH3(38) <=> CH3X(29) + CXCH2(39)  # Reaction 326
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 27.502}
+- equation: CH2X(28) + CXHCH2(40) <=> CH3X(29) + CXCH2(39)  # Reaction 327
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.755}
+- equation: CH2X(28) + nC3H7X(44) <=> C2H4X(48) + C2H5X(36)  # Reaction 328
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.897}
+- equation: CH2X(28) + iC3H7X(45) <=> CHCH3X(37) + C2H5X(36)  # Reaction 329
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 15.619}
+- equation: CH2X(28) + C2H3OX(49) <=> CH3X(29) + CXHCHO(57)  # Reaction 330
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 15.797}
+- equation: CH2X(28) + CXCHO(50) <=> CH3X(29) + CXCO(58)  # Reaction 331
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 39.528}
+- equation: CH2X(28) + C2H3OX(51) <=> H2CXOH(33) + CXCH2(39)  # Reaction 332
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.655}
+- equation: CH2X(28) + SX(53) <=> CO2X(17) + C2H5X(36)  # Reaction 333
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.329}
+- equation: CH2X(28) + C2H3OX(56) <=> H2CXOH(33) + CXCH2(39)  # Reaction 334
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.0}
+- equation: CHX(27) + C2H3OX(49) <=> CH2X(28) + CXHCHO(57)  # Reaction 335
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.891}
+  duplicate: true
+- equation: CH2X(28) + CXHCHO(57) <=> CH3X(29) + CXCHO(50)  # Reaction 336
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.67}
+- equation: CHX(27) + C2H3OX(49) <=> CH2X(28) + CXHCHO(57)  # Reaction 337
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.891}
+  duplicate: true
+- equation: CH2X(28) + C2H5OX(59) <=> H2CXOH(33) + C2H4X(48)  # Reaction 338
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.132}
+- equation: CH2X(28) + C2H5OX(60) <=> H2CXOH(33) + CHCH3X(37)  # Reaction 339
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 9.853}
+- equation: CH2X(28) + C2H5OX(60) <=> HCXOH(31) + C2H5X(36)  # Reaction 340
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.018}
+- equation: CH2X(28) + C2H5OX(60) <=> CH3X(29) + C2H4OX(47)  # Reaction 341
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.845}
+- equation: HCXOH(31) + H2CXOH(33) <=> H2COX(32) + H2CXOH(33)  # Reaction 342
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.951}
+- equation: HCXOH(31) + H3COX(34) <=> H2COX(32) + H2CXOH(33)  # Reaction 343
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 14.93}
+- equation: HCXOH(31) + C2H5X(36) <=> H2CXOH(33) + CHCH3X(37)  # Reaction 344
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 20.603}
+- equation: HCXOH(31) + C2H5X(36) <=> H2CXOH(33) + C2H4X(48)  # Reaction 345
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 18.913}
+- equation: HCXOH(31) + CHCH3X(37) <=> CHX(27) + C2H5OX(60)  # Reaction 346
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.369}
+  duplicate: true
+- equation: HCXOH(31) + CHCH3X(37) <=> H2CXOH(33) + CXCH3(38)  # Reaction 347
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.258}
+- equation: HCXOH(31) + CHCH3X(37) <=> CHX(27) + C2H5OX(60)  # Reaction 348
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.369}
+  duplicate: true
+- equation: HCXOH(31) + CHCH3X(37) <=> H2CXOH(33) + CXHCH2(40)  # Reaction 349
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 24.54}
+- equation: HCXOH(31) + CXCH3(38) <=> H2CXOH(33) + CXCH2(39)  # Reaction 350
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 25.711}
+- equation: HCXOH(31) + CXHCH2(40) <=> H2CXOH(33) + CXCH2(39)  # Reaction 351
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.036}
+- equation: HCXOH(31) + nC3H7X(44) <=> C2H4X(48) + C2H5OX(60)  # Reaction 352
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.16}
+- equation: CHCH3X(37) + C2H5OX(60) <=> HCXOH(31) + iC3H7X(45)  # Reaction 353
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.762}
+- equation: HCXOH(31) + C2H3OX(49) <=> H2CXOH(33) + CXHCHO(57)  # Reaction 354
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 13.078}
+- equation: HCXOH(31) + CXCHO(50) <=> H2CXOH(33) + CXCO(58)  # Reaction 355
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 35.687}
+- equation: HCXOH(31) + SX(53) <=> CO2X(17) + C2H5OX(60)  # Reaction 356
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 14.592}
+- equation: HCXOH(31) + CXHCHO(57) <=> H2CXOH(33) + CXCHO(50)  # Reaction 357
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 12.951}
+- equation: HCXOH(31) + C2H5OX(60) <=> H2CXOH(33) + C2H4OX(47)  # Reaction 358
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.187}
+- equation: H2CXOH(33) + H2CXOH(33) <=> H2COX(32) + H3COHX(46)  # Reaction 359
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 42.669}
+- equation: H2CXOH(33) + H3COX(34) <=> H2COX(32) + H3COHX(46)  # Reaction 360
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.375}
+  duplicate: true
+- equation: H2CXOH(33) + H3COX(34) <=> H2COX(32) + H3COHX(46)  # Reaction 361
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 32.375}
+  duplicate: true
+- equation: H2CXOH(33) + C2H5X(36) <=> H2COX(32) + C2H6X(35)  # Reaction 362
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.755}
+- equation: H2CXOH(33) + C2H5X(36) <=> H3COHX(46) + C2H4X(48)  # Reaction 363
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 42.572}
+- equation: H2CXOH(33) + CHCH3X(37) <=> H2COX(32) + C2H5X(36)  # Reaction 364
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 21.12}
+- equation: H2CXOH(33) + CXCH2(39) <=> H2COX(32) + CXHCH2(40)  # Reaction 365
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 26.224}
+- equation: H2CXOH(33) + CXHCH2(40) <=> H2COX(32) + C2H4X(48)  # Reaction 366
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 41.518}
+- equation: H2CXOH(33) + CH3CXO(41) <=> H2COX(32) + C2H4OX(47)  # Reaction 367
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 41.215}
+- equation: H2CXOH(33) + nC3H7X(44) <=> H2COX(32) + C3H8X(43)  # Reaction 368
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.597}
+- equation: H2CXOH(33) + nC3H7X(44) <=> C2H4X(48) + C2H6OX(55)  # Reaction 369
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 49.927}
+- equation: H2CXOH(33) + iC3H7X(45) <=> H2COX(32) + C3H8X(43)  # Reaction 370
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 34.531}
+- equation: H2CXOH(33) + C2H3OX(49) <=> H2COX(32) + C2H4OX(47)  # Reaction 371
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.959}
+- equation: H2CXOH(33) + SX(53) <=> H2COX(32) + SX(52)  # Reaction 372
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.76}
+- equation: H2CXOH(33) + SX(53) <=> CO2X(17) + C2H6OX(55)  # Reaction 373
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.113}
+- equation: H2CXOH(33) + SX(54) <=> H2COX(32) + SX(52)  # Reaction 374
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 35.753}
+- equation: H2CXOH(33) + CXHCHO(57) <=> H2COX(32) + C2H3OX(49)  # Reaction 375
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.588}
+- equation: H2CXOH(33) + C2H5OX(59) <=> H2COX(32) + C2H6OX(55)  # Reaction 376
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.824}
+- equation: H2CXOH(33) + C2H5OX(60) <=> H2COX(32) + C2H6OX(55)  # Reaction 377
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 44.27}
+- equation: H2CXOH(33) + C2H5OX(60) <=> H3COHX(46) + C2H4OX(47)  # Reaction 378
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 38.153}
+- equation: H3COX(34) + H3COX(34) <=> H2COX(32) + H3COHX(46)  # Reaction 379
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 22.081}
+- equation: H3COX(34) + C2H5X(36) <=> H2COX(32) + C2H6X(35)  # Reaction 380
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.461}
+- equation: H3COX(34) + C2H5X(36) <=> H3COHX(46) + C2H4X(48)  # Reaction 381
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 32.278}
+- equation: H3COX(34) + CHCH3X(37) <=> H2COX(32) + C2H5X(36)  # Reaction 382
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 17.099}
+- equation: H3COX(34) + CXCH2(39) <=> H2COX(32) + CXHCH2(40)  # Reaction 383
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.103}
+- equation: H3COX(34) + CXHCH2(40) <=> H2COX(32) + C2H4X(48)  # Reaction 384
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 31.224}
+- equation: H3COX(34) + CH3CXO(41) <=> H2COX(32) + C2H4OX(47)  # Reaction 385
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 30.921}
+- equation: H3COX(34) + nC3H7X(44) <=> H2COX(32) + C3H8X(43)  # Reaction 386
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 22.303}
+- equation: H3COX(34) + iC3H7X(45) <=> H2COX(32) + C3H8X(43)  # Reaction 387
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 24.237}
+- equation: H3COX(34) + C2H3OX(49) <=> H2COX(32) + C2H4OX(47)  # Reaction 388
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 27.665}
+- equation: H3COX(34) + SX(53) <=> H2COX(32) + SX(52)  # Reaction 389
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 23.466}
+- equation: H3COX(34) + SX(54) <=> H2COX(32) + SX(52)  # Reaction 390
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 25.459}
+- equation: H3COX(34) + CXHCHO(57) <=> H2COX(32) + C2H3OX(49)  # Reaction 391
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.688}
+- equation: H3COX(34) + C2H5OX(59) <=> H2COX(32) + C2H6OX(55)  # Reaction 392
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 27.53}
+- equation: H3COX(34) + C2H5OX(60) <=> H2COX(32) + C2H6OX(55)  # Reaction 393
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.976}
+- equation: H3COX(34) + C2H5OX(60) <=> H3COHX(46) + C2H4OX(47)  # Reaction 394
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 27.859}
+- equation: C2H5X(36) + C2H5X(36) <=> C2H4X(48) + C2H6X(35)  # Reaction 395
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 31.658}
+- equation: CHCH3X(37) + C2H5X(36) <=> C2H4X(48) + C2H5X(36)  # Reaction 396
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 21.082}
+- equation: CHCH3X(37) + CHCH3X(37) <=> CXCH3(38) + C2H5X(36)  # Reaction 397
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.816}
+- equation: CXHCH2(40) + CHCH3X(37) <=> CXCH2(39) + C2H5X(36)  # Reaction 398
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 17.594}
+- equation: CXCH3(38) + CHCH3X(37) <=> CXCH2(39) + C2H5X(36)  # Reaction 399
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 28.054}
+- equation: CXCH2(39) + C2H5X(36) <=> CXHCH2(40) + C2H4X(48)  # Reaction 400
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 26.073}
+- equation: CHCH3X(37) + CHCH3X(37) <=> CXHCH2(40) + C2H5X(36)  # Reaction 401
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 26.883}
+- equation: CXHCH2(40) + C2H5X(36) <=> C2H4X(48) + C2H4X(48)  # Reaction 402
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 41.421}
+- equation: CH3CXO(41) + C2H5X(36) <=> C2H4X(48) + C2H4OX(47)  # Reaction 403
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 41.118}
+- equation: C2H5X(36) + nC3H7X(44) <=> C2H4X(48) + C3H8X(43)  # Reaction 404
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 32.5}
+  duplicate: true
+- equation: C2H5X(36) + nC3H7X(44) <=> C2H4X(48) + C3H8X(43)  # Reaction 405
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 32.5}
+  duplicate: true
+- equation: C2H5X(36) + iC3H7X(45) <=> C2H4X(48) + C3H8X(43)  # Reaction 406
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 34.434}
+- equation: C2H3OX(49) + C2H5X(36) <=> C2H4X(48) + C2H4OX(47)  # Reaction 407
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 37.862}
+- equation: CXHCHO(57) + CHCH3X(37) <=> CXCHO(50) + C2H5X(36)  # Reaction 408
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 16.509}
+- equation: SX(53) + C2H5X(36) <=> C2H4X(48) + SX(52)  # Reaction 409
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.663}
+- equation: SX(53) + C2H5X(36) <=> CO2X(17) + C3H8X(43)  # Reaction 410
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 15.686}
+- equation: SX(54) + C2H5X(36) <=> C2H4X(48) + SX(52)  # Reaction 411
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 35.656}
+- equation: C2H3OX(49) + CHCH3X(37) <=> CXHCHO(57) + C2H5X(36)  # Reaction 412
+  rate-constant: {A: 6.4e+21, b: 0.0, Ea: 16.636}
+- equation: CXHCHO(57) + C2H5X(36) <=> C2H3OX(49) + C2H4X(48)  # Reaction 413
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 28.41}
+- equation: CXCHO(50) + CHCH3X(37) <=> CXCO(58) + C2H5X(36)  # Reaction 414
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 41.761}
+- equation: C2H5X(36) + C2H5OX(59) <=> C2H4X(48) + C2H6OX(55)  # Reaction 415
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 37.727}
+  duplicate: true
+- equation: C2H5X(36) + C2H5OX(59) <=> C2H4X(48) + C2H6OX(55)  # Reaction 416
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.727}
+  duplicate: true
+- equation: C2H5X(36) + C2H5OX(60) <=> C2H4X(48) + C2H6OX(55)  # Reaction 417
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 44.173}
+- equation: C2H5X(36) + C2H5OX(60) <=> C2H4OX(47) + C2H6X(35)  # Reaction 418
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 27.239}
+- equation: CXCH2(39) + CHCH3X(37) <=> CXCH3(38) + CXHCH2(40)  # Reaction 419
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 22.383}
+- equation: CXCH2(39) + CHCH3X(37) <=> CXHCH2(40) + CXHCH2(40)  # Reaction 420
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 31.208}
+- equation: CHCH3X(37) + nC3H7X(44) <=> C2H4X(48) + iC3H7X(45)  # Reaction 421
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.327}
+- equation: CXCHO(50) + CHCH3X(37) <=> CXHCHO(57) + CXCH3(38)  # Reaction 422
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.469}
+- equation: C2H3OX(51) + CHCH3X(37) <=> CXCH2(39) + C2H5OX(60)  # Reaction 423
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 24.442}
+- equation: SX(53) + CHCH3X(37) <=> CO2X(17) + iC3H7X(45)  # Reaction 424
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 13.759}
+- equation: C2H3OX(56) + CHCH3X(37) <=> CXCH2(39) + C2H5OX(60)  # Reaction 425
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 0.082}
+- equation: CXHCHO(57) + CHCH3X(37) <=> CXCH3(38) + C2H3OX(49)  # Reaction 426
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.341}
+- equation: CXHCHO(57) + CHCH3X(37) <=> CXHCH2(40) + C2H3OX(49)  # Reaction 427
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 31.839}
+- equation: CHCH3X(37) + C2H5OX(59) <=> C2H4X(48) + C2H5OX(60)  # Reaction 428
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 18.564}
+- equation: CHCH3X(37) + C2H5OX(60) <=> C2H4OX(47) + C2H5X(36)  # Reaction 429
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 19.356}
+- equation: CXCH2(39) + CXCH3(38) <=> CXCH2(39) + CXHCH2(40)  # Reaction 430
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 32.379}
+- equation: CXHCHO(57) + CXCH3(38) <=> CXCH2(39) + C2H3OX(49)  # Reaction 431
+  rate-constant: {A: 9.6e+21, b: 0.0, Ea: 33.01}
+- equation: CXHCHO(57) + CXHCH2(40) <=> CXCH2(39) + C2H3OX(49)  # Reaction 432
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 25.119}
+- equation: CXCHO(50) + CXCH2(39) <=> CXCO(58) + CXHCH2(40)  # Reaction 433
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 57.514}
+- equation: CXCH2(39) + C2H3OX(51) <=> CXCH2(39) + C2H3OX(56)  # Reaction 434
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 34.725}
+- equation: CXCH2(39) + CXHCHO(57) <=> CXCHO(50) + CXHCH2(40)  # Reaction 435
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.076}
+- equation: CXCH2(39) + C2H5OX(59) <=> C2H3OX(56) + C2H4X(48)  # Reaction 436
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 38.069}
+- equation: CXCH2(39) + C2H5OX(60) <=> CXHCH2(40) + C2H4OX(47)  # Reaction 437
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.361}
+- equation: CXHCH2(40) + C2H5OX(60) <=> C2H4X(48) + C2H4OX(47)  # Reaction 438
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 37.002}
+- equation: CH3CXO(41) + C2H5OX(59) <=> C2H4X(48) + SX(52)  # Reaction 439
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 20.537}
+- equation: CH3CXO(41) + C2H5OX(60) <=> C2H4OX(47) + C2H4OX(47)  # Reaction 440
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 36.699}
+- equation: C2H5OX(60) + nC3H7X(44) <=> C2H4OX(47) + C3H8X(43)  # Reaction 441
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 28.081}
+- equation: C2H5OX(60) + iC3H7X(45) <=> C2H4OX(47) + C3H8X(43)  # Reaction 442
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 30.015}
+- equation: CXHCHO(57) + CXHCHO(57) <=> CXCHO(50) + C2H3OX(49)  # Reaction 443
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 24.034}
+- equation: CXCHO(50) + CXHCHO(57) <=> CXCO(58) + C2H3OX(49)  # Reaction 444
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 60.203}
+- equation: C2H3OX(49) + C2H5OX(60) <=> C2H4OX(47) + C2H4OX(47)  # Reaction 445
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.443}
+- equation: SX(53) + C2H5OX(60) <=> C2H4OX(47) + SX(52)  # Reaction 446
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 29.244}
+- equation: SX(54) + C2H5OX(60) <=> C2H4OX(47) + SX(52)  # Reaction 447
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 31.237}
+- equation: CXHCHO(57) + C2H5OX(60) <=> C2H3OX(49) + C2H4OX(47)  # Reaction 448
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 23.945}
+- equation: C2H5OX(59) + C2H5OX(60) <=> C2H4OX(47) + C2H6OX(55)  # Reaction 449
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 33.309}
+- equation: C2H5OX(60) + C2H5OX(60) <=> C2H4OX(47) + C2H6OX(55)  # Reaction 450
+  rate-constant: {A: 3.2e+21, b: 0.0, Ea: 39.755}

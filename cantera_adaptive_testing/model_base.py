@@ -56,14 +56,18 @@ class ModelBase(object):
         self.options.setdefault("runtype", "performance")
         self.options.setdefault("replace_reactions", False) # replace reactions of discarded types with generic reaction or skip them with False
         self.options.setdefault("use_icdb", True)
+        self.options.setdefault("flexible", False)
         # adjust moles if preconditioned but not moles
         self.options["moles"] = self.preconditioned if self.preconditioned else self.options["moles"]
         # create file name
         # output data options
         self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
         if self.preconditioned:
-            cl_th = 0 if self.threshold == 0 else int(round(abs(np.log10(self.threshold))))
-            self.classifiers.append(f"{cl_th}")
+            if self.flexible:
+                self.classifiers.append("flex")
+            else:
+                cl_th = 0 if self.threshold == 0 else int(round(abs(np.log10(self.threshold))))
+                self.classifiers.append(f"{cl_th}")
         elif self.moles:
             self.classifiers.append("moles")
         else:
@@ -307,6 +311,14 @@ class ModelBase(object):
     def use_icdb(self, value):
         self.options["use_icdb"] = value
 
+    @property
+    def flexible(self):
+        return self.options["flexible"]
+
+    @flexible.setter
+    def flexible(self, value):
+        self.options["flexible"] = value
+
     def __del__(self):
         if self.log:
             yaml = ruamel.yaml.YAML()
@@ -409,7 +421,10 @@ class ModelBase(object):
         """
         if self.preconditioned:
             self.precon = ct.AdaptivePreconditioner()
-            self.precon.threshold = self.threshold
+            if self.flexible:
+                self.precon.flexible_threshold = True
+            else:
+                self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
             self.net.derivative_settings = {"skip-falloff": self.skip_falloff,
                 "skip-third-bodies": self.skip_thirdbody}
