@@ -444,7 +444,7 @@ class ModelBase(object):
             stats["determinant"] = float(np.linalg.det(prec_mat))
             stats["min_eigenvalue"] = float(np.amin(eigvals))
             stats["max_eigenvalue"] = float(np.amax(eigvals))
-            stats["threshold"] = self.threshold
+            stats["threshold"] = self.precon.threshold
             stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
             stats["total_elements"] = np.prod(prec_mat.shape)
         return stats

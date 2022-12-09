@@ -8,7 +8,7 @@
 
 #SBATCH -p mime4,share							# name of partition or queue
 
-#SBATCH --time=7-00:00:00
+#SBATCH --time=1-00:00:00
 
 #SBATCH --mail-type=FAIL,END				# send email when job begins, ends or aborts
 

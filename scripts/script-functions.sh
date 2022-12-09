@@ -96,6 +96,34 @@ approximate_precon_mpi() {
     done
 }
 
+# function to run approximate preconditioned single jobs
+flexible_precon_single() {
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -v -M -P --flexible $ADD_ARGS"
+    echo $JOB_OPTIONS $AMS
+    echo
+    # run the job with set options
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        slurm_job_wait
+        sbatch -J "$CURR_MODEL-flex-single" --mem=$AMS ./batches/jobs-single.sh
+    fi
+    sleep $SLEEP_TIMER
+}
+
+# function to run approximate preconditioned mpi jobs
+flexible_precon_mpi() {
+    export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -v -M -P --flexible $ADD_ARGS"
+    echo $JOB_OPTIONS $AMS
+    echo
+    # run the job with set options
+    if [ -z "$SKIP_SBATCH" ]
+    then
+        slurm_job_wait
+        sbatch -J "$CURR_MODEL-flex-mpi" --mem=$AMS ./batches/jobs-mpi.sh
+    fi
+    sleep $SLEEP_TIMER
+}
+
 # function to run fully analytical preconditioned single jobs
 analytical_precon_single() {
     export JOB_OPTIONS="$CURR_MODEL $PROBLEMS -v -M -P -T 0 --prefix analyt --skip_thirdbody --skip_falloff --analyt_temp_derivs $ADD_ARGS"
@@ -201,12 +229,23 @@ skip_sbatch() {
     export SKIP_SBATCH=1
 }
 
+skip_flex() {
+    export SKIP_FLEX=1
+}
+
+skip_steady_state() {
+    export SKIP_STEADY_STATE=1
+}
+
+
 reset_skips() {
     unset SKIP_ANALYT
     unset SKIP_APPROX
     unset SKIP_MASS
     unset SKIP_MOLES
     unset SKIP_SBATCH
+    unset SKIP_FLEX
+    unset SKIP_STEADY_STATE
 }
 
 # Define single jobs
@@ -220,6 +259,11 @@ define_runners() {
     if [ -z "$SKIP_APPROX" ]
     then
         RUNNERS+=("approximate_precon_$1")
+    fi
+    # Moles run
+    if [ -z "$SKIP_FLEX" ]
+    then
+        RUNNERS+=("flexible_precon_$1")
     fi
     # Analytical preconditioner
     if [ -z "$SKIP_ANALYT" ]

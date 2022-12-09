@@ -50,6 +50,7 @@ def check_for_all_cases(direc="surface_data"):
     # mass, precon cases
     for cm in check_mods:
         cases[f"{cm}-mass"] = []
+        cases[f"{cm}-flex"] = []
         for i in range(0, 19, 1):
             cases[f"{cm}-{i}"] = []
     std_keys = copy.deepcopy(list(cases.keys()))
