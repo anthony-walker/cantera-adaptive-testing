@@ -12,6 +12,8 @@ then
     echo "Running steady state calcs..."
     skip_moles
     skip_analyt
+    skip_flex
+    skip_approx
 
 
     declare -a ss_arr
@@ -50,14 +52,17 @@ skip_moles
 skip_analyt
 
 # performance runs
-./launch.sh ./options/surf-opts mpi 10 5 $MLIST -R performance -O $SURF_DIR -L
-./launch.sh ./options/surf-opts mpi 10 5 $MLIST -R performance --remove_falloff -O $SURF_DIR -L
-./launch.sh ./options/surf-opts mpi 10 5 $MLIST -R performance --remove_thirdbody -O $SURF_DIR -L
-./launch.sh ./options/surf-opts mpi 10 5 $MLIST -R performance --remove_thirdbody --remove_falloff -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_falloff -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody -O $SURF_DIR -L
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance --remove_thirdbody --remove_falloff -O $SURF_DIR -L
+# performance runs with MVR
+./launch.sh ./options/surf-opts mpi 10 1 $MLIST -R performance -O $SURF_DIR -L -MVR
 
 # analysis runs
 ./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE -O $SURF_DIR
 ./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_falloff -O $SURF_DIR
 ./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_thirdbody -O $SURF_DIR
 ./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE --remove_thirdbody --remove_falloff -O $SURF_DIR
-
+# analysis runs with MVR
+./launch.sh ./options/surf-opts single 1 1 $MLIST -R analysis -D $SDATABASE -O $SURF_DIR -MVR

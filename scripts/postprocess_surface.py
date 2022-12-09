@@ -36,8 +36,37 @@ def add_nruns_to_older_files():
             with open(os.path.join("surf-data", fi), "w") as f:
                 yaml.dump(data, f)
 
+def merge_database_files(input_db, output_db):
+    # get connections
+    in_connect = sqlite3.connect(input_db, timeout=100000)
+    out_connect = sqlite3.connect(output_db, timeout=100000)
+    in_cursor = in_connect.cursor()
+    out_cursor = out_connect.cursor()
+    # get all tables
+    table_query = """SELECT name FROM sqlite_master WHERE type='table';"""
+    in_cursor.execute(table_query)
+    tables = in_cursor.fetchall()
+    tables = [ t[0] for t in tables ]
+    tables.remove("PERFORMANCE")
+    tables.remove("THERMO_DATA")
+    tables.remove("EXCEPTIONS")
+    for t in tables:
+        query = f"SELECT sql from sqlite_master WHERE name='{t}'"
+        in_cursor.execute(query)
+        r = in_cursor.fetchall()
+        out_cursor.execute(f"DROP TABLE IF EXISTS {t}")
+        out_cursor.execute(r[0][0])
+        in_cursor.execute(f"SELECT * FROM {t}")
+        curr_data = in_cursor.fetchall()
+        if curr_data:
+            vstr = ", ".join(["?"for i in range(len(curr_data[0]))])
+            for c in curr_data:
+                out_cursor.execute(f"INSERT INTO {t} VALUES ({vstr})", c)
+    out_connect.commit()
+    in_connect.close()
+    out_connect.close()
 
-def check_for_all_cases(direc="surface_data"):
+def check_for_all_cases(direc="surface_data", disp=False):
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
     files = list(filter(lambda x: ".yaml" in x, files))
@@ -59,11 +88,13 @@ def check_for_all_cases(direc="surface_data"):
             cases[f"{k}-{md}"] = []
     for f in files:
         cases["-".join(f.split("-")[:-1])].append(f)
-    for c, k in cases.items():
+    for c, k in sorted(cases.items(), key=lambda x: x[0][::-1]):
         if len(k) > 100:
             print(f"MORE THAN {c}: {len(k)}")
         elif len(k) < 100:
             print(f"LESS THAN {c}: {len(k)}")
+        elif disp:
+            print(f"GOOD {c}: {len(k)}")
 
 
 def trim_to_one_hundred(direc="surface_data"):
@@ -171,11 +202,14 @@ def plot_data_one(problem, add_filters=[], colors={}, markers={}):
         for k, v in rt_data.items():
             if m in k and k != mass_key:
                 y.append(rt_data[mass_key]/v)
-                thstr = int(re.search("\d+", k).group(0))
-                if thstr == 0:
-                    x.append(0)
+                if "flex" in k:
+                    x.append(1)
                 else:
-                    x.append(10**-thstr)
+                    thstr = int(re.search("\d+", k).group(0))
+                    if thstr == 0:
+                        x.append(0)
+                    else:
+                        x.append(10**-thstr)
         if x and y:
             # sort plotted data
             temp = list(zip(x,y))
@@ -383,9 +417,10 @@ def threshold_database_plot(value, model="GRI", surface="Small", mean=True):
     for mod in ["", "_ntb", "_nfo", "_ntb_nfo"]:
         x = []
         y = []
-        for i in range(0, 19, 1):
+        for i in range(0, 20, 1):
+            iv = "flex" if i == 19 else f"{i}"
             try:
-                cursor.execute(f""" SELECT {value} FROM Platinum{surface}{model}_{i}{mod}_network_combustor_exhaust """)
+                cursor.execute(f""" SELECT {value} FROM Platinum{surface}{model}_{iv}{mod}_network_combustor_exhaust """)
                 condition = cursor.fetchall()
                 condition = np.array([c[0] for c in condition])
                 # get mean or max condition
@@ -394,11 +429,13 @@ def threshold_database_plot(value, model="GRI", surface="Small", mean=True):
                 else:
                     max_condition = np.amax(condition)
                     if value == "lin_iters":
-                        cursor.execute(f""" SELECT time FROM Platinum{surface}{model}_{i}{mod}_network_combustor_exhaust """)
+                        cursor.execute(f""" SELECT time FROM Platinum{surface}{model}_{iv}{mod}_network_combustor_exhaust """)
                         time = cursor.fetchall()[-1][0]
                         max_condition /= time
                 if i == 0:
                     x.append(0)
+                elif i == 19:
+                    x.append(1)
                 else:
                     x.append(10**-i)
                 y.append(max_condition)
@@ -576,19 +613,19 @@ def make_max_prec_evals():
             plt.close()
 
 if __name__ == "__main__":
-    # combine_surf_yamls()
+    # check_for_all_cases(disp=True)
+    combine_surf_yamls()
     # required_paper_numbers()
-    # make_all_reaction_figures()
-    # make_mean_condition_plots()
-    # make_mean_eigenvalue_plots()
-    # make_mean_linear_iterations()
-
     # make_total_runtime_figures()
     # make_all_reaction_figures()
+    # make_mean_eigenvalue_plots()
+    # make_mean_condition_plots()
     # make_mean_nnz_plots()
     # make_max_steps_plots()
     # make_max_nonlinear_iters()
     # make_max_rhs_evals()
     # make_mean_l2_norm()
     # make_mean_frobenius_norm()
-    make_max_prec_evals()
+    # make_max_prec_solves()
+    # make_max_prec_evals()
+    # make_mean_linear_iterations()
