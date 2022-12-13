@@ -9,6 +9,7 @@ import cantera_adaptive_testing.models as models
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from matplotlib.lines import Line2D
+from matplotlib import ticker, cm
 
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
@@ -167,13 +168,16 @@ def combine_surf_yamls(direc="surface_data"):
     with open("combined.yaml", 'w') as f:
         data = yaml.dump(case_data, f)
 
-def plot_data_one(problem, add_filters=[], colors={}, markers={}):
+def plot_data_one(problem, add_filters=[], colors={}, markers={}, value="id", dbcase=0):
     # get all models of interest
     mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
     mods = list(filter(lambda x: "Platinum" in x, mods))
     mods = list(filter(lambda x: "Aramco" not in x, mods))
     for ad in add_filters:
         mods = list(filter(lambda x: ad not in x, mods))
+    # get database connection
+    connection = sqlite3.connect("surf.db", timeout=100000)
+    cursor = connection.cursor()
     # get data
     yaml = ruamel.yaml.YAML()
     with open("combined.yaml", 'r') as f:
@@ -201,15 +205,32 @@ def plot_data_one(problem, add_filters=[], colors={}, markers={}):
         y = []
         for k, v in rt_data.items():
             if m in k and k != mass_key:
-                y.append(rt_data[mass_key]/v)
-                if "flex" in k:
-                    x.append(1)
-                else:
-                    thstr = int(re.search("\d+", k).group(0))
-                    if thstr == 0:
-                        x.append(0)
+                try:
+                    if dbcase > 0:
+                        db_key = re.sub("-","_", f"{k}_{problem}")
+                        cursor.execute(f""" SELECT {value} FROM {db_key} """)
+                        condition = cursor.fetchall()
+                        condition = np.array([c[0] for c in condition])
+                    # get mean or max condition
+                    if dbcase == 3:
+                        nv = condition[initial:initial+1]
+                    elif dbcase == 2:
+                        nv = np.mean(condition)
+                    elif dbcase == 1:
+                        nv = np.amax(condition)
                     else:
-                        x.append(10**-thstr)
+                        nv = 1
+                    y.append(rt_data[mass_key]/v/nv)
+                    if "flex" in k:
+                        x.append(1)
+                    else:
+                        thstr = int(re.search("\d+", k).group(0))
+                        if thstr == 0:
+                            x.append(0)
+                        else:
+                            x.append(10**-thstr)
+                except Exception as e:
+                    print(e)
         if x and y:
             # sort plotted data
             temp = list(zip(x,y))
@@ -244,7 +265,7 @@ def plot_data_one(problem, add_filters=[], colors={}, markers={}):
             ax.loglog(x, y, label=k)
     ax.set_xlabel("Threshold")
     ax.set_ylabel("Speed-up")
-    ax.set_ylim([10**-3, 10**3])
+    # ax.set_ylim([10**-3, 10**3])
     return fig, ax
 
 def make_total_runtime_figures():
@@ -340,11 +361,14 @@ def plot_data_nfo_ntb(model_name, problem, markers={}, colors={}):
             for k in curr_data:
                 if k != mass_key:
                     y.append(rt_data[mass_key]/rt_data[k])
-                    thstr = int(re.search("\d+", k).group(0))
-                    if thstr == 0:
-                        x.append(0)
+                    if "flex" in k:
+                        x.append(1)
                     else:
-                        x.append(10**-thstr)
+                        thstr = int(re.search("\d+", k).group(0))
+                        if thstr == 0:
+                            x.append(0)
+                        else:
+                            x.append(10**-thstr)
             if x and y:
                 # sort plotted data
                 temp = list(zip(x,y))
@@ -407,7 +431,7 @@ def required_paper_numbers():
     models.PlatinumSmallIsoOctane.print_model_information()
     models.PlatinumLargeIsoOctane.print_model_information()
 
-def threshold_database_plot(value, model="GRI", surface="Small", mean=True):
+def threshold_database_plot(value, model="GRI", surface="Small", mean=True, initial=-1):
     # get database connection
     connection = sqlite3.connect("surf.db", timeout=100000)
     cursor = connection.cursor()
@@ -424,6 +448,8 @@ def threshold_database_plot(value, model="GRI", surface="Small", mean=True):
                 condition = cursor.fetchall()
                 condition = np.array([c[0] for c in condition])
                 # get mean or max condition
+                if initial > -1:
+                    condition = condition[initial:initial+1]
                 if mean:
                     max_condition = np.mean(condition)
                 else:
@@ -612,9 +638,125 @@ def make_max_prec_evals():
             plt.savefig(f"figures/max_prec_evals_{m}_{s}.pdf".lower())
             plt.close()
 
+def make_init_condition_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("condition", m, s, initial=1)
+            # ax.set_ylim(np.float64(10**10), np.float64(10**32))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Initial Condition Number")
+            plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/init_condition_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_init_eigenvalue_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("max_eigenvalue", m, s, initial=1)
+            # ax.set_ylim(np.float64(10**8), np.float64(10**14))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Maximum Initial Eigenvalue")
+            plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/init_eigen_{m}_{s}.pdf".lower())
+            plt.close()
+
+def make_init_fro_norm_plots():
+    # Font properties
+    font_props = FontProperties()
+    font_props.set_size('x-small')
+    for s in ["Small", "Large"]:
+        for m in ["GRI", "IsoOctane"]:
+            fig, ax = threshold_database_plot("fro_norm", m, s, initial=0)
+            # ax.set_ylim(np.float64(10**8), np.float64(10**14))
+            ax.legend(loc="lower center", ncol=2, prop=font_props,bbox_to_anchor=(0.5, 1.0))
+            ax.set_ylabel("Initial Frobenius Norm")
+            plt.yscale("linear")
+            plt.subplots_adjust(bottom=0.15)
+            plt.savefig(f"figures/init_fro_norm_{m}_{s}.pdf".lower())
+            plt.close()
+
+def single_threshold_analysis_plot(x, y, model="GRI", surface="Small", thresh="flex", start=0, stop=-1, fig=None, ax=None):
+    # get database connection
+    connection = sqlite3.connect("surf.db", timeout=100000)
+    cursor = connection.cursor()
+    colors = {"_nfo":'#a6cee3', "":'#1f78b4', "_ntb":'#b2df8a', "_ntb_nfo":'#33a02c'}
+    markers = {"Small":"s", "Medium":"o", "Large":"d"}
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(1, 1)
+    for mod in [""]:#, "_ntb", "_nfo", "_ntb_nfo"]:
+        try:
+            cursor.execute(f""" SELECT {x} FROM Platinum{surface}{model}_{thresh}{mod}_network_combustor_exhaust """)
+            x_values = cursor.fetchall()
+            x_values = np.array([c[0] for c in x_values])
+            cursor.execute(f""" SELECT {y} FROM Platinum{surface}{model}_{thresh}{mod}_network_combustor_exhaust """)
+            y_values = cursor.fetchall()
+            y_values = np.array([c[0] for c in y_values])
+        except Exception as e:
+            print(e)
+        clabel = re.sub("[_]","-", f"Platinum{surface}{model}_{thresh}{mod}")
+        x_values, y_values = zip(*sorted(list(zip(x_values, y_values))))
+        ax.loglog(x_values[start:stop], y_values[start:stop], marker=markers[surface], label=clabel)
+    return fig, ax
+
+def make_threshold_time_step():
+    fig,ax = single_threshold_analysis_plot("id", "threshold", thresh=1)
+    # fig.set_figheight(value_height)
+    fig.set_figwidth(16)
+    ax.set_xlabel("Id")
+    ax.set_ylabel("Threshold")
+    ax.set_ylim([0, 0.125])
+    plt.show()
+
+def make_maxeigen_time_step():
+    # fig,ax = single_threshold_analysis_plot("id", "max_eigenvalue", thresh=0, model="IsoOctane")
+    fig,ax = single_threshold_analysis_plot("id", "max_eigenvalue", thresh=7, surface="Large")
+    # fig,ax = single_threshold_analysis_plot("id", "max_eigenvalue", thresh=0, model="NDodecane", fig=fig, ax=ax)
+    # fig,ax = single_threshold_analysis_plot("id", "max_eigenvalue", thresh=0, fig=fig, ax=ax)
+    # fig,ax = single_threshold_analysis_plot("id", "max_eigenvalue", thresh=0, fig=fig, ax=ax)
+    # fig.set_figheight(value_height)
+    fig.set_figwidth(16)
+    ax.set_xlabel("Id")
+    ax.set_ylabel("MME")
+    ax.legend()
+    # ax.set_ylim([0, 0.125])
+    plt.show()
+
+
+def make_liniters_time_step():
+    fig,ax = single_threshold_analysis_plot("id", "lin_iters", thresh="flex")
+    fig,ax = single_threshold_analysis_plot("id", "lin_iters", thresh=1, fig=fig, ax=ax)
+    fig,ax = single_threshold_analysis_plot("id", "lin_iters", thresh=0, fig=fig, ax=ax)
+    # fig.set_figheight(value_height)
+    fig.set_figwidth(16)
+    ax.set_xlabel("Id")
+    ax.set_ylabel("Linear Iterations")
+    ax.legend()
+    # ax.set_ylim([0, 0.125])
+    plt.show()
+
+def make_prec_evals_time_step():
+    fig,ax = single_threshold_analysis_plot("id", "prec_evals", thresh="flex")
+    fig,ax = single_threshold_analysis_plot("id", "prec_evals", thresh=1, fig=fig, ax=ax)
+    fig,ax = single_threshold_analysis_plot("id", "prec_evals", thresh=0, fig=fig, ax=ax)
+    # fig.set_figheight(value_height)
+    fig.set_figwidth(16)
+    ax.set_xlabel("Id")
+    ax.set_ylabel("Linear Iterations")
+    ax.legend()
+    # ax.set_ylim([0, 0.125])
+    plt.show()
+
 if __name__ == "__main__":
     # check_for_all_cases(disp=True)
-    combine_surf_yamls()
+    # combine_surf_yamls()
     # required_paper_numbers()
     # make_total_runtime_figures()
     # make_all_reaction_figures()
@@ -629,3 +771,10 @@ if __name__ == "__main__":
     # make_max_prec_solves()
     # make_max_prec_evals()
     # make_mean_linear_iterations()
+    # make_init_condition_plots()
+    # make_init_eigenvalue_plots()
+    # make_init_fro_norm_plots()
+    # make_maxeigen_time_step()
+    make_liniters_time_step()
+    # make_prec_evals_time_step()
+    # make_contour_data()

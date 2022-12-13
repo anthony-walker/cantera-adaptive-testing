@@ -11,6 +11,7 @@ from mpi4py import MPI
 import multiprocessing as mp
 import cantera_adaptive_testing.cutils as cutils
 import cantera_adaptive_testing.models as models
+import cantera_adaptive_testing.surfaces as surfaces
 import cantera_adaptive_testing.yaml_plotter as yaml_plotter
 
 
@@ -108,7 +109,7 @@ def parser_setup(add_mod=True, add_probs=True):
                         help="Turn on the falloff reaction evaluation for preconditioning")
     parser.add_argument('--remove_thirdbody', action='store_true', default=False,
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
-    parser.add_argument('--replace_reactions', action='store_true', default=False,
+    parser.add_argument('--replace_reactions', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
     parser.add_argument('-MTS', '--max_time_step', type=float,
                          default=1e5, help="Set a fixed max time step value.")
@@ -116,6 +117,7 @@ def parser_setup(add_mod=True, add_probs=True):
                          default=1e5, help="Set a fixed max number of steps.")
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
+    parser.add_argument('-S', "--surface", type=str, default="", help="Name of surface to add to gas phase model")
     return parser
 
 
@@ -193,6 +195,9 @@ def cmd_line_main():
     # Handle models
     mods = inspect.getmembers(models, inspect.isclass)
     mods = {element[0]: element[1] for element in mods}
+    surfs = inspect.getmembers(surfaces, inspect.isclass)
+    surfs = {element[0]: element[1] for element in surfs}
+    del surfs["Surface"] # delete surface because its not a valid option
     del mods['ModelBase']  # delete model because it is not a valid option
     if args.model not in mods:
         # print models
@@ -201,6 +206,9 @@ def cmd_line_main():
             print("\t"+mod)
     else:
         selected = mods[args.model](**vars(args))
+        if args.surface:
+            csurf = surfs[args.surface]()
+            selected.add_surface(csurf)
         for p in args.problems:
             curr_method = selected.get_method_by_name(p)
             curr_method()

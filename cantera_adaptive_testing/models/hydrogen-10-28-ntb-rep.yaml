@@ -253,13 +253,13 @@ species:
     rotational-relaxation: 4.0
 
 reactions:
-- equation: 2 O + M <=> O2 + M  # Reaction 1
+- equation: 2 O <=> O2          # Reaction 1
   rate-constant: {A: 1.2e+17, b: -1.0, Ea: 0.0}
-- equation: O + H + M <=> OH + M  # Reaction 2
+- equation: O + H <=> OH          # Reaction 2
   rate-constant: {A: 5.0e+17, b: -1.0, Ea: 0.0}
-- equation: H + O2 + M <=> HO2 + M  # Reaction 6
+- equation: H + O2 <=> HO2          # Reaction 6
   rate-constant: {A: 2.8e+18, b: -0.86, Ea: 0.0}
-- equation: 2 H + M <=> H2 + M  # Reaction 12
+- equation: 2 H <=> H2          # Reaction 12
   rate-constant: {A: 1.0e+18, b: -1.0, Ea: 0.0}
-- equation: H + OH + M <=> H2O + M  # Reaction 15
+- equation: H + OH <=> H2O          # Reaction 15
   rate-constant: {A: 2.2e+22, b: -2.0, Ea: 0.0}

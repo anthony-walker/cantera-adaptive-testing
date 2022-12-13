@@ -54,8 +54,8 @@ class ModelBase(object):
         # the performance run no stats are recorded and during the analysis run, all
         # stats are recorded.
         self.options.setdefault("runtype", "performance")
-        self.options.setdefault("replace_reactions", False) # replace reactions of discarded types with generic reaction or skip them with False
-        self.options.setdefault("use_icdb", True)
+        self.options.setdefault("replace_reactions", True) # replace reactions of discarded types with generic reaction or skip them with False
+        self.options.setdefault("use_icdb", False)
         self.options.setdefault("flexible", False)
         self.options.setdefault("min_val_repl", False)
         # adjust moles if preconditioned but not moles
@@ -99,10 +99,12 @@ class ModelBase(object):
             except Exception as e:
                 print(e)
         # dictionary for logging yaml
-        self.yaml_data = {self.__class__.__name__:{}}
-        self.yaml_file = "-".join(filter(None, self.classifiers + [str(random.randint(1e12, 1e13))])) + ".yaml"
+        self.yaml_data = {}
         # flag to stop extra modification
         self.not_modified = True
+        self.surface = ""
+        self.sphase = ""
+        self.surfname = ""
 
     @property
     def remove_thirdbody(self):
@@ -331,8 +333,9 @@ class ModelBase(object):
         self.options["min_val_repl"] = value
 
     def __del__(self):
-        if self.log:
+        if self.log and self.yaml_data:
             yaml = ruamel.yaml.YAML()
+            self.yaml_file = "-".join(filter(None, self.classifiers + [str(random.randint(1e12, 1e13))])) + ".yaml"
             with open(os.path.join(self.data_dir, self.yaml_file), 'w') as f:
                 yaml.dump(self.yaml_data, f)
 
@@ -360,6 +363,7 @@ class ModelBase(object):
                     if k["type"] == "falloff" and self.remove_falloff:
                         has_falloff = True
                         if self.replace_reactions:
+                            k["equation"] = re.sub(" [(]?[+][ ]?M[)]?", "", k["equation"])
                             k.pop("type", None)
                             k.pop("Troe", None)
                             k.pop("high-P-rate-constant", None)
@@ -369,6 +373,7 @@ class ModelBase(object):
                     elif k["type"] == "three-body" and self.remove_thirdbody:
                         has_thirdbody = True
                         if self.replace_reactions:
+                            k["equation"] = re.sub(" [(]?[+][ ]?M[)]?", "", k["equation"])
                             k.pop("type", None)
                             k.pop("efficiencies", None)
                             reactions.append(k)
@@ -492,7 +497,9 @@ class ModelBase(object):
                 create_all_tables(self.database)
             # get runtime information for these run types
             if self.runtype != "steady":
-                ss_name = f"{self.__class__.__name__}-{func.__name__}"
+                ss_name = f"{self.__class__.__name__}"
+                ss_name += f"-{self.surfname}" if self.surface else ""
+                ss_name += f"-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
                 if self.remove_thirdbody or self.remove_falloff:
@@ -503,7 +510,8 @@ class ModelBase(object):
                 if ss_res is not None:
                     self.sstime = ss_res[0]
                 else:
-                    raise Exception(f"No steady state time for {self.__class__.__name__}, {func.__name__}.")
+                    raise Exception(f"No steady state time for {self.__class__.__name__}, {self.surfname}, {func.__name__}.")
+            yaml_name = "-".join(filter(None, self.classifiers))
             # run problem
             try:
                 t0 = time.time_ns()
@@ -516,11 +524,17 @@ class ModelBase(object):
                     append_exception_table(self.curr_name, self.exception, self.database)
                 if self.log:
                     self.curr_run[func.__name__].update({"exception":self.exception})
-                    self.yaml_data[self.__class__.__name__].update(self.curr_run)
+                    if yaml_name in self.yaml_data:
+                        self.yaml_data[yaml_name].update(self.curr_run)
+                    else:
+                        self.yaml_data[yaml_name] = {}
+                        self.yaml_data[yaml_name].update(self.curr_run)
                 return False
             # add steady state to table
             if self.runtype == "steady":
-                ss_name = f"{self.__class__.__name__}-{func.__name__}"
+                ss_name = f"{self.__class__.__name__}"
+                ss_name += f"-{self.surfname}" if self.surface else ""
+                ss_name += f"-{func.__name__}"
                 ss_name += "-nfo" if self.remove_falloff else ""
                 ss_name += "-ntb" if self.remove_thirdbody else ""
                 if self.remove_thirdbody or self.remove_falloff:
@@ -539,8 +553,16 @@ class ModelBase(object):
                 self.curr_run[func.__name__]["nruns"] = 1
                 self.curr_run[func.__name__]["runtype"] = self.options["runtype"]
                 self.curr_run[func.__name__].update(self.thermo_data)
+                stats = self.get_numerical_stats()
+                for k in stats:
+                    stats[k] = f"{stats[k]}"
+                self.curr_run[func.__name__].update({"numerical":stats})
                 self.curr_run[func.__name__].update({"config":self.options})
-                self.yaml_data[self.__class__.__name__].update(self.curr_run)
+                if yaml_name in self.yaml_data:
+                    self.yaml_data[yaml_name].update(self.curr_run)
+                else:
+                    self.yaml_data[yaml_name] = {}
+                    self.yaml_data[yaml_name].update(self.curr_run)
             return True
         return wrapped
 
@@ -578,7 +600,7 @@ class ModelBase(object):
             "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
             }})
         # Add surface data if it exists
-        if self.surface is not None:
+        if self.surface:
             # create platinum surface
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
@@ -688,7 +710,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
         else:
-            gas.TP = kwargs.get('T', 1200), kwargs.get('P', ct.one_atm)
+            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
@@ -715,7 +737,7 @@ class ModelBase(object):
             "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
             }})
         # Add surface data if it exists
-        if self.surface is not None:
+        if self.surface:
             # import the surface model
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
@@ -795,7 +817,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas.TP = get_ics_time(self.__class__.__name__+"_well_stirred_reactor")
         else:
-            gas.TP = kwargs.get('T', 1200), kwargs.get('P', ct.one_atm)
+            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
@@ -807,7 +829,7 @@ class ModelBase(object):
             "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
             }})
         # Add surface if it exists
-        if self.surface is not None:
+        if self.surface:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(self.model, self.sphase, [gas])
@@ -953,3 +975,9 @@ class ModelBase(object):
                 data[curr_type] = 1
         for k, v in data.items():
             print(f"{k}: {v}, {v/rlen*100: .2f}%")
+
+    def add_surface(self, surf_obj):
+        self.surfname = surf_obj.__class__.__name__
+        self.surface = surf_obj.surface
+        self.sphase = surf_obj.sphase
+        self.classifiers = self.classifiers[:2] + [self.surfname,] + self.classifiers[2:]

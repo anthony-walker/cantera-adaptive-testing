@@ -7,154 +7,27 @@ class GAS_DEF(ModelBase):
         super(GAS_DEF, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('gas-def.yaml')
         self.fuel = 'CH4:1.0'
-        self.skip_database_build = True
+
 
 class Hydrogen(ModelBase):
     def __init__(self, *args, **kwargs):
         super(Hydrogen, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('hydrogen-10-28.yaml')
         self.fuel = 'H2:1.0'
-        self.skip_database_build = False
 
-class PlatinumSmallHydrogen(ModelBase):
-    def __init__(self, *args, **kwargs):
-        super(PlatinumSmallHydrogen, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
-        self.fuel = 'H2:1.0'
-        self.surface = 'PT(S):1.0'
-        self.sphase = 'surface-small'
-        self.skip_database_build = False
 
-class PlatinumMediumHydrogen(ModelBase):
+class Aramco(ModelBase):  # Hydrogen with more species
     def __init__(self, *args, **kwargs):
-        super(PlatinumMediumHydrogen, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
-        self.fuel = 'H2:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-medium'
-        self.skip_database_build = False
-
-class PlatinumLargeHydrogen(ModelBase):
-    def __init__(self, *args, **kwargs):
-        super(PlatinumLargeHydrogen, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('hydrogen-10-28.yaml')
-        self.fuel = 'H2:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-large'
-        self.skip_database_build = False
-
-class PlatinumSmallAramco(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumSmallAramco, self).__init__(*args, **kwargs)
+        super(PlatinumAramco, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('aramco-493-2716.yaml')
         self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'PT(S):1.0'
-        self.sphase = 'surface-small'
 
-class PlatinumMediumAramco(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumMediumAramco, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('aramco-493-2716.yaml')
-        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-medium'
-        self.skip_database_build = False
-
-class PlatinumLargeAramco(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumLargeAramco, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('aramco-493-2716.yaml')
-        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-large'
-        self.skip_database_build = False
-
-class PlatinumSmallNDodecane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumSmallNDodecane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('jetsurf2.0-348-2163.yaml')
-        self.fuel = 'NC12H26'
-        self.surface = 'PT(S):1.0'
-        self.sphase = 'surface-small'
-
-class PlatinumMediumNDodecane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumMediumNDodecane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('jetsurf2.0-348-2163.yaml')
-        self.fuel = 'NC12H26'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-medium'
-        self.skip_database_build = False
-
-class PlatinumLargeNDodecane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumLargeNDodecane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('jetsurf2.0-348-2163.yaml')
-        self.fuel = 'NC12H26'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-large'
-        self.skip_database_build = False
-
-class PlatinumSmallGRI(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumSmallGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
-        self.fuel = 'CH4:1.0'
-        self.surface = 'PT(S):1.0'
-        self.gphase = 'gas'
-        self.sphase = 'surface-small'
-        self.skip_database_build = False
-
-class PlatinumMediumGRI(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumMediumGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
-        self.fuel = 'CH4:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-medium'
-        self.skip_database_build = False
-
-class PlatinumLargeGRI(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumLargeGRI, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
-        self.fuel = 'CH4:1.0'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-large'
-        self.skip_database_build = False
-
-class PlatinumSmallIsoOctane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumSmallIsoOctane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('ic8-874-6864.yaml')
-        self.fuel = 'IC8H18'
-        self.surface = 'PT(S):1.0'
-        self.sphase = 'surface-small'
-
-class PlatinumMediumIsoOctane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumMediumIsoOctane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('ic8-874-6864.yaml')
-        self.fuel = 'IC8H18'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-medium'
-        self.skip_database_build = False
-
-class PlatinumLargeIsoOctane(ModelBase):  # Hydrogen with more species
-    def __init__(self, *args, **kwargs):
-        super(PlatinumLargeIsoOctane, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('ic8-874-6864.yaml')
-        self.fuel = 'IC8H18'
-        self.surface = 'Pt(9):1.0'
-        self.sphase = 'surface-large'
-        self.skip_database_build = False
 
 class DME(ModelBase):
     def __init__(self, *args, **kwargs):
         super(DME, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('dme-propane-122-711.yaml')
         self.fuel = 'CH3OCH3:1.0, C3H8:1.0'
-        self.skip_database_build = False
 
 
 class JetA(ModelBase):
@@ -162,7 +35,6 @@ class JetA(ModelBase):
         super(JetA, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('jetA-detailed-NOx-203-1589.yaml')
         self.fuel = 'POSF10325:1.0'
-        self.skip_database_build = False
 
 
 class Butane(ModelBase):
@@ -170,7 +42,6 @@ class Butane(ModelBase):
         super(Butane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('butane-230-2461.yaml')
         self.fuel = 'C4H10:1.0'
-        self.skip_database_build = False
 
 
 class TwoButonane(ModelBase):
@@ -179,7 +50,6 @@ class TwoButonane(ModelBase):
         self.model = self.get_test_set_path(
             '2-butonane-ch3coch2ch3-315-1803.yaml')
         self.fuel = 'C4H8O1-2:1.0'
-        self.skip_database_build = False
 
 
 class NHexanal(ModelBase):
@@ -187,7 +57,6 @@ class NHexanal(ModelBase):
         super(NHexanal, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('n-hexanal-482-5182.yaml')
         self.fuel = 'C6H14:1.0'
-        self.skip_database_build = False
 
 
 class IsoButene(ModelBase):
@@ -195,7 +64,6 @@ class IsoButene(ModelBase):
         super(IsoButene, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('isobutene-ic4h8-493-2716.yaml')
         self.fuel = 'IC4H8:1.0'
-        self.skip_database_build = False
 
 
 class IsoPentanol(ModelBase):
@@ -203,7 +71,6 @@ class IsoPentanol(ModelBase):
         super(IsoPentanol, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('i-pentanol-511-3010.yaml')
         self.fuel = 'ic5h10oh:1.0'
-        self.skip_database_build = False
 
 
 class T124MCH(ModelBase):
@@ -211,7 +78,6 @@ class T124MCH(ModelBase):
         super(T124MCH, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('t124mch-533-3193.yaml')
         self.fuel = 'T124MCH:1.0'
-        self.skip_database_build = False
 
 
 class OneTwoDME(ModelBase):
@@ -219,7 +85,6 @@ class OneTwoDME(ModelBase):
         super(OneTwoDME, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('one-two-dme-570-2960.yaml')
         self.fuel = 'CH3OCH3:1.0'
-        self.skip_database_build = False
 
 
 class PropylAcetate(ModelBase):
@@ -227,7 +92,6 @@ class PropylAcetate(ModelBase):
         super(PropylAcetate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('propyl-acetate-628-4182.yaml')
         self.fuel = 'pa:1.0'
-        self.skip_database_build = False
 
 
 class NHeptane(ModelBase):
@@ -235,7 +99,6 @@ class NHeptane(ModelBase):
         super(NHeptane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('n-heptane-c7h16-654-4846.yaml')
         self.fuel = 'NC7H16:1.0'
-        self.skip_database_build = False
 
 
 class DEE(ModelBase):
@@ -243,7 +106,6 @@ class DEE(ModelBase):
         super(DEE, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('dee-746-3555.yaml')
         self.fuel = 'DEE:1.0'
-        self.skip_database_build = False
 
 
 class IsoOctane(ModelBase):  # Iso-Octane
@@ -251,7 +113,6 @@ class IsoOctane(ModelBase):  # Iso-Octane
         super(IsoOctane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('ic8-874-6864.yaml')
         self.fuel = 'IC8H18:1.0'
-        self.skip_database_build = False
 
 
 class ThreeMethylHeptane(ModelBase):
@@ -265,7 +126,6 @@ https://reader.elsevier.com/reader/sd/pii/S1540748910000787?token=7EE5B546D255AE
         self.model = self.get_test_set_path(
             '3-methylheptane-c8h18-3-1378-8143.yaml')
         self.fuel = 'c8h18-3:1.0'
-        self.skip_database_build = False
 
 
 class NHexadecane(ModelBase):
@@ -276,7 +136,6 @@ class NHexadecane(ModelBase):
         super(NHexadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('nhexadecane-2115-13341.yaml')
         self.fuel = 'nc16h34:1.0'
-        self.skip_database_build = False
 
 
 class MethylFiveDeconate(ModelBase):
@@ -287,7 +146,6 @@ class MethylFiveDeconate(ModelBase):
         super(MethylFiveDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md5d-2649-10487.yaml')
         self.fuel = 'md5d:1.0'
-        self.skip_database_build = False
 
 
 class IsoOctaneDetailed(ModelBase):  # Iso-Octane
@@ -295,7 +153,6 @@ class IsoOctaneDetailed(ModelBase):  # Iso-Octane
         super(IsoOctaneDetailed, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('ic8-detailed-2768-11850.yaml')
         self.fuel = 'IC8H18:1.0'
-        self.skip_database_build = False
 
 
 class MethylNineDeconate(ModelBase):
@@ -306,7 +163,6 @@ class MethylNineDeconate(ModelBase):
         super(MethylNineDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md9d-3298.yaml')
         self.fuel = 'md9d:1.0'
-        self.skip_database_build = False
 
 
 class MethylDeconateNHeptane(ModelBase):
@@ -318,7 +174,6 @@ class MethylDeconateNHeptane(ModelBase):
         super(MethylDeconateNHeptane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md-nc7-3787-10264.yaml')
         self.fuel = 'md:1.0, nc7h16:1.0'
-        self.skip_database_build = False
 
 
 class TwoMethylnonadecane(ModelBase):
@@ -333,4 +188,4 @@ class TwoMethylnonadecane(ModelBase):
         super(TwoMethylnonadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('mmc5-7171-38324.yaml')
         self.fuel = 'c20h42-2:1.0'
-        self.skip_database_build = False
+
