@@ -1,21 +1,28 @@
 #!/bin/bash
 # check and wait so as not to exceed slurm job limit
 slurm_job_wait() {
-    n_jobs=$(squeue -u walkanth | wc -l)
-    stime=1
-    while [ $n_jobs -ge 100 ]
-    do
-        echo "Number of jobs over 100, waiting $stime seconds..."
-        sleep $stime
+    # run the job with set options
+    if [ -z "$SKIP_SBATCH" ]
+    then
         n_jobs=$(squeue -u walkanth | wc -l)
-        # adjust sleep time
-        if [ $stime -lt 10 ]
-        then
-            ((stime=stime+1))
-        fi
-    done
-    echo "Currently queued jobs: $n_jobs"
+        stime=1
+        while [ $n_jobs -ge 100 ]
+        do
+            echo "Number of jobs over 100, waiting $stime seconds..."
+            sleep $stime
+            n_jobs=$(squeue -u walkanth | wc -l)
+            # adjust sleep time
+            if [ $stime -lt 10 ]
+            then
+                ((stime=stime+1))
+            fi
+        done
+        echo "Currently queued jobs: $n_jobs"
+    else
+        sleep $SLEEP_TIMER
+    fi
 }
+
 # create directorys
 check_args_and_dirs() {
     if [ -z "$1" ]
