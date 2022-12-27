@@ -96,9 +96,9 @@ def parser_setup(add_mod=True, add_probs=True):
     parser.add_argument('-P', '--preconditioned', action='store_true',
                         default=False, help="Enable use of different preconditioners")
     parser.add_argument('-F', '--flexible', action='store_true',
-                        default=False, help="Enable use of flexible thresholding")
+                        default=False, help="Enable use of flexible thresholding [Deprecated]")
     parser.add_argument('-MVR', '--min_val_repl', action='store_true',
-                        default=False, help="Enable use of minimum value replacement.")
+                        default=False, help="Enable use of minimum value replacement. [Deprecated]")
     parser.add_argument('-f', '--prefix', type=str, default="",
                         help="Add a prefix to the output name")
     parser.add_argument('-T', '--threshold', type=float, default=0,
