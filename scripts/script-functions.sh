@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# function to print jobs in a specific format
+slurm_job_print() {
+    squeue -u $USER --format="%.18i %.40j"
+}
+
 # check and wait so as not to exceed slurm job limit
 slurm_job_wait() {
     # run the job with set options
