@@ -317,6 +317,44 @@ profile_preconditioning() {
     # -D ignore non-functions
 }
 
+steady_state_wait() {
+# steady state runs
+    if [ -z "$SKIP_STEADY_STATE" ]
+    then
+        echo "Running steady state calcs..."
+        skip_moles
+        skip_analyt
+        skip_flex
+        skip_mass
+        # set start and end thresholds
+        export TSTART=0
+        export TEND=0
+        # get steady state times for all models
+        declare -a ss_arr
+        steady_args="-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
+        ss_arr+=($(./launch.sh ./options/sp-opts single 1 1 $PLIST $steady_args  -S PlatinumLarge | grep -o -E '[0-9]{3,10}'))
+        # check if jobs are still active
+        ss_running=true
+        while [ $ss_running == true ]
+        do
+            ss_running=false
+            OUTPUT=$(slurm_job_print)
+            for ss in "${ss_arr[@]}"
+            do
+                if [[ "$OUTPUT" == *"$ss"* ]]; then
+                    echo "$ss: still found"
+                    ss_running=true
+                fi
+            done
+            # sleep if ss is still runs
+            if [ $ss_running == true ]; then
+                echo "Steady state runs still active, sleeping for a minute..."
+                sleep 60
+            fi
+        done
+    fi
+}
+
 job_wait_loop() {
     n_jobs=$(squeue -u $USER --format="%.18i %.40j" | grep -E $1 | wc -l)
     stime=1

@@ -56,6 +56,7 @@ class ModelBase(object):
         self.options.setdefault("runtype", "performance")
         self.options.setdefault("replace_reactions", True) # replace reactions of discarded types with generic reaction or skip them with False
         self.options.setdefault("use_icdb", False)
+        self.options.setdefault("endtime", 0)
         # adjust moles if preconditioned but not moles
         self.options["moles"] = self.preconditioned if self.preconditioned else self.options["moles"]
         # create file name
@@ -309,6 +310,14 @@ class ModelBase(object):
     def use_icdb(self, value):
         self.options["use_icdb"] = value
 
+    @property
+    def endtime(self):
+        return self.options["endtime"]
+
+    @endtime.setter
+    def endtime(self, value):
+        self.options["endtime"] = value
+
     def __del__(self):
         if self.log and self.yaml_data:
             yaml = ruamel.yaml.YAML()
@@ -470,26 +479,34 @@ class ModelBase(object):
                 create_all_tables(self.database)
             # get runtime information for these run types
             if self.runtype != "steady":
-                ss_name = f"{self.__class__.__name__}"
-                ss_name += f"-{self.surfname}" if self.surface else ""
-                ss_name += f"-{func.__name__}"
-                ss_name += "-nfo" if self.remove_falloff else ""
-                ss_name += "-ntb" if self.remove_thirdbody else ""
-                if self.remove_thirdbody or self.remove_falloff:
-                    ss_name += "-rep" if self.replace_reactions else ""
-                # add to the steady state time table
-                ss_res = get_steadystate_time(ss_name)
-                # change max time step to form steady state time
-                if ss_res is not None:
-                    self.sstime = ss_res[0]
+                # use steady state time unless an end time is specified
+                if self.endtime == 0:
+                    ss_name = f"{self.__class__.__name__}"
+                    ss_name += f"-{self.surfname}" if self.surface else ""
+                    ss_name += f"-{func.__name__}"
+                    ss_name += "-nfo" if self.remove_falloff else ""
+                    ss_name += "-ntb" if self.remove_thirdbody else ""
+                    if self.remove_thirdbody or self.remove_falloff:
+                        ss_name += "-rep" if self.replace_reactions else ""
+                    # add to the steady state time table
+                    ss_res = get_steadystate_time(ss_name)
+                    # change max time step to form steady state time
+                    if ss_res is not None:
+                        self.sstime = ss_res[0]
+                    else:
+                        raise Exception(f"No steady state time for {self.__class__.__name__}, {self.surfname}, {func.__name__}.")
+
                 else:
-                    raise Exception(f"No steady state time for {self.__class__.__name__}, {self.surfname}, {func.__name__}.")
+                    self.sstime = self.endtime
             yaml_name = "-".join(filter(None, self.classifiers))
             # run problem
             try:
                 t0 = time.time_ns()
                 func(self, *args, **kwargs)
                 tf = time.time_ns()
+                if self.verbose:
+                    spec = self.thermo_data["thermo"]["gas_species"]
+                    print(f"{self.__class__.__name__}: {func.__name__}: {round((tf-t0) * 1e-9, 8)} nspecies: {spec}")
             except Exception as e:
                 print(self.__class__.__name__, func.__name__, e)
                 self.exception = format_exc()
@@ -606,6 +623,8 @@ class ModelBase(object):
         if self.runtype == "steady":
             self.net.advance_to_steady_state()
         elif self.runtype == "performance":
+            if self.verbose:
+                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "analysis":
             if self.database is None:
@@ -686,7 +705,7 @@ class ModelBase(object):
             gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
-        r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
+        r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
         r.volume = vol
         # catalyst area in one reactor
         mass_flow_rate = velocity * gas.density * area
@@ -732,6 +751,8 @@ class ModelBase(object):
         if self.runtype == "steady":
             self.net.advance_to_steady_state()
         elif self.runtype == "performance":
+            if self.verbose:
+                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
@@ -825,6 +846,8 @@ class ModelBase(object):
         if self.runtype == "steady":
             self.net.advance_to_steady_state()
         elif self.runtype == "performance":
+            if self.verbose:
+                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
