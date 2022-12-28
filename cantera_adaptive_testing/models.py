@@ -16,11 +16,11 @@ class Hydrogen(ModelBase):
         self.fuel = 'H2:1.0'
 
 
-class Aramco(ModelBase):  # Hydrogen with more species
+class GRI(ModelBase):
     def __init__(self, *args, **kwargs):
-        super(PlatinumAramco, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('aramco-493-2716.yaml')
-        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
+        super(GRI, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('gri-mech-55-325.yaml')
+        self.fuel = 'CH4:1.0'
 
 
 class DME(ModelBase):
@@ -57,6 +57,13 @@ class NHexanal(ModelBase):
         super(NHexanal, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('n-hexanal-482-5182.yaml')
         self.fuel = 'C6H14:1.0'
+
+
+class Aramco(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(PlatinumAramco, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('aramco-493-2716.yaml')
+        self.fuel = 'CH4:1.0, C3H8:1.0, C2H6:1.0'
 
 
 class IsoButene(ModelBase):

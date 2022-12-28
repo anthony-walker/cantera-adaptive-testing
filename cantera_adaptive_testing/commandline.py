@@ -49,11 +49,17 @@ def mpi_run_loop():
     # get models
     mods = inspect.getmembers(models, inspect.isclass)
     mods = {element[0]: element[1] for element in mods}
+    surfs = inspect.getmembers(surfaces, inspect.isclass)
+    surfs = {element[0]: element[1] for element in surfs}
     del mods['ModelBase']  # delete model because it is not a valid option
+    del surfs["Surface"] # delete surface because its not a valid option
     # get data from main rank
     data = comm.bcast(data, root=0)
     args = comm.bcast(args, root=0)
     selected = mods[args.model](**vars(args))
+    if args.surface:
+        csurf = surfs[args.surface]()
+        selected.add_surface(csurf)
     for p in args.problems:
         curr_method = selected.get_method_by_name(p)
         curr_method()
