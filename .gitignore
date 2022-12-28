@@ -8,6 +8,8 @@ vol-data/
 net-data/
 surf-data/
 press-data/
+reaction-analysis/
+threshold-analysis/
 cancel_jobs.sh
 missed_jobs.sh
 # Byte-compiled / optimized / DLL files

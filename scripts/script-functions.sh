@@ -43,6 +43,7 @@ check_args_and_dirs() {
         mkdir slurm-output
     fi
 }
+
 # check and set threshold bounds
 check_set_threshold_bounds() {
     # starting threshold

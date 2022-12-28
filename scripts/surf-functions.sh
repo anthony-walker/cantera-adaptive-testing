@@ -19,7 +19,7 @@ surface_performance_study() {
         export TEND=0
         # get steady state times for all models
         declare -a ss_arr
-        steady_args=-"-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
+        steady_args="-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
         ss_arr+=($(./launch.sh ./options/sp-opts single 1 1 $PLIST $steady_args  -S PlatinumLarge | grep -o -E '[0-9]{3,10}'))
         # check if jobs are still active
         ss_running=true
@@ -70,7 +70,7 @@ surface_reaction_study() {
         export TEND=0
         # get steady state times for all models
         declare -a ss_arr
-        steady_args=-"-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
+        steady_args="-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
         ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST $steady_args | grep -o -E '[0-9]{3,10}'))
         ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST  $steady_args --remove_falloff | grep -o -E '[0-9]{3,10}'))
         ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST  $steady_args --remove_thirdbody | grep -o -E '[0-9]{3,10}'))
@@ -130,11 +130,8 @@ surface_threshold_study() {
         export TEND=0
         # get steady state times for all models
         declare -a ss_arr
-        steady_args=-"-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
+        steady_args="-R steady -MTS 1e-3 -MS 1e9 -O $SURF_DIR"
         ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST $steady_args | grep -o -E '[0-9]{3,10}'))
-        ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST  $steady_args --remove_falloff | grep -o -E '[0-9]{3,10}'))
-        ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST  $steady_args --remove_thirdbody | grep -o -E '[0-9]{3,10}'))
-        ss_arr+=($(./launch.sh ./options/sa-opts single 1 1 $PLIST  $steady_args --remove_falloff --remove_thirdbody | grep -o -E '[0-9]{3,10}'))
         # check if jobs are still active
         ss_running=true
         while [ $ss_running == true ]
