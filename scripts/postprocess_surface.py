@@ -775,6 +775,7 @@ if __name__ == "__main__":
     # make_init_eigenvalue_plots()
     # make_init_fro_norm_plots()
     # make_maxeigen_time_step()
-    make_liniters_time_step()
+    # make_liniters_time_step()
     # make_prec_evals_time_step()
     # make_contour_data()
+    combine_surf_yamls(direc="threshold_data")
