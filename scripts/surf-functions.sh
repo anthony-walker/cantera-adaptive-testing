@@ -59,6 +59,15 @@ surface_threshold_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 1
 }
 
+ttest() {
+    factor=10
+    for i in {1..20}
+    do
+        factor=$(echo "scale=$i; $factor*0.1" | bc)
+        echo $factor
+    done
+}
+
 run_all_surface_studies() {
     surface_threshold_study
     surface_reaction_study
