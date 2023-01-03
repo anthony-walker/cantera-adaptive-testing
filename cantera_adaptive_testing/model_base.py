@@ -63,8 +63,9 @@ class ModelBase(object):
         # output data options
         self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
         if self.preconditioned:
-            cl_th = 0 if self.threshold == 0 else int(round(abs(np.log10(self.threshold))))
-            self.classifiers.append(f"{cl_th}")
+            cl_th = re.sub("[+]", "p", f"{self.threshold:.0e}")
+            cl_th = re.sub("[-]", "m", cl_th)
+            self.classifiers.append(cl_th)
         elif self.moles:
             self.classifiers.append("moles")
         else:

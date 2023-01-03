@@ -19,7 +19,6 @@ def hello_world():
     print("Hello World!")
 
 def add_nruns_to_older_files():
-    yaml = ruamel.yaml.YAML()
     files = os.listdir("surf-data")
     files = list(filter(lambda x: ".yaml" in x, files))
     mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
