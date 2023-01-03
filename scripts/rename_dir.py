@@ -30,7 +30,7 @@ def rename_all_dir(direc="surf_data"):
         os.remove(os.path.join(direc, cf))
 
 def str_replace(rep, nrep):
-    direc = "threshold_data"
+    direc = "surf_data"
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
     files = list(filter(lambda x: rep in x, files))
@@ -44,4 +44,4 @@ def str_replace(rep, nrep):
             yaml.dump(data, f_obj)
         os.remove(os.path.join(direc, cf))
 
-rename_all_dir()
+str_replace("1e-", "1em")
