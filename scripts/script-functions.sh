@@ -12,7 +12,7 @@ slurm_job_wait() {
     then
         n_jobs=$(squeue -u walkanth | wc -l)
         stime=1
-        while [ $n_jobs -ge 100 ]
+        while [ $n_jobs -ge 200 ]
         do
             echo "Number of jobs over 100, waiting $stime seconds..."
             sleep $stime
