@@ -10,7 +10,7 @@
 
 #SBATCH --time=7-00:00:00
 
-#SBATCH --mail-type=FAIL,END				# send email when job begins, ends or aborts
+#SBATCH --mail-type=FAIL				# send email when job begins, ends or aborts
 
 #SBATCH --mail-user=walkanth@oregonstate.edu		# send email to this address
 

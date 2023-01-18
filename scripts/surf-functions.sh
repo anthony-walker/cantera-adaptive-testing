@@ -5,7 +5,7 @@ source ./script-functions.sh
 surface_performance_study() {
     # performance runs
     export PLIST=./model_lists/surf-performance
-    export SURF_DIR=surf_data
+    export SURF_DIR=performance_data
     # skip certain runs
     reset_skips
     skip_moles
@@ -62,7 +62,7 @@ surface_threshold_study() {
 wsr_performance_study() {
     # performance runs
     export PLIST=./model_lists/surf-performance
-    export SURF_DIR=surf_data
+    export SURF_DIR=performance_data
     # skip certain runs
     reset_skips
     skip_moles
