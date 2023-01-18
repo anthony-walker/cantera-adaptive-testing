@@ -1,0 +1,4518 @@
+Butane-0ep00:
+  well_stirred_reactor:
+    runtime: 1.4081244133
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '988'
+      rhs_evals: '1109'
+      nonlinear_iters: '1108'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '97'
+      lin_rhs_evals: '3162'
+      lin_iters: '3162'
+      lin_conv_fails: '127'
+      prec_evals: '19'
+      prec_solves: '4185'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3162'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.695647128573177e+29'
+      l2_norm: '2.3983601743419094e+21'
+      fro_norm: '2.3983601743456884e+21'
+      determinant: inf
+      min_eigenvalue: '0.9738051944149196'
+      max_eigenvalue: '1641440441708522.2'
+      threshold: '0.0'
+      nonzero_elements: '6234'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:58-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em19:
+  well_stirred_reactor:
+    runtime: 1.2253644675000002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '944'
+      rhs_evals: '1073'
+      nonlinear_iters: '1072'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '96'
+      lin_rhs_evals: '3104'
+      lin_iters: '3104'
+      lin_conv_fails: '137'
+      prec_evals: '19'
+      prec_solves: '4095'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3104'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '8.778274068156814e+27'
+      l2_norm: '2.17536273246392e+21'
+      fro_norm: '2.175362732467348e+21'
+      determinant: inf
+      min_eigenvalue: '0.9598519543588431'
+      max_eigenvalue: '1488820730712727.2'
+      threshold: '1e-19'
+      nonzero_elements: '4050'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-19
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:17-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1ep00:
+  well_stirred_reactor:
+    runtime: 6.790747798415842
+    endtime: 1.0
+    nruns: 101
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '995'
+      rhs_evals: '1127'
+      nonlinear_iters: '1126'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '103'
+      lin_rhs_evals: '3595'
+      lin_iters: '3595'
+      lin_conv_fails: '180'
+      prec_evals: '24'
+      prec_solves: '4649'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3595'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.5706694267309046e+23'
+      l2_norm: '4.1786413455493123e+20'
+      fro_norm: '4.178641345555898e+20'
+      determinant: inf
+      min_eigenvalue: '0.9148781439933467'
+      max_eigenvalue: '285986687125562.06'
+      threshold: '1.0'
+      nonzero_elements: '2489'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database: /nfs/hpc/share/walkanth/nrg-cantera-project/cantera-adaptive-testing/scripts/threshold_data/threshold.db
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 02:18:46-30-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em03:
+  well_stirred_reactor:
+    runtime: 1.7911106718000007
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1086'
+      rhs_evals: '1355'
+      nonlinear_iters: '1354'
+      nonlinear_conv_fails: '62'
+      err_test_fails: '19'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '209'
+      lin_rhs_evals: '4352'
+      lin_iters: '4352'
+      lin_conv_fails: '338'
+      prec_evals: '76'
+      prec_solves: '5613'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '4352'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.4228749435258295e+26'
+      l2_norm: '6.563368004700723e+20'
+      fro_norm: '6.563368004711065e+20'
+      determinant: inf
+      min_eigenvalue: '1.0'
+      max_eigenvalue: '449197646332406.5'
+      threshold: '0.001'
+      nonzero_elements: '2679'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.001
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:05-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em10:
+  well_stirred_reactor:
+    runtime: 1.8353612445000003
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '981'
+      rhs_evals: '1113'
+      nonlinear_iters: '1112'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '101'
+      lin_rhs_evals: '3165'
+      lin_iters: '3165'
+      lin_conv_fails: '133'
+      prec_evals: '19'
+      prec_solves: '4187'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3165'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.0060772930503815e+29'
+      l2_norm: '3.109575063234767e+21'
+      fro_norm: '3.109575063239668e+21'
+      determinant: inf
+      min_eigenvalue: '0.9715061843023907'
+      max_eigenvalue: '2128196728505723.5'
+      threshold: '1e-10'
+      nonzero_elements: '3243'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-10
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:05-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em17:
+  well_stirred_reactor:
+    runtime: 2.0254747036
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '976'
+      rhs_evals: '1105'
+      nonlinear_iters: '1104'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '100'
+      lin_rhs_evals: '3222'
+      lin_iters: '3222'
+      lin_conv_fails: '149'
+      prec_evals: '19'
+      prec_solves: '4240'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3222'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.1302483363580923e+28'
+      l2_norm: '4.0756837956630204e+20'
+      fro_norm: '4.075683795669443e+20'
+      determinant: inf
+      min_eigenvalue: '0.996040314606592'
+      max_eigenvalue: '278940264455412.56'
+      threshold: '1e-17'
+      nonzero_elements: '3679'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-17
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:51-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em24:
+  well_stirred_reactor:
+    runtime: 2.702453713300001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '981'
+      rhs_evals: '1097'
+      nonlinear_iters: '1096'
+      nonlinear_conv_fails: '4'
+      err_test_fails: '14'
+      last_order: '2'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '98'
+      lin_rhs_evals: '3141'
+      lin_iters: '3141'
+      lin_conv_fails: '128'
+      prec_evals: '19'
+      prec_solves: '4155'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3141'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.232251292630039e+27'
+      l2_norm: '5.815018865201789e+20'
+      fro_norm: '5.815018865210951e+20'
+      determinant: inf
+      min_eigenvalue: '0.9885123730450031'
+      max_eigenvalue: '397980556562313.5'
+      threshold: '1e-24'
+      nonzero_elements: '4917'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-24
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:46-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em08:
+  well_stirred_reactor:
+    runtime: 1.6389502855
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '958'
+      rhs_evals: '1097'
+      nonlinear_iters: '1096'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '18'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '101'
+      lin_rhs_evals: '3151'
+      lin_iters: '3151'
+      lin_conv_fails: '134'
+      prec_evals: '19'
+      prec_solves: '4154'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3151'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.3089168880100637e+28'
+      l2_norm: '1.1703169219863765e+21'
+      fro_norm: '1.170316921988221e+21'
+      determinant: inf
+      min_eigenvalue: '0.9998385113558796'
+      max_eigenvalue: '800966233078367.2'
+      threshold: '1e-08'
+      nonzero_elements: '3068'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-08
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:43-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em16:
+  well_stirred_reactor:
+    runtime: 1.1690326762000003
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '962'
+      rhs_evals: '1080'
+      nonlinear_iters: '1079'
+      nonlinear_conv_fails: '4'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '97'
+      lin_rhs_evals: '2989'
+      lin_iters: '2989'
+      lin_conv_fails: '94'
+      prec_evals: '19'
+      prec_solves: '3980'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2989'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.906532527022086e+28'
+      l2_norm: '2.9936946765718157e+21'
+      fro_norm: '2.993694676576535e+21'
+      determinant: inf
+      min_eigenvalue: '0.5415544563989901'
+      max_eigenvalue: '2048888050961950.5'
+      threshold: '1e-16'
+      nonzero_elements: '3809'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-16
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:13-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em18:
+  well_stirred_reactor:
+    runtime: 2.6177840665999996
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1000'
+      rhs_evals: '1121'
+      nonlinear_iters: '1120'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '97'
+      lin_rhs_evals: '3232'
+      lin_iters: '3232'
+      lin_conv_fails: '126'
+      prec_evals: '19'
+      prec_solves: '4268'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3232'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '5.535557210436442e+28'
+      l2_norm: '3.975912421851455e+21'
+      fro_norm: '3.975912421857721e+21'
+      determinant: inf
+      min_eigenvalue: '0.999310019802649'
+      max_eigenvalue: '2721119014002108.5'
+      threshold: '1e-18'
+      nonzero_elements: '3742'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-18
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:25-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em11:
+  well_stirred_reactor:
+    runtime: 1.6303941163000004
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '983'
+      rhs_evals: '1106'
+      nonlinear_iters: '1105'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '99'
+      lin_rhs_evals: '2998'
+      lin_iters: '2998'
+      lin_conv_fails: '99'
+      prec_evals: '20'
+      prec_solves: '4018'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2998'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.4966383474264074e+28'
+      l2_norm: '9.689134027627086e+20'
+      fro_norm: '9.689134027642359e+20'
+      determinant: inf
+      min_eigenvalue: '0.9971541725315957'
+      max_eigenvalue: '663125436383593.1'
+      threshold: '1e-11'
+      nonzero_elements: '3309'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-11
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:04-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em05:
+  well_stirred_reactor:
+    runtime: 1.7199789357999993
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '993'
+      rhs_evals: '1142'
+      nonlinear_iters: '1141'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '22'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '110'
+      lin_rhs_evals: '3072'
+      lin_iters: '3072'
+      lin_conv_fails: '107'
+      prec_evals: '21'
+      prec_solves: '4105'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3072'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.116977640200734e+27'
+      l2_norm: '9.86171306924208e+20'
+      fro_norm: '9.861713069257619e+20'
+      determinant: inf
+      min_eigenvalue: '0.999669758751675'
+      max_eigenvalue: '674936769542349.6'
+      threshold: '1e-05'
+      nonzero_elements: '2790'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-05
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:17-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1ep01:
+  well_stirred_reactor:
+    runtime: 6.337867107524753
+    endtime: 1.0
+    nruns: 101
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1054'
+      rhs_evals: '1218'
+      nonlinear_iters: '1217'
+      nonlinear_conv_fails: '27'
+      err_test_fails: '12'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '129'
+      lin_rhs_evals: '4294'
+      lin_iters: '4294'
+      lin_conv_fails: '392'
+      prec_evals: '39'
+      prec_solves: '5454'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '4294'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.1096565728979086e+23'
+      l2_norm: '2.1558379065090952e+20'
+      fro_norm: '2.155837906512493e+20'
+      determinant: inf
+      min_eigenvalue: '1.0'
+      max_eigenvalue: '147545785368505.75'
+      threshold: '10.0'
+      nonzero_elements: '2345'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database: /nfs/hpc/share/walkanth/nrg-cantera-project/cantera-adaptive-testing/scripts/threshold_data/threshold.db
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 10.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 02:19:34-30-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em22:
+  well_stirred_reactor:
+    runtime: 1.9331583527999994
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '995'
+      rhs_evals: '1118'
+      nonlinear_iters: '1117'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '101'
+      lin_rhs_evals: '3243'
+      lin_iters: '3243'
+      lin_conv_fails: '160'
+      prec_evals: '19'
+      prec_solves: '4278'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3243'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.4691514169618898e+30'
+      l2_norm: '8.137208479827383e+21'
+      fro_norm: '8.137208479840207e+21'
+      determinant: inf
+      min_eigenvalue: '0.231324257191378'
+      max_eigenvalue: '5569114781107408.0'
+      threshold: '1e-22'
+      nonzero_elements: '3933'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-22
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:17-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em07:
+  well_stirred_reactor:
+    runtime: 1.7724778394999998
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '948'
+      rhs_evals: '1087'
+      nonlinear_iters: '1086'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '102'
+      lin_rhs_evals: '3192'
+      lin_iters: '3192'
+      lin_conv_fails: '132'
+      prec_evals: '22'
+      prec_solves: '4186'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3192'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.57945442257461e+28'
+      l2_norm: '8.021593539407626e+20'
+      fro_norm: '8.021593539420266e+20'
+      determinant: inf
+      min_eigenvalue: '0.9574260172257084'
+      max_eigenvalue: '548998775458582.7'
+      threshold: '1e-07'
+      nonzero_elements: '2941'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-07
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:58-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em06:
+  well_stirred_reactor:
+    runtime: 1.6586162968
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '973'
+      rhs_evals: '1096'
+      nonlinear_iters: '1095'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '96'
+      lin_rhs_evals: '3162'
+      lin_iters: '3162'
+      lin_conv_fails: '120'
+      prec_evals: '19'
+      prec_solves: '4179'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3162'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.3752530240870044e+28'
+      l2_norm: '8.083374032001064e+20'
+      fro_norm: '8.083374032013802e+20'
+      determinant: inf
+      min_eigenvalue: '0.9983640254749899'
+      max_eigenvalue: '553227034040684.44'
+      threshold: '1e-06'
+      nonzero_elements: '2865'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-06
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:11-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em12:
+  well_stirred_reactor:
+    runtime: 2.8950749569
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '984'
+      rhs_evals: '1110'
+      nonlinear_iters: '1109'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '99'
+      lin_rhs_evals: '3175'
+      lin_iters: '3175'
+      lin_conv_fails: '115'
+      prec_evals: '20'
+      prec_solves: '4198'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3175'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.1960330936096152e+28'
+      l2_norm: '1.7152212423026184e+21'
+      fro_norm: '1.7152212423053222e+21'
+      determinant: inf
+      min_eigenvalue: '0.9948110819704917'
+      max_eigenvalue: '1173899386526249.5'
+      threshold: '1e-12'
+      nonzero_elements: '3431'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-12
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:04-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em09:
+  well_stirred_reactor:
+    runtime: 2.1411464895000005
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '967'
+      rhs_evals: '1103'
+      nonlinear_iters: '1102'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '99'
+      lin_rhs_evals: '3192'
+      lin_iters: '3192'
+      lin_conv_fails: '102'
+      prec_evals: '20'
+      prec_solves: '4196'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3192'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.2583800915717743e+28'
+      l2_norm: '1.0452875019728201e+21'
+      fro_norm: '1.0452875019744675e+21'
+      determinant: inf
+      min_eigenvalue: '0.9862269285911608'
+      max_eigenvalue: '715395957376032.2'
+      threshold: '1e-09'
+      nonzero_elements: '3153'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-09
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:57-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em13:
+  well_stirred_reactor:
+    runtime: 1.6725779608999998
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '977'
+      rhs_evals: '1105'
+      nonlinear_iters: '1104'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '101'
+      lin_rhs_evals: '3099'
+      lin_iters: '3099'
+      lin_conv_fails: '123'
+      prec_evals: '23'
+      prec_solves: '4120'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3099'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.8078397451692117e+27'
+      l2_norm: '8.355726521593475e+20'
+      fro_norm: '8.355726521606641e+20'
+      determinant: inf
+      min_eigenvalue: '0.9968161267967418'
+      max_eigenvalue: '571866874611631.4'
+      threshold: '1e-13'
+      nonzero_elements: '3413'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-13
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:49-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em23:
+  well_stirred_reactor:
+    runtime: 3.907597142
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '981'
+      rhs_evals: '1097'
+      nonlinear_iters: '1096'
+      nonlinear_conv_fails: '4'
+      err_test_fails: '14'
+      last_order: '2'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '98'
+      lin_rhs_evals: '3141'
+      lin_iters: '3141'
+      lin_conv_fails: '128'
+      prec_evals: '19'
+      prec_solves: '4155'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3141'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.44944772866034e+28'
+      l2_norm: '5.815018865201789e+20'
+      fro_norm: '5.815018865210951e+20'
+      determinant: inf
+      min_eigenvalue: '0.9245808520812604'
+      max_eigenvalue: '397980556562313.1'
+      threshold: '1e-23'
+      nonzero_elements: '4828'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-23
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:49-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em20:
+  well_stirred_reactor:
+    runtime: 1.2901314343
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '970'
+      rhs_evals: '1110'
+      nonlinear_iters: '1109'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '97'
+      lin_rhs_evals: '3261'
+      lin_iters: '3261'
+      lin_conv_fails: '156'
+      prec_evals: '19'
+      prec_solves: '4276'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3261'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.5599836682096175e+28'
+      l2_norm: '2.5731173128386396e+21'
+      fro_norm: '2.573117312842695e+21'
+      determinant: inf
+      min_eigenvalue: '0.9747849796437833'
+      max_eigenvalue: '1761044399934801.0'
+      threshold: '1e-20'
+      nonzero_elements: '3787'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-20
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:25-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em15:
+  well_stirred_reactor:
+    runtime: 1.7180699052999995
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '982'
+      rhs_evals: '1109'
+      nonlinear_iters: '1108'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '100'
+      lin_rhs_evals: '3056'
+      lin_iters: '3056'
+      lin_conv_fails: '109'
+      prec_evals: '21'
+      prec_solves: '4079'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3056'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.4399801733841135e+28'
+      l2_norm: '1.038503626803928e+21'
+      fro_norm: '1.0385036268055647e+21'
+      determinant: inf
+      min_eigenvalue: '0.9904802455000326'
+      max_eigenvalue: '710753061517480.2'
+      threshold: '1e-15'
+      nonzero_elements: '3614'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-15
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:50-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em04:
+  well_stirred_reactor:
+    runtime: 1.5946771725999995
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1048'
+      rhs_evals: '1235'
+      nonlinear_iters: '1234'
+      nonlinear_conv_fails: '26'
+      err_test_fails: '17'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '142'
+      lin_rhs_evals: '3689'
+      lin_iters: '3689'
+      lin_conv_fails: '189'
+      prec_evals: '39'
+      prec_solves: '4831'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3689'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.7478153031606894e+28'
+      l2_norm: '7.747767337480037e+20'
+      fro_norm: '7.747767337492247e+20'
+      determinant: inf
+      min_eigenvalue: '0.9994674361602999'
+      max_eigenvalue: '530258076415537.5'
+      threshold: '0.0001'
+      nonzero_elements: '2723'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0001
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:59-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em14:
+  well_stirred_reactor:
+    runtime: 1.1198110312999998
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '950'
+      rhs_evals: '1069'
+      nonlinear_iters: '1068'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '12'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '93'
+      lin_rhs_evals: '2998'
+      lin_iters: '2998'
+      lin_conv_fails: '89'
+      prec_evals: '19'
+      prec_solves: '3983'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2998'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.9583723591024324e+28'
+      l2_norm: '2.401554982699289e+21'
+      fro_norm: '2.4015549827030733e+21'
+      determinant: inf
+      min_eigenvalue: '0.9508405387056164'
+      max_eigenvalue: '1643626979131604.8'
+      threshold: '1e-14'
+      nonzero_elements: '3987'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-14
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:24-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em21:
+  well_stirred_reactor:
+    runtime: 2.1143495508000005
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '960'
+      rhs_evals: '1084'
+      nonlinear_iters: '1083'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '12'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '93'
+      lin_rhs_evals: '3070'
+      lin_iters: '3070'
+      lin_conv_fails: '137'
+      prec_evals: '19'
+      prec_solves: '4066'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3070'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.119096911516586e+29'
+      l2_norm: '4.5512519357258164e+21'
+      fro_norm: '4.55125193573299e+21'
+      determinant: inf
+      min_eigenvalue: '0.9422050280582577'
+      max_eigenvalue: '3114882016928989.0'
+      threshold: '1e-21'
+      nonzero_elements: '4379'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-21
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:28-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em01:
+  well_stirred_reactor:
+    runtime: 1.5924635093000006
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '974'
+      rhs_evals: '1117'
+      nonlinear_iters: '1116'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '17'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '105'
+      lin_rhs_evals: '3473'
+      lin_iters: '3473'
+      lin_conv_fails: '170'
+      prec_evals: '23'
+      prec_solves: '4505'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3473'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '9.967057453832142e+24'
+      l2_norm: '3.5956096789865756e+21'
+      fro_norm: '3.595609678992243e+21'
+      determinant: -inf
+      min_eigenvalue: '-5852.555071277717'
+      max_eigenvalue: '2460839406932060.5'
+      threshold: '0.1'
+      nonzero_elements: '2606'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.1
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:23-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-mass:
+  well_stirred_reactor:
+    runtime: 1051.2551491347
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: false
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '2842'
+      rhs_evals: '4208'
+      nonlinear_iters: '4207'
+      nonlinear_conv_fails: '7'
+      err_test_fails: '214'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '52'
+      lin_solve_setups: '446'
+      lin_rhs_evals: '12116'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '1.0'
+      preconditioned: 'False'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:34-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+Butane-1em02:
+  well_stirred_reactor:
+    runtime: 1.2938233327999997
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '939'
+      rhs_evals: '1064'
+      nonlinear_iters: '1063'
+      nonlinear_conv_fails: '7'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '93'
+      lin_rhs_evals: '3122'
+      lin_iters: '3122'
+      lin_conv_fails: '118'
+      prec_evals: '18'
+      prec_solves: '4103'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3122'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.3246939973537313e+26'
+      l2_norm: '2.533922129474595e+21'
+      fro_norm: '2.533922129478588e+21'
+      determinant: inf
+      min_eigenvalue: '0.9590731389005149'
+      max_eigenvalue: '1734219451146847.8'
+      threshold: '0.01'
+      nonzero_elements: '2663'
+      total_elements: '53824'
+    config:
+      model: Butane
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.01
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:09:59-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em09:
+  well_stirred_reactor:
+    runtime: 4.385720867000001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1167'
+      rhs_evals: '1305'
+      nonlinear_iters: '1304'
+      nonlinear_conv_fails: '13'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '125'
+      lin_rhs_evals: '3392'
+      lin_iters: '3392'
+      lin_conv_fails: '120'
+      prec_evals: '32'
+      prec_solves: '4613'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3392'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.2340429653842014e+27'
+      l2_norm: '1.2611090117643485e+20'
+      fro_norm: '1.2611090117655049e+20'
+      determinant: inf
+      min_eigenvalue: '0.9935065793251778'
+      max_eigenvalue: '224931830584503.12'
+      threshold: '1e-09'
+      nonzero_elements: '4298'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-09
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:16-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em23:
+  well_stirred_reactor:
+    runtime: 2.955652136400001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1254'
+      rhs_evals: '1422'
+      nonlinear_iters: '1421'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '134'
+      lin_rhs_evals: '3907'
+      lin_iters: '3907'
+      lin_conv_fails: '168'
+      prec_evals: '32'
+      prec_solves: '5233'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3907'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.79221852052585e+26'
+      l2_norm: '4.096158484729258e+19'
+      fro_norm: '4.096158484733013e+19'
+      determinant: inf
+      min_eigenvalue: '0.9664813999605877'
+      max_eigenvalue: '73059220180365.7'
+      threshold: '1e-23'
+      nonzero_elements: '5024'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-23
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:33-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em12:
+  well_stirred_reactor:
+    runtime: 3.502580513100001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1202'
+      rhs_evals: '1356'
+      nonlinear_iters: '1355'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '128'
+      lin_rhs_evals: '3526'
+      lin_iters: '3526'
+      lin_conv_fails: '145'
+      prec_evals: '32'
+      prec_solves: '4789'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3526'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.235664489662961e+27'
+      l2_norm: '6.8352007109513355e+19'
+      fro_norm: '6.835200710957603e+19'
+      determinant: inf
+      min_eigenvalue: '0.9862425822771331'
+      max_eigenvalue: '121912871435912.73'
+      threshold: '1e-12'
+      nonzero_elements: '4472'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-12
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:34-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em19:
+  well_stirred_reactor:
+    runtime: 4.545791122000002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1139'
+      rhs_evals: '1269'
+      nonlinear_iters: '1268'
+      nonlinear_conv_fails: '4'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '108'
+      lin_rhs_evals: '3206'
+      lin_iters: '3206'
+      lin_conv_fails: '100'
+      prec_evals: '20'
+      prec_solves: '4380'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3206'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '5.42914411531519e+27'
+      l2_norm: '2.340336356478201e+20'
+      fro_norm: '2.340336356480347e+20'
+      determinant: inf
+      min_eigenvalue: '0.9323930424646923'
+      max_eigenvalue: '417423186205312.4'
+      threshold: '1e-19'
+      nonzero_elements: '5264'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-19
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:24-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em01:
+  well_stirred_reactor:
+    runtime: 4.434282474100001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1174'
+      rhs_evals: '1326'
+      nonlinear_iters: '1325'
+      nonlinear_conv_fails: '10'
+      err_test_fails: '17'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '123'
+      lin_rhs_evals: '3574'
+      lin_iters: '3574'
+      lin_conv_fails: '144'
+      prec_evals: '27'
+      prec_solves: '4799'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3574'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '6.267905464572187e+23'
+      l2_norm: '4.583811022029436e+19'
+      fro_norm: '4.58381102203364e+19'
+      determinant: inf
+      min_eigenvalue: '1.0'
+      max_eigenvalue: '81757008245143.12'
+      threshold: '0.1'
+      nonzero_elements: '3362'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.1
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:33-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em16:
+  well_stirred_reactor:
+    runtime: 4.173692298599999
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1194'
+      rhs_evals: '1372'
+      nonlinear_iters: '1371'
+      nonlinear_conv_fails: '27'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '156'
+      lin_rhs_evals: '3556'
+      lin_iters: '3556'
+      lin_conv_fails: '157'
+      prec_evals: '45'
+      prec_solves: '4831'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3556'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.2900834718398422e+26'
+      l2_norm: '1.2525664625982042e+19'
+      fro_norm: '1.2525664625993527e+19'
+      determinant: inf
+      min_eigenvalue: '0.9983522843244994'
+      max_eigenvalue: '22340817830239.68'
+      threshold: '1e-16'
+      nonzero_elements: '4667'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-16
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:39-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em24:
+  well_stirred_reactor:
+    runtime: 3.6314774145000035
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1183'
+      rhs_evals: '1333'
+      nonlinear_iters: '1332'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '123'
+      lin_rhs_evals: '3497'
+      lin_iters: '3497'
+      lin_conv_fails: '134'
+      prec_evals: '29'
+      prec_solves: '4737'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3497'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '5.7222069886759065e+26'
+      l2_norm: '3.12965070803713e+19'
+      fro_norm: '3.129650708039999e+19'
+      determinant: inf
+      min_eigenvalue: '0.9990858907122714'
+      max_eigenvalue: '55820555956612.69'
+      threshold: '1e-24'
+      nonzero_elements: '5048'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-24
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:31-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em15:
+  well_stirred_reactor:
+    runtime: 3.937092609700002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1151'
+      rhs_evals: '1282'
+      nonlinear_iters: '1281'
+      nonlinear_conv_fails: '7'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '119'
+      lin_rhs_evals: '3130'
+      lin_iters: '3130'
+      lin_conv_fails: '78'
+      prec_evals: '25'
+      prec_solves: '4315'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3130'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.10145580194607e+27'
+      l2_norm: '1.7018565416060086e+20'
+      fro_norm: '1.7018565416075687e+20'
+      determinant: inf
+      min_eigenvalue: '0.9999998275472325'
+      max_eigenvalue: '303543708069079.1'
+      threshold: '1e-15'
+      nonzero_elements: '4672'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-15
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:46-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em04:
+  well_stirred_reactor:
+    runtime: 4.0156078846000005
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1253'
+      rhs_evals: '1453'
+      nonlinear_iters: '1452'
+      nonlinear_conv_fails: '30'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '164'
+      lin_rhs_evals: '4101'
+      lin_iters: '4101'
+      lin_conv_fails: '201'
+      prec_evals: '48'
+      prec_solves: '5461'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '4101'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '2.782900582950833e+24'
+      l2_norm: '1.2192918855485616e+19'
+      fro_norm: '1.2192918855496798e+19'
+      determinant: inf
+      min_eigenvalue: '0.9999937588507561'
+      max_eigenvalue: '21747331939130.977'
+      threshold: '0.0001'
+      nonzero_elements: '3608'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0001
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:58-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em21:
+  well_stirred_reactor:
+    runtime: 4.344907435700001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1145'
+      rhs_evals: '1272'
+      nonlinear_iters: '1271'
+      nonlinear_conv_fails: '4'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '113'
+      lin_rhs_evals: '3196'
+      lin_iters: '3196'
+      lin_conv_fails: '97'
+      prec_evals: '22'
+      prec_solves: '4375'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3196'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '8.938121870885453e+26'
+      l2_norm: '4.6036025331910296e+19'
+      fro_norm: '4.603602533195249e+19'
+      determinant: inf
+      min_eigenvalue: '0.998523275014023'
+      max_eigenvalue: '82110010541944.47'
+      threshold: '1e-21'
+      nonzero_elements: '5056'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-21
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:38-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em07:
+  well_stirred_reactor:
+    runtime: 5.399812514900001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1221'
+      rhs_evals: '1415'
+      nonlinear_iters: '1414'
+      nonlinear_conv_fails: '24'
+      err_test_fails: '20'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '155'
+      lin_rhs_evals: '3728'
+      lin_iters: '3728'
+      lin_conv_fails: '173'
+      prec_evals: '43'
+      prec_solves: '5042'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3728'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '4.2575324537269615e+26'
+      l2_norm: '2.7215625634186256e+19'
+      fro_norm: '2.7215625634211217e+19'
+      determinant: inf
+      min_eigenvalue: '0.99991241251363'
+      max_eigenvalue: '48541881719977.32'
+      threshold: '1e-07'
+      nonzero_elements: '4042'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-07
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:39-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em18:
+  well_stirred_reactor:
+    runtime: 6.002536951899999
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1173'
+      rhs_evals: '1327'
+      nonlinear_iters: '1326'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '129'
+      lin_rhs_evals: '3380'
+      lin_iters: '3380'
+      lin_conv_fails: '148'
+      prec_evals: '31'
+      prec_solves: '4609'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3380'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.144863457819424e+26'
+      l2_norm: '3.93130664409628e+19'
+      fro_norm: '3.931306644099884e+19'
+      determinant: inf
+      min_eigenvalue: '0.9921225312147792'
+      max_eigenvalue: '70118918396337.82'
+      threshold: '1e-18'
+      nonzero_elements: '4775'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-18
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:14-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em06:
+  well_stirred_reactor:
+    runtime: 5.469028611900002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1174'
+      rhs_evals: '1305'
+      nonlinear_iters: '1304'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '111'
+      lin_rhs_evals: '3211'
+      lin_iters: '3211'
+      lin_conv_fails: '90'
+      prec_evals: '23'
+      prec_solves: '4428'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3211'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.0592697003010112e+26'
+      l2_norm: '2.799257271420722e+19'
+      fro_norm: '2.799257271423288e+19'
+      determinant: inf
+      min_eigenvalue: '0.9992585799281049'
+      max_eigenvalue: '49927647472963.984'
+      threshold: '1e-06'
+      nonzero_elements: '3889'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-06
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:22-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1ep00:
+  well_stirred_reactor:
+    runtime: 8.534276173069308
+    endtime: 1.0
+    nruns: 101
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1211'
+      rhs_evals: '1337'
+      nonlinear_iters: '1336'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '116'
+      lin_rhs_evals: '3960'
+      lin_iters: '3960'
+      lin_conv_fails: '226'
+      prec_evals: '26'
+      prec_solves: '5217'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3960'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '6.448274950955403e+21'
+      l2_norm: '4.546152888414516e+19'
+      fro_norm: '4.546152888418684e+19'
+      determinant: -inf
+      min_eigenvalue: '-64976.63970728192'
+      max_eigenvalue: '81085336665974.28'
+      threshold: '1.0'
+      nonzero_elements: '3208'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database: /nfs/hpc/share/walkanth/nrg-cantera-project/cantera-adaptive-testing/scripts/threshold_data/threshold.db
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 02:18:28-30-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em22:
+  well_stirred_reactor:
+    runtime: 7.159211184099998
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1254'
+      rhs_evals: '1422'
+      nonlinear_iters: '1421'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '134'
+      lin_rhs_evals: '3907'
+      lin_iters: '3907'
+      lin_conv_fails: '168'
+      prec_evals: '32'
+      prec_solves: '5233'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3907'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.792231874689238e+26'
+      l2_norm: '4.096158484729258e+19'
+      fro_norm: '4.096158484733013e+19'
+      determinant: inf
+      min_eigenvalue: '0.9911831692875469'
+      max_eigenvalue: '73059220180365.72'
+      threshold: '1e-22'
+      nonzero_elements: '5003'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-22
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:02-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em14:
+  well_stirred_reactor:
+    runtime: 6.650768508099998
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1192'
+      rhs_evals: '1325'
+      nonlinear_iters: '1324'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '115'
+      lin_rhs_evals: '3348'
+      lin_iters: '3348'
+      lin_conv_fails: '139'
+      prec_evals: '24'
+      prec_solves: '4581'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3348'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '5.998852146324447e+26'
+      l2_norm: '3.3471625961894728e+19'
+      fro_norm: '3.3471625961925435e+19'
+      determinant: inf
+      min_eigenvalue: '0.9974600901774007'
+      max_eigenvalue: '59700105153322.84'
+      threshold: '1e-14'
+      nonzero_elements: '4584'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-14
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:20-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em05:
+  well_stirred_reactor:
+    runtime: 4.6591916221
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1181'
+      rhs_evals: '1351'
+      nonlinear_iters: '1350'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '23'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '129'
+      lin_rhs_evals: '3496'
+      lin_iters: '3496'
+      lin_conv_fails: '124'
+      prec_evals: '27'
+      prec_solves: '4742'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3496'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '6.02004638568084e+26'
+      l2_norm: '1.3485298587646953e+20'
+      fro_norm: '1.348529858765932e+20'
+      determinant: inf
+      min_eigenvalue: '0.9999752385165799'
+      max_eigenvalue: '240524241444738.4'
+      threshold: '1e-05'
+      nonzero_elements: '3845'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-05
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:44-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em08:
+  well_stirred_reactor:
+    runtime: 6.270109500400002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1171'
+      rhs_evals: '1341'
+      nonlinear_iters: '1340'
+      nonlinear_conv_fails: '22'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '143'
+      lin_rhs_evals: '3390'
+      lin_iters: '3390'
+      lin_conv_fails: '127'
+      prec_evals: '41'
+      prec_solves: '4633'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3390'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.6694742978994926e+26'
+      l2_norm: '9.119995749837598e+18'
+      fro_norm: '9.119995749845957e+18'
+      determinant: inf
+      min_eigenvalue: '0.9962139673889183'
+      max_eigenvalue: '16266455366216.387'
+      threshold: '1e-08'
+      nonzero_elements: '4112'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-08
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:45-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1ep01:
+  well_stirred_reactor:
+    runtime: 9.614030962079209
+    endtime: 1.0
+    nruns: 101
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1618'
+      rhs_evals: '1951'
+      nonlinear_iters: '1950'
+      nonlinear_conv_fails: '107'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '314'
+      lin_rhs_evals: '7364'
+      lin_iters: '7364'
+      lin_conv_fails: '818'
+      prec_evals: '126'
+      prec_solves: '9242'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '7364'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.2893202328964773e+21'
+      l2_norm: '2.514007183228073e+20'
+      fro_norm: '2.514007183230378e+20'
+      determinant: -inf
+      min_eigenvalue: '-9601.11375258455'
+      max_eigenvalue: '448399176245407.5'
+      threshold: '10.0'
+      nonzero_elements: '3161'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database: /nfs/hpc/share/walkanth/nrg-cantera-project/cantera-adaptive-testing/scripts/threshold_data/threshold.db
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 10.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 02:19:31-30-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em11:
+  well_stirred_reactor:
+    runtime: 5.679805846100002
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1172'
+      rhs_evals: '1333'
+      nonlinear_iters: '1332'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '134'
+      lin_rhs_evals: '3430'
+      lin_iters: '3430'
+      lin_conv_fails: '125'
+      prec_evals: '32'
+      prec_solves: '4666'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3430'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '6.26853200280164e+26'
+      l2_norm: '3.6363562179153064e+19'
+      fro_norm: '3.63635621791864e+19'
+      determinant: inf
+      min_eigenvalue: '0.9979339465950925'
+      max_eigenvalue: '64858172602969.83'
+      threshold: '1e-11'
+      nonzero_elements: '4385'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-11
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:27-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em20:
+  well_stirred_reactor:
+    runtime: 6.965207425899997
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1169'
+      rhs_evals: '1326'
+      nonlinear_iters: '1325'
+      nonlinear_conv_fails: '16'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '134'
+      lin_rhs_evals: '3477'
+      lin_iters: '3477'
+      lin_conv_fails: '124'
+      prec_evals: '32'
+      prec_solves: '4707'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3477'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '1.4896644970389553e+27'
+      l2_norm: '8.085666155177833e+19'
+      fro_norm: '8.085666155185245e+19'
+      determinant: inf
+      min_eigenvalue: '0.9980946094175233'
+      max_eigenvalue: '144216215497154.4'
+      threshold: '1e-20'
+      nonzero_elements: '4913'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-20
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:33-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em10:
+  well_stirred_reactor:
+    runtime: 3.2244677466
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1157'
+      rhs_evals: '1291'
+      nonlinear_iters: '1290'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '15'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '113'
+      lin_rhs_evals: '3177'
+      lin_iters: '3177'
+      lin_conv_fails: '113'
+      prec_evals: '24'
+      prec_solves: '4375'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3177'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.26463209409503e+26'
+      l2_norm: '1.7892339171833104e+19'
+      fro_norm: '1.7892339171849505e+19'
+      determinant: inf
+      min_eigenvalue: '0.9982551234392578'
+      max_eigenvalue: '31912836464061.836'
+      threshold: '1e-10'
+      nonzero_elements: '4309'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-10
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:32-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em02:
+  well_stirred_reactor:
+    runtime: 2.6943429810999997
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1214'
+      rhs_evals: '1412'
+      nonlinear_iters: '1411'
+      nonlinear_conv_fails: '30'
+      err_test_fails: '19'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '159'
+      lin_rhs_evals: '4094'
+      lin_iters: '4094'
+      lin_conv_fails: '219'
+      prec_evals: '47'
+      prec_solves: '5412'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '4094'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.335191943086904e+23'
+      l2_norm: '2.9245239902719304e+19'
+      fro_norm: '2.9245239902746124e+19'
+      determinant: inf
+      min_eigenvalue: '0.9904819091705649'
+      max_eigenvalue: '52161914600333.81'
+      threshold: '0.01'
+      nonzero_elements: '3463'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.01
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:04-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em03:
+  well_stirred_reactor:
+    runtime: 2.685201490700001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1185'
+      rhs_evals: '1322'
+      nonlinear_iters: '1321'
+      nonlinear_conv_fails: '13'
+      err_test_fails: '13'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '125'
+      lin_rhs_evals: '3363'
+      lin_iters: '3363'
+      lin_conv_fails: '136'
+      prec_evals: '31'
+      prec_solves: '4598'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3363'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.0840409887065773e+24'
+      l2_norm: '4.238745906586874e+19'
+      fro_norm: '4.23874590659076e+19'
+      determinant: inf
+      min_eigenvalue: '0.9999647657752102'
+      max_eigenvalue: '75602415498322.27'
+      threshold: '0.001'
+      nonzero_elements: '3575'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.001
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:29-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-mass:
+  well_stirred_reactor:
+    runtime: 1016.6425354959999
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: false
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '3055'
+      rhs_evals: '4608'
+      nonlinear_iters: '4607'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '254'
+      last_order: '3'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '520'
+      lin_rhs_evals: '12036'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '1.0'
+      preconditioned: 'False'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:40-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em17:
+  well_stirred_reactor:
+    runtime: 4.5677855308
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1179'
+      rhs_evals: '1337'
+      nonlinear_iters: '1336'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '127'
+      lin_rhs_evals: '3373'
+      lin_iters: '3373'
+      lin_conv_fails: '136'
+      prec_evals: '31'
+      prec_solves: '4613'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3373'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '7.815956833466691e+26'
+      l2_norm: '4.0727553854397055e+19'
+      fro_norm: '4.0727553854434394e+19'
+      determinant: inf
+      min_eigenvalue: '0.9799438382980539'
+      max_eigenvalue: '72641800752118.23'
+      threshold: '1e-17'
+      nonzero_elements: '4720'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-17
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:38-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-0ep00:
+  well_stirred_reactor:
+    runtime: 4.636425397200001
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1183'
+      rhs_evals: '1333'
+      nonlinear_iters: '1332'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '14'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '123'
+      lin_rhs_evals: '3497'
+      lin_iters: '3497'
+      lin_conv_fails: '134'
+      prec_evals: '29'
+      prec_solves: '4737'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3497'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '5.7222069886759065e+26'
+      l2_norm: '3.12965070803713e+19'
+      fro_norm: '3.129650708039999e+19'
+      determinant: inf
+      min_eigenvalue: '0.9960291465405978'
+      max_eigenvalue: '55820555956612.65'
+      threshold: '0.0'
+      nonzero_elements: '5859'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:10:54-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false
+JetA-1em13:
+  well_stirred_reactor:
+    runtime: 5.751521233499999
+    endtime: 1.0
+    nruns: 100
+    runtype: performance
+    thermo:
+      model: jetA-detailed-NOx-203-1589.yaml
+      moles: true
+      gas_reactions: 1589
+      gas_species: 201
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1600.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical:
+      steps: '1188'
+      rhs_evals: '1339'
+      nonlinear_iters: '1338'
+      nonlinear_conv_fails: '10'
+      err_test_fails: '16'
+      last_order: '1'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '126'
+      lin_rhs_evals: '3348'
+      lin_iters: '3348'
+      lin_conv_fails: '113'
+      prec_evals: '28'
+      prec_solves: '4587'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '3348'
+      time: '1.0'
+      preconditioned: 'True'
+      condition: '3.8045827325574067e+27'
+      l2_norm: '2.1361670234254036e+20'
+      fro_norm: '2.1361670234273625e+20'
+      determinant: inf
+      min_eigenvalue: '0.9977845325603509'
+      max_eigenvalue: '381007474667802.5'
+      threshold: '1e-13'
+      nonzero_elements: '4566'
+      total_elements: '41209'
+    config:
+      model: JetA
+      problems:
+      - well_stirred_reactor
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 1e-13
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      replace_reactions: true
+      endtime: 1.0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: threshold_data
+      surface: ''
+      date: 10:11:12-28-12-22
+      energy: on
+      advance_kwargs: {}
+      skip_falloff: true
+      skip_thirdbody: true
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      record_steps: 1
+      use_icdb: false

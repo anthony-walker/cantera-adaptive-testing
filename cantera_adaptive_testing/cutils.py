@@ -521,3 +521,10 @@ def get_db_prob_results(conds):
         s2 = analyt_model.pressure_problem(T0=T0, P0=P0, V0=V0, db_conds=False)
     return s1 and s2
 
+
+def upper_case_model(model):
+    fpath = os.path.dirname(__file__)
+    mpath = os.path.join(fpath, "models", model)
+    with open(mpath, "r") as f:
+        data = yaml.load(f)
+        print(data)

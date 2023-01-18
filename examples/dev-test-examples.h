@@ -15,6 +15,7 @@
 
 using namespace Cantera;
 
+void JacobianProfiling();
 void PreconditionerTestRun();
 void HydrogenAutoIgnition();
 void EigenTest();

@@ -6,7 +6,7 @@
 
 using namespace Cantera;
 
-void HydrogenAutoIgnition()
+void JacobianProfiling()
 {
     // create an ideal gas mixture that corresponds to GRI-Mech 3.0
     auto sol = newSolution("gri30.yaml", "gri30", "None");
@@ -22,15 +22,37 @@ void HydrogenAutoIgnition()
     // create reactor network and set to use preconditioner
     ReactorNet sim;
     sim.addReactor(r);
-    sim.setProblemType(GMRES);
-    sim.setPreconditioner(precon);
-    // main loop
-    double dt = 1.e-5; // interval at which output is written
-    int nsteps = 100; // number of intervals
-    for (int i = 1; i <= nsteps; i++) {
-        double tm = i*dt;
-        sim.advance(tm);
+    sim.initialize();
+    for (int i = 1; i <= 100; i++) {
+        r.jacobian();
     }
+}
+
+void HydrogenAutoIgnition()
+{
+    // create an ideal gas mixture that corresponds to GRI-Mech 3.0
+    auto sol = newSolution("gri30.yaml", "gri30", "None");
+    auto gas = sol->thermo();
+    // set the state
+    gas->setState_TPX(1001.0, OneAtm, "H2:2.0, O2:1.0, N2:4.0");
+    // create a reactor
+    IdealGasConstPressureMoleReactor r;
+    // 'insert' the gas into the reactor and environment.
+    r.insert(sol);
+    // create preconditioner
+    AdaptivePreconditioner precon;
+    // create reactor network and set to use preconditioner
+    // ReactorNet sim;
+    // sim.addReactor(r);
+    // sim.setProblemType(GMRES);
+    // sim.setPreconditioner(precon);
+    // // main loop
+    // double dt = 1.e-5; // interval at which output is written
+    // int nsteps = 100; // number of intervals
+    // for (int i = 1; i <= nsteps; i++) {
+    //     double tm = i*dt;
+    //     sim.advance(tm);
+    // }
 }
 
 void PreconditionerTestRun()
@@ -45,15 +67,15 @@ void PreconditionerTestRun()
     reactor.insert(sol);
     double volume = 1.0;
     reactor.setInitialVolume(volume);
-    //Creating reactor network
-    ReactorNet network;
-    AdaptivePreconditioner precon;
-    network.setProblemType(GMRES);
-    network.setPreconditioner(precon);
-    // network.setVerbose(); //Setting verbose to be true
-    network.addReactor(reactor); //Adding reactor to network
-    //Setting up simulation
-    network.step();
+    // //Creating reactor network
+    // ReactorNet network;
+    // AdaptivePreconditioner precon;
+    // network.setProblemType(GMRES);
+    // network.setPreconditioner(precon);
+    // // network.setVerbose(); //Setting verbose to be true
+    // network.addReactor(reactor); //Adding reactor to network
+    // //Setting up simulation
+    // network.step();
 }
 
 
@@ -126,14 +148,14 @@ void JetA()
     inletMassFlowController.setMassFlowRate(1.0);
     //Creating reactor network
     ReactorNet network;
-    AdaptivePreconditioner precon;
-    network.setProblemType(GMRES);
-    network.setPreconditioner(precon);
-    // network.setVerbose(); //Setting verbose to be true
-    network.addReactor(reactor); //Adding reactor to network
-    //Setting up simulation
-    for (size_t i = 0; i<1000; i++)
-    {
-        network.step();
-    }
+    // AdaptivePreconditioner precon;
+    // network.setProblemType(GMRES);
+    // network.setPreconditioner(precon);
+    // // network.setVerbose(); //Setting verbose to be true
+    // network.addReactor(reactor); //Adding reactor to network
+    // //Setting up simulation
+    // for (size_t i = 0; i<1000; i++)
+    // {
+    //     network.step();
+    // }
 }

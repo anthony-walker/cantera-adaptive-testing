@@ -622,10 +622,10 @@ class ModelBase(object):
             sid = 0
         # try to run simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state()
+            self.net.advance_to_steady_state(atol=1e-6)
         elif self.runtype == "performance":
-            if self.verbose:
-                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
+            # if self.verbose:
+            #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "analysis":
             if self.database is None:
@@ -707,6 +707,7 @@ class ModelBase(object):
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
+        r.energy_enabled = False
         r.volume = vol
         # catalyst area in one reactor
         mass_flow_rate = velocity * gas.density * area
@@ -752,8 +753,8 @@ class ModelBase(object):
         if self.runtype == "steady":
             self.net.advance_to_steady_state()
         elif self.runtype == "performance":
-            if self.verbose:
-                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
+            # if self.verbose:
+            #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
@@ -847,8 +848,8 @@ class ModelBase(object):
         if self.runtype == "steady":
             self.net.advance_to_steady_state()
         elif self.runtype == "performance":
-            if self.verbose:
-                print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
+            # if self.verbose:
+            #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
             self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
@@ -897,6 +898,78 @@ class ModelBase(object):
                 stats = self.add_numerical_stats(stats, sid)
                 # add to the database
                 add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+        else:
+            raise Exception("Invalid runtype specified.")
+
+    @problem
+    def jacobian_timer(self, *args, **kwargs):
+        # physical params
+        area = 1
+        vol = 1
+        velocity = 15 # m / s
+        # import the gas model and set the initial conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        if self.use_icdb:
+            gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
+        else:
+            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
+        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        # create a new reactor
+        r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
+        r.energy_enabled = False
+        r.volume = vol
+        # catalyst area in one reactor
+        mass_flow_rate = velocity * gas.density * area
+        # create a reservoir to represent the reactor immediately upstream. Note
+        # that the gas object is set already to the state of the upstream reactor
+        upstream = ct.Reservoir(gas, name='upstream')
+        # create a reservoir for the reactor to exhaust into. The composition of
+        # this reservoir is irrelevant.
+        downstream = ct.Reservoir(gas, name='downstream')
+        # The mass flow rate into the reactor will be fixed by using a
+        # MassFlowController object.
+        m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
+        # We need an outlet to the downstream reservoir. This will determine the
+        # pressure in the reactor. The value of K will only affect the transient
+        # pressure difference.
+        v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        # Setup thermo data dictionary
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
+            "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
+            "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": r.volume,
+            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            }})
+        # Add surface data if it exists
+        if self.surface:
+            # import the surface model
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf.TP = gas.T, gas.P
+            surf.coverages = self.surface
+            rsurf = ct.ReactorSurface(surf, r, A=area)
+            self.thermo_data["thermo"].update({"surface":self.surface,
+                "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
+                "surf_area":rsurf.area,})
+        self.net = ct.ReactorNet([r])
+        self.apply_numerical_options()
+        # get connection if analysis
+        if self.runtype == "analysis":
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
+        # advance the simulation
+        if self.runtype == "steady":
+            pass
+        elif self.runtype == "performance":
+            for i in range(100):
+                r.jacobian
+        elif self.runtype == "plot":
+            pass
+        elif self.runtype == "analysis":
+            pass
         else:
             raise Exception("Invalid runtype specified.")
 

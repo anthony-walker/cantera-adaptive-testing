@@ -298,16 +298,15 @@ define_runners() {
 
 # TODO: current not functional
 profile_preconditioning() {
-    source ~/.functions
     export CURR_DIR=$(pwd)
     export EX_DIR='../examples'
-    export CANTERA_DIR='../../cantera/'
-    # Rebuild cantera
-    cd $CANTERA_DIR
-    scons build -j 12
-    scons install prefix=$CONDA_PREFIX
-    # Build example
-    cd $CURR_DIR
+    # export CANTERA_DIR='../../cantera/'
+    # # Rebuild cantera
+    # cd $CANTERA_DIR
+    # scons build -j 12
+    # scons install prefix=$CONDA_PREFIX
+    # # Build example
+    # cd $CURR_DIR
     cd $EX_DIR
     scons;
     ./dev-test.out;

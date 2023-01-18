@@ -59,6 +59,21 @@ surface_threshold_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 1
 }
 
+wsr_performance_study() {
+    # performance runs
+    export PLIST=./model_lists/surf-performance
+    export SURF_DIR=surf_data
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    export TSTART=0
+    export TEND=20
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 1 -S PlatinumLarge
+}
+
 ttest() {
     factor=10
     for i in {1..20}
