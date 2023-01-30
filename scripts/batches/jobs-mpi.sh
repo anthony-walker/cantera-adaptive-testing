@@ -16,6 +16,8 @@
 
 #SBATCH -o ./slurm-output/%x-%j.out
 
+#SBATCH --constraint=haswell
+
 # load any software environment module required for app
 
 # run my jobs

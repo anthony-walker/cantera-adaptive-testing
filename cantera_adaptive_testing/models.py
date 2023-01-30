@@ -27,7 +27,7 @@ class DME(ModelBase):
     def __init__(self, *args, **kwargs):
         super(DME, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('dme-propane-122-711.yaml')
-        self.fuel = 'CH3OCH3:1.0, C3H8:1.0'
+        self.fuel = 'CH3OCH3:1.0'
 
 
 class JetA(ModelBase):

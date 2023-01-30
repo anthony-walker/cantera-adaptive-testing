@@ -2,11 +2,11 @@ import os
 
 env = Environment()
 
-env.Append(CCFLAGS=['-pg','-g3', '--std=c++14'],
-           CPPPATH=[os.path.join(os.environ['CONDA_PREFIX'],'include'),],
-           LIBS=['cantera',],
+env.Append(CCFLAGS=['-O3', '--std=c++14'],
+           CPPPATH=[os.path.join(os.environ['CONDA_PREFIX'],'include'), os.path.join(os.environ['CONDA_PREFIX'], 'include', "eigen3"), os.path.join(os.environ['CONDA_PREFIX'], 'include', "sundials"),],
+           LIBS=['cantera'],
            LIBPATH=[os.path.join(os.environ['CONDA_PREFIX'],'lib')],
-           LINKFLAGS=['-pg', '-pthread'])
+           LINKFLAGS=['-pthread'])
 
 osap = env.Program('dev-test.out', ['dev-test.cpp', 'dev-test-examples.cpp'])
 

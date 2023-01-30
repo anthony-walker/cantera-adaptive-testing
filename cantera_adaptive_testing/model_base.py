@@ -35,8 +35,8 @@ class ModelBase(object):
         self.options.setdefault("database", None)
         self.options.setdefault("problems", [])
         self.options.setdefault("advance_kwargs", {})
-        self.options.setdefault("skip_falloff", True)
-        self.options.setdefault("skip_thirdbody", True)
+        self.options.setdefault("enable_falloff", False) # true means not enabled
+        self.options.setdefault("enable_thirdbody", False)
         self.options.setdefault("fuel", None)
         self.options.setdefault("air", "O2:1.0, N2:3.76")
         self.options.setdefault("surface", None)
@@ -200,20 +200,20 @@ class ModelBase(object):
         self.options["advance_kwargs"] = value
 
     @property
-    def skip_falloff(self):
-        return self.options["skip_falloff"]
+    def enable_falloff(self):
+        return self.options["enable_falloff"]
 
-    @skip_falloff.setter
-    def skip_falloff(self, value):
-        self.options["skip_falloff"] = value
+    @enable_falloff.setter
+    def enable_falloff(self, value):
+        self.options["enable_falloff"] = value
 
     @property
-    def skip_thirdbody(self):
-        return self.options["skip_thirdbody"]
+    def enable_thirdbody(self):
+        return self.options["enable_thirdbody"]
 
-    @skip_thirdbody.setter
-    def skip_thirdbody(self, value):
-        self.options["skip_thirdbody"] = value
+    @enable_thirdbody.setter
+    def enable_thirdbody(self, value):
+        self.options["enable_thirdbody"] = value
 
     @property
     def fuel(self):
@@ -426,8 +426,8 @@ class ModelBase(object):
             self.precon = ct.AdaptivePreconditioner()
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
-            self.net.derivative_settings = {"skip-falloff": self.skip_falloff,
-                "skip-third-bodies": self.skip_thirdbody}
+            self.net.derivative_settings = {"skip-falloff": not self.enable_falloff,
+                "skip-third-bodies": not self.enable_thirdbody}
         self.net.initialize()
 
     def get_numerical_stats(self):
@@ -588,7 +588,7 @@ class ModelBase(object):
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas1.n_reactions,
             "gas_species": gas1.n_species, "fuel": self.fuel, "air": self.air,
             "phi": self.phi, "T0": gas1.T, "P0": gas1.P, "V0": combustor.volume,
-            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            "skip_falloff":not self.enable_falloff, "skip_thirdbody": not self.enable_thirdbody
             }})
         # Add surface data if it exists
         if self.surface:
@@ -596,8 +596,8 @@ class ModelBase(object):
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(self.model, self.sphase, [gas2])
-            surf.coverages = self.surface
-            rsurf = ct.ReactorSurface(surf, exhaust, A=1.0)
+            surf.TPX = gas2.T, gas2.P, self.surface
+            rsurf = ct.ReactorSurface(surf, exhaust, A=2.0)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
@@ -707,7 +707,6 @@ class ModelBase(object):
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
-        r.energy_enabled = False
         r.volume = vol
         # catalyst area in one reactor
         mass_flow_rate = velocity * gas.density * area
@@ -728,7 +727,7 @@ class ModelBase(object):
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
             "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
             "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": r.volume,
-            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            "skip_falloff": not self.enable_falloff, "skip_thirdbody": not self.enable_thirdbody
             }})
         # Add surface data if it exists
         if self.surface:
@@ -736,8 +735,7 @@ class ModelBase(object):
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(self.model, self.sphase, [gas])
-            surf.TP = gas.T, gas.P
-            surf.coverages = self.surface
+            surf.TPX = gas.T, gas.P, self.surface
             rsurf = ct.ReactorSurface(surf, r, A=area)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
@@ -822,16 +820,15 @@ class ModelBase(object):
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
             "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
             "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": r.volume,
-            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            "skip_falloff": not self.enable_falloff, "skip_thirdbody": not self.enable_thirdbody
             }})
         # Add surface if it exists
         if self.surface:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(self.model, self.sphase, [gas])
-            surf.TP = gas.T, gas.P
-            surf.coverages = self.surface
-            rsurf = ct.ReactorSurface(surf, r, A=1)
+            surf.TPX = gas.T, gas.P, self.surface
+            rsurf = ct.ReactorSurface(surf, r, A=2.0)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
@@ -880,11 +877,13 @@ class ModelBase(object):
                 time.append(self.net.time)
             # now plot data
             fig, cax = plt.subplots(1, 1)
-            fig.tight_layout()
+            # fig.tight_layout()
             cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("WSR")
+            cax.set_xlabel("Time [s]")
+            cax.set_ylabel("Moles [kmol]")
             cax.legend(loc='upper right')
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
@@ -918,7 +917,6 @@ class ModelBase(object):
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
-        r.energy_enabled = False
         r.volume = vol
         # catalyst area in one reactor
         mass_flow_rate = velocity * gas.density * area
@@ -939,7 +937,7 @@ class ModelBase(object):
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
             "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
             "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": r.volume,
-            "skip_falloff":self.skip_falloff, "skip_thirdbody":self.skip_thirdbody
+            "skip_falloff": not self.enable_falloff, "skip_thirdbody": not self.enable_thirdbody
             }})
         # Add surface data if it exists
         if self.surface:
@@ -947,8 +945,7 @@ class ModelBase(object):
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(self.model, self.sphase, [gas])
-            surf.TP = gas.T, gas.P
-            surf.coverages = self.surface
+            surf.TPX = gas.T, gas.P, self.surface
             rsurf = ct.ReactorSurface(surf, r, A=area)
             self.thermo_data["thermo"].update({"surface":self.surface,
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
@@ -1022,7 +1019,7 @@ class ModelBase(object):
         print(f"\nReactants: {curr_model.fuel}, {curr_model.air}, Phi: {curr_model.phi}")
         print(f"Gas phase: Species: {gas.n_species}, Reactions: {gas.n_reactions}")
         # Add surface if it exists
-        if curr_model.surface is not None:
+        if curr_model.surface != "":
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 surf = ct.Interface(curr_model.model, curr_model.sphase, [gas])
@@ -1045,6 +1042,7 @@ class ModelBase(object):
                 data[curr_type] = 1
         for k, v in data.items():
             print(f"{k}: {v}, {v/rlen*100: .2f}%")
+        print("\n")
 
     def add_surface(self, surf_obj):
         self.surfname = surf_obj.__class__.__name__

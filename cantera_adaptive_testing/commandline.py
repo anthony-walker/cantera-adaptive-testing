@@ -115,6 +115,10 @@ def parser_setup(add_mod=True, add_probs=True):
                         help="Turn on the falloff reaction evaluation for preconditioning")
     parser.add_argument('--remove_thirdbody', action='store_true', default=False,
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
+    parser.add_argument('--enable_falloff', action='store_true', default=False,
+                        help="Turn on the falloff reaction evaluation for preconditioning")
+    parser.add_argument('--enable_thirdbody', action='store_true', default=False,
+                        help="Turn on the thirdbody reaction evaluation for preconditioning")
     parser.add_argument('--replace_reactions', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
     parser.add_argument('-E', '--endtime', type=float,

@@ -159,3 +159,33 @@ void JetA()
     //     network.step();
     // }
 }
+
+void SurfJacTest() {
+    // setup reactors
+    auto sol = newSolution("ptcombust.yaml");
+    sol->thermo()->setState_TP(900, OneAtm);
+    IdealGasMoleReactor r1;
+    IdealGasConstPressureMoleReactor r2;
+    r1.insert(sol);
+    r2.insert(sol);
+    // setup surfaces
+    auto surf = newInterface("ptcombust.yaml", "Pt_surf", {sol});
+    // surf->thermo()->setState_TPX(900, OneAtm, "PT(S):1.0, H(S):1.0, O(S):1.0");
+    auto surf_kin = surf->kinetics();
+    ReactorSurface rsurf1;
+    ReactorSurface rsurf2;
+    rsurf1.setKinetics(surf_kin.get());
+    rsurf2.setKinetics(surf_kin.get());
+    // add surfaces to reactors
+    r1.addSurface(&rsurf1);
+    r2.addSurface(&rsurf2);
+    // create network
+    ReactorNet net;
+    net.addReactor(r1);
+    net.addReactor(r2);
+    net.initialize();
+    // initialize reactors
+    Eigen::MatrixXd net_jac = Eigen::MatrixXd(net.jacobian());
+    Eigen::MatrixXd r1_jac = Eigen::MatrixXd(r1.jacobian());
+    Eigen::MatrixXd r2_jac = Eigen::MatrixXd(r2.jacobian());
+}

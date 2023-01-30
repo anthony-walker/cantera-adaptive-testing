@@ -1,4 +1,4 @@
-Hydrogen well_stirred_reactor sdev 0.059687 nspecies 10
+ydrogen well_stirred_reactor sdev 0.059687 nspecies 10
 Hydrogen plug_flow_reactor sdev 0.122431 nspecies 10
 DME well_stirred_reactor sdev 0.792 nspecies 120
 DME plug_flow_reactor sdev 0.809763 nspecies 120

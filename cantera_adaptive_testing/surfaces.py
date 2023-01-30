@@ -18,5 +18,5 @@ class PlatinumMedium(Surface):
 class PlatinumLarge(Surface):
     def __init__(self, *args, **kwargs):
         super(PlatinumLarge, self).__init__(*args, **kwargs)
-        self.surface = 'Pt(9):1.0'
+        self.surface = 'Pt(9):0.1'
         self.sphase = 'surface-large'

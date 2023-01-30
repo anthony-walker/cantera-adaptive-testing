@@ -8,6 +8,7 @@
 #include "cantera/thermo.h"
 #include "cantera/kinetics.h"
 #include "cantera/kinetics/GasKinetics.h"
+#include "cantera/base/Interface.h"
 #include "cantera/transport.h"
 #include "cantera/numerics/AdaptivePreconditioner.h"
 //Creating reactor and reactor network
@@ -20,5 +21,6 @@ void PreconditionerTestRun();
 void HydrogenAutoIgnition();
 void EigenTest();
 void JetA();
+void SurfJacTest();
 
 #endif

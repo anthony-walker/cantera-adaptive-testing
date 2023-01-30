@@ -14,7 +14,7 @@ surface_performance_study() {
     export TSTART=0
     export TEND=20
     # launch all runs now that ss is found.
-    ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 1 -S PlatinumLarge
+    ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge
 }
 
 surface_reaction_study() {
@@ -30,15 +30,15 @@ surface_reaction_study() {
     skip_analyt
     skip_flex
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 1
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --remove_falloff -O $SURF_DIR -L -E 1
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --remove_thirdbody -O $SURF_DIR -L -E 1
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --remove_thirdbody --remove_falloff -O $SURF_DIR -L -E 1
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L
     # analysis runs
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 1
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --remove_falloff -O $SURF_DIR -E 1
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --remove_thirdbody -O $SURF_DIR -E 1
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --remove_thirdbody --remove_falloff -O $SURF_DIR -E 1
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR
 }
 
 surface_threshold_study() {
@@ -54,9 +54,9 @@ surface_threshold_study() {
     export TSTART=0
     export TEND=24
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 1
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L
     # analysis runs
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 1
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR
 }
 
 wsr_performance_study() {
@@ -71,7 +71,7 @@ wsr_performance_study() {
     export TSTART=0
     export TEND=20
     # launch all runs now that ss is found.
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 1 -S PlatinumLarge
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge
 }
 
 ttest() {
