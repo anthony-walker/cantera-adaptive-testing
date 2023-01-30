@@ -74,6 +74,10 @@ class ModelBase(object):
             self.classifiers.append("ntb")
         if self.remove_falloff:
             self.classifiers.append("nfo")
+        if self.enable_thirdbody:
+            self.classifiers.append("etb")
+        if self.enable_falloff:
+            self.classifiers.append("efo")
         if self.replace_reactions and (self.remove_thirdbody or self.remove_falloff):
             self.classifiers.append('rep')
         # get directors for figures and data
