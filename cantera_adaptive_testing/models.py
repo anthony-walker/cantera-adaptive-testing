@@ -22,13 +22,58 @@ class GRI(ModelBase):
         self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
 
+class A1(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(A1, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('a1-119-841.yaml')
+        self.fuel = 'POSF10264:1.0'
+
+class A2(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(A2, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('a2-119-841.yaml')
+        self.fuel = 'POSF10289:1.0'
+
+class A3(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(A3, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('a3-119-841.yaml')
+        self.fuel = 'POSF10325:1.0'
+
+class C1(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(C1, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('c1-119-841.yaml')
+        self.fuel = 'POSF11498:1.0'
+
+class C5(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(C5, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('c5-119-843.yaml')
+        self.fuel = 'POSF12345:1.0'
+
+class JP10(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(JP10, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('jp10-119-841.yaml')
+        self.fuel = 'C10H16:1.0'
+class R1(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(R1, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('r1-119-841.yaml')
+        self.fuel = 'POSF7688:1.0'
+
+class R2(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(R2, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('r2-119-841.yaml')
+        self.fuel = 'POSF5433:1.0'
 
 class DME(ModelBase):
     def __init__(self, *args, **kwargs):
         super(DME, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('dme-propane-122-711.yaml')
         self.fuel = 'CH3OCH3:1.0'
-
 
 class JetA(ModelBase):
     def __init__(self, *args, **kwargs):

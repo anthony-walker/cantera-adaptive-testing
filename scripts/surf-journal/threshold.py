@@ -99,6 +99,6 @@ def model_threshold_barchart():
 
 def selected_threshold_analysis():
     pass
-combine_surf_yamls()
-# model_threshold_barchart()
+# combine_surf_yamls()
+model_threshold_barchart()
 
