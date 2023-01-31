@@ -32,13 +32,13 @@ class A2(ModelBase):
     def __init__(self, *args, **kwargs):
         super(A2, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('a2-119-841.yaml')
-        self.fuel = 'POSF10289:1.0'
+        self.fuel = 'POSF10325:1.0'
 
 class A3(ModelBase):
     def __init__(self, *args, **kwargs):
         super(A3, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('a3-119-841.yaml')
-        self.fuel = 'POSF10325:1.0'
+        self.fuel = 'POSF10289:1.0'
 
 class C1(ModelBase):
     def __init__(self, *args, **kwargs):
@@ -55,7 +55,7 @@ class C5(ModelBase):
 class JP10(ModelBase):
     def __init__(self, *args, **kwargs):
         super(JP10, self).__init__(*args, **kwargs)
-        self.model = self.get_test_set_path('jp10-119-841.yaml')
+        self.model = self.get_test_set_path('jp10-120-841.yaml')
         self.fuel = 'C10H16:1.0'
 class R1(ModelBase):
     def __init__(self, *args, **kwargs):

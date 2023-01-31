@@ -8,6 +8,18 @@ input-files: [C5highT.cti]
 
 units: {length: cm, quantity: mol, activation-energy: cal/mol}
 
+elements:
+- symbol: Ci
+  atomic-weight: 13.003
+- symbol: D
+  atomic-weight: 2.014
+- symbol: Oi
+  atomic-weight: 17.999
+- symbol: T
+  atomic-weight: 3.016
+- symbol: X
+  atomic-weight: 195.083
+
 phases:
 - name: gas
   thermo: ideal-gas
@@ -30,6 +42,63 @@ phases:
   state:
     T: 300.0
     P: 1.01325e+05
+
+- name: surface-large
+  thermo: ideal-surface
+  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
+    X]
+  species:
+  - pt-large.yaml/species: [Pt(9), OCX(10), OX(11), CO2X(12), C2H4X2(13), C2H3X2(14),
+    HX(15), CHX(16), CH2X(17), CHCH3X(18), CCH3X(19), C2H4X(20), C2H2X2(21), CCH2X(22),
+    C2H5X(23), h-C2HX(24), CX(25), C3H7X(27), C3H7X(28), CH3X(29), CH4X(30),
+    H2OX(31), C2H6X(33), HOX(34), CHO2X(35), CHO2X(36), CHOX(37), CHOX(38),
+    C2H3OX(41), CH3OX(42), C3H5OX(46), C2H5OX(47), C3H8X(49), C3H5X(51),
+    C3H5X(52), C4H7X(53), CHO3X(54), CH4OX(59), C2H3OX(61), CH2O2X(68),
+    C2H4OX(79), CH2OX(87), C2H4OX(89), C3H6X(98), SX(103), CH3OX(145), C2HOX(163),
+    SX(173), SX(174), C4H8X(178), C5H7X(180), C4H7X(193), C4H6X(194), C3H2X(196),
+    C4H5X(201), C4H7X(213), SX(305), C4H7X(418), C4H8X(812)]
+  kinetics: surface
+  reactions:
+  - pt-large.yaml/reactions: declared-species
+  state:
+    T: 300.0
+    P: 1.01325e+05
+  adjacent-phases: [gas]
+  site-density: 2.39e-09
+
+- name: surface-medium
+  thermo: ideal-surface
+  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
+    X]
+  species:
+  - pt-med.yaml/species: [Pt(9), OCX(10), OX(11), CO2X(12), C2H4X2(13),
+    C2H3X2(14), HX(15), CHX(16), CH2X(17), CHCH3X(18), CCH3X(19), C2H4X(20),
+    C2H2X2(21), CCH2X(22), C2H5X(23), h-C2HX(24), CX(25), C3H7X(27), C3H7X(28),
+    CH3X(29), CH4X(30), H2OX(31), C2H6X(33), HOX(34), CHO2X(36), CHOX(37),
+    CHOX(38), C2H3OX(50), CH3OX(53), C3H5X(56), CH2O2X(66), C2H4OX(77), CH2OX(93)]
+  kinetics: surface
+  reactions:
+  - pt-med.yaml/reactions: declared-species
+  state:
+    T: 300.0
+    P: 1.01325e+05
+  adjacent-phases: [gas]
+  site-density: 2.39e-09
+
+- name: surface-small
+  thermo: ideal-surface
+  adjacent-phases: [gas]
+  elements: [Pt, H, O, C]
+  species:
+  - pt-small.yaml/species: [PT(S), H(S), H2O(S), OH(S), CO(S), CO2(S), CH3(S), CH2(S)s,
+    CH(S), C(S), O(S)]
+  kinetics: surface
+  reactions:
+  - pt-small.yaml/reactions: declared-species
+  state:
+    T: 900.0
+    coverages: {O(S): 0.0, PT(S): 0.5, H(S): 0.5}
+  site-density: 2.7063e-09
 
 species:
 - name: POSF12345
