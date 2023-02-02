@@ -12,7 +12,7 @@ from matplotlib.lines import Line2D
 from matplotlib import ticker, cm
 
 
-def combine_surf_yamls(direc="reaction_data"):
+def combine_surf_yamls(direc="jet_data"):
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
     files = list(filter(lambda x: ".yaml" in x, files))
@@ -50,7 +50,7 @@ def combine_surf_yamls(direc="reaction_data"):
     for c in case_data:
         for p in case_data[c]:
             case_data[c][p]["runtime"] /= case_data[c][p]["nruns"]
-    with open("reaction.yaml", 'w') as f:
+    with open("jet.yaml", 'w') as f:
         data = yaml.dump(case_data, f)
 
 
@@ -110,29 +110,29 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     plt.savefig(f"figures/reaction-{problem}-bar.pdf")
     plt.close()
 
-def model_evaluation(xval="steps", yval="condition"):
+def model_evaluation(xval="steps", yval="condition", yml="reaction.yaml", problem="well_stirred_reactor"):
     yaml = ruamel.yaml.YAML()
-    with open("reaction.yaml", 'r') as f:
+    with open(yml, 'r') as f:
         data = dict(yaml.load(f))
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # filter by keys
     keys = data.keys()
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
-    jkeys = sorted(keys[4:], key=len)
-    bkeys = sorted(keys[:4], key=len)
+    mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
     labels = ["std", "efo", "etb", "etb-efo"]
     # get db connection
-    conn = sqlite3.connect("reaction.db")
+    db_name = yml.split(".")[0]+".db"
+    conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    for keylist in [bkeys, jkeys]:
+    for keylist in mkeys:
         fig, ax = plt.subplots(1, 1)
         fig.set_figwidth(16)
         fig.set_figheight(8)
         fig.tight_layout()
         for i, k in enumerate(keylist):
             # get speed up data
-            db_key = re.sub("-","_", f"{k}_well_stirred_reactor")
+            db_key = re.sub("-","_", f"{k}_{problem}")
             cursor.execute(f""" SELECT {xval} FROM {db_key} """)
             x_arr = [x[0] for x in cursor.fetchall()]
             cursor.execute(f""" SELECT {yval} FROM {db_key} """)
@@ -142,6 +142,126 @@ def model_evaluation(xval="steps", yval="condition"):
         name = keylist[0].split("-")[0].lower()
         plt.savefig(f"figures/{name}-{xval}-{yval}.pdf")
 
-model_numbers()
-# model_evaluation()
-# model_assumptions_speedup(problem="plug_flow_reactor")
+def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_stirred_reactor", fcn=max, ylab=None):
+    yaml = ruamel.yaml.YAML()
+    with open(yml, 'r') as f:
+        data = dict(yaml.load(f))
+    colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
+    # filter by keys
+    keys = data.keys()
+    keys = list(filter(lambda x: "-0" in x, keys))
+    keys.sort()
+    mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
+    labels = ["std", "efo", "etb", "etb-efo"]
+    # get db connection
+    db_name = yml.split(".")[0]+".db"
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    bwid = 0.1
+    x = [i for i in range(4)]
+    xs = [i for i in range(4)]
+    fig, ax = plt.subplots(1, 1)
+    fig.tight_layout()
+    plt.subplots_adjust(left=0.15, top=0.9)
+    rg1 = 1
+    rg2 = 5
+    for q, keylist in enumerate(mkeys[rg1:rg2]):
+        y = []
+        for i, k in enumerate(keylist):
+            # get speed up data
+            db_key = re.sub("-","_", f"{k}_{problem}")
+            if yval == "sparsity":
+                cursor.execute(f""" SELECT nonzero_elements FROM {db_key} """)
+                y_arr = [x[0] for x in cursor.fetchall()]
+                cursor.execute(f""" SELECT total_elements FROM {db_key} """)
+                total = cursor.fetchall()[0][0]
+                sparsity = (total - np.mean(y_arr)) / total
+                y.append(sparsity)
+            else:
+                cursor.execute(f""" SELECT {yval} FROM {db_key} """)
+                y_arr = [x[0] for x in cursor.fetchall()]
+                y.append(fcn(y_arr))
+        clab = keylist[0].split("-0")[0]
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q])
+        ax.plot([-2, 5], [max(y)] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
+        x = np.array(x) + bwid
+    ax.set_xlim([min(xs)-bwid, max(x)])
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ylab = yval.capitalize() if ylab is None else ylab
+    ax.set_ylabel(ylab)
+    xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
+    ax.set_xticks(xavg)
+    ax.set_xticklabels(labels)
+    plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}-bar.pdf")
+    plt.close()
+
+def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_reactor", yml="reaction.yaml"):
+    yaml = ruamel.yaml.YAML()
+    with open(yml, 'r') as f:
+        data = dict(yaml.load(f))
+    # filter by keys
+    keys = data.keys()
+    # keys = filter(lambda x: model in x, keys)
+    mass_keys = list(filter(lambda x: "-mass" in x, keys))
+    mass_keys.sort()
+    mkeys = []
+    for m in mass_keys:
+        mkeys += [m] * 4
+    mass_keys = mkeys
+    keys = list(filter(lambda x: "-0" in x, keys))
+    keys.sort()
+    # get runtime data
+    rt_data = []
+    for k in keys:
+        if problem in data[k].keys():
+            rt_data.append(data[k][problem]["runtime"])
+    mass_data = []
+    for mk in mass_keys:
+        if problem in data[mk].keys():
+            mass_data.append(data[mk][problem]["runtime"])
+    # make arrays
+    mass_data = np.array(mass_data)
+    rt_data = np.array(rt_data)
+    speedup = mass_data / rt_data
+    # create barchart figure
+    fig, ax = plt.subplots(1, 1)
+    fig.tight_layout()
+    plt.subplots_adjust(left=0.15, top=0.9)
+    # fig.set_figwidth(12)
+    # fig.set_figheight(8)
+    bwid = 0.10
+    xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
+    xlabs[0] = "std"
+    colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
+    # make plot
+    x = [i for i in range(4)]
+    xs = [i for i in range(4)]
+    for i in range(1, 5): #range(len(speedup) // 4):
+        y = speedup[i * 4:(i+1) * 4]
+        clab = keys[i * 4].split("-0")[0]
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
+        x = np.array(x) + bwid
+        ax.plot([-2, 5], [max(y)] * 2, color=colors[i], linestyle="--", linewidth=0.5)
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.set_ylabel("Speed-up")
+    ax.set_xlim([min(xs)-bwid, max(x)])
+    xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
+    ax.set_xticks(xavg)
+    ax.set_xticklabels(xlabs)
+    # # ax.set_yscale("log")
+    # # ax.set_ylim([10**0, 10**4])
+    plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-bar.pdf")
+    plt.close()
+
+
+# combine_surf_yamls()
+# model_numbers()
+for p in ["well_stirred_reactor", "plug_flow_reactor"]:
+    # model_evaluation_bar(yval="lin_iters", yml="jet.yaml", problem=p, ylab="Linear Iterations")
+    # model_evaluation_bar(yval="nonlinear_iters", yml="jet.yaml", problem=p, ylab="Nonlinear Iterations")
+    # model_evaluation_bar(yval="max_eigenvalue", yml="jet.yaml", problem=p, fcn=np.mean, ylab="Mean Maximum Eigenvalue")
+    # model_evaluation_bar(yval="sparsity", yml="jet.yaml", problem=p, ylab="Sparsity Percentage")
+    model_evaluation_bar(yval="prec_solves", yml="jet.yaml", problem=p, ylab="Preconditioner Solves")
+    model_evaluation_bar(yval="steps", yml="jet.yaml", problem=p, ylab="Time Steps")
+    # model_assumptions_speedup(problem=p, yml="jet.yaml")
+

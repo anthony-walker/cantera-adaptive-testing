@@ -121,9 +121,9 @@ def parser_setup(add_mod=True, add_probs=True):
                         help="Turn on the thirdbody reaction evaluation for preconditioning")
     parser.add_argument('--replace_reactions', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
-    parser.add_argument('-E', '--endtime', type=float,
+    parser.add_argument('-E', '--endtime', type=float, default=0,
                          help="Set an endtime other than steady state.")
-    parser.add_argument('-RS', '--runsteps', type=int,
+    parser.add_argument('-RS', '--runsteps', type=int, default=0,
                          help="Set a specific number of steps to run.")
     parser.add_argument('-MTS', '--max_time_step', type=float,
                          default=1e5, help="Set a fixed max time step value.")
