@@ -57,6 +57,7 @@ class ModelBase(object):
         self.options.setdefault("replace_reactions", True) # replace reactions of discarded types with generic reaction or skip them with False
         self.options.setdefault("use_icdb", False)
         self.options.setdefault("endtime", 0)
+        self.options.setdefault("runsteps", 0)
         # adjust moles if preconditioned but not moles
         self.options["moles"] = self.preconditioned if self.preconditioned else self.options["moles"]
         # create file name
@@ -323,6 +324,14 @@ class ModelBase(object):
     def endtime(self, value):
         self.options["endtime"] = value
 
+    @property
+    def runsteps(self):
+        return self.options["runsteps"]
+
+    @runsteps.setter
+    def runsteps(self, value):
+        self.options["runsteps"] = value
+
     def __del__(self):
         if self.log and self.yaml_data:
             yaml = ruamel.yaml.YAML()
@@ -485,7 +494,7 @@ class ModelBase(object):
             # get runtime information for these run types
             if self.runtype != "steady":
                 # use steady state time unless an end time is specified
-                if self.endtime == 0:
+                if self.endtime == 0 and self.runsteps == 0:
                     ss_name = f"{self.__class__.__name__}"
                     ss_name += f"-{self.surfname}" if self.surface else ""
                     ss_name += f"-{func.__name__}"
@@ -630,16 +639,27 @@ class ModelBase(object):
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
-            self.net.advance(self.sstime)
+            if self.runsteps != 0:
+                for i in range(self.runsteps):
+                    self.net.step()
+            else:
+                self.net.advance(self.sstime)
         elif self.runtype == "analysis":
             if self.database is None:
                 raise Exception("No database file for analysis run.")
-            while (self.sstime > self.net.time):
-                for i in range(1, self.record_steps + 1, 1):
+            if self.runsteps != 0:
+                for i in range(1, self.runsteps + 1, 1):
                     self.net.step()
-                sid += i
-                stats = self.add_numerical_stats(stats, sid)
-            add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+            else:
+                while (self.sstime > self.net.time):
+                    for i in range(1, self.record_steps + 1, 1):
+                        self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
         elif self.runtype == "plot":
             # create plot categories
             products = []
@@ -745,6 +765,8 @@ class ModelBase(object):
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
         self.net = ct.ReactorNet([r])
+        self.net.max_time_step = self.max_time_step
+        self.net.max_steps = self.max_steps
         self.apply_numerical_options()
         # get connection if analysis
         if self.runtype == "analysis":
@@ -757,7 +779,11 @@ class ModelBase(object):
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
-            self.net.advance(self.sstime)
+            if self.runsteps != 0:
+                for i in range(self.runsteps):
+                    self.net.step()
+            else:
+                self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
             products = []
@@ -797,12 +823,19 @@ class ModelBase(object):
         elif self.runtype == "analysis":
             if self.database is None:
                 raise Exception("No database file for analysis run.")
-            while (self.sstime > self.net.time):
-                for i in range(1, self.record_steps + 1, 1):
+            if self.runsteps != 0:
+                for i in range(1, self.runsteps + 1, 1):
                     self.net.step()
-                sid += i
-                stats = self.add_numerical_stats(stats, sid)
-            add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+            else:
+                while (self.sstime > self.net.time):
+                    for i in range(1, self.record_steps + 1, 1):
+                        self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
         else:
             raise Exception("Invalid runtype specified.")
 
@@ -838,6 +871,8 @@ class ModelBase(object):
                 "surf_area":rsurf.area,})
         # create network
         self.net = ct.ReactorNet([r])
+        self.net.max_time_step = self.max_time_step
+        self.net.max_steps = self.max_steps
         self.apply_numerical_options()
         # get connection if analysis
         if self.runtype == "analysis":
@@ -851,7 +886,11 @@ class ModelBase(object):
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
-            self.net.advance(self.sstime)
+            if self.runsteps != 0:
+                for i in range(self.runsteps):
+                    self.net.step()
+            else:
+                self.net.advance(self.sstime)
         elif self.runtype == "plot":
             # create plot categories
             products = []
@@ -894,12 +933,18 @@ class ModelBase(object):
             if self.database is None:
                 raise Exception("No database file for analysis run.")
             # run all steps
-            while (self.sstime > self.net.time):
-                for i in range(1, self.record_steps + 1, 1):
+            if self.runsteps != 0:
+                for i in range(1, self.runsteps + 1, 1):
                     self.net.step()
-                sid += i
-                stats = self.add_numerical_stats(stats, sid)
-                # add to the database
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+            else:
+                while (self.sstime > self.net.time):
+                    for i in range(1, self.record_steps + 1, 1):
+                        self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
                 add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
         else:
             raise Exception("Invalid runtype specified.")
@@ -955,6 +1000,8 @@ class ModelBase(object):
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
         self.net = ct.ReactorNet([r])
+        self.net.max_time_step = self.max_time_step
+        self.net.max_steps = self.max_steps
         self.apply_numerical_options()
         # get connection if analysis
         if self.runtype == "analysis":

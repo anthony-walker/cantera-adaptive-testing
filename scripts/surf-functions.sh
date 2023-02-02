@@ -44,7 +44,7 @@ surface_reaction_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR
 }
 
-jet_fuel_study() {
+jet_reaction_study() {
     # analysis runs
     export PLIST=./model_lists/jet-fuels
     export SDATABASE=jet.db
@@ -71,6 +71,32 @@ jet_fuel_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR
 }
 
+jet_reaction_fixed_timestep() {
+    # analysis runs
+    export PLIST=./model_lists/jet-fuels
+    export SDATABASE=jet_fixed.db
+    export SURF_DIR=jet_fixed_data
+    export TSTART=0
+    export TEND=0
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    # performance runs
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -MTS 1e-15 -RS 1000000 --record_steps 1000
+    skip_mass
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L -MTS 1e-15 -RS 1000000 --record_steps 1000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L -MTS 1e-15 -RS 1000000 --record_steps 1000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L -MTS 1e-15 -RS 1000000 --record_steps 1000
+    # analysis runs
+    unset SKIP_MASS
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -MTS 1e-15 -RS 1000000 --record_steps 1000
+    skip_mass
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR -MTS 1e-15 -RS 1000000 --record_steps 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -MTS 1e-15 -RS 1000000 --record_steps 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -MTS 1e-15 -RS 1000000 --record_steps 1000
+}
 
 jet_threshold_study() {
     # analysis runs

@@ -122,7 +122,9 @@ def parser_setup(add_mod=True, add_probs=True):
     parser.add_argument('--replace_reactions', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
     parser.add_argument('-E', '--endtime', type=float,
-                         default=0, help="Set an endtime other than steady state.")
+                         help="Set an endtime other than steady state.")
+    parser.add_argument('-RS', '--runsteps', type=int,
+                         help="Set a specific number of steps to run.")
     parser.add_argument('-MTS', '--max_time_step', type=float,
                          default=1e5, help="Set a fixed max time step value.")
     parser.add_argument('-MS', '--max_steps', type=float,
@@ -130,6 +132,8 @@ def parser_setup(add_mod=True, add_probs=True):
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
     parser.add_argument('-S', "--surface", type=str, default="", help="Name of surface to add to gas phase model")
+    parser.add_argument('--record_steps', type=int,
+                         default=1, help="Set to record every n steps.")
     return parser
 
 
