@@ -47,8 +47,8 @@ surface_reaction_study() {
 jet_reaction_study() {
     # analysis runs
     export PLIST=./model_lists/jet-fuels
-    export SDATABASE=jet.db
-    export SURF_DIR=jet_data
+    export SDATABASE=jr.db
+    export SURF_DIR=jr_data
     export TSTART=0
     export TEND=0
     # skip certain runs
@@ -74,8 +74,8 @@ jet_reaction_study() {
 jet_reaction_fixed_timestep() {
     # analysis runs
     export PLIST=./model_lists/jet-fuels
-    export SDATABASE=jet_fixed.db
-    export SURF_DIR=jet_fixed_data
+    export SDATABASE=jrf.db
+    export SURF_DIR=jrf_data
     export TSTART=0
     export TEND=0
     # skip certain runs
@@ -84,18 +84,18 @@ jet_reaction_fixed_timestep() {
     skip_analyt
     skip_flex
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -MTS 1e-15 -RS 100000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -RS 1000
     skip_mass
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L -MTS 1e-15 -RS 100000
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L -MTS 1e-15 -RS 100000
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L -MTS 1e-15 -RS 100000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L -RS 1000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L -RS 1000
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L -RS 1000
     # analysis runs
     unset SKIP_MASS
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -MTS 1e-15 -RS 100000 --record_steps 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -RS 1000
     skip_mass
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR -MTS 1e-15 -RS 100000 --record_steps 1000
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -MTS 1e-15 -RS 100000 --record_steps 1000
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -MTS 1e-15 -RS 100000 --record_steps 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR -RS 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -RS 1000
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -RS 1000
 }
 
 jet_threshold_study() {
@@ -130,9 +130,9 @@ jet_threshold_fixed() {
     export TSTART=0
     export TEND=24
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -MTS 1e-15 -RS 100000 --enable_thirdbody --enable_falloff
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -RS 1000 --enable_thirdbody --enable_falloff
     # analysis runs
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -MTS 1e-15 -RS 100000 --record_steps 1000 --enable_thirdbody --enable_falloff
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -RS 1000 --enable_thirdbody --enable_falloff
 }
 
 surface_threshold_study() {
