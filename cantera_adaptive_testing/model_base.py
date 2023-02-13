@@ -60,6 +60,9 @@ class ModelBase(object):
         self.options.setdefault("runsteps", 0)
         # adjust moles if preconditioned but not moles
         self.options["moles"] = self.preconditioned if self.preconditioned else self.options["moles"]
+        # default temperature and pressure for a fuel
+        self.options.setdefault("T", 1600)
+        self.options.setdefault("P", ct.one_atm)
         # create file name
         # output data options
         self.classifiers = [self.__class__.__name__, self.options.get("prefix", ""), ]
@@ -582,7 +585,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas1.TP = get_ics_time(self.__class__.__name__+"_network_combustor_exhaust")
         else:
-            gas1.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
+            gas1.TP = self.options.get("T"), self.options.get("P")
         gas1.set_equivalence_ratio(self.phi, self.fuel, self.air)
         inlet = ct.Reservoir(gas1)
         # create combustor
@@ -615,7 +618,7 @@ class ModelBase(object):
                 "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
                 "surf_area":rsurf.area,})
         # setup mass flow controllers
-        residence_time = 0.1
+        residence_time = 0.001
         inlet_mfc = ct.MassFlowController(inlet, combustor,
             mdot=combustor.mass / residence_time)
         outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc)
@@ -683,7 +686,7 @@ class ModelBase(object):
             comb_array = append_row(combustor, combust_idxs, comb_array)
             exhaust_array = append_row(exhaust, exhaust_idxs, exhaust_array)
             time.append(self.net.time)
-            while (self.sstime * 0.0001 > self.net.time):
+            while (self.sstime > self.net.time):
                 for i in range(self.record_steps):
                     self.net.step()
                     if self.sstime < self.net.time:
@@ -727,7 +730,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
         else:
-            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
+            gas.TP = self.options.get("T"), self.options.get("P")
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
@@ -803,7 +806,7 @@ class ModelBase(object):
                 return np.append(arr, keep, 1)
             comb_array = append_row(r, combust_idxs, comb_array)
             time.append(self.net.time)
-            while (self.sstime * 0.00005 > self.net.time):
+            while (self.sstime > self.net.time):
                 for i in range(self.record_steps):
                     self.net.step()
                     if self.sstime < self.net.time:
@@ -848,7 +851,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas.TP = get_ics_time(self.__class__.__name__+"_well_stirred_reactor")
         else:
-            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
+            gas.TP = self.options.get("T"), self.options.get("P")
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasMoleReactor(gas) if self.moles else ct.IdealGasReactor(gas)
@@ -950,6 +953,147 @@ class ModelBase(object):
             raise Exception("Invalid runtype specified.")
 
     @problem
+    def network_afterburner(self, *args, **kwargs):
+        """ This problem is meant to simulate a combustor that flows into some form
+            of exhaust
+        """
+        # Create inlet to the combustor at atmospheric conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas1 = ct.Solution(self.model, self.gphase)
+        if self.use_icdb:
+            gas1.TP = get_ics_time(self.__class__.__name__+"_network_combustor_exhaust")
+        else:
+            gas1.TP = self.options.get("T"), self.options.get("P")
+        gas1.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        inlet = ct.Reservoir(gas1)
+        # create combustor
+        combustor = ct.IdealGasConstPressureMoleReactor(gas1) if self.moles else ct.IdealGasReactor(gas1)
+        combustor.volume = 1.0
+        afterburner = ct.IdealGasConstPressureMoleReactor(gas1) if self.moles else ct.IdealGasConstPressureReactor(gas1)
+        afterburner.volume = 1.0
+        # Create a reservoir for the afterburner
+        atmosphere = ct.Reservoir(gas1)
+        # Setup thermo data dictionary
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas1.n_reactions,
+            "gas_species": gas1.n_species, "fuel": self.fuel, "air": self.air,
+            "phi": self.phi, "T0": gas1.T, "P0": gas1.P, "V0": combustor.volume,
+            "skip_falloff":not self.enable_falloff, "skip_thirdbody": not self.enable_thirdbody
+            }})
+        # Add surface data if it exists
+        if self.surface:
+            # create platinum surface
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas1])
+            surf.TPX = gas1.T, gas1.P, self.surface
+            rsurf = ct.ReactorSurface(surf, afterburner, A=2.0)
+            self.thermo_data["thermo"].update({"surface":self.surface,
+                "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
+                "surf_area":rsurf.area,})
+        # setup mass flow controllers
+        residence_time = 0.05
+        inlet_mfc = ct.MassFlowController(inlet, combustor,
+            mdot=combustor.mass / residence_time)
+        afterburn_mfc = ct.MassFlowController(inlet, afterburner,
+            mdot=afterburner.mass / residence_time)
+        outlet_mfc = ct.PressureController(combustor, afterburner, master=inlet_mfc)
+        outlet_mfc2 = ct.PressureController(afterburner, atmosphere, master=outlet_mfc)
+        # the simulation only contains one reactor
+        self.net = ct.ReactorNet([combustor, afterburner])
+        self.net.max_time_step = self.max_time_step
+        self.net.max_steps = self.max_steps
+        # apply numerical options
+        self.apply_numerical_options()
+        # add total number of variables
+        self.thermo_data["thermo"].update({"n_vars": self.net.n_vars})
+        # array for numerical_stats
+        if self.runtype == "analysis":
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
+        # try to run simulation
+        if self.runtype == "steady":
+            self.net.advance_to_steady_state(atol=1e-6)
+        elif self.runtype == "performance":
+            # if self.verbose:
+            #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
+            if self.runsteps != 0:
+                for i in range(self.runsteps):
+                    self.net.step()
+            else:
+                self.net.advance(self.sstime)
+        elif self.runtype == "analysis":
+            if self.database is None:
+                raise Exception("No database file for analysis run.")
+            if self.runsteps != 0:
+                for i in range(1, self.runsteps + 1, 1):
+                    self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+            else:
+                while (self.sstime > self.net.time):
+                    for i in range(1, self.record_steps + 1, 1):
+                        self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+        elif self.runtype == "plot":
+            # create plot categories
+            products = []
+            species = [combustor.component_name(i) for i in range(combustor.n_vars)]
+            for prod in ["CO", "CO2", "H2O"]:
+                if prod in species:
+                    products.append(prod)
+            fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
+            surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
+            comb_contents = fuels + products
+            afterburner_contents = fuels + products + surfaces
+            combust_idxs = [combustor.component_index(f) for f in comb_contents]
+            afterburner_idxs = [afterburner.component_index(f) for f in afterburner_contents]
+            time = []
+            comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
+            afterburner_array = np.empty((len(afterburner_idxs), 0), dtype=float, order='C')
+            def append_row(r, idxs, arr):
+                state = r.get_state()
+                keep = np.transpose(np.array([[state[i] for i in idxs ]]))
+                return np.append(arr, keep, 1)
+            comb_array = append_row(combustor, combust_idxs, comb_array)
+            afterburner_array = append_row(afterburner, afterburner_idxs, afterburner_array)
+            time.append(self.net.time)
+            while (self.sstime > self.net.time):
+                for i in range(self.record_steps):
+                    self.net.step()
+                    if self.sstime < self.net.time:
+                        break
+                # create plot data
+                comb_array = append_row(combustor, combust_idxs, comb_array)
+                afterburner_array = append_row(afterburner, afterburner_idxs, afterburner_array)
+                time.append(self.net.time)
+            # plot cax
+            fig, cax = plt.subplots(1, 1)
+            fig.tight_layout()
+            cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
+            for i, name in enumerate(comb_contents):
+                cax.plot(time, comb_array[i, :], label=name)
+            # cax.set_title("Combustor")
+            cax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-combustor.pdf"))
+            plt.close()
+            # plot eax
+            fig, eax = plt.subplots(1, 1)
+            fig.tight_layout()
+            eax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
+            for i, name in enumerate(afterburner_contents):
+                eax.plot(time, afterburner_array[i, :], label=name)
+            # eax.set_title("Exhaust")
+            eax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-exhaust.pdf"))
+        else:
+            raise Exception("Invalid runtype specified.")
+
+    @problem
     def jacobian_timer(self, *args, **kwargs):
         # physical params
         area = 1
@@ -962,7 +1106,7 @@ class ModelBase(object):
         if self.use_icdb:
             gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
         else:
-            gas.TP = kwargs.get('T', 1600), kwargs.get('P', ct.one_atm)
+            gas.TP = self.options.get("T"), self.options.get("P")
         gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
         # create a new reactor
         r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
@@ -1028,6 +1172,8 @@ class ModelBase(object):
     def get_method_by_name(self, name):
         if name == "network_combustor_exhaust":
             return self.network_combustor_exhaust
+        elif name == "network_afterburner":
+            return self.network_afterburner
         elif name == "plug_flow_reactor":
             return self.plug_flow_reactor
         elif name == "well_stirred_reactor":

@@ -167,6 +167,13 @@ class IsoOctane(ModelBase):  # Iso-Octane
         self.fuel = 'IC8H18:1.0'
 
 
+class GasolineSurrogate(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(GasolineSurrogate, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path("gasoline-surrogate-1389.yaml")
+        self.fuel = "C6H5CH3:1.0, NC7H16:1.0, IC8H18:1.0"
+
+
 class ThreeMethylHeptane(ModelBase):
     """“Kinetic modeling of gasoline surrogate components and mixtures
 under engine conditions | Elsevier Enhanced Reader.”
@@ -178,6 +185,9 @@ https://reader.elsevier.com/reader/sd/pii/S1540748910000787?token=7EE5B546D255AE
         self.model = self.get_test_set_path(
             '3-methylheptane-c8h18-3-1378-8143.yaml')
         self.fuel = 'c8h18-3:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1300)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class NHexadecane(ModelBase):
@@ -188,6 +198,21 @@ class NHexadecane(ModelBase):
         super(NHexadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('nhexadecane-2115-13341.yaml')
         self.fuel = 'nc16h34:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1300)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
+class C8_C18_Blends(ModelBase):
+    """
+    LNLL n-hexadecane
+    """
+    def __init__(self, *args, **kwargs):
+        super(C8_C18_Blends, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path('nhexadecane-2115-13341.yaml')
+        self.fuel = 'nc16h34:1.0, nc8h18:1.0, nc12h26:1.0, nc10h22:1.0' # NHexadecane, NOctane, NDodecane
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1300)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class MethylFiveDeconate(ModelBase):
@@ -198,6 +223,9 @@ class MethylFiveDeconate(ModelBase):
         super(MethylFiveDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md5d-2649-10487.yaml')
         self.fuel = 'md5d:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1250)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class IsoOctaneDetailed(ModelBase):  # Iso-Octane
@@ -205,7 +233,9 @@ class IsoOctaneDetailed(ModelBase):  # Iso-Octane
         super(IsoOctaneDetailed, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('ic8-detailed-2768-11850.yaml')
         self.fuel = 'IC8H18:1.0'
-
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1250)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 class MethylNineDeconate(ModelBase):
     """
@@ -215,6 +245,9 @@ class MethylNineDeconate(ModelBase):
         super(MethylNineDeconate, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md9d-3298.yaml')
         self.fuel = 'md9d:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1250)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class MethylDeconateNHeptane(ModelBase):
@@ -226,6 +259,9 @@ class MethylDeconateNHeptane(ModelBase):
         super(MethylDeconateNHeptane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('md-nc7-3787-10264.yaml')
         self.fuel = 'md:1.0, nc7h16:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1250)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class TwoMethylnonadecane(ModelBase):
@@ -240,4 +276,7 @@ class TwoMethylnonadecane(ModelBase):
         super(TwoMethylnonadecane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('mmc5-7171-38324.yaml')
         self.fuel = 'c20h42-2:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1250)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 

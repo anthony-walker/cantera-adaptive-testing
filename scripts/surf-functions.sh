@@ -14,7 +14,7 @@ surface_performance_study() {
     export TSTART=0
     export TEND=20
     # launch all runs now that ss is found.
-    ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge
+    ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001
 }
 
 surface_reaction_study() {
@@ -174,6 +174,15 @@ ttest() {
     do
         factor=$(echo "scale=$i; $factor*0.1" | bc)
         echo $factor
+    done
+}
+
+quick_performance_test() {
+    for m in "Hydrogen" "GRI" "A2" "C5" "JetA" "Butane" "TwoButonane" "IsoButene" "NHeptane" "IsoOctane" "ThreeMethylHeptane" "GasolineSurrogate" "C8_C18_Blends" "NHexadecane" "MethylFiveDeconate" "MethylDeconateNHeptane" "TwoMethylnonadecane"
+    do
+        echo $m
+        adaptive-testing $m network_combustor_exhaust -P -E 0.001 -S PlatinumLarge
+        adaptive-testing $m network_combustor_exhaust -L -E 0.001
     done
 }
 
