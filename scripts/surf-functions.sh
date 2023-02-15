@@ -30,18 +30,18 @@ surface_reaction_study() {
     skip_analyt
     skip_flex
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -E 0.005
     skip_mass
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L -E 0.005
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L -E 0.005
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L -E 0.005
     # analysis runs
     unset SKIP_MASS
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 0.005
     skip_mass
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR -E 0.005
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -E 0.005
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -E 0.005
 }
 
 jet_reaction_study() {
@@ -57,18 +57,18 @@ jet_reaction_study() {
     skip_analyt
     skip_flex
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L  -E 0.005
     skip_mass
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_falloff -O $SURF_DIR -L -E 0.005
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody -O $SURF_DIR -L -E 0.005
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance --enable_thirdbody --enable_falloff -O $SURF_DIR -L -E 0.005
     # analysis runs
     unset SKIP_MASS
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR -E 0.005
     skip_mass
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_falloff -O $SURF_DIR -E 0.005
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -E 0.005
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -E 0.005
 }
 
 jet_reaction_fixed_timestep() {
@@ -111,9 +111,9 @@ jet_threshold_study() {
     export TSTART=0
     export TEND=24
     # performance runs
-    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L --enable_thirdbody --enable_falloff
+    ./launch.sh ./options/sa-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L --enable_thirdbody --enable_falloff -E 0.005
     # analysis runs
-    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR --enable_thirdbody --enable_falloff
+    ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR --enable_thirdbody --enable_falloff -E 0.005
 }
 
 
