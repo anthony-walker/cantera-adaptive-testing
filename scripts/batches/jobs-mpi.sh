@@ -16,9 +16,9 @@
 
 #SBATCH -o ./slurm-output/%x-%j.out
 
-#SBATCH --constraint=haswell
+## this is how you constrain SBATCH --constraint=haswell
 
-#SBATCH --exclusive
+## this is how you make exclusive jobs SBATCH --exclusive
 
 # load any software environment module required for app
 

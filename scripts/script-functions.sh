@@ -10,7 +10,7 @@ slurm_job_wait() {
     # njobs setter
     if [ -z "$NJOBS_LIMIT" ]
     then
-        export NJOBS_LIMIT=300
+        export NJOBS_LIMIT=1000
     fi
     # run the job with set options
     if [ -z "$SKIP_SBATCH" ]
