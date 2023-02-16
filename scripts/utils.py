@@ -7,20 +7,24 @@ import ruamel.yaml
 import numpy as np
 import cantera_adaptive_testing.models as models
 
-plt.rcParams['mathtext.fontset'] = 'cm'
-plt.rcParams['mathtext.rm'] = 'serif'
-plt.rcParams["font.family"] = 'serif'
-
-def check_for_all_cases(direc="performance_data", disp=False, ins=[]):
+def check_for_all_cases(direc="performance_data", disp=False, ins=[], infiles=True):
     files = os.listdir(direc)
     files = list(filter(lambda x: ".yaml" in x, files))
-    temp = []
-    for i in ins:
-        temp += list(filter(lambda x: i in x, files))
-    files = temp
     mods, ___ = list(zip(*inspect.getmembers(models, inspect.isclass)))
+    if infiles:
+        new_mods = []
+        for m in mods:
+            for f in files:
+                if m in f:
+                    new_mods.append(m)
+                    break
+        mods = new_mods
     check_mods = []
     if ins:
+        temp = []
+        for i in ins:
+            temp += list(filter(lambda x: i in x, files))
+        files = temp
         for i in ins:
             check_mods += list(filter(lambda x: i in x, mods))
     else:
@@ -114,4 +118,4 @@ def combine_surf_yamls(direc="performance_data"):
     with open("performance.yaml", 'w') as f:
         data = yaml.dump(case_data, f)
 
-check_for_all_cases(ins=["TwoMethylnonadecane"])
+check_for_all_cases()
