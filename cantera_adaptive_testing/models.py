@@ -167,6 +167,16 @@ class IsoOctane(ModelBase):  # Iso-Octane
         self.fuel = 'IC8H18:1.0'
 
 
+class Toluene(ModelBase):
+    def __init__(self, *args, **kwargs):
+        super(Toluene, self).__init__(*args, **kwargs)
+        self.model = self.get_test_set_path("gasoline-surrogate-1389.yaml")
+        self.fuel = "C6H5CH3:1.0"
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1500)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
+
 class GasolineSurrogate(ModelBase):
     def __init__(self, *args, **kwargs):
         super(GasolineSurrogate, self).__init__(*args, **kwargs)
@@ -202,6 +212,7 @@ class NHexadecane(ModelBase):
         self.options["T"] = kwargs.get("T", 1300)
         self.options["P"] = kwargs.get("P", ct.one_atm)
 
+
 class C8_C18_Blends(ModelBase):
     """
     LNLL n-hexadecane
@@ -236,6 +247,7 @@ class IsoOctaneDetailed(ModelBase):  # Iso-Octane
         # default temperature and pressure for a fuel
         self.options["T"] = kwargs.get("T", 1250)
         self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class MethylNineDeconate(ModelBase):
     """

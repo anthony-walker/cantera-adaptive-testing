@@ -17,7 +17,7 @@ plt.rcParams["font.family"] = 'serif'
 
 colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
 
-def combine_surf_yamls(direc="jet_thresh_data"):
+def combine_surf_yamls(direc="jet_thresh_data", yml_name="jet_thresh.yaml"):
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
     files = list(filter(lambda x: ".yaml" in x, files))
@@ -55,22 +55,23 @@ def combine_surf_yamls(direc="jet_thresh_data"):
     for c in case_data:
         for p in case_data[c]:
             case_data[c][p]["runtime"] /= case_data[c][p]["nruns"]
-    with open("threshold.yaml", 'w') as f:
+    with open(yml_name, 'w') as f:
         data = yaml.dump(case_data, f)
 
-def model_threshold_barchart(problem = "well_stirred_reactor"):
+def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", ylims=None):
     # open data
     yaml = ruamel.yaml.YAML()
-    with open("threshold.yaml", 'r') as f:
+    with open(yml, 'r') as f:
         data = dict(yaml.load(f))
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
-    fig.set_figwidth(16)
-    fig.set_figheight(8)
+    # fig.set_figwidth(10)
+    # fig.set_figheight(8)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.xticks(rotation=70)
+    plt.subplots_adjust(left=0.15, top=0.9, bottom=0.25)
     bwid = 0.15
-    mods = list(set([d.rsplit("-", maxsplit=1)[0] for d in data.keys()]))
+    mods = list(set([d.rsplit("-")[0] for d in data.keys()]))
     mods.sort()
     # filter by keys
     for sh, m in enumerate(mods[1:5]):
@@ -78,11 +79,12 @@ def model_threshold_barchart(problem = "well_stirred_reactor"):
         keys = filter(lambda x: m in x, keys)
         keys = list(keys)
         keys.sort()
+        keys = [keys[0]] + keys[1:-1][::-1] + [keys[-1]]
         # get runtime data
         rt_data = []
         for k in keys[:-1]:
             if problem in data[k].keys():
-                tstr = re.sub("ep", "e+", k.split("-")[-1])
+                tstr = re.sub("ep", "e+", k.split("-")[1])
                 tstr = re.sub("em", "e-", tstr)
                 thresh = float(tstr)
                 rt_data.append((thresh, data[k][problem]["runtime"]))
@@ -96,14 +98,67 @@ def model_threshold_barchart(problem = "well_stirred_reactor"):
         ax.set_xticklabels(xlabs)
         x = np.array(x) + sh * bwid
         y = mass_runtime / np.array(y)
+        ax.plot([-2, 30], [y[0]] * 2, color=colors[sh+1], linestyle="--", linewidth=0.5)
         ax.bar(x, y, width=bwid, align="center", label=m, color=colors[sh+1])
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
     ax.set_ylabel("Speed-up")
-    plt.savefig(f"figures/speedup-thresh-{problem}.pdf")
+    if ylims is not None:
+        ax.set_ylim(ylims)
+    ax.set_xlim([-0.5, 25])
+    plt.savefig(f"figures/{yml.split('.')[0]}-speedup-{problem}.pdf")
     plt.close()
 
+def model_threshold_steps_ratio(yml="jth.yaml", problem="well_stirred_reactor", ylims=None):
+    # open data
+    yaml = ruamel.yaml.YAML()
+    with open(yml, 'r') as f:
+        data = dict(yaml.load(f))
+    # create barchart figure
+    fig, ax = plt.subplots(1, 1)
+    # fig.set_figwidth(10)
+    # fig.set_figheight(8)
+    fig.tight_layout()
+    plt.xticks(rotation=70)
+    plt.subplots_adjust(left=0.15, top=0.9, bottom=0.25)
+    bwid = 0.15
+    mods = list(set([d.rsplit("-")[0] for d in data.keys()]))
+    mods.sort()
+    # filter by keys
+    for sh, m in enumerate(mods[1:5]):
+        keys = data.keys()
+        keys = filter(lambda x: m in x, keys)
+        keys = list(keys)
+        keys.sort()
+        keys = [keys[0]] + keys[1:-1][::-1] + [keys[-1]]
+        # get runtime data
+        rt_data = []
+        for k in keys[:-1]:
+            if problem in data[k].keys():
+                tstr = re.sub("ep", "e+", k.split("-")[1])
+                tstr = re.sub("em", "e-", tstr)
+                thresh = float(tstr)
+                rt_data.append((thresh, float(data[k][problem]["numerical"]["steps"])))
+        mass_runtime = float(data[keys[-1]][problem]["numerical"]["steps"])
+        rt_data.sort()
+        # get x and y data
+        x, y = zip(*rt_data)
+        xlabs = [f"{i:.0e}" for i in x]
+        x = [i for i in range(len(x))]
+        ax.set_xticks(x)
+        ax.set_xticklabels(xlabs)
+        x = np.array(x) + sh * bwid
+        y = mass_runtime / np.array(y)
+        ax.bar(x, y, width=bwid, align="center", label=m, color=colors[sh+1])
+        ax.plot([-2, 30], [y[0]] * 2, color=colors[sh+1], linestyle="--", linewidth=0.5)
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    if ylims is not None:
+        ax.set_ylim(ylims)
+    ax.set_xlim([-0.5, 25])
+    ax.set_ylabel("Steps ratio")
+    plt.savefig(f"figures/{yml.split('.')[0]}-steps-ratio-{problem}.pdf")
+    plt.close()
 
-def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="well_stirred_reactor", fcn=max, ylab=None):
+def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="well_stirred_reactor", fcn=max, ylab=None, yxlims=None, ylog=False):
     yaml = ruamel.yaml.YAML()
     with open(yml, 'r') as f:
         data = dict(yaml.load(f))
@@ -112,6 +167,9 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
     keys = list(filter(lambda x: "-mass" not in x, keys))
     keys.sort()
     mkeys = [keys[i*25 : (i+1)*25] for i in range(len(keys) // 25)]
+    for i in range(len(mkeys)):
+        mkeys[i].append(mkeys[i].pop(0))
+        mkeys[i] = mkeys[i][::-1]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
@@ -121,12 +179,19 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
     xs = [i for i in range(25)]
     # create figure
     fig, ax = plt.subplots(1, 1)
-    fig.set_figwidth(16)
-    fig.set_figheight(8)
+    # fig.set_figwidth(8)
+    # fig.set_figheight(8)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.xticks(rotation=70)
+    plt.subplots_adjust(left=0.15, top=0.9, bottom=0.25)
     rg1 = 1
     rg2 = 5
+    labels = []
+    for l in mkeys[0]:
+        lab = l.split("-")[1]
+        lab = re.sub("m", "-", lab)
+        lab = re.sub("p", "+", lab)
+        labels.append(lab)
     for q, keylist in enumerate(mkeys[rg1:rg2]):
         y = []
         for i, k in enumerate(keylist):
@@ -145,20 +210,30 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
                 y.append(fcn(y_arr))
         clab = keylist[0].split("-0")[0]
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q])
-        ax.plot([-2, 5], [max(y)] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
+        ax.plot([-2, 30], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
         x = np.array(x) + bwid
     ax.set_xlim([min(xs)-bwid, max(x)])
+    if yxlims is not None:
+        ax.set_ylim(yxlims)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
     ylab = yval.capitalize() if ylab is None else ylab
     ax.set_ylabel(ylab)
     xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
     ax.set_xticks(xavg)
     ax.set_xticklabels(labels)
-    plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}-bar.pdf")
+    if ylog:
+        plt.yscale("log")
+    plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
     plt.close()
 
 
-# combine_surf_yamls()
-threshold_evaluation_bar()
-# model_threshold_barchart(problem="plug_flow_reactor")
+yml = "jth.yaml"
+for prob, lim, slim in [("plug_flow_reactor", [50, 200], [2.5, 2.9]), ("well_stirred_reactor", [75, 275], [2.5, 3.05])]:
+    # combine_surf_yamls(direc="jth_data", yml_name=yml)
+    threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
+    threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
+    threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)
+    threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition", ylog=True)
+    model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
+    model_threshold_steps_ratio(yml=yml, problem=prob, ylims=slim)
 

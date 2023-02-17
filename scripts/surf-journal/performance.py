@@ -125,7 +125,7 @@ def trim_to_one_hundred(direc="surface_data"):
             print(f"LESS THAN {c}: {len(k)}")
 
 
-def combine_surf_yamls(direc="performance_data"):
+def combine_surf_yamls(direc="performance_data", yml_name="performance.yaml"):
     yaml = ruamel.yaml.YAML()
     files = os.listdir(direc)
     files = list(filter(lambda x: ".yaml" in x, files))
@@ -164,15 +164,15 @@ def combine_surf_yamls(direc="performance_data"):
     for c in case_data:
         for p in case_data[c]:
             case_data[c][p]["runtime"] /= case_data[c][p]["nruns"]
-    with open("performance.yaml", 'w') as f:
+    with open(yml_name, 'w') as f:
         data = yaml.dump(case_data, f)
 
-def total_runtime_figure():
+def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterburner"):
     # get all models of interest
     mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
     # get data
     yaml = ruamel.yaml.YAML()
-    with open("performance.yaml", 'r') as f:
+    with open(yml_name, 'r') as f:
         data = dict(yaml.load(f))
     # filter by keys
     keys = data.keys()
@@ -180,7 +180,6 @@ def total_runtime_figure():
     kmods = set()
     # get runtime data
     rt_data = {}
-    problem = "well_stirred_reactor"
     for k in keys:
         for m in mods:
             if m in k:
@@ -199,7 +198,7 @@ def total_runtime_figure():
         if "mass" in k:
             plot_data[curr_key]["mass"] = v
             nspec = data[k][problem]["thermo"]["gas_species"]
-            nspec += data[k][problem]["thermo"]["surface_species"]
+            # nspec += data[k][problem]["thermo"]["surface_species"]
             plot_data[curr_key]["nspecies"] = nspec
             plot_data[curr_key]["nlsm"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
             plot_data[curr_key]["msteps"] = int(data[k][problem]["numerical"]["steps"])
@@ -218,119 +217,120 @@ def total_runtime_figure():
                 total_elements = int(data[k][problem]["numerical"]["total_elements"])
                 plot_data[curr_key]["sparsity"] = (total_elements - nnz) / total_elements
             nspec = data[k][problem]["thermo"]["gas_species"]
-            nspec += data[k][problem]["thermo"]["surface_species"]
+            # nspec += data[k][problem]["thermo"]["surface_species"]
             plot_data[curr_key]["nspecies"] = nspec
-
 
     # plot runtime
     pdata = []
     for k, v in plot_data.items():
+        print(k, v)
         ct = (v["nspecies"], float(v["th"]), v["mass"]/v["precon"])
         pdata.append(ct)
     pdata.sort()
     species, threshold, speedup = zip(*pdata)
+    print(species, threshold, speedup)
     colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
     fig, ax = plt.subplots(1, 1)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    ax.loglog(species, speedup, color=colors[0], marker="s")
-    ax.set_ylim([0, 10**3])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Speed-up")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/speed-up.pdf")
-    print(speedup)
-    print(species)
-
-    # plot nonlinear iterations ratio
-    pdata = []
-    for k, v in plot_data.items():
-        ct = (v["nspecies"], float(v["th"]), v["nlsm"]/v["nlsp"])
-        pdata.append(ct)
-    pdata.sort()
-    species, threshold, speedup = zip(*pdata)
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
-    fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(12)
-    # fig.set_figheight(8)
-    ax.semilogx(species, speedup, color=colors[0], marker="s")
-    ax.set_ylim([0, 6])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Nonlinear Iteration Ratio")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/nonlinear_itrs.pdf")
-
-
-    # plot linear iterations ratio
-    pdata = []
-    for k, v in plot_data.items():
-        ct = (v["nspecies"], float(v["th"]), v["lin_iters"])
-        pdata.append(ct)
-    pdata.sort()
-    species, threshold, speedup = zip(*pdata)
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
-    fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(12)
-    # fig.set_figheight(8)
-    ax.loglog(species, speedup, color=colors[0], marker="s")
-    ax.set_ylim([10**3, 10**4])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Linear Iterations")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/linear_itrs.pdf")
-
-    # plot linear iterations ratio
-    pdata = []
-    for k, v in plot_data.items():
-        ct = (v["nspecies"], float(v["th"]), v["condition"])
-        pdata.append(ct)
-    pdata.sort()
-    species, threshold, speedup = zip(*pdata)
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
-    fig, ax = plt.subplots(1, 1)
     ax.loglog(species, speedup, color=colors[0], marker="s")
     # ax.set_ylim([0, 10**3])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Condition Number")
+    ax.set_xlim([50, 8000])
+    ax.set_ylabel("Speed-up")
     ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/condition.pdf")
+    plt.savefig(f"figures/speed-up-{problem}.pdf")
 
-    # plot linear iterations ratio
-    pdata = []
-    for k, v in plot_data.items():
-        ct = (v["nspecies"], float(v["th"]), v["sparsity"])
-        pdata.append(ct)
-    pdata.sort()
-    species, threshold, speedup = zip(*pdata)
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
-    fig, ax = plt.subplots(1, 1)
-    ax.semilogx(species, speedup, color=colors[0], marker="s")
-    ax.set_ylim([0.8, 1])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Sparsity Percentage")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/sparsity.pdf")
+    # # plot nonlinear iterations ratio
+    # pdata = []
+    # for k, v in plot_data.items():
+    #     ct = (v["nspecies"], float(v["th"]), v["nlsm"]/v["nlsp"])
+    #     pdata.append(ct)
+    # pdata.sort()
+    # species, threshold, speedup = zip(*pdata)
+    # colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # fig, ax = plt.subplots(1, 1)
+    # # fig.set_figwidth(12)
+    # # fig.set_figheight(8)
+    # ax.semilogx(species, speedup, color=colors[0], marker="s")
+    # ax.set_ylim([0, 6])
+    # ax.set_xlim([50, 2000])
+    # ax.set_ylabel("Nonlinear Iteration Ratio")
+    # ax.set_xlabel("Number of Species")
+    # plt.savefig(f"figures/nonlinear_itrs.pdf")
 
-    # plot nonlinear iterations ratio
-    pdata = []
-    for k, v in plot_data.items():
-        ct = (v["nspecies"], float(v["th"]), v["msteps"]/v["psteps"])
-        pdata.append(ct)
-    pdata.sort()
-    species, threshold, speedup = zip(*pdata)
-    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
-    fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(12)
-    # fig.set_figheight(8)
-    ax.semilogx(species, speedup, color=colors[0], marker="s")
-    ax.set_ylim([0, 6])
-    ax.set_xlim([50, 2000])
-    ax.set_ylabel("Steps Ratio")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/steps.pdf")
+
+    # # plot linear iterations ratio
+    # pdata = []
+    # for k, v in plot_data.items():
+    #     ct = (v["nspecies"], float(v["th"]), v["lin_iters"])
+    #     pdata.append(ct)
+    # pdata.sort()
+    # species, threshold, speedup = zip(*pdata)
+    # colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # fig, ax = plt.subplots(1, 1)
+    # # fig.set_figwidth(12)
+    # # fig.set_figheight(8)
+    # ax.loglog(species, speedup, color=colors[0], marker="s")
+    # # ax.set_ylim([10**3, 10**4])
+    # ax.set_xlim([50, 2000])
+    # ax.set_ylabel("Linear Iterations")
+    # ax.set_xlabel("Number of Species")
+    # plt.savefig(f"figures/linear_itrs.pdf")
+
+    # # plot linear iterations ratio
+    # pdata = []
+    # for k, v in plot_data.items():
+    #     ct = (v["nspecies"], float(v["th"]), v["condition"])
+    #     pdata.append(ct)
+    # pdata.sort()
+    # species, threshold, speedup = zip(*pdata)
+    # colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # fig, ax = plt.subplots(1, 1)
+    # ax.loglog(species, speedup, color=colors[0], marker="s")
+    # # ax.set_ylim([0, 10**3])
+    # ax.set_xlim([50, 2000])
+    # ax.set_ylabel("Condition Number")
+    # ax.set_xlabel("Number of Species")
+    # plt.savefig(f"figures/condition.pdf")
+
+    # # plot linear iterations ratio
+    # pdata = []
+    # for k, v in plot_data.items():
+    #     ct = (v["nspecies"], float(v["th"]), v["sparsity"])
+    #     pdata.append(ct)
+    # pdata.sort()
+    # species, threshold, speedup = zip(*pdata)
+    # colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # fig, ax = plt.subplots(1, 1)
+    # ax.semilogx(species, speedup, color=colors[0], marker="s")
+    # ax.set_ylim([0.8, 1])
+    # ax.set_xlim([50, 2000])
+    # ax.set_ylabel("Sparsity Percentage")
+    # ax.set_xlabel("Number of Species")
+    # plt.savefig(f"figures/sparsity.pdf")
+
+    # # plot nonlinear iterations ratio
+    # pdata = []
+    # for k, v in plot_data.items():
+    #     ct = (v["nspecies"], float(v["th"]), v["msteps"]/v["psteps"])
+    #     pdata.append(ct)
+    # pdata.sort()
+    # species, threshold, speedup = zip(*pdata)
+    # colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # fig, ax = plt.subplots(1, 1)
+    # # fig.set_figwidth(12)
+    # # fig.set_figheight(8)
+    # ax.semilogx(species, speedup, color=colors[0], marker="s")
+    # ax.set_ylim([0, 6])
+    # ax.set_xlim([50, 2000])
+    # ax.set_ylabel("Steps Ratio")
+    # ax.set_xlabel("Number of Species")
+    # plt.savefig(f"figures/steps.pdf")
 
 if __name__ == "__main__":
-    # combine_surf_yamls()
-    total_runtime_figure()
+    yml = "performance.yaml"
+    combine_surf_yamls(direc="performance_data", yml_name=yml)
+    # total_runtime_figure(yml_name="data.yaml")
+    total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
 
 
