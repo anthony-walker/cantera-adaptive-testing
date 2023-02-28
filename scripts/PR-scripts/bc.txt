@@ -1,119 +1,137 @@
-Hydrogen: well_stirred_reactor: main: 0.05991 nspecies: 10
-DME: well_stirred_reactor: main: 0.681281 nspecies: 120
-JetA: well_stirred_reactor: main: 2.457694 nspecies: 201
-Butane: well_stirred_reactor: main: 1.291682 nspecies: 230
-TwoButonane: well_stirred_reactor: main: 1.489097 nspecies: 315
-IsoButene: well_stirred_reactor: main: 3.383462 nspecies: 493
-NHeptane: well_stirred_reactor: main: 16.128892 nspecies: 654
-IsoOctane: well_stirred_reactor: main: 35.085375 nspecies: 874
-ThreeMethylHeptane: well_stirred_reactor: main: 7.551984 nspecies: 1378
-NHexadecane: well_stirred_reactor: main: 17.9435 nspecies: 2115
-MethylFiveDeconate: well_stirred_reactor: main: 77.760681 nspecies: 2649
-MethylDeconateNHeptane: well_stirred_reactor: main: 87.562206 nspecies: 3787
-TwoMethylnonadecane: well_stirred_reactor: main: 98.05968 nspecies: 7171
-Hydrogen: plug_flow_reactor: main: 0.466377 nspecies: 10
-DME: plug_flow_reactor: main: 2.988608 nspecies: 120
-JetA: plug_flow_reactor: main: 9.075093 nspecies: 201
-Butane: plug_flow_reactor: main: 1.164561 nspecies: 230
-TwoButonane: plug_flow_reactor: main: 1.494461 nspecies: 315
-IsoButene: plug_flow_reactor: main: 8.141067 nspecies: 493
-NHeptane: plug_flow_reactor: main: 24.697317 nspecies: 654
-IsoOctane: plug_flow_reactor: main: 49.662756 nspecies: 874
-ThreeMethylHeptane: plug_flow_reactor: main: 26.097697 nspecies: 1378
-NHexadecane: plug_flow_reactor: main: 86.719833 nspecies: 2115
-MethylFiveDeconate: plug_flow_reactor: main: 156.572107 nspecies: 2649
-MethylDeconateNHeptane: plug_flow_reactor: main: 200.892475 nspecies: 3787
-TwoMethylnonadecane: plug_flow_reactor: main: 122.367872 nspecies: 7171
-Hydrogen: network_combustor_exhaust: main 5.628902 nspecies: 10
-DME: network_combustor_exhaust: 224.504442 nspecies: 120
-JetA: network_combustor_exhaust: 415.678239 nspecies: 201
-Butane: network_combustor_exhaust: 152.730125 nspecies: 230
-TwoButonane: network_combustor_exhaust: 707.785373 nspecies: 315
-IsoButene: network_combustor_exhaust: 846.688565 nspecies: 493
-NHeptane: network_combustor_exhaust: 2417.678391 nspecies: 654
-IsoOctane: network_combustor_exhaust: 2505.674834 nspecies: 874
-ThreeMethylHeptane: network_combustor_exhaust: 3511.71545 nspecies: 1378
-NHexadecane: network_combustor_exhaust: 23010.187138 nspecies: 2115
-MethylFiveDeconate: network_combustor_exhaust: 3187.83618 nspecies: 2649
-MethylDeconateNHeptane: network_combustor_exhaust: 8290.210916 nspecies: 3787
-TwoMethylnonadecane: network_combustor_exhaust: 21368.354379 nspecies: 7171
+Hydrogen: wsr: main: 0.035492 nspecies: 10
+A2: wsr: main: 0.896796 nspecies: 119
+A3: wsr: main: 0.89285 nspecies: 119
+C1: wsr: main: 0.97403 nspecies: 119
+C5: wsr: main: 0.870549 nspecies: 119
+Butane: wsr: main: 1.076562 nspecies: 230
+TwoButonane: wsr: main: 1.108809 nspecies: 315
+IsoButene: wsr: main: 2.18352 nspecies: 493
+NHeptane: wsr: main: 14.243346 nspecies: 654
+IsoOctane: wsr: main: 24.59795 nspecies: 874
+ThreeMethylHeptane: wsr: main: 4.918167 nspecies: 1378
+NHexadecane: wsr: main: 8.063917 nspecies: 2115
+MethylFiveDeconate: wsr: main: 9.313253 nspecies: 2649
+MethylDeconateNHeptane: wsr: main: 11.467311 nspecies: 3787
+TwoMethylnonadecane: wsr: main: 17.884555 nspecies: 7171
+Hydrogen: pfr: main: 0.022917 nspecies: 10
+A2: pfr: main: 0.660537 nspecies: 119
+A3: pfr: main: 0.659143 nspecies: 119
+C1: pfr: main: 0.689663 nspecies: 119
+C5: pfr: main: 0.646845 nspecies: 119
+Butane: pfr: main: 0.596442 nspecies: 230
+TwoButonane: pfr: main: 0.608054 nspecies: 315
+IsoButene: pfr: main: 1.201135 nspecies: 493
+NHeptane: pfr: main: 13.584692 nspecies: 654
+IsoOctane: pfr: main: 24.635006 nspecies: 874
+ThreeMethylHeptane: pfr: main: 3.381372 nspecies: 1378
+NHexadecane: pfr: main: 4.978011 nspecies: 2115
+MethylFiveDeconate: pfr: main: 6.741197 nspecies: 2649
+MethylDeconateNHeptane: pfr: main: 8.090762 nspecies: 3787
+TwoMethylnonadecane: pfr: main: 7.71454 nspecies: 7171
+Hydrogen: nce: main: 0.034903 nspecies: 10
+A2: nce: main: 1.428343 nspecies: 119
+A3: nce: main: 1.320576 nspecies: 119
+C1: nce: main: 1.33101 nspecies: 119
+C5: nce: main: 1.321312 nspecies: 119
+Butane: nce: main: 1.75389 nspecies: 230
+TwoButonane: nce: main: 1.667967 nspecies: 315
+IsoButene: nce: main: 3.435689 nspecies: 493
+NHeptane: nce: main: 28.092645 nspecies: 654
+IsoOctane: nce: main: 62.047544 nspecies: 874
+ThreeMethylHeptane: nce: main: 7.300219 nspecies: 1378
+NHexadecane: nce: main: 12.943306 nspecies: 2115
+MethylFiveDeconate: nce: main: 24.749572 nspecies: 2649
+MethylDeconateNHeptane: nce: main: 25.302358 nspecies: 3787
+TwoMethylnonadecane: nce: main: 17.254807 nspecies: 7171
 
-Hydrogen: well_stirred_reactor: sdev: 0.057614 nspecies: 10
-DME: well_stirred_reactor: sdev: 0.876985 nspecies: 120
-JetA: well_stirred_reactor: sdev: 2.512775 nspecies: 201
-Butane: well_stirred_reactor: sdev: 1.201641 nspecies: 230
-TwoButonane: well_stirred_reactor: sdev: 1.285857 nspecies: 315
-IsoButene: well_stirred_reactor: sdev: 2.727328 nspecies: 493
-NHeptane: well_stirred_reactor: sdev: 17.846611 nspecies: 654
-IsoOctane: well_stirred_reactor: sdev: 36.326925 nspecies: 874
-ThreeMethylHeptane: well_stirred_reactor: sdev: 12.235581 nspecies: 1378
-NHexadecane: well_stirred_reactor: sdev: 11.833782 nspecies: 2115
-MethylFiveDeconate: well_stirred_reactor: sdev: 39.556418 nspecies: 2649
-MethylDeconateNHeptane: well_stirred_reactor: sdev: 64.080361 nspecies: 3787
-TwoMethylnonadecane: well_stirred_reactor: sdev: 39.170322 nspecies: 7171
-Hydrogen: plug_flow_reactor: sdev: 0.323066 nspecies: 10
-DME: plug_flow_reactor: sdev: 0.906071 nspecies: 120
-JetA: plug_flow_reactor: sdev: 2.134512 nspecies: 201
-Butane: plug_flow_reactor: sdev: 0.808008 nspecies: 230
-TwoButonane: plug_flow_reactor: sdev: 1.18703 nspecies: 315
-IsoButene: plug_flow_reactor: sdev: 3.660663 nspecies: 493
-NHeptane: plug_flow_reactor: sdev: 16.617289 nspecies: 654
-IsoOctane: plug_flow_reactor: sdev: 51.883548 nspecies: 874
-ThreeMethylHeptane: plug_flow_reactor: sdev: 11.669925 nspecies: 1378
-NHexadecane: plug_flow_reactor: sdev: 16.286091 nspecies: 2115
-MethylFiveDeconate: plug_flow_reactor: sdev: 136.087941 nspecies: 2649
-MethylDeconateNHeptane: plug_flow_reactor: sdev: 195.694272 nspecies: 3787
-TwoMethylnonadecane: plug_flow_reactor: sdev: 206.74799 nspecies: 7171
-Hydrogen: network_combustor_exhaust: 0.106451 nspecies: 10
-DME: network_combustor_exhaust: 16.528058 nspecies: 120
-JetA: network_combustor_exhaust: 14.154513 nspecies: 201
-Butane: network_combustor_exhaust: 35.859161 nspecies: 230
-TwoButonane: network_combustor_exhaust: 54.231131 nspecies: 315
-IsoButene: network_combustor_exhaust: 124.427473 nspecies: 493
-NHeptane: network_combustor_exhaust: 235.86006 nspecies: 654
-IsoOctane: network_combustor_exhaust: 324.67762 nspecies: 874
-ThreeMethylHeptane: network_combustor_exhaust: 289.721895 nspecies: 1378
-NHexadecane: network_combustor_exhaust: 1457.926837 nspecies: 2115
-MethylFiveDeconate: network_combustor_exhaust: 2519.363399 nspecies: 2649
-MethylDeconateNHeptane: network_combustor_exhaust: 6824.250813 nspecies: 3787
-TwoMethylnonadecane: network_combustor_exhaust: 32531.498315 nspecies: 7171
+Hydrogen: wsr: sdev: 0.068635 nspecies: 10
+A2: wsr: sdev: 1.045974 nspecies: 119
+A3: wsr: sdev: 1.031654 nspecies: 119
+C1: wsr: sdev: 1.155206 nspecies: 119
+C5: wsr: sdev: 1.05774 nspecies: 119
+Butane: wsr: sdev: 1.215061 nspecies: 230
+TwoButonane: wsr: sdev: 1.240915 nspecies: 315
+IsoButene: wsr: sdev: 2.422419 nspecies: 493
+NHeptane: wsr: sdev: 15.275866 nspecies: 654
+IsoOctane: wsr: sdev: 26.906321 nspecies: 874
+ThreeMethylHeptane: wsr: sdev: 4.82781 nspecies: 1378
+NHexadecane: wsr: sdev: 8.467243 nspecies: 2115
+MethylFiveDeconate: wsr: sdev: 9.534556 nspecies: 2649
+MethylDeconateNHeptane: wsr: sdev: 11.378715 nspecies: 3787
+TwoMethylnonadecane: wsr: sdev: 17.785544 nspecies: 7171
+Hydrogen: pfr: sdev: 0.028976 nspecies: 10
+A2: pfr: sdev: 0.767751 nspecies: 119
+A3: pfr: sdev: 0.773221 nspecies: 119
+C1: pfr: sdev: 0.788622 nspecies: 119
+C5: pfr: sdev: 0.750832 nspecies: 119
+Butane: pfr: sdev: 0.694953 nspecies: 230
+TwoButonane: pfr: sdev: 0.694772 nspecies: 315
+IsoButene: pfr: sdev: 1.387695 nspecies: 493
+NHeptane: pfr: sdev: 14.531483 nspecies: 654
+IsoOctane: pfr: sdev: 26.4353 nspecies: 874
+ThreeMethylHeptane: pfr: sdev: 3.640141 nspecies: 1378
+NHexadecane: pfr: sdev: 5.161692 nspecies: 2115
+MethylFiveDeconate: pfr: sdev: 7.453819 nspecies: 2649
+MethylDeconateNHeptane: pfr: sdev: 8.525867 nspecies: 3787
+TwoMethylnonadecane: pfr: sdev: 8.723324 nspecies: 7171
+Hydrogen: nce: sdev: 0.043696 nspecies: 10
+A2: nce: sdev: 1.562424 nspecies: 119
+A3: nce: sdev: 1.548704 nspecies: 119
+C1: nce: sdev: 1.509151 nspecies: 119
+C5: nce: sdev: 1.475202 nspecies: 119
+Butane: nce: sdev: 1.848766 nspecies: 230
+TwoButonane: nce: sdev: 1.721582 nspecies: 315
+IsoButene: nce: sdev: 3.417643 nspecies: 493
+NHeptane: nce: sdev: 31.017815 nspecies: 654
+IsoOctane: nce: sdev: 65.289298 nspecies: 874
+ThreeMethylHeptane: nce: sdev: 7.424161 nspecies: 1378
+NHexadecane: nce: sdev: 13.725185 nspecies: 2115
+MethylFiveDeconate: nce: sdev: 22.883237 nspecies: 2649
+MethylDeconateNHeptane: nce: sdev: 23.153056 nspecies: 3787
+TwoMethylnonadecane: nce: sdev: 17.486001 nspecies: 7171
 
-Hydrogen: well_stirred_reactor: surf 0.224862 nspecies: 10
-DME: well_stirred_reactor: surf 1.14166 nspecies: 120
-JetA: well_stirred_reactor: surf 2.736037 nspecies: 201
-Butane: well_stirred_reactor: surf 1.741646 nspecies: 230
-TwoButonane: well_stirred_reactor: surf 1.557815 nspecies: 315
-IsoButene: well_stirred_reactor: surf 3.952527 nspecies: 493
-NHeptane: well_stirred_reactor: surf 18.422363 nspecies: 654
-IsoOctane: well_stirred_reactor: surf 34.977234 nspecies: 874
-ThreeMethylHeptane: well_stirred_reactor: surf 12.937878 nspecies: 1378
-NHexadecane: well_stirred_reactor: surf 15.222369 nspecies: 2115
-MethylFiveDeconate: well_stirred_reactor: surf 51.142618 nspecies: 2649
-MethylDeconateNHeptane: well_stirred_reactor: surf 48.613559 nspecies: 3787
-TwoMethylnonadecane: well_stirred_reactor: surf 49.584156 nspecies: 7171
-Hydrogen: plug_flow_reactor: surf 0.069646 nspecies: 10
-DME: plug_flow_reactor: surf 0.958472 nspecies: 120
-JetA: plug_flow_reactor: surf 2.528742 nspecies: 201
-Butane: plug_flow_reactor: surf 1.220684 nspecies: 230
-TwoButonane: plug_flow_reactor: surf 1.825121 nspecies: 315
-IsoButene: plug_flow_reactor: surf 4.409792 nspecies: 493
-NHeptane: plug_flow_reactor: surf 18.414866 nspecies: 654
-IsoOctane: plug_flow_reactor: surf 55.694641 nspecies: 874
-ThreeMethylHeptane: plug_flow_reactor: surf 15.519065 nspecies: 1378
-NHexadecane: plug_flow_reactor: surf 10.376793 nspecies: 2115
-MethylFiveDeconate: plug_flow_reactor: surf 163.133513 nspecies: 2649
-MethylDeconateNHeptane: plug_flow_reactor: surf 240.855564 nspecies: 3787
-TwoMethylnonadecane: plug_flow_reactor: surf 403.481519 nspecies: 7171
-Hydrogen: network_combustor_exhaust: 0.30629 nspecies: 10
-DME: network_combustor_exhaust: 62.100508 nspecies: 120
-JetA: network_combustor_exhaust: 22.794413 nspecies: 201
-Butane: network_combustor_exhaust: 75.737133 nspecies: 230
-TwoButonane: network_combustor_exhaust: 131.281471 nspecies: 315
-IsoButene: network_combustor_exhaust: 248.223075 nspecies: 493
-NHeptane: network_combustor_exhaust: 226.536191 nspecies: 654
-IsoOctane: network_combustor_exhaust: 541.463944 nspecies: 874
-ThreeMethylHeptane: network_combustor_exhaust: 545.879062 nspecies: 1378
-NHexadecane: network_combustor_exhaust: 1405.001861 nspecies: 2115
-MethylFiveDeconate: network_combustor_exhaust: 3159.60508 nspecies: 2649
-MethylDeconateNHeptane: network_combustor_exhaust: 8483.005211 nspecies: 3787
-TwoMethylnonadecane: network_combustor_exhaust: 32807.949415 nspecies: 7171
+Hydrogen: wsr: surf: 0.222102 nspecies: 10
+A2: wsr: surf: 1.330789 nspecies: 119
+A3: wsr: surf: 1.275596 nspecies: 119
+C1: wsr: surf: 1.288511 nspecies: 119
+C5: wsr: surf: 1.18837 nspecies: 119
+Butane: wsr: surf: 1.42105 nspecies: 230
+TwoButonane: wsr: surf: 1.500821 nspecies: 315
+IsoButene: wsr: surf: 2.668351 nspecies: 493
+NHeptane: wsr: surf: 15.899382 nspecies: 654
+IsoOctane: wsr: surf: 27.497504 nspecies: 874
+ThreeMethylHeptane: wsr: surf: 5.408169 nspecies: 1378
+NHexadecane: wsr: surf: 8.666007 nspecies: 2115
+MethylFiveDeconate: wsr: surf: 10.15514 nspecies: 2649
+MethylDeconateNHeptane: wsr: surf: 12.032148 nspecies: 3787
+TwoMethylnonadecane: wsr: surf: 18.103358 nspecies: 7171
+Hydrogen: pfr: surf: 0.053766 nspecies: 10
+A2: pfr: surf: 0.919916 nspecies: 119
+A3: pfr: surf: 0.910262 nspecies: 119
+C1: pfr: surf: 1.060876 nspecies: 119
+C5: pfr: surf: 1.081783 nspecies: 119
+Butane: pfr: surf: 0.93434 nspecies: 230
+TwoButonane: pfr: surf: 0.956671 nspecies: 315
+IsoButene: pfr: surf: 1.420545 nspecies: 493
+NHeptane: pfr: surf: 15.489327 nspecies: 654
+IsoOctane: pfr: surf: 25.423607 nspecies: 874
+ThreeMethylHeptane: pfr: surf: 3.253579 nspecies: 1378
+NHexadecane: pfr: surf: 4.961598 nspecies: 2115
+MethylFiveDeconate: pfr: surf: 7.106577 nspecies: 2649
+MethylDeconateNHeptane: pfr: surf: 8.465587 nspecies: 3787
+TwoMethylnonadecane: pfr: surf: 8.655946 nspecies: 7171
+Hydrogen: nce: surf: 0.075067 nspecies: 10
+A2: nce: surf: 1.770013 nspecies: 119
+A3: nce: surf: 1.723685 nspecies: 119
+C1: nce: surf: 1.736775 nspecies: 119
+C5: nce: surf: 1.678305 nspecies: 119
+Butane: nce: surf: 1.902232 nspecies: 230
+TwoButonane: nce: surf: 2.174929 nspecies: 315
+IsoButene: nce: surf: 3.555255 nspecies: 493
+NHeptane: nce: surf: 31.92909 nspecies: 654
+IsoOctane: nce: surf: 55.777987 nspecies: 874
+ThreeMethylHeptane: nce: surf: 8.624818 nspecies: 1378
+NHexadecane: nce: surf: 12.492778 nspecies: 2115
+MethylFiveDeconate: nce: surf: 19.747276 nspecies: 2649
+MethylDeconateNHeptane: nce: surf: 25.463188 nspecies: 3787
+TwoMethylnonadecane: nce: surf: 18.246961 nspecies: 7171

@@ -443,7 +443,8 @@ class ModelBase(object):
             self.precon.threshold = self.threshold
             self.net.preconditioner = self.precon
             self.net.derivative_settings = {"skip-falloff": not self.enable_falloff,
-                "skip-third-bodies": not self.enable_thirdbody}
+                "skip-third-bodies": not self.enable_thirdbody,
+                "skip-coverage-dependence": True, "skip-electrochemistry": True}
         self.net.initialize()
 
     def get_numerical_stats(self):

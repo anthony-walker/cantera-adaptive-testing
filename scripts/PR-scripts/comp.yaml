@@ -1,207 +1,255 @@
+A2:
+  species: '119'
+  nce:
+    main: 1.428343
+    sdev: 1.562424
+    surf: 1.770013
+    main-sdev: -0.13408100000000012
+  pfr:
+    main: 0.660537
+    sdev: 0.767751
+    surf: 0.919916
+    main-sdev: -0.10721399999999992
+  wsr:
+    main: 0.896796
+    sdev: 1.045974
+    surf: 1.330789
+    main-sdev: -0.14917799999999992
+A3:
+  species: '119'
+  nce:
+    main: 1.320576
+    sdev: 1.548704
+    surf: 1.723685
+    main-sdev: -0.2281280000000001
+  pfr:
+    main: 0.659143
+    sdev: 0.773221
+    surf: 0.910262
+    main-sdev: -0.11407800000000001
+  wsr:
+    main: 0.89285
+    sdev: 1.031654
+    surf: 1.275596
+    main-sdev: -0.13880400000000004
 Butane:
   species: '230'
-  network_combustor_exhaust:
-    main: 152.730125
-    sdev: 35.859161
-    surf: 75.737133
-    main-sdev: 116.87096399999999
-  plug_flow_reactor:
-    main: 1.164561
-    sdev: 0.808008
-    surf: 1.220684
-    main-sdev: 0.356553
-  well_stirred_reactor:
-    main: 1.291682
-    sdev: 1.201641
-    surf: 1.741646
-    main-sdev: 0.09004100000000004
-DME:
-  species: '120'
-  network_combustor_exhaust:
-    main: 224.504442
-    sdev: 16.528058
-    surf: 62.100508
-    main-sdev: 207.976384
-  plug_flow_reactor:
-    main: 2.988608
-    sdev: 0.906071
-    surf: 0.958472
-    main-sdev: 2.0825370000000003
-  well_stirred_reactor:
-    main: 0.681281
-    sdev: 0.876985
-    surf: 1.14166
-    main-sdev: -0.195704
+  nce:
+    main: 1.75389
+    sdev: 1.848766
+    surf: 1.902232
+    main-sdev: -0.09487599999999996
+  pfr:
+    main: 0.596442
+    sdev: 0.694953
+    surf: 0.93434
+    main-sdev: -0.09851100000000002
+  wsr:
+    main: 1.076562
+    sdev: 1.215061
+    surf: 1.42105
+    main-sdev: -0.13849899999999993
+C1:
+  species: '119'
+  nce:
+    main: 1.33101
+    sdev: 1.509151
+    surf: 1.736775
+    main-sdev: -0.17814099999999988
+  pfr:
+    main: 0.689663
+    sdev: 0.788622
+    surf: 1.060876
+    main-sdev: -0.09895900000000002
+  wsr:
+    main: 0.97403
+    sdev: 1.155206
+    surf: 1.288511
+    main-sdev: -0.181176
+C5:
+  species: '119'
+  nce:
+    main: 1.321312
+    sdev: 1.475202
+    surf: 1.678305
+    main-sdev: -0.15388999999999986
+  pfr:
+    main: 0.646845
+    sdev: 0.750832
+    surf: 1.081783
+    main-sdev: -0.10398700000000005
+  wsr:
+    main: 0.870549
+    sdev: 1.05774
+    surf: 1.18837
+    main-sdev: -0.18719099999999989
 Hydrogen:
   species: '10'
-  network_combustor_exhaust:
-    main: 5.628902
-    sdev: 0.106451
-    surf: 0.30629
-    main-sdev: 5.522451
-  plug_flow_reactor:
-    main: 0.466377
-    sdev: 0.323066
-    surf: 0.069646
-    main-sdev: 0.14331099999999997
-  well_stirred_reactor:
-    main: 0.05991
-    sdev: 0.057614
-    surf: 0.224862
-    main-sdev: 0.0022959999999999994
+  nce:
+    main: 0.034903
+    sdev: 0.043696
+    surf: 0.075067
+    main-sdev: -0.008792999999999995
+  pfr:
+    main: 0.022917
+    sdev: 0.028976
+    surf: 0.053766
+    main-sdev: -0.006058999999999998
+  wsr:
+    main: 0.035492
+    sdev: 0.068635
+    surf: 0.222102
+    main-sdev: -0.033143
 IsoButene:
   species: '493'
-  network_combustor_exhaust:
-    main: 846.688565
-    sdev: 124.427473
-    surf: 248.223075
-    main-sdev: 722.2610920000001
-  plug_flow_reactor:
-    main: 8.141067
-    sdev: 3.660663
-    surf: 4.409792
-    main-sdev: 4.480404
-  well_stirred_reactor:
-    main: 3.383462
-    sdev: 2.727328
-    surf: 3.952527
-    main-sdev: 0.6561340000000002
+  nce:
+    main: 3.435689
+    sdev: 3.417643
+    surf: 3.555255
+    main-sdev: 0.018046000000000006
+  pfr:
+    main: 1.201135
+    sdev: 1.387695
+    surf: 1.420545
+    main-sdev: -0.18655999999999984
+  wsr:
+    main: 2.18352
+    sdev: 2.422419
+    surf: 2.668351
+    main-sdev: -0.23889899999999997
 IsoOctane:
   species: '874'
-  network_combustor_exhaust:
-    sdev: 324.67762
-    surf: 541.463944
-    main-sdev: -324.67762
-  plug_flow_reactor:
-    main: 49.662756
-    sdev: 51.883548
-    surf: 55.694641
-    main-sdev: -2.220791999999996
-  well_stirred_reactor:
-    main: 35.085375
-    sdev: 36.326925
-    surf: 34.977234
-    main-sdev: -1.2415500000000037
-JetA:
-  species: '201'
-  network_combustor_exhaust:
-    main: 415.678239
-    sdev: 14.154513
-    surf: 22.794413
-    main-sdev: 401.523726
-  plug_flow_reactor:
-    main: 9.075093
-    sdev: 2.134512
-    surf: 2.528742
-    main-sdev: 6.940581000000001
-  well_stirred_reactor:
-    main: 2.457694
-    sdev: 2.512775
-    surf: 2.736037
-    main-sdev: -0.055080999999999936
+  nce:
+    main: 62.047544
+    sdev: 65.289298
+    surf: 55.777987
+    main-sdev: -3.2417540000000002
+  pfr:
+    main: 24.635006
+    sdev: 26.4353
+    surf: 25.423607
+    main-sdev: -1.800294000000001
+  wsr:
+    main: 24.59795
+    sdev: 26.906321
+    surf: 27.497504
+    main-sdev: -2.3083709999999975
 MethylDeconateNHeptane:
   species: '3787'
-  plug_flow_reactor:
-    main: 200.892475
-    sdev: 195.694272
-    surf: 240.855564
-    main-sdev: 5.198202999999978
-  well_stirred_reactor:
-    main: 87.562206
-    sdev: 64.080361
-    surf: 48.613559
-    main-sdev: 23.481845000000007
+  nce:
+    main: 25.302358
+    sdev: 23.153056
+    surf: 25.463188
+    main-sdev: 2.1493020000000023
+  pfr:
+    main: 8.090762
+    sdev: 8.525867
+    surf: 8.465587
+    main-sdev: -0.4351050000000001
+  wsr:
+    main: 11.467311
+    sdev: 11.378715
+    surf: 12.032148
+    main-sdev: 0.08859600000000079
 MethylFiveDeconate:
   species: '2649'
-  network_combustor_exhaust:
-    sdev: 2519.363399
-    surf: 3159.60508
-    main-sdev: -2519.363399
-  plug_flow_reactor:
-    main: 156.572107
-    sdev: 136.087941
-    surf: 163.133513
-    main-sdev: 20.484165999999988
-  well_stirred_reactor:
-    main: 77.760681
-    sdev: 39.556418
-    surf: 51.142618
-    main-sdev: 38.204263000000005
+  nce:
+    main: 24.749572
+    sdev: 22.883237
+    surf: 19.747276
+    main-sdev: 1.8663349999999994
+  pfr:
+    main: 6.741197
+    sdev: 7.453819
+    surf: 7.106577
+    main-sdev: -0.7126220000000005
+  wsr:
+    main: 9.313253
+    sdev: 9.534556
+    surf: 10.15514
+    main-sdev: -0.2213030000000007
 NHeptane:
   species: '654'
-  network_combustor_exhaust:
-    main: 2417.678391
-    sdev: 235.86006
-    surf: 226.536191
-    main-sdev: 2181.818331
-  plug_flow_reactor:
-    main: 24.697317
-    sdev: 16.617289
-    surf: 18.414866
-    main-sdev: 8.080028000000002
-  well_stirred_reactor:
-    main: 16.128892
-    sdev: 17.846611
-    surf: 18.422363
-    main-sdev: -1.7177189999999989
+  nce:
+    main: 28.092645
+    sdev: 31.017815
+    surf: 31.92909
+    main-sdev: -2.925169999999998
+  pfr:
+    main: 13.584692
+    sdev: 14.531483
+    surf: 15.489327
+    main-sdev: -0.9467909999999993
+  wsr:
+    main: 14.243346
+    sdev: 15.275866
+    surf: 15.899382
+    main-sdev: -1.0325199999999999
 NHexadecane:
   species: '2115'
-  network_combustor_exhaust:
-    sdev: 1457.926837
-    surf: 1405.001861
-    main-sdev: -1457.926837
-  plug_flow_reactor:
-    main: 86.719833
-    sdev: 16.286091
-    surf: 10.376793
-    main-sdev: 70.433742
-  well_stirred_reactor:
-    main: 17.9435
-    sdev: 11.833782
-    surf: 15.222369
-    main-sdev: 6.109718000000001
+  nce:
+    main: 12.943306
+    sdev: 13.725185
+    surf: 12.492778
+    main-sdev: -0.781879
+  pfr:
+    main: 4.978011
+    sdev: 5.161692
+    surf: 4.961598
+    main-sdev: -0.18368099999999998
+  wsr:
+    main: 8.063917
+    sdev: 8.467243
+    surf: 8.666007
+    main-sdev: -0.40332599999999985
 ThreeMethylHeptane:
   species: '1378'
-  network_combustor_exhaust:
-    sdev: 289.721895
-    surf: 545.879062
-    main-sdev: -289.721895
-  plug_flow_reactor:
-    main: 26.097697
-    sdev: 11.669925
-    surf: 15.519065
-    main-sdev: 14.427772000000001
-  well_stirred_reactor:
-    main: 7.551984
-    sdev: 12.235581
-    surf: 12.937878
-    main-sdev: -4.683597
+  nce:
+    main: 7.300219
+    sdev: 7.424161
+    surf: 8.624818
+    main-sdev: -0.12394199999999955
+  pfr:
+    main: 3.381372
+    sdev: 3.640141
+    surf: 3.253579
+    main-sdev: -0.258769
+  wsr:
+    main: 4.918167
+    sdev: 4.82781
+    surf: 5.408169
+    main-sdev: 0.09035700000000002
 TwoButonane:
   species: '315'
-  network_combustor_exhaust:
-    main: 707.785373
-    sdev: 54.231131
-    surf: 131.281471
-    main-sdev: 653.554242
-  plug_flow_reactor:
-    main: 1.494461
-    sdev: 1.18703
-    surf: 1.825121
-    main-sdev: 0.307431
-  well_stirred_reactor:
-    main: 1.489097
-    sdev: 1.285857
-    surf: 1.557815
-    main-sdev: 0.20323999999999987
+  nce:
+    main: 1.667967
+    sdev: 1.721582
+    surf: 2.174929
+    main-sdev: -0.05361499999999997
+  pfr:
+    main: 0.608054
+    sdev: 0.694772
+    surf: 0.956671
+    main-sdev: -0.08671799999999996
+  wsr:
+    main: 1.108809
+    sdev: 1.240915
+    surf: 1.500821
+    main-sdev: -0.13210600000000006
 TwoMethylnonadecane:
   species: '7171'
-  plug_flow_reactor:
-    main: 122.367872
-    sdev: 206.74799
-    surf: 403.481519
-    main-sdev: -84.38011799999998
-  well_stirred_reactor:
-    main: 98.05968
-    sdev: 39.170322
-    surf: 49.584156
-    main-sdev: 58.889358
+  nce:
+    main: 17.254807
+    sdev: 17.486001
+    surf: 18.246961
+    main-sdev: -0.23119400000000212
+  pfr:
+    main: 7.71454
+    sdev: 8.723324
+    surf: 8.655946
+    main-sdev: -1.0087839999999995
+  wsr:
+    main: 17.884555
+    sdev: 17.785544
+    surf: 18.103358
+    main-sdev: 0.0990109999999973

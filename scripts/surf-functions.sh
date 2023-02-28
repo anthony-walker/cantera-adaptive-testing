@@ -178,11 +178,11 @@ ttest() {
 }
 
 quick_performance_test() {
-    for m in "Hydrogen" "GRI" "A2" "C5" "JetA" "Butane" "TwoButonane" "IsoButene" "NHeptane" "IsoOctane" "ThreeMethylHeptane" "GasolineSurrogate" "C8_C18_Blends" "NHexadecane" "MethylFiveDeconate" "MethylDeconateNHeptane" "TwoMethylnonadecane"
+    for m in "Hydrogen" "GRI" "A2" "C5" "JetA" "Butane" "TwoButonane" "IsoButene" "NHeptane" #"IsoOctane" "ThreeMethylHeptane" "GasolineSurrogate" "C8_C18_Blends" "NHexadecane" "MethylFiveDeconate" "MethylDeconateNHeptane" "TwoMethylnonadecane"
     do
         echo $m
-        adaptive-testing $m network_combustor_exhaust -P -E 0.001 -S PlatinumLarge
-        adaptive-testing $m network_combustor_exhaust -L -E 0.001
+        adaptive-testing $m plug_flow_reactor -P -E 0.001 -S PlatinumLarge
+        adaptive-testing $m plug_flow_reactor -L -E 0.001 -S PlatinumLarge
     done
 }
 

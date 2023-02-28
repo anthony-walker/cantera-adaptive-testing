@@ -223,19 +223,19 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # plot runtime
     pdata = []
     for k, v in plot_data.items():
-        print(k, v)
+        # print(k, v)
         ct = (v["nspecies"], float(v["th"]), v["mass"]/v["precon"])
         pdata.append(ct)
     pdata.sort()
     species, threshold, speedup = zip(*pdata)
-    print(species, threshold, speedup)
+    # print(species, threshold, speedup)
     colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
     fig, ax = plt.subplots(1, 1)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
     ax.loglog(species, speedup, color=colors[0], marker="s")
     # ax.set_ylim([0, 10**3])
-    ax.set_xlim([50, 8000])
+    ax.set_xlim([1, 8000])
     ax.set_ylabel("Speed-up")
     ax.set_xlabel("Number of Species")
     plt.savefig(f"figures/speed-up-{problem}.pdf")
@@ -328,9 +328,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # plt.savefig(f"figures/steps.pdf")
 
 if __name__ == "__main__":
-    yml = "performance.yaml"
-    combine_surf_yamls(direc="performance_data", yml_name=yml)
-    # total_runtime_figure(yml_name="data.yaml")
-    total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
-
-
+    yml = "nab_data.yaml"
+    combine_surf_yamls(direc="nab_data", yml_name=yml)
+    total_runtime_figure(yml_name="nab_data.yaml")
+    # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
