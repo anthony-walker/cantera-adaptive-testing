@@ -183,6 +183,11 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
                 cursor.execute(f""" SELECT condition FROM {db_key} """)
                 total = np.array([x[0] for x in cursor.fetchall()])
                 y.append(np.mean(y_arr / total))
+            elif yval == "ill-conditioned":
+                cursor.execute(f""" SELECT condition FROM {db_key} """)
+                y_arr = np.array([x[0] for x in cursor.fetchall()])
+                y_arr = np.mean(np.log(y_arr))
+                y.append(y_arr)
             else:
                 cursor.execute(f""" SELECT {yval} FROM {db_key} """)
                 y_arr = [x[0] for x in cursor.fetchall()]
@@ -378,18 +383,20 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
     plt.close()
 
 
-# combine_surf_yamls(direc="jr_data", yml_name="jr.yaml")
+# combine_surf_yamls(direc="jr_dat÷a", yml_name="jr.yaml")
 # model_numbers()
 yml="jet.yaml"
 for p in ["plug_flow_reactor", "well_stirred_reactor"]:
-#     model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
-#     model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
-#     model_evaluation_bar(yval="max_eigenvalue", yml=yml, problem=p, fcn=np.mean, ylab="Mean Maximum Eigenvalue")
-#     model_evaluation_bar(yval="l2_norm", yml=yml, problem=p, fcn=np.mean, ylab="L2 Norm")
-#     model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
-#     model_evaluation_bar(yval="singularity", yml=yml, problem=p, ylab="Distance From Singular Matrix")
-#     model_evaluation_bar(yval="prec_solves", yml=yml, problem=p, ylab="Preconditioner Solves")
-#     model_evaluation_bar(yval="steps", yml=yml, problem=p, ylab="Time Steps")
+    model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
+    model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
+    model_evaluation_bar(yval="max_eigenvalue", yml=yml, problem=p, fcn=np.mean, ylab="Mean Maximum Eigenvalue")
+    model_evaluation_bar(yval="l2_norm", yml=yml, problem=p, fcn=np.mean, ylab="2-norm")
+    model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
+    model_evaluation_bar(yval="ill-conditioned", yml=yml, problem=p, fcn=np.mean, ylab="log(Condition Number)")
+    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
+    model_evaluation_bar(yval="singularity", yml=yml, problem=p, ylab="Distance From Singular Matrix")
+    model_evaluation_bar(yval="prec_solves", yml=yml, problem=p, ylab="Preconditioner Solves")
+    model_evaluation_bar(yval="steps", yml=yml, problem=p, ylab="Time Steps")
     model_assumptions_speedup(problem=p, yml=yml)
 #     model_assumptions_clocktime(problem=p, yml=yml)
     model_steps_ratio(problem=p, yml=yml)

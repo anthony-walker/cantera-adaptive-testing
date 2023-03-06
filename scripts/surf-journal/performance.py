@@ -171,6 +171,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # get all models of interest
     mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
     # get data
+    name = yml_name.split(".")[0]
     yaml = ruamel.yaml.YAML()
     with open(yml_name, 'r') as f:
         data = dict(yaml.load(f))
@@ -238,7 +239,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     ax.set_xlim([1, 8000])
     ax.set_ylabel("Speed-up")
     ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/speed-up-{problem}.pdf")
+    plt.savefig(f"figures/speed-up-{name}-{problem}.pdf")
 
     # # plot nonlinear iterations ratio
     # pdata = []
@@ -329,6 +330,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
 
 if __name__ == "__main__":
     yml = "nab_data.yaml"
-    combine_surf_yamls(direc="nab_data", yml_name=yml)
-    total_runtime_figure(yml_name="nab_data.yaml")
-    # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
+    # combine_surf_yamls(direc="performance_data", yml_name=yml)
+    total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
+    total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
+    total_runtime_figure(yml_name=yml, problem="network_afterburner")

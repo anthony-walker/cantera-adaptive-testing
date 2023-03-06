@@ -14,6 +14,9 @@ class Hydrogen(ModelBase):
         super(Hydrogen, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('hydrogen-10-28.yaml')
         self.fuel = 'H2:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 990)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class GRI(ModelBase):
@@ -21,53 +24,90 @@ class GRI(ModelBase):
         super(GRI, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('gri-mech-55-325.yaml')
         self.fuel = 'CH4:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1625)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class A1(ModelBase):
     def __init__(self, *args, **kwargs):
         super(A1, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('a1-119-841.yaml')
         self.fuel = 'POSF10264:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1350)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class A2(ModelBase):
     def __init__(self, *args, **kwargs):
         super(A2, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('a2-119-841.yaml')
         self.fuel = 'POSF10325:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1350)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class A3(ModelBase):
     def __init__(self, *args, **kwargs):
         super(A3, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('a3-119-841.yaml')
         self.fuel = 'POSF10289:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1350)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class C1(ModelBase):
     def __init__(self, *args, **kwargs):
         super(C1, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('c1-119-841.yaml')
         self.fuel = 'POSF11498:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1450)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class C5(ModelBase):
     def __init__(self, *args, **kwargs):
         super(C5, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('c5-119-843.yaml')
         self.fuel = 'POSF12345:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1375)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class JP10(ModelBase):
     def __init__(self, *args, **kwargs):
         super(JP10, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('jp10-120-841.yaml')
         self.fuel = 'C10H16:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1390)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
+
 class R1(ModelBase):
     def __init__(self, *args, **kwargs):
         super(R1, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('r1-119-841.yaml')
         self.fuel = 'POSF7688:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1375)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class R2(ModelBase):
     def __init__(self, *args, **kwargs):
         super(R2, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('r2-119-841.yaml')
         self.fuel = 'POSF5433:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1375)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 class DME(ModelBase):
     def __init__(self, *args, **kwargs):
@@ -80,6 +120,9 @@ class JetA(ModelBase):
         super(JetA, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('jetA-detailed-NOx-203-1589.yaml')
         self.fuel = 'POSF10325:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1350)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class Butane(ModelBase):
@@ -87,6 +130,9 @@ class Butane(ModelBase):
         super(Butane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('butane-230-2461.yaml')
         self.fuel = 'C4H10:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1390)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class TwoButonane(ModelBase):
@@ -95,6 +141,9 @@ class TwoButonane(ModelBase):
         self.model = self.get_test_set_path(
             '2-butonane-ch3coch2ch3-315-1803.yaml')
         self.fuel = 'C4H8O1-2:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1630)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class NHexanal(ModelBase):
@@ -116,6 +165,10 @@ class IsoButene(ModelBase):
         super(IsoButene, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('isobutene-ic4h8-493-2716.yaml')
         self.fuel = 'IC4H8:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1460)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
+
 
 
 class IsoPentanol(ModelBase):
@@ -151,6 +204,9 @@ class NHeptane(ModelBase):
         super(NHeptane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('n-heptane-c7h16-654-4846.yaml')
         self.fuel = 'NC7H16:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1350)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class DEE(ModelBase):
@@ -165,6 +221,9 @@ class IsoOctane(ModelBase):  # Iso-Octane
         super(IsoOctane, self).__init__(*args, **kwargs)
         self.model = self.get_test_set_path('ic8-874-6864.yaml')
         self.fuel = 'IC8H18:1.0'
+        # default temperature and pressure for a fuel
+        self.options["T"] = kwargs.get("T", 1450)
+        self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
 class Toluene(ModelBase):
@@ -173,7 +232,7 @@ class Toluene(ModelBase):
         self.model = self.get_test_set_path("gasoline-surrogate-1389.yaml")
         self.fuel = "C6H5CH3:1.0"
         # default temperature and pressure for a fuel
-        self.options["T"] = kwargs.get("T", 1500)
+        self.options["T"] = kwargs.get("T", 1460)
         self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
@@ -235,7 +294,7 @@ class MethylFiveDeconate(ModelBase):
         self.model = self.get_test_set_path('md5d-2649-10487.yaml')
         self.fuel = 'md5d:1.0'
         # default temperature and pressure for a fuel
-        self.options["T"] = kwargs.get("T", 1250)
+        self.options["T"] = kwargs.get("T", 1300)
         self.options["P"] = kwargs.get("P", ct.one_atm)
 
 
@@ -289,6 +348,6 @@ class TwoMethylnonadecane(ModelBase):
         self.model = self.get_test_set_path('mmc5-7171-38324.yaml')
         self.fuel = 'c20h42-2:1.0'
         # default temperature and pressure for a fuel
-        self.options["T"] = kwargs.get("T", 1250)
+        self.options["T"] = kwargs.get("T", 1350)
         self.options["P"] = kwargs.get("P", ct.one_atm)
 

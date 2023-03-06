@@ -228,8 +228,8 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
 
 
 yml = "jth.yaml"
-combine_surf_yamls(direc="jth_data", yml_name=yml)
-for prob, lim, slim in [("plug_flow_reactor", [50, 200], [2.5, 2.9]), ("well_stirred_reactor", [75, 275], [2.5, 3.05])]:
+# combine_surf_yamls(direc="jth_data", yml_name=yml)
+for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ("well_stirred_reactor", [75, 275], [2.5, 3.05])]:
     threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
     threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
     threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)

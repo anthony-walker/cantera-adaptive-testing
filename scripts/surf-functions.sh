@@ -17,6 +17,21 @@ surface_performance_study() {
     ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001
 }
 
+surface_short_study() {
+    # performance runs
+    export PLIST=./model_lists/surf-performance
+    export SURF_DIR=perf_data
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    export TSTART=0
+    export TEND=18
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/nce-nab-pfr single 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -ASF
+}
+
 surface_reaction_study() {
     # analysis runs
     export PLIST=./model_lists/surf-analysis
@@ -178,11 +193,11 @@ ttest() {
 }
 
 quick_performance_test() {
-    for m in "Hydrogen" "GRI" "A2" "C5" "JetA" "Butane" "TwoButonane" "IsoButene" "NHeptane" #"IsoOctane" "ThreeMethylHeptane" "GasolineSurrogate" "C8_C18_Blends" "NHexadecane" "MethylFiveDeconate" "MethylDeconateNHeptane" "TwoMethylnonadecane"
+    for m in "Hydrogen" "GRI" "A2" "C5" "JetA" "Butane" "TwoButonane" "IsoButene" "NHeptane" "IsoOctane" "Toluene" "ThreeMethylHeptane" "GasolineSurrogate" "C8_C18_Blends" "NHexadecane" "MethylFiveDeconate" "MethylDeconateNHeptane" "TwoMethylnonadecane"
     do
         echo $m
-        adaptive-testing $m plug_flow_reactor -P -E 0.001 -S PlatinumLarge
-        adaptive-testing $m plug_flow_reactor -L -E 0.001 -S PlatinumLarge
+        adaptive-testing $m plug_flow_reactor -P -E 0.000001 -S PlatinumLarge -ASF -L
+        # adaptive-testing $m plug_flow_reactor -L -E 0.001 -S PlatinumLarge
     done
 }
 

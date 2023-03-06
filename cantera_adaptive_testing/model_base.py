@@ -47,6 +47,8 @@ class ModelBase(object):
         self.options.setdefault("remove_thirdbody", False)
         self.options.setdefault("gphase", "gas")
         self.options.setdefault("sphase", "surface")
+        # set default to append surface fuel
+        self.options.setdefault("append_surface_fuel", False)
         self.options.setdefault("record_steps", 1) # take ten steps before recording
         self.options.setdefault("max_time_step", 1e5) # max time step is 10 seconds by default
         self.options.setdefault("max_steps", 100000) # max steps default 100000
@@ -335,6 +337,14 @@ class ModelBase(object):
     def runsteps(self, value):
         self.options["runsteps"] = value
 
+    @property
+    def append_surface_fuel(self):
+        return self.options["append_surface_fuel"]
+
+    @append_surface_fuel.setter
+    def append_surface_fuel(self, value):
+        self.options["append_surface_fuel"] = value
+
     def __del__(self):
         if self.log and self.yaml_data:
             yaml = ruamel.yaml.YAML()
@@ -448,22 +458,24 @@ class ModelBase(object):
         self.net.initialize()
 
     def get_numerical_stats(self):
-        stats = self.net.solver_stats
-        # add other solver stats here if you want
-        stats["time"] = self.net.time
-        stats["preconditioned"] = self.preconditioned
-        if self.preconditioned:
-            prec_mat = self.precon.matrix
-            eigvals = np.linalg.eigvals(prec_mat)
-            stats["condition"] = float(np.linalg.cond(prec_mat))
-            stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
-            stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
-            stats["determinant"] = float(np.linalg.det(prec_mat))
-            stats["min_eigenvalue"] = float(np.amin(eigvals))
-            stats["max_eigenvalue"] = float(np.amax(eigvals))
-            stats["threshold"] = self.precon.threshold
-            stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
-            stats["total_elements"] = np.prod(prec_mat.shape)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            stats = self.net.solver_stats
+            # add other solver stats here if you want
+            stats["time"] = self.net.time
+            stats["preconditioned"] = self.preconditioned
+            if self.preconditioned:
+                prec_mat = self.precon.matrix
+                eigvals = np.linalg.eigvals(prec_mat)
+                stats["condition"] = float(np.linalg.cond(prec_mat))
+                stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
+                stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
+                stats["determinant"] = float(np.linalg.det(prec_mat))
+                stats["min_eigenvalue"] = float(np.amin(eigvals))
+                stats["max_eigenvalue"] = float(np.amax(eigvals))
+                stats["threshold"] = self.precon.threshold
+                stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
+                stats["total_elements"] = np.prod(prec_mat.shape)
         return stats
 
     def add_numerical_stats(self, arr=None, sid=0):
@@ -1244,6 +1256,22 @@ class ModelBase(object):
 
     def add_surface(self, surf_obj):
         self.surfname = surf_obj.__class__.__name__
+        if self.append_surface_fuel and surf_obj.fuel:
+            if surf_obj.fuel in self.fuel:
+                pass
+            else:
+                fuel_name = surf_obj.fuel.split(":")[0].strip()
+                lower_fuel_name = fuel_name.lower()
+                fuel_regex = r"\s+" + "".join([f"[{i}]"for i in fuel_name]) + r"\s+"
+                lower_regex = r"\s+" + "".join([f"[{i}]"for i in lower_fuel_name]) + r"\s+"
+                with open(self.model, "r") as f:
+                    content = f.read()
+                if re.search(fuel_regex, content):
+                    self.fuel = f"{self.fuel}, {surf_obj.fuel}"
+                elif re.search(lower_fuel_name, content):
+                    self.fuel = f"{self.fuel}, {surf_obj.fuel.lower()}"
+                else:
+                    print(f"{self.__class__.__name__}: surf fuel not found in model.")
         self.surface = surf_obj.surface
         self.sphase = surf_obj.sphase
         self.classifiers = self.classifiers[:2] + [self.surfname,] + self.classifiers[2:]
