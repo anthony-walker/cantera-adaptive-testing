@@ -12,7 +12,7 @@ surface_performance_study() {
     skip_analyt
     skip_flex
     export TSTART=0
-    export TEND=20
+    export TEND=18
     # launch all runs now that ss is found.
     ./launch.sh ./options/sp-opts mpi 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001
 }
