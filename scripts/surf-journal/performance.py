@@ -167,7 +167,7 @@ def combine_surf_yamls(direc="performance_data", yml_name="performance.yaml"):
     with open(yml_name, 'w') as f:
         data = yaml.dump(case_data, f)
 
-def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterburner"):
+def total_runtime_figure(yml_name="performance.yaml", problem="network_afterburner", add_surf_species=True):
     # get all models of interest
     mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
     # get data
@@ -224,8 +224,8 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # plot runtime
     pdata = []
     for k, v in plot_data.items():
-        # print(k, v)
-        ct = (v["nspecies"], float(v["th"]), v["mass"]/v["precon"])
+        sspec = v["nspecies"] if not add_surf_species else v["nspecies"] + 59
+        ct = (sspec, float(v["th"]), v["mass"]/v["precon"])
         pdata.append(ct)
     pdata.sort()
     species, threshold, speedup = zip(*pdata)
@@ -236,7 +236,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # fig.set_figheight(8)
     ax.loglog(species, speedup, color=colors[0], marker="s")
     # ax.set_ylim([0, 10**3])
-    ax.set_xlim([1, 8000])
+    ax.set_xlim([10, 10000])
     ax.set_ylabel("Speed-up")
     ax.set_xlabel("Number of Species")
     plt.savefig(f"figures/speed-up-{name}-{problem}.pdf")
@@ -329,8 +329,24 @@ def total_runtime_figure(yml_name="performance.yaml", problem = "network_afterbu
     # plt.savefig(f"figures/steps.pdf")
 
 if __name__ == "__main__":
-    yml = "nab_data.yaml"
+    yml = "performance.yaml"
     # combine_surf_yamls(direc="performance_data", yml_name=yml)
     total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
+    # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
+    # total_runtime_figure(yml_name=yml, problem="network_afterburner")
+
+    yml = "nab.yaml"
+    # combine_surf_yamls(direc="nab_data", yml_name=yml)
+    # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
     total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
-    total_runtime_figure(yml_name=yml, problem="network_afterburner")
+
+    yml = "perf.yaml"
+    # combine_surf_yamls(direc="perf_data", yml_name=yml)
+    # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
+    total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
+
+    yml = "pfr.yaml"
+    # combine_surf_yamls(direc="pfr_perf", yml_name=yml)
+    total_runtime_figure(yml_name=yml, problem="plug_flow_reactor", add_surf_species=False)
+    # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
+    # total_runtime_figure(yml_name=yml, problem="network_afterburner")

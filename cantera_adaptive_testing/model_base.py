@@ -49,6 +49,9 @@ class ModelBase(object):
         self.options.setdefault("sphase", "surface")
         # set default to append surface fuel
         self.options.setdefault("append_surface_fuel", False)
+        # number of reactors for n_reactors problem
+        self.options.setdefault("nrs", 2)
+        self.options.setdefault("series", True)
         self.options.setdefault("record_steps", 1) # take ten steps before recording
         self.options.setdefault("max_time_step", 1e5) # max time step is 10 seconds by default
         self.options.setdefault("max_steps", 100000) # max steps default 100000
@@ -345,6 +348,22 @@ class ModelBase(object):
     def append_surface_fuel(self, value):
         self.options["append_surface_fuel"] = value
 
+    @property
+    def nrs(self):
+        return self.options["nrs"]
+
+    @nrs.setter
+    def nrs(self, value):
+        self.options["nrs"] = value
+
+    @property
+    def series(self):
+        return self.options["series"]
+
+    @series.setter
+    def series(self, value):
+        self.options["series"] = value
+
     def __del__(self):
         if self.log and self.yaml_data:
             yaml = ruamel.yaml.YAML()
@@ -525,7 +544,6 @@ class ModelBase(object):
                         self.sstime = ss_res[0]
                     else:
                         raise Exception(f"No steady state time for {self.__class__.__name__}, {self.surfname}, {func.__name__}.")
-
                 else:
                     self.sstime = self.endtime
             yaml_name = "-".join(filter(None, self.classifiers))
@@ -1191,8 +1209,156 @@ class ModelBase(object):
             return self.plug_flow_reactor
         elif name == "well_stirred_reactor":
             return self.well_stirred_reactor
+        elif name == "n_reactors":
+            return self.n_reactors
         else:
             raise Exception("Invalid problem given.")
+
+    @problem
+    def n_reactors(self, *args, **kwargs):
+        # physical params
+        area = 1
+        vol = 1
+        velocity = 15 # m / s
+        # lists for parameters
+        reactors = []
+        # create phase objects
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        if self.use_icdb:
+            gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
+        else:
+            gas.TP = self.options.get("T"), self.options.get("P")
+        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        # catalyst area in one reactor
+        mass_flow_rate = velocity * gas.density * area
+        # Setup thermo data dictionary
+        self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
+            "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
+            "phi": self.phi, "T0": gas.T, "P0": gas.P, "V0": vol,
+            "skip_falloff": not self.enable_falloff,
+            "skip_thirdbody": not self.enable_thirdbody,
+            "n_reactors":self.nrs, "series": self.series
+            }})
+        # surf phase
+        if self.surface:
+            # import the surface model
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf.TPX = gas.T, gas.P, self.surface
+            self.thermo_data["thermo"].update({"surface":self.surface,
+                "surface_species":surf.n_species, "surface_reactions":surf.n_reactions,
+                "surf_area":area})
+        # create reservoirs
+        # create a reservoir to represent the reactor immediately upstream. Note
+        # that the gas object is set already to the state of the upstream reactor
+        upstream = ct.Reservoir(gas, name='upstream')
+        # create a reservoir for the reactor to exhaust into. The composition of
+        # this reservoir is irrelevant.
+        downstream = ct.Reservoir(gas, name='downstream')
+        # loop over desired number of reactors
+        for i in range(self.nrs):
+            # create a new reactora
+            r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
+            r.volume = vol
+            reactors.append(r)
+        # in series all reactors flow into each other, in parallel, they solve the same
+        # problem
+        if self.series:
+            # The mass flow rate into the reactor will be fixed by using a
+            # MassFlowController object.
+            m = ct.MassFlowController(upstream, reactors[0], mdot=mass_flow_rate)
+            for i in range(self.nrs-1):
+                # We need an outlet to the downstream reservoir. This will determine the
+                # pressure in the reactor. The value of K will only affect the transient
+                # pressure difference.
+                v = ct.PressureController(reactors[i], reactors[i+1], master=m, K=1e-5)
+            v = ct.PressureController(reactors[-1], downstream, master=m, K=1e-5)
+        else:
+            for r in reactors:
+                m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
+                v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        # Add surface data if it exists
+        if self.surface:
+            for r in reactors:
+                rsurf = ct.ReactorSurface(surf, r, A=area)
+        self.net = ct.ReactorNet(reactors)
+        self.net.max_time_step = self.max_time_step
+        self.net.max_steps = self.max_steps
+        self.apply_numerical_options()
+        # get connection if analysis
+        if self.runtype == "analysis":
+            stats = self.add_numerical_stats()
+            stats_keys = ["id",] + self.get_stats_keys()
+            sid = 0
+        # advance the simulation
+        if self.runtype == "steady":
+            self.net.advance_to_steady_state()
+        elif self.runtype == "performance":
+            # if self.verbose:
+            #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
+            if self.runsteps != 0:
+                for i in range(self.runsteps):
+                    self.net.step()
+            else:
+                self.net.advance(self.sstime)
+        elif self.runtype == "plot":
+            # create plot categories
+            r = reactors[0]
+            products = []
+            species = [r.component_name(i) for i in range(r.n_vars)]
+            for prod in ["CO", "CO2", "H2O"]:
+                if prod in species:
+                    products.append(prod)
+            fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
+            surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
+            comb_contents = fuels + products + surfaces
+            combust_idxs = [r.component_index(f) for f in comb_contents]
+            time = []
+            comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
+            def append_row(r, idxs, arr):
+                state = r.get_state()
+                keep = np.transpose(np.array([[state[i] for i in idxs ]]))
+                return np.append(arr, keep, 1)
+            comb_array = append_row(r, combust_idxs, comb_array)
+            time.append(self.net.time)
+            while (self.sstime > self.net.time):
+                for i in range(self.record_steps):
+                    self.net.step()
+                    if self.sstime < self.net.time:
+                        break
+                # create plot data
+                comb_array = append_row(r, combust_idxs, comb_array)
+                time.append(self.net.time)
+            # now plot data
+            fig, cax = plt.subplots(1, 1)
+            fig.tight_layout()
+            cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
+            for i, name in enumerate(comb_contents):
+                cax.plot(time, comb_array[i, :], label=name)
+            # cax.set_title("PFR")
+            cax.legend(loc='upper right')
+            plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
+        elif self.runtype == "analysis":
+            if self.database is None:
+                raise Exception("No database file for analysis run.")
+            if self.runsteps != 0:
+                for i in range(1, self.runsteps + 1, 1):
+                    self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+            else:
+                while (self.sstime > self.net.time):
+                    for i in range(1, self.record_steps + 1, 1):
+                        self.net.step()
+                    sid += i
+                    stats = self.add_numerical_stats(stats, sid)
+                add_analysis_stats(self.curr_name, stats, stats_keys, self.database)
+        else:
+            raise Exception("Invalid runtype specified.")
 
     @classmethod
     def create_initial_conditions(cls):
