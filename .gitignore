@@ -12,6 +12,7 @@ reaction-analysis/
 threshold-analysis/
 cancel_jobs.sh
 missed_jobs.sh
+*.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
