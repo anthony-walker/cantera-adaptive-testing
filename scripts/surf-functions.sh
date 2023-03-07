@@ -29,7 +29,7 @@ surface_short_study() {
     export TSTART=0
     export TEND=18
     # launch all runs now that ss is found.
-    ./launch.sh ./options/nce-nab-pfr single 10 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -ASF
+    ./launch.sh ./options/nce-nab-pfr mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -ASF
 }
 
 surface_reaction_study() {
