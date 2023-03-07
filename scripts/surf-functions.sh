@@ -32,6 +32,25 @@ surface_short_study() {
     ./launch.sh ./options/nce-nab-pfr mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -ASF
 }
 
+network_series_test() {
+    # analysis runs
+    export PLIST=./model_lists/network-mods
+    export SURF_DIR=series_data
+    export TSTART=0
+    export TEND=0
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    # performance runs
+    for i in {1..10}
+    do
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.005 -S PlatinumLarge --nrs $i
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.005 -S PlatinumLarge --nrs $i --series
+    done
+}
+
 surface_reaction_study() {
     # analysis runs
     export PLIST=./model_lists/surf-analysis
