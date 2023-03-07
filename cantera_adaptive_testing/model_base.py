@@ -547,6 +547,8 @@ class ModelBase(object):
                 else:
                     self.sstime = self.endtime
             yaml_name = "-".join(filter(None, self.classifiers))
+            if func.__name__ == self.n_reactors.__name__:
+                yaml_name += "-series" if self.series else "-parallel"
             # run problem
             try:
                 t0 = time.time_ns()
