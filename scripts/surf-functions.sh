@@ -27,9 +27,25 @@ surface_short_study() {
     skip_analyt
     skip_flex
     export TSTART=0
-    export TEND=18
+    export TEND=0
     # launch all runs now that ss is found.
     ./launch.sh ./options/nce-nab-pfr mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -ASF
+}
+
+perf_analysis_study() {
+    # performance runs
+    export PLIST=./model_lists/surf-performance
+    export SURF_DIR=perf_data
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    skip_mass
+    export TSTART=0
+    export TEND=0
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/pfr-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
 }
 
 network_series_test() {
@@ -44,10 +60,12 @@ network_series_test() {
     skip_analyt
     skip_flex
     # performance runs
-    for i in {1..10}
+    for i in {1..15}
     do
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.005 -S PlatinumLarge --nrs $i
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.005 -S PlatinumLarge --nrs $i --series
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 -S PlatinumLarge --nrs $i
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 -S PlatinumLarge --nrs $i --series
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O series_ns_data -L -E 0.001 --nrs $i
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O series_ns_data -L -E 0.001 --nrs $i --series
     done
 }
 
