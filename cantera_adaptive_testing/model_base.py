@@ -488,7 +488,7 @@ class ModelBase(object):
                 eigvals = np.linalg.eigvals(prec_mat)
                 stats["condition"] = float(np.linalg.cond(prec_mat))
                 stats["logC"] = float(np.log10(stats["condition"]))
-                mv = np.amax(np.abs(np.log10(np.abs(prec_mat))))
+                mv = np.amax(np.abs(np.log10(np.abs(prec_mat)[prec_mat != 0])))
                 stats["precision"] = float(mv)
                 stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
                 stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
