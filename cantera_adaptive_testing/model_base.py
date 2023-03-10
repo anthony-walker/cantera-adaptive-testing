@@ -487,6 +487,9 @@ class ModelBase(object):
                 prec_mat = self.precon.matrix
                 eigvals = np.linalg.eigvals(prec_mat)
                 stats["condition"] = float(np.linalg.cond(prec_mat))
+                stats["logC"] = float(np.log10(stats["condition"]))
+                mv = 10 ** np.floor(np.log10(np.amin(np.abs(prec_mat[np.abs(prec_mat) > 0]))))
+                stats["min_prec"] = float(mv)
                 stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
                 stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
                 stats["determinant"] = float(np.linalg.det(prec_mat))
@@ -552,7 +555,7 @@ class ModelBase(object):
             # run problem
             try:
                 t0 = time.time_ns()
-                func(self, *args, **kwargs)
+                ret_val = func(self, *args, **kwargs)
                 tf = time.time_ns()
                 if self.verbose:
                     spec = self.thermo_data["thermo"]["gas_species"]
@@ -603,7 +606,7 @@ class ModelBase(object):
                 else:
                     self.yaml_data[yaml_name] = {}
                     self.yaml_data[yaml_name].update(self.curr_run)
-            return True
+            return ret_val
         return wrapped
 
     @problem
@@ -1387,6 +1390,103 @@ class ModelBase(object):
         for k, v in found.items():
             if not v:
                 warnings.warn(f"{cls.__name__}:{k} not conditions found.")
+
+    def randomized_state_threshold(self):
+        # physical params
+        area = 1
+        vol = 1
+        velocity = 15 # m / s
+        # import the gas model and set the initial conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        if self.use_icdb:
+            gas.TP = get_ics_time(self.__class__.__name__+"_plug_flow_reactor")
+        else:
+            gas.TP = self.options.get("T"), self.options.get("P")
+        gas.set_equivalence_ratio(self.phi, self.fuel, self.air)
+        gas.equilibrate("HP")
+        # create a new reactor
+        r = ct.IdealGasConstPressureMoleReactor(gas)
+        initial_state = r.state
+        # make randomized state
+        random.seed(time.time())
+        max_moles = np.amax(initial_state[1:])
+        omag = np.ceil(abs(np.log(max_moles)))
+        rn = lambda x: random.random() / (10 ** random.randint(0, 16))
+        rrst = [rn(i) for i in range(r.n_vars-1)]
+        r.state = [initial_state[0],] + rrst
+        r.volume = vol
+        # print(r.state)
+        # catalyst area in one reactor
+        mass_flow_rate = velocity * gas.density * area
+        # create a reservoir to represent the reactor immediately upstream. Note
+        # that the gas object is set already to the state of the upstream reactor
+        upstream = ct.Reservoir(gas, name='upstream')
+        # create a reservoir for the reactor to exhaust into. The composition of
+        # this reservoir is irrelevant.
+        downstream = ct.Reservoir(gas, name='downstream')
+        # The mass flow rate into the reactor will be fixed by using a
+        # MassFlowController object.
+        m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
+        # We need an outlet to the downstream reservoir. This will determine the
+        # pressure in the reactor. The value of K will only affect the transient
+        # pressure difference.
+        v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        # Add surface data if it exists
+        if self.surface:
+            # import the surface model
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf.TPX = gas.T, gas.P, self.surface
+            rsurf = ct.ReactorSurface(surf, r, A=area)
+        # setup network
+        self.net = ct.ReactorNet([r])
+        self.precon = ct.AdaptivePreconditioner()
+        self.precon.threshold = 0
+        self.net.preconditioner = self.precon
+        self.net.derivative_settings = {"skip-falloff": not self.enable_falloff,
+                "skip-third-bodies": not self.enable_thirdbody,
+                "skip-coverage-dependence": True, "skip-electrochemistry": True}
+        self.net.max_time_step = 1e-16
+        self.net.initialize()
+        self.net.step()
+        # information of interest
+        prec_mat = self.precon.matrix
+        # loop through threshold range
+        conds = []
+        thresholds = []
+        for i in range(0, 19):
+            th = 10**(-i) if i > 0 else 0
+            pmat = np.copy(prec_mat)
+            # prune
+            for j in range(r.n_vars):
+                for k in range(r.n_vars):
+                    if j != k and pmat[j, k] < th:
+                        pmat[j, k] = 0
+            cond = float(np.linalg.cond(pmat))
+            # add to lists
+            conds.append(cond)
+            thresholds.append(th)
+        data = list(zip(conds, thresholds))
+        data.sort()
+        return data[0]
+
+    def nspecies(self, *args, **kwargs):
+        # import the gas model and set the initial conditions
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            gas = ct.Solution(self.model, self.gphase)
+        # Add surface if it exists
+        if self.surface != "":
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                surf = ct.Interface(self.model, self.sphase, [gas])
+            surf_spec = surf.n_species
+        else:
+            surf_spec = 0
+        return gas.n_species + surf_spec
 
     @classmethod
     def print_model_information(cls, *args, **kwargs):
