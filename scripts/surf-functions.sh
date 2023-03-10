@@ -45,7 +45,7 @@ perf_analysis_study() {
     export TSTART=0
     export TEND=0
     # launch all runs now that ss is found.
-    ./launch.sh ./options/nce-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
+    ./launch.sh ./options/pfr-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
 }
 
 network_series_test() {
