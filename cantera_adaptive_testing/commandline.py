@@ -14,28 +14,6 @@ import cantera_adaptive_testing.models as models
 import cantera_adaptive_testing.surfaces as surfaces
 import cantera_adaptive_testing.yaml_plotter as yaml_plotter
 
-
-def mpi_run_all(*args, **kwargs):
-    comm = MPI.COMM_WORLD
-    rank = comm.Get_rank()
-    if rank == 0:
-        parser = parser_setup(add_mod=False)
-        args = parser.parse_args()
-        data = vars(args)
-        mods = inspect.getmembers(models, inspect.isclass)
-        mods = [mod for mname, mod in mods]
-        random.shuffle(mods)
-        mods = np.array_split(mods, comm.Get_size())
-    else:
-        mods = None
-        data = None
-    data = comm.bcast(data, root=0)
-    rankMod = comm.scatter(mods, root=0)
-    for rm in rankMod:
-        currMod = rm(**data)
-        currMod()
-
-
 def mpi_run_loop():
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
@@ -43,6 +21,12 @@ def mpi_run_loop():
         parser = parser_setup()
         args = parser.parse_args()
         data = vars(args)
+        if data.get("T") is None:
+            data.pop("T")
+        if data.get("phi") is None:
+            data.pop("phi")
+        if data.get("P") is None:
+            data.pop("P")
     else:
         data = None
         args = None
@@ -63,20 +47,6 @@ def mpi_run_loop():
     for p in args.problems:
         curr_method = selected.get_method_by_name(p)
         curr_method()
-
-
-def omp_run_all(*args, **kwargs):
-    parser = parser_setup(add_mod=False)
-    args = parser.parse_args()
-    data = vars(args)
-    mods = inspect.getmembers(models, inspect.isclass)
-    modsList = []
-    for mname, mod in mods:
-        if mname != "ModelBase":
-            modsList.append((mod, data))
-    pool = mp.Pool(len(modsList))
-    pool.map(processModelRun, modsList)
-
 
 def parser_setup(add_mod=True, add_probs=True):
     """This function is the main call for the commandline interface for
@@ -139,6 +109,9 @@ def parser_setup(add_mod=True, add_probs=True):
     parser.add_argument('-O', "--out_dir", type=str, default="data",
                         help="Name of output directory with no / in it, strictly \"data\" or something of that nature.")
     parser.add_argument('-S', "--surface", type=str, default="", help="Name of surface to add to gas phase model")
+    parser.add_argument("--phi", type=float, help="Equivalence ratio")
+    parser.add_argument("--P", type=float, help="Pressure")
+    parser.add_argument("--T", type=float, help="Temperature")
     parser.add_argument('--record_steps', type=int,
                          default=1, help="Set to record every n steps.")
     return parser
@@ -228,7 +201,14 @@ def cmd_line_main():
         for mod in mods:
             print("\t"+mod)
     else:
-        selected = mods[args.model](**vars(args))
+        keywords = vars(args)
+        if keywords.get("T") is None:
+            keywords.pop("T")
+        if keywords.get("phi") is None:
+            keywords.pop("phi")
+        if keywords.get("P") is None:
+            keywords.pop("P")
+        selected = mods[args.model](**keywords)
         if args.surface:
             csurf = surfs[args.surface]()
             selected.add_surface(csurf)

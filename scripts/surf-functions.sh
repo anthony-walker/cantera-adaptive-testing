@@ -221,6 +221,30 @@ surface_threshold_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE -O $SURF_DIR
 }
 
+pfr_threshold_perturb() {
+    # analysis runs
+    export PLIST=./model_lists/jet-perturb
+    export SDATABASE=jpt.db
+    export SURF_DIR=jpt_data
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    export TSTART=0
+    export TEND=18
+    # performance runs
+    for i in `seq 900 50 1600`
+    do
+        echo $i
+        for x in {4..10}
+        do
+            y=`bc <<< "scale=1; $x/10"`
+            ./launch.sh ./options/pfr-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 --T $i --phi $y
+        done
+    done
+}
+
 wsr_performance_study() {
     # performance runs
     export PLIST=./model_lists/surf-performance

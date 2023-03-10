@@ -87,7 +87,8 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
                 tstr = re.sub("ep", "e+", k.split("-")[1])
                 tstr = re.sub("em", "e-", tstr)
                 thresh = float(tstr)
-                rt_data.append((thresh, data[k][problem]["runtime"]))
+                if thresh==0 or round(np.abs(np.log10(thresh))) <= 18:
+                    rt_data.append((thresh, data[k][problem]["runtime"]))
         mass_runtime = data[keys[-1]][problem]["runtime"]
         rt_data.sort()
         # get x and y data
@@ -104,7 +105,7 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
     ax.set_ylabel("Speed-up")
     if ylims is not None:
         ax.set_ylim(ylims)
-    ax.set_xlim([-0.5, 25])
+    ax.set_xlim([-0.5, 19])
     plt.savefig(f"figures/{yml.split('.')[0]}-speedup-{problem}.pdf")
     plt.close()
 
@@ -167,7 +168,9 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
     keys = list(filter(lambda x: "-mass" not in x, keys))
     keys.sort()
     mkeys = [keys[i*25 : (i+1)*25] for i in range(len(keys) // 25)]
+    limit = 18
     for i in range(len(mkeys)):
+        mkeys[i] = mkeys[i][:limit+1]
         mkeys[i].append(mkeys[i].pop(0))
         mkeys[i] = mkeys[i][::-1]
     # get db connection
@@ -175,8 +178,8 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     bwid = 0.1
-    x = [i for i in range(25)]
-    xs = [i for i in range(25)]
+    x = [i for i in range(limit+1)]
+    xs = [i for i in range(limit+1)]
     # create figure
     fig, ax = plt.subplots(1, 1)
     # fig.set_figwidth(8)
@@ -229,11 +232,12 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
 
 yml = "jth.yaml"
 # combine_surf_yamls(direc="jth_data", yml_name=yml)
-for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ("well_stirred_reactor", [75, 275], [2.5, 3.05])]:
+# ("well_stirred_reactor", [75, 275], [2.5, 3.05])
+for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
     threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
     threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
     threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)
-    threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition", ylog=True)
+    threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition Number", ylog=True)
     model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
-    model_threshold_steps_ratio(yml=yml, problem=prob, ylims=slim)
+    # model_threshold_steps_ratio(yml=yml, problem=prob, ylims=slim)
 

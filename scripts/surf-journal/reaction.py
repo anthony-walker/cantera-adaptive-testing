@@ -382,16 +382,62 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-ct-ps.pdf")
     plt.close()
 
+def model_condition_study():
+    # get db connection
+    db_name = "jet.db"
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    problem = "plug_flow_reactor"
+    cursor.execute("select name from sqlite_master where type = 'table'")
+    res = [c[0] for c in cursor.fetchall()]
+    res = sorted(list(filter(lambda x: problem in x, res)))
+    res = sorted(list(filter(lambda x: "0ep00" in x, res)))
+    res = sorted(list(filter(lambda x: "etb" in x, res)))
+    res = sorted(list(filter(lambda x: "efo" not in x, res)))[1:5]
+    y_s = []
+    x_s = [i for i in range(4)]
+    for db_key in res:
+        # get logc
+        cursor.execute(f""" SELECT condition FROM {db_key} """)
+        logc = np.array([x[0] for x in cursor.fetchall()])
+        logc_max = np.log10(np.amax(logc))
+        # get precision
+        # cursor.execute(f""" SELECT precision FROM {db_key} """)
+        # prec = np.array([x[0] for x in cursor.fetchall()])
+        # prec_max = np.amax(prec)
+        y_s.append(logc_max / 15)
+    # create figure
+    fig, ax = plt.subplots(1, 1)
+    fig.tight_layout()
+    plt.subplots_adjust(left=0.15, top=0.9)
+    # create bar chart
+    colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
+    for c, x, y, clr in zip(res, x_s, y_s, colors[1:5]):
+        print(c, x, y)
+        clab = c.split("_")[0]
+        ax.bar(x, y, width=0.1, align="center", color=clr, label=clab)
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    # ylab = yval.capitalize() if ylab is None else ylab
+    # ax.set_ylabel(ylab)
+    # xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
+    # ax.set_xticks(xavg)
+    # ax.set_xticklabels(labels)
+    # if yxlims is not None:
+    #     ax.set_ylim(yxlims)
+    # plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
+    # plt.close()
+
+model_condition_study()
 
 # combine_surf_yamls(direc="jr_dat÷a", yml_name="jr.yaml")
 # model_numbers()
-yml="jet.yaml"
-for p in ["plug_flow_reactor",]:
+# yml="jet.yaml"
+# for p in ["plug_flow_reactor",]:
     # model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
     # model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
     # model_evaluation_bar(yval="max_eigenvalue", yml=yml, problem=p, fcn=np.mean, ylab="Mean Maximum Eigenvalue")
     # model_evaluation_bar(yval="l2_norm", yml=yml, problem=p, fcn=np.mean, ylab="2-norm")
-    model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
+    # model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
     # model_evaluation_bar(yval="ill-conditioned", yml=yml, problem=p, fcn=np.mean, ylab="log(Condition Number)")
     # model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
     # model_evaluation_bar(yval="singularity", yml=yml, problem=p, ylab="Distance From Singular Matrix")
@@ -399,5 +445,5 @@ for p in ["plug_flow_reactor",]:
     # model_evaluation_bar(yval="steps", yml=yml, problem=p, ylab="Time Steps")
     # model_assumptions_speedup(problem=p, yml=yml)
 #     model_assumptions_clocktime(problem=p, yml=yml)
-    model_steps_ratio(problem=p, yml=yml)
+    # model_steps_ratio(problem=p, yml=yml)
 
