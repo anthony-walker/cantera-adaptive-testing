@@ -1262,7 +1262,9 @@ class ModelBase(object):
         downstream = ct.Reservoir(gas, name='downstream')
         # loop over desired number of reactors
         for i in range(self.nrs):
-            # create a new reactora
+            if self.series and i == 1:
+                gas.TPX = 300, ct.one_atm, self.air
+            # create a new reactor
             r = ct.IdealGasConstPressureMoleReactor(gas) if self.moles else ct.IdealGasConstPressureReactor(gas)
             r.volume = vol
             reactors.append(r)
