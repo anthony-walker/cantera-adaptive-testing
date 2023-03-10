@@ -45,7 +45,7 @@ perf_analysis_study() {
     export TSTART=0
     export TEND=0
     # launch all runs now that ss is found.
-    ./launch.sh ./options/pfr-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
+    ./launch.sh ./options/nce-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
 }
 
 network_series_test() {
@@ -60,12 +60,10 @@ network_series_test() {
     skip_analyt
     skip_flex
     # performance runs
-    for i in {1..15}
+    for i in {1..25}
     do
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 -S PlatinumLarge --nrs $i
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 -S PlatinumLarge --nrs $i --series
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O series_ns_data -L -E 0.001 --nrs $i
-        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O series_ns_data -L -E 0.001 --nrs $i --series
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 --nrs $i
+        ./launch.sh ./options/nrs-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 --nrs $i --series
     done
 }
 
@@ -95,6 +93,24 @@ surface_reaction_study() {
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody -O $SURF_DIR -E 0.005
     ./launch.sh ./options/sa-opts single 1 1 $PLIST -R analysis -D $SDATABASE --enable_thirdbody --enable_falloff -O $SURF_DIR -E 0.005
 }
+
+surface_condition_reaction_study() {
+    # analysis runs
+    export PLIST=./model_lists/jet-fuels
+    export SDATABASE=jet_cond.db
+    export SURF_DIR=jet_data
+    export TSTART=0
+    export TEND=0
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    skip_mass
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/pfr-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -E 0.005 -D $SDATABASE
+}
+
 
 jet_reaction_study() {
     # analysis runs
