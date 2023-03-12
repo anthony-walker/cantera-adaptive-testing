@@ -237,7 +237,7 @@ pfr_threshold_perturb() {
     for i in `seq 900 50 1600`
     do
         echo $i
-        for x in {4..10}
+        for x in {5..10}
         do
             y=`bc <<< "scale=1; $x/10"`
             ./launch.sh ./options/pfr-opts mpi 1 1 $PLIST -R performance -O $SURF_DIR -L -E 0.001 --T $i --phi $y
