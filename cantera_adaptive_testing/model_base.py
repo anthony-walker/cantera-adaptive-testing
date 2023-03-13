@@ -59,6 +59,7 @@ class ModelBase(object):
         # the performance run no stats are recorded and during the analysis run, all
         # stats are recorded.
         self.options.setdefault("runtype", "performance")
+        self.options.setdefault("append_ss", True)
         self.options.setdefault("replace_reactions", True) # replace reactions of discarded types with generic reaction or skip them with False
         self.options.setdefault("use_icdb", False)
         self.options.setdefault("endtime", 0)
@@ -574,7 +575,7 @@ class ModelBase(object):
                         self.yaml_data[yaml_name].update(self.curr_run)
                 return False
             # add steady state to table
-            if self.runtype == "steady":
+            if self.runtype == "steady" and self.options.get("append_ss", True):
                 ss_name = f"{self.__class__.__name__}"
                 ss_name += f"-{self.surfname}" if self.surface else ""
                 ss_name += f"-{func.__name__}"
@@ -1050,7 +1051,7 @@ class ModelBase(object):
             sid = 0
         # try to run simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state(atol=1e-6)
+            self.net.advance_to_steady_state()
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")

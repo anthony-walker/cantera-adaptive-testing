@@ -58,6 +58,50 @@ def combine_surf_yamls(direc="jet_thresh_data", yml_name="jet_thresh.yaml"):
     with open(yml_name, 'w') as f:
         data = yaml.dump(case_data, f)
 
+def combine_by_TP(direc="jpt_data", yml_name="jpt.yaml", problem="plug_flow_reactor"):
+    yaml = ruamel.yaml.YAML()
+    files = os.listdir(direc)
+    files = list(filter(lambda x: ".yaml" in x, files))
+    # sort all files into cases
+    fp = lambda x: os.path.join(direc, x)
+    cases = {}
+    for cf in files:
+        with open(fp(cf), "r") as f:
+            cdata = yaml.load(f)
+            keys = list(cdata.keys())
+            T0 = cdata[keys[0]][problem]["thermo"]["T0"]
+            phi = cdata[keys[0]][problem]["thermo"]["phi"]
+        case_key = "-".join(cf.split("-")[:-1]+[str(phi), str(T0)])
+        # add case key
+        if case_key in cases:
+            cases[case_key].append(cf)
+        else:
+            cases[case_key] = [cf]
+    # combine cases
+    case_data = {}
+    for case in cases:
+        case_files = cases[case]
+        case_data[case] = {}
+        for cf in case_files:
+            with open(fp(cf), "r") as f:
+                data = yaml.load(f)
+            for k1, v1 in data.items():
+                for k2, v2 in v1.items():
+                    # do nothing if exception is a key
+                    if "exception" in v1[k2]:
+                        pass
+                    elif k2 not in case_data[case]:
+                        case_data[case][k2] = v1[k2]
+                    else:
+                        case_data[case][k2]["runtime"] += v2["runtime"]
+                        case_data[case][k2]["nruns"] += 1
+    # average the run times
+    for c in case_data:
+        for p in case_data[c]:
+            case_data[c][p]["runtime"] /= case_data[c][p]["nruns"]
+    with open(yml_name, 'w') as f:
+        data = yaml.dump(case_data, f)
+
 def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", ylims=None):
     # open data
     yaml = ruamel.yaml.YAML()
@@ -229,15 +273,110 @@ def threshold_evaluation_bar(yval="condition", yml="threshold.yaml", problem="we
     plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
     plt.close()
 
+def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=None, yxlims=None, ylog=False, model="C1"):
+    yaml = ruamel.yaml.YAML()
+    with open(yml, 'r') as f:
+        data = dict(yaml.load(f))
+    keys = list(data.keys())
+    keys = list(filter(lambda x: model in x, keys))
+    phi_vals = [i/10 for i in range(5, 11)]
+    T_vals = [i for i in range(900, 1650, 50)]
+    thresholds = []
+    # 2D array for mass Temp, phi
+    mass_data = np.zeros((len(T_vals) ,len(phi_vals)))
+    mass_keys = list(filter(lambda x: "mass" in x, keys))
+    for mk in mass_keys:
+        phi, T = map(float, mk.split("-")[2:])
+        i = T_vals.index(T)
+        j = phi_vals.index(phi)
+        mass_data[i, j] = data[mk][problem]["runtime"]
+    # 3D array for precond thresh, temp, phi
+    thresholds = [0,] + [float(f"1e-{i}") for i in range(1, 19)]
+    p_data = np.zeros((len(thresholds), len(T_vals) ,len(phi_vals)))
+    p_keys = list(filter(lambda x: "mass" not in x, keys))
+    for pk in p_keys:
+        thresh, phi, T = pk.split("-")[1:]
+        phi = float(phi)
+        T = float(T)
+        thresh = re.sub("[e][p]", "e+", thresh)
+        thresh = float(re.sub("[1][e][m]", "1e-", thresh))
+        k = thresholds.index(thresh)
+        i = T_vals.index(T)
+        j = phi_vals.index(phi)
+        p_data[k, i, j] = data[pk][problem]["runtime"]
+    speedup = np.zeros(p_data.shape)
+    for i in range(p_data.shape[0]):
+        speedup[i, : :] = np.divide(mass_data, p_data[i])
+    # create contours
+    # adjust thresholds
+    threshs = [10 ** i for i in range(len(thresholds))]
+    labels = []
+    for th in thresholds:
+        if th == 0:
+            labels.append("0")
+        else:
+            mthlab = "$\mathregular{10}"+"^{-"+f"{round(np.abs(np.log10(th)))}" + "}$"
+            labels.append(mthlab)
+    labels = [labels[0],] + labels[1:][::-1]
+    txp, phiy = np.meshgrid(threshs, phi_vals)
+    txT, Ty = np.meshgrid(threshs, T_vals)
+    # create all phi contours
+    for i, T in enumerate(T_vals):
+        levels = np.linspace(np.floor(np.amin(speedup[:, i, :])), np.ceil(np.amax(speedup[:, i, :])), 1000)
+        plt.contourf(txp, phiy, np.transpose(speedup[:, i, :]), cmap=plt.cm.inferno, levels=levels)
+        yts = np.linspace(np.floor(np.amin(speedup[:, i, :])), np.ceil(np.amax(speedup[:, i, :])), 5)
+        cbar = plt.colorbar(ticks=yts)
+        # adjust figure width
+        fig = plt.gcf()
+        fig.set_figwidth(12)
+        # adjust axis
+        ax = plt.gca()
+        ax.set_xscale("log")
+        ax.set_xlim([np.amin(threshs), np.amax(threshs)])
+        ax.set_xticks(threshs)
+        ax.set_xticklabels(labels)
+        ax.set_xlabel("Threshold")
+        ax.set_ylabel("Equivalence Ratio")
+        plt.grid(True, axis="both", color='k', linewidth=1)
+        plt.savefig(f"figures/Tcontour_{T}_{model}.jpg")
+        plt.close()
 
-yml = "jth.yaml"
+    # create all temperature contours
+    for i, phi in enumerate(phi_vals):
+        levels = np.linspace(np.floor(np.amin(speedup[:, :, i])), np.ceil(np.amax(speedup[:, :, i])), 1000)
+        plt.contourf(txT, Ty, np.transpose(speedup[:, :, i]), cmap=plt.cm.inferno, levels=levels)
+        yts = np.linspace(np.floor(np.amin(speedup[:, :, i])), np.ceil(np.amax(speedup[:, :, i])), 5)
+        cbar = plt.colorbar(ticks=yts)
+        # adjust figure width
+        fig = plt.gcf()
+        fig.set_figwidth(12)
+        # adjust axis
+        ax = plt.gca()
+        ax.set_xscale("log")
+        ax.set_xlim([np.amin(threshs), np.amax(threshs)])
+        ax.set_xticks(threshs)
+        ax.set_xticklabels(labels)
+        ax.set_xlabel("Threshold")
+        ax.set_ylabel("Temperature")
+        plt.grid(True, axis="both", color='k', linewidth=1)
+        plt.savefig(f"figures/Phicontour_{phi}_{model}.jpg")
+        plt.close()
+
+    # labs = [str(l) for l in yts]
+    # ax.set_yticks(yts)
+    # cbar.ax.set_yticklabels(labs)
+
+    # get mass keys
+# yml = "jth.yaml"
 # combine_surf_yamls(direc="jth_data", yml_name=yml)
 # ("well_stirred_reactor", [75, 275], [2.5, 3.05])
-for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
-    threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
-    threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
-    threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)
-    threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition Number", ylog=True)
-    model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
+# for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
+#     threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
+#     threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
+#     threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)
+#     threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition Number", ylog=True)
+#     model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
     # model_threshold_steps_ratio(yml=yml, problem=prob, ylims=slim)
-
+# combine_by_TP()
+create_perturbed_contour()
+create_perturbed_contour(model="A2")

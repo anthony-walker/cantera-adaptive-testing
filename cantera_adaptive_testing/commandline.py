@@ -96,6 +96,8 @@ def parser_setup(add_mod=True, add_probs=True):
                          help="Set a specific number of reactors for nreactors prob.")
     parser.add_argument('--series', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
+    parser.add_argument('--append_ss', action='store_false', default=True,
+                        help="Append the steadystate time table, turn off.")
     parser.add_argument('--replace_reactions', action='store_false', default=True,
                         help="Instead of removing reaction types, replace them.")
     parser.add_argument('-E', '--endtime', type=float, default=0,
