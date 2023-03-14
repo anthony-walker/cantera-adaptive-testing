@@ -815,7 +815,7 @@ class ModelBase(object):
             sid = 0
         # advance the simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state()
+            self.net.advance_to_steady_state(atol=1e-6)
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
@@ -922,7 +922,7 @@ class ModelBase(object):
         # advance the simulation
         # try to run simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state()
+            self.net.advance_to_steady_state(atol=1e-6)
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
@@ -1051,7 +1051,7 @@ class ModelBase(object):
             sid = 0
         # try to run simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state()
+            self.net.advance_to_steady_state(atol=1e-6)
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
@@ -1303,7 +1303,7 @@ class ModelBase(object):
             sid = 0
         # advance the simulation
         if self.runtype == "steady":
-            self.net.advance_to_steady_state()
+            self.net.advance_to_steady_state(atol=1e-6)
         elif self.runtype == "performance":
             # if self.verbose:
             #     print(f"Integrating {self.__class__.__name__} to {self.sstime} seconds")
