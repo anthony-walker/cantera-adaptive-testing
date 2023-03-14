@@ -240,7 +240,7 @@ pfr_threshold_perturb() {
         for x in {5..10}
         do
             y=`bc <<< "scale=1; $x/10"`
-            ./launch.sh ./options/pfr-opts mpi 1 1 $PLIST -R steady -O $SURF_DIR -L -E 0.001 --T $i --phi $y --append_ss
+            ./launch.sh ./options/pfr-opts mpi 1 1 $PLIST -R steady -O $SURF_DIR -L --T $i --phi $y --append_ss
         done
     done
 }
