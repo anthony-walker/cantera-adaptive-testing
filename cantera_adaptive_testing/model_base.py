@@ -17,6 +17,7 @@ from traceback import format_exc
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
+plt.rcParams['font.size'] = 16
 
 
 class ModelBase(object):
@@ -739,7 +740,10 @@ class ModelBase(object):
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("Combustor")
-            cax.legend(loc='upper right')
+            cax.set_xlabel("Time $[s]$")
+            cax.set_ylabel("Amounts of selected species $[kmol]$")
+            cax.legend()
+            plt.subplots_adjust(bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-combustor.pdf"))
             plt.close()
             # plot eax
@@ -749,7 +753,10 @@ class ModelBase(object):
             for i, name in enumerate(exhaust_contents):
                 eax.plot(time, exhaust_array[i, :], label=name)
             # eax.set_title("Exhaust")
-            eax.legend(loc='upper right')
+            eax.set_xlabel("Time $[s]$")
+            eax.set_ylabel("Amounts of selected species $[kmol]$")
+            eax.legend()
+            plt.subplots_adjust(left=0.15, bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-exhaust.pdf"))
         else:
             raise Exception("Invalid runtype specified.")
@@ -858,7 +865,10 @@ class ModelBase(object):
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("PFR")
-            cax.legend(loc='upper right')
+            cax.legend()
+            cax.set_xlabel("Time $[s]$")
+            cax.set_ylabel("Amounts of selected species $[kmol]$")
+            plt.subplots_adjust(bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
             if self.database is None:
@@ -965,9 +975,10 @@ class ModelBase(object):
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("WSR")
-            cax.set_xlabel("Time [s]")
-            cax.set_ylabel("Moles [kmol]")
-            cax.legend(loc='upper right')
+            cax.set_xlabel("Time $[s]$")
+            cax.set_ylabel("Amounts of selected species $[kmol]$")
+            cax.legend()
+            plt.subplots_adjust(bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
             if self.database is None:
@@ -1115,7 +1126,10 @@ class ModelBase(object):
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("Combustor")
-            cax.legend(loc='upper right')
+            cax.set_xlabel("Time $[s]$")
+            cax.set_ylabel("Amounts of selected species $[kmol]$")
+            cax.legend()
+            plt.subplots_adjust(bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-combustor.pdf"))
             plt.close()
             # plot eax
@@ -1125,7 +1139,10 @@ class ModelBase(object):
             for i, name in enumerate(afterburner_contents):
                 eax.plot(time, afterburner_array[i, :], label=name)
             # eax.set_title("Exhaust")
-            eax.legend(loc='upper right')
+            eax.set_xlabel("Time $[s]$")
+            eax.set_ylabel("Amounts of selected species $[kmol]$")
+            eax.legend()
+            plt.subplots_adjust(left=0.15, bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-exhaust.pdf"))
         else:
             raise Exception("Invalid runtype specified.")
@@ -1347,7 +1364,10 @@ class ModelBase(object):
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
             # cax.set_title("PFR")
-            cax.legend(loc='upper right')
+            cax.set_xlabel("Time $[s]$")
+            cax.set_ylabel("Amounts of selected species $[kmol]$")
+            cax.legend()
+            plt.subplots_adjust(bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}.pdf"))
         elif self.runtype == "analysis":
             if self.database is None:

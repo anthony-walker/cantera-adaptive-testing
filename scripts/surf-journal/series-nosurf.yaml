@@ -1,0 +1,5070 @@
+GRI-0ep00-series-7:
+  n_reactors:
+    runtime: 1.123171865
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: true
+    numerical:
+      steps: '881'
+      rhs_evals: '988'
+      nonlinear_iters: '985'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2302'
+      lin_iters: '2302'
+      lin_conv_fails: '12'
+      prec_evals: '15'
+      prec_solves: '3200'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2302'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '8238551792704539.0'
+      l2_norm: '1060934028.1705086'
+      fro_norm: '2806830633.158421'
+      determinant: inf
+      min_eigenvalue: '0.9999831640867554'
+      max_eigenvalue: '3394.253182720396'
+      threshold: '0.0'
+      nonzero_elements: '8606'
+      total_elements: '142884'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:50:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-3:
+  n_reactors:
+    runtime: 0.6335141959999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: true
+    numerical:
+      steps: '879'
+      rhs_evals: '987'
+      nonlinear_iters: '984'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '70'
+      lin_rhs_evals: '2183'
+      lin_iters: '2183'
+      lin_conv_fails: '6'
+      prec_evals: '15'
+      prec_solves: '3078'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2183'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.00540713923852e+16'
+      l2_norm: '1312160440.2501147'
+      fro_norm: '2272563802.442229'
+      determinant: '3.380729848970255e+234'
+      min_eigenvalue: '0.9999961731318783'
+      max_eigenvalue: '4258.373799434759'
+      threshold: '0.0'
+      nonzero_elements: '3696'
+      total_elements: '26244'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:30:27-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-5:
+  n_reactors:
+    runtime: 485.22106923900003
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: false
+    numerical:
+      steps: '1612'
+      rhs_evals: '2010'
+      nonlinear_iters: '2007'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '61'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '27'
+      lin_solve_setups: '169'
+      lin_rhs_evals: '7425'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:37:48-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-11:
+  n_reactors:
+    runtime: 1183.2686282500003
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: false
+    numerical:
+      steps: '1610'
+      rhs_evals: '2028'
+      nonlinear_iters: '2025'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '74'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '188'
+      lin_rhs_evals: '17545'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:24:55-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-10:
+  n_reactors:
+    runtime: 1.4343340709999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: true
+    numerical:
+      steps: '879'
+      rhs_evals: '990'
+      nonlinear_iters: '987'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '74'
+      lin_rhs_evals: '2174'
+      lin_iters: '2174'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3070'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2174'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.0844929578974274e+16'
+      l2_norm: '1401545348.5765095'
+      fro_norm: '4431912587.989386'
+      determinant: inf
+      min_eigenvalue: '0.9999927247090381'
+      max_eigenvalue: '4533.648078965648'
+      threshold: '0.0'
+      nonzero_elements: '12243'
+      total_elements: '291600'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:15:20-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-12:
+  n_reactors:
+    runtime: 1177.5186217980001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: true
+    numerical:
+      steps: '1614'
+      rhs_evals: '2010'
+      nonlinear_iters: '2007'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '65'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '178'
+      lin_rhs_evals: '19140'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:34:22-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-5:
+  n_reactors:
+    runtime: 0.8447612939999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: true
+    numerical:
+      steps: '873'
+      rhs_evals: '987'
+      nonlinear_iters: '984'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '71'
+      lin_rhs_evals: '2198'
+      lin_iters: '2198'
+      lin_conv_fails: '7'
+      prec_evals: '15'
+      prec_solves: '3087'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2198'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.113670908450073e+16'
+      l2_norm: '1381200565.7125747'
+      fro_norm: '3088261777.8563275'
+      determinant: inf
+      min_eigenvalue: '0.9999669292627474'
+      max_eigenvalue: '4383.527167611253'
+      threshold: '0.0'
+      nonzero_elements: '6160'
+      total_elements: '72900'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:37:24-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-9:
+  n_reactors:
+    runtime: 854.2768091150001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: false
+    numerical:
+      steps: '1594'
+      rhs_evals: '1988'
+      nonlinear_iters: '1985'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '58'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '162'
+      lin_rhs_evals: '13860'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:10:02-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-7:
+  n_reactors:
+    runtime: 726.0231630300001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: true
+    numerical:
+      steps: '1595'
+      rhs_evals: '2010'
+      nonlinear_iters: '2007'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '67'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '176'
+      lin_rhs_evals: '11165'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:51:11-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-2:
+  n_reactors:
+    runtime: 168.45378582799998
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: false
+    numerical:
+      steps: '1588'
+      rhs_evals: '1988'
+      nonlinear_iters: '1985'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '64'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '175'
+      lin_rhs_evals: '3080'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:30:06-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-3:
+  n_reactors:
+    runtime: 292.001932072
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: true
+    numerical:
+      steps: '1643'
+      rhs_evals: '2075'
+      nonlinear_iters: '2072'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '71'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '184'
+      lin_rhs_evals: '4620'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:30:37-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-8:
+  n_reactors:
+    runtime: 1.40032575
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: true
+    numerical:
+      steps: '874'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2234'
+      lin_iters: '2234'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3125'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2234'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.2051450993608172e+16'
+      l2_norm: '1500627880.9902284'
+      fro_norm: '4244227367.161651'
+      determinant: inf
+      min_eigenvalue: '0.9999698616299222'
+      max_eigenvalue: '4780.64270427919'
+      threshold: '0.0'
+      nonzero_elements: '9715'
+      total_elements: '186624'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:57:18-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-7:
+  n_reactors:
+    runtime: 716.276703775
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: false
+    numerical:
+      steps: '1614'
+      rhs_evals: '2041'
+      nonlinear_iters: '2038'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '64'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '170'
+      lin_rhs_evals: '10780'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:54:10-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-8:
+  n_reactors:
+    runtime: 748.7414826319999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: true
+    numerical:
+      steps: '1626'
+      rhs_evals: '2047'
+      nonlinear_iters: '2044'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '66'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '175'
+      lin_rhs_evals: '12320'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:58:18-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-6:
+  n_reactors:
+    runtime: 597.894981407
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: false
+    numerical:
+      steps: '1621'
+      rhs_evals: '2009'
+      nonlinear_iters: '2006'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '62'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '168'
+      lin_rhs_evals: '9570'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:46:32-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-9:
+  n_reactors:
+    runtime: 1.304223637
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: true
+    numerical:
+      steps: '877'
+      rhs_evals: '988'
+      nonlinear_iters: '985'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2194'
+      lin_iters: '2194'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3087'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2194'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.401474300611071e+16'
+      l2_norm: '1742619312.1511786'
+      fro_norm: '5227643042.426177'
+      determinant: inf
+      min_eigenvalue: '0.9999694620408296'
+      max_eigenvalue: '5565.431379045088'
+      threshold: '0.0'
+      nonzero_elements: '11088'
+      total_elements: '236196'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:06:33-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-1:
+  n_reactors:
+    runtime: 0.31261967
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: false
+    numerical:
+      steps: '879'
+      rhs_evals: '987'
+      nonlinear_iters: '984'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2274'
+      lin_iters: '2274'
+      lin_conv_fails: '8'
+      prec_evals: '15'
+      prec_solves: '3171'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2274'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '8853981721781264.0'
+      l2_norm: '1157275713.9564645'
+      fro_norm: '1157275713.962661'
+      determinant: '7.325693393607057e+75'
+      min_eigenvalue: '0.9999928294694208'
+      max_eigenvalue: '3738.2700506650394'
+      threshold: '0.0'
+      nonzero_elements: '1232'
+      total_elements: '2916'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:47-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-13:
+  n_reactors:
+    runtime: 1.8019283090000002
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: true
+    numerical:
+      steps: '869'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '74'
+      lin_rhs_evals: '2186'
+      lin_iters: '2186'
+      lin_conv_fails: '0'
+      prec_evals: '15'
+      prec_solves: '3072'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2186'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '9061738076563048.0'
+      l2_norm: '1169358086.568286'
+      fro_norm: '4216042067.8262815'
+      determinant: inf
+      min_eigenvalue: '0.9999865822455547'
+      max_eigenvalue: '3757.4348856561237'
+      threshold: '0.0'
+      nonzero_elements: '16016'
+      total_elements: '492804'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:39:09-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-4:
+  n_reactors:
+    runtime: 369.1619735830001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: false
+    numerical:
+      steps: '1586'
+      rhs_evals: '1952'
+      nonlinear_iters: '1949'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '60'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '166'
+      lin_rhs_evals: '6380'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:33:33-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-15:
+  n_reactors:
+    runtime: 1.8668775180000001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: true
+    numerical:
+      steps: '873'
+      rhs_evals: '995'
+      nonlinear_iters: '992'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '19'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '77'
+      lin_rhs_evals: '2173'
+      lin_iters: '2173'
+      lin_conv_fails: '1'
+      prec_evals: '16'
+      prec_solves: '3064'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2173'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '7952017343427558.0'
+      l2_norm: '1056394207.6478537'
+      fro_norm: '4091285424.233'
+      determinant: inf
+      min_eigenvalue: '0.9999970880380497'
+      max_eigenvalue: '3429.598753280868'
+      threshold: '0.0'
+      nonzero_elements: '18480'
+      total_elements: '656100'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 10:02:17-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-6:
+  n_reactors:
+    runtime: 561.23772617
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: true
+    numerical:
+      steps: '1558'
+      rhs_evals: '1923'
+      nonlinear_iters: '1920'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '54'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '27'
+      lin_solve_setups: '162'
+      lin_rhs_evals: '8910'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:41:14-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-15:
+  n_reactors:
+    runtime: 1382.6657621870002
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: true
+    numerical:
+      steps: '1637'
+      rhs_evals: '2054'
+      nonlinear_iters: '2051'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '68'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '182'
+      lin_rhs_evals: '23925'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 10:02:41-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-9:
+  n_reactors:
+    runtime: 836.959121012
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: true
+    numerical:
+      steps: '1605'
+      rhs_evals: '1971'
+      nonlinear_iters: '1968'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '49'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '156'
+      lin_rhs_evals: '14355'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:06:49-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-4:
+  n_reactors:
+    runtime: 399.474771163
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: true
+    numerical:
+      steps: '1651'
+      rhs_evals: '2048'
+      nonlinear_iters: '2045'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '66'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '30'
+      lin_solve_setups: '175'
+      lin_rhs_evals: '6600'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:33:20-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-10:
+  n_reactors:
+    runtime: 952.0405612279999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: true
+    numerical:
+      steps: '1578'
+      rhs_evals: '1972'
+      nonlinear_iters: '1969'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '58'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '163'
+      lin_rhs_evals: '15400'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:16:20-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-1:
+  n_reactors:
+    runtime: 0.28232005899999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: true
+    numerical:
+      steps: '1605'
+      rhs_evals: '2006'
+      nonlinear_iters: '2003'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '61'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '164'
+      lin_rhs_evals: '1595'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:47-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-14:
+  n_reactors:
+    runtime: 1214.700893526
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: true
+    numerical:
+      steps: '1645'
+      rhs_evals: '2013'
+      nonlinear_iters: '2010'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '58'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '30'
+      lin_solve_setups: '166'
+      lin_rhs_evals: '23100'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:55:25-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-13:
+  n_reactors:
+    runtime: 1233.193776161
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: false
+    numerical:
+      steps: '1633'
+      rhs_evals: '2026'
+      nonlinear_iters: '2023'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '63'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '176'
+      lin_rhs_evals: '20735'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:45:07-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-2:
+  n_reactors:
+    runtime: 0.590921323
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: false
+    numerical:
+      steps: '877'
+      rhs_evals: '985'
+      nonlinear_iters: '982'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '71'
+      lin_rhs_evals: '2170'
+      lin_iters: '2170'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3063'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2170'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.2069318563718274e+16'
+      l2_norm: '1508700220.962872'
+      fro_norm: '2133624314.0523932'
+      determinant: '3.418007384748731e+162'
+      min_eigenvalue: '0.9999725187119765'
+      max_eigenvalue: '4814.174801836591'
+      threshold: '0.0'
+      nonzero_elements: '2464'
+      total_elements: '11664'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:30:04-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-11:
+  n_reactors:
+    runtime: 1.319693321
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: false
+    numerical:
+      steps: '877'
+      rhs_evals: '985'
+      nonlinear_iters: '982'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2180'
+      lin_iters: '2180'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3073'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2180'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1274063919941896e+16'
+      l2_norm: '1397688078.710629'
+      fro_norm: '4635606931.060523'
+      determinant: inf
+      min_eigenvalue: '0.9999667294006774'
+      max_eigenvalue: '4435.570520944104'
+      threshold: '0.0'
+      nonzero_elements: '13552'
+      total_elements: '352836'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:24:35-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-4:
+  n_reactors:
+    runtime: 0.701462165
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: true
+    numerical:
+      steps: '883'
+      rhs_evals: '991'
+      nonlinear_iters: '988'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '70'
+      lin_rhs_evals: '2216'
+      lin_iters: '2216'
+      lin_conv_fails: '6'
+      prec_evals: '15'
+      prec_solves: '3115'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2216'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '9600894426322432.0'
+      l2_norm: '1176426169.5624225'
+      fro_norm: '2352668390.665134'
+      determinant: inf
+      min_eigenvalue: '0.999960260275098'
+      max_eigenvalue: '3697.3425273592293'
+      threshold: '0.0'
+      nonzero_elements: '4928'
+      total_elements: '46656'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:33:09-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-10:
+  n_reactors:
+    runtime: 1028.310139903
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: false
+    numerical:
+      steps: '1631'
+      rhs_evals: '2024'
+      nonlinear_iters: '2021'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '65'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '177'
+      lin_rhs_evals: '15950'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:18:52-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-2:
+  n_reactors:
+    runtime: 181.95035955400002
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: true
+    numerical:
+      steps: '1680'
+      rhs_evals: '2101'
+      nonlinear_iters: '2098'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '76'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '30'
+      lin_solve_setups: '188'
+      lin_rhs_evals: '3300'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:57-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-12:
+  n_reactors:
+    runtime: 1133.38203484
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: false
+    numerical:
+      steps: '1624'
+      rhs_evals: '1996'
+      nonlinear_iters: '1993'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '62'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '172'
+      lin_rhs_evals: '19140'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:36:19-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-5:
+  n_reactors:
+    runtime: 0.8633348310000001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: false
+    numerical:
+      steps: '878'
+      rhs_evals: '986'
+      nonlinear_iters: '983'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2185'
+      lin_iters: '2185'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3079'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2185'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1807472974296312e+16'
+      l2_norm: '1464344555.7973304'
+      fro_norm: '3274373969.261921'
+      determinant: inf
+      min_eigenvalue: '0.9999671011715943'
+      max_eigenvalue: '4653.184240828626'
+      threshold: '0.0'
+      nonzero_elements: '6160'
+      total_elements: '72900'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:37:35-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-13:
+  n_reactors:
+    runtime: 1210.3936526049997
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: true
+    numerical:
+      steps: '1593'
+      rhs_evals: '1985'
+      nonlinear_iters: '1982'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '64'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '169'
+      lin_rhs_evals: '20735'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:39:32-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-1:
+  n_reactors:
+    runtime: 0.283781048
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: false
+    numerical:
+      steps: '1605'
+      rhs_evals: '2006'
+      nonlinear_iters: '2003'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '61'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '164'
+      lin_rhs_evals: '1595'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:47-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-8:
+  n_reactors:
+    runtime: 840.6465901219999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: false
+    numerical:
+      steps: '1656'
+      rhs_evals: '2070'
+      nonlinear_iters: '2067'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '73'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '186'
+      lin_rhs_evals: '12760'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:00:18-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-7:
+  n_reactors:
+    runtime: 0.916860321
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: false
+    numerical:
+      steps: '880'
+      rhs_evals: '986'
+      nonlinear_iters: '983'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2179'
+      lin_iters: '2179'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3075'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2179'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1360751524490898e+16'
+      l2_norm: '1409374336.3167405'
+      fro_norm: '3728853998.1104336'
+      determinant: inf
+      min_eigenvalue: '0.9999671701920603'
+      max_eigenvalue: '4474.897976375818'
+      threshold: '0.0'
+      nonzero_elements: '8624'
+      total_elements: '142884'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:53:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-6:
+  n_reactors:
+    runtime: 0.882835633
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: false
+    numerical:
+      steps: '880'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2160'
+      lin_iters: '2160'
+      lin_conv_fails: '5'
+      prec_evals: '16'
+      prec_solves: '3057'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2160'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '8495141328657606.0'
+      l2_norm: '1123829028.4052658'
+      fro_norm: '2752807677.7350664'
+      determinant: inf
+      min_eigenvalue: '0.9999973885389252'
+      max_eigenvalue: '3651.0886204471026'
+      threshold: '0.0'
+      nonzero_elements: '7392'
+      total_elements: '104976'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:46:24-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-3:
+  n_reactors:
+    runtime: 0.586855354
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: false
+    numerical:
+      steps: '879'
+      rhs_evals: '986'
+      nonlinear_iters: '983'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2180'
+      lin_iters: '2180'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3075'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2180'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.0807090188376842e+16'
+      l2_norm: '1331567155.1680315'
+      fro_norm: '2306341966.453375'
+      determinant: '7.630403034113054e+237'
+      min_eigenvalue: '0.9999629842074179'
+      max_eigenvalue: '4209.12012680934'
+      threshold: '0.0'
+      nonzero_elements: '3696'
+      total_elements: '26244'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:31:13-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-3:
+  n_reactors:
+    runtime: 248.133630812
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: false
+    numerical:
+      steps: '1591'
+      rhs_evals: '1931'
+      nonlinear_iters: '1928'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '53'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '157'
+      lin_rhs_evals: '4620'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:32:13-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-12:
+  n_reactors:
+    runtime: 1.5356853890000004
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: true
+    numerical:
+      steps: '871'
+      rhs_evals: '988'
+      nonlinear_iters: '985'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2204'
+      lin_iters: '2204'
+      lin_conv_fails: '0'
+      prec_evals: '15'
+      prec_solves: '3091'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2204'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.3657085719552488e+16'
+      l2_norm: '1702623859.4942877'
+      fro_norm: '5897859713.379955'
+      determinant: inf
+      min_eigenvalue: '0.9999714340471955'
+      max_eigenvalue: '5441.7261923292535'
+      threshold: '0.0'
+      nonzero_elements: '14568'
+      total_elements: '419904'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:33:22-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-10:
+  n_reactors:
+    runtime: 1.2999780680000002
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: false
+    numerical:
+      steps: '877'
+      rhs_evals: '986'
+      nonlinear_iters: '983'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2179'
+      lin_iters: '2179'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3072'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2179'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1582069403452752e+16'
+      l2_norm: '1447133745.6116593'
+      fro_norm: '4576238715.047069'
+      determinant: inf
+      min_eigenvalue: '0.9999718581917654'
+      max_eigenvalue: '4612.178783321619'
+      threshold: '0.0'
+      nonzero_elements: '12320'
+      total_elements: '291600'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:18:33-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-15:
+  n_reactors:
+    runtime: 1.6036480599999998
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: false
+    numerical:
+      steps: '877'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2165'
+      lin_iters: '2165'
+      lin_conv_fails: '5'
+      prec_evals: '16'
+      prec_solves: '3059'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2165'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1261422729029268e+16'
+      l2_norm: '1459894567.7424357'
+      fro_norm: '5654147348.112688'
+      determinant: inf
+      min_eigenvalue: '0.9999958619180819'
+      max_eigenvalue: '4736.993613990293'
+      threshold: '0.0'
+      nonzero_elements: '18480'
+      total_elements: '656100'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 10:06:01-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-1:
+  n_reactors:
+    runtime: 0.290223856
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: true
+    numerical:
+      steps: '879'
+      rhs_evals: '987'
+      nonlinear_iters: '984'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2274'
+      lin_iters: '2274'
+      lin_conv_fails: '8'
+      prec_evals: '15'
+      prec_solves: '3171'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2274'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '8853981721781264.0'
+      l2_norm: '1157275713.9564645'
+      fro_norm: '1157275713.962661'
+      determinant: '7.325693393607057e+75'
+      min_eigenvalue: '0.9999928294694208'
+      max_eigenvalue: '3738.2700506650394'
+      threshold: '0.0'
+      nonzero_elements: '1232'
+      total_elements: '2916'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:48-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-15:
+  n_reactors:
+    runtime: 1286.0994372829998
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: false
+    numerical:
+      steps: '1602'
+      rhs_evals: '1970'
+      nonlinear_iters: '1967'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '61'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '169'
+      lin_rhs_evals: '23925'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 10:06:26-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-12:
+  n_reactors:
+    runtime: 1.622094945
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: false
+    numerical:
+      steps: '881'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2186'
+      lin_iters: '2186'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3083'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2186'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.3767864112966236e+16'
+      l2_norm: '1715459009.5576215'
+      fro_norm: '5942524325.741831'
+      determinant: inf
+      min_eigenvalue: '0.9999710347608369'
+      max_eigenvalue: '5480.953499101825'
+      threshold: '0.0'
+      nonzero_elements: '14784'
+      total_elements: '419904'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:35:23-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-13:
+  n_reactors:
+    runtime: 1.5167331929999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: false
+    numerical:
+      steps: '883'
+      rhs_evals: '989'
+      nonlinear_iters: '986'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2149'
+      lin_iters: '2149'
+      lin_conv_fails: '5'
+      prec_evals: '16'
+      prec_solves: '3048'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2149'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1265968638736568e+16'
+      l2_norm: '1462241558.6654146'
+      fro_norm: '5272186916.907466'
+      determinant: inf
+      min_eigenvalue: '0.9999965786766031'
+      max_eigenvalue: '4750.000766552555'
+      threshold: '0.0'
+      nonzero_elements: '16016'
+      total_elements: '492804'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:44:44-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-11:
+  n_reactors:
+    runtime: 1002.5904621699999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: true
+    numerical:
+      steps: '1591'
+      rhs_evals: '1962'
+      nonlinear_iters: '1959'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '54'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '155'
+      lin_rhs_evals: '16940'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:22:05-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-11:
+  n_reactors:
+    runtime: 1.423118813
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: true
+    numerical:
+      steps: '878'
+      rhs_evals: '990'
+      nonlinear_iters: '987'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2210'
+      lin_iters: '2210'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3105'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2210'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1570459338202474e+16'
+      l2_norm: '1464182699.0273535'
+      fro_norm: '4855968979.329009'
+      determinant: inf
+      min_eigenvalue: '0.999980302516291'
+      max_eigenvalue: '4695.22090994706'
+      threshold: '0.0'
+      nonzero_elements: '13552'
+      total_elements: '352836'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:21:46-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-8:
+  n_reactors:
+    runtime: 1.145519547
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: false
+    numerical:
+      steps: '882'
+      rhs_evals: '992'
+      nonlinear_iters: '989'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2150'
+      lin_iters: '2150'
+      lin_conv_fails: '5'
+      prec_evals: '16'
+      prec_solves: '3049'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2150'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '7825089144136092.0'
+      l2_norm: '1040556355.0074649'
+      fro_norm: '2943137819.345348'
+      determinant: inf
+      min_eigenvalue: '0.9999969923861292'
+      max_eigenvalue: '3376.2726007892597'
+      threshold: '0.0'
+      nonzero_elements: '9856'
+      total_elements: '186624'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:59:18-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-series-5:
+  n_reactors:
+    runtime: 490.329891762
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: true
+    numerical:
+      steps: '1624'
+      rhs_evals: '2029'
+      nonlinear_iters: '2026'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '63'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '28'
+      lin_solve_setups: '174'
+      lin_rhs_evals: '7700'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:37:23-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-9:
+  n_reactors:
+    runtime: 1.139549342
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: false
+    numerical:
+      steps: '874'
+      rhs_evals: '987'
+      nonlinear_iters: '984'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '71'
+      lin_rhs_evals: '2108'
+      lin_iters: '2108'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '2999'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2108'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.0705075251061728e+16'
+      l2_norm: '1342216841.1549141'
+      fro_norm: '4026650523.484958'
+      determinant: inf
+      min_eigenvalue: '0.9999732760467556'
+      max_eigenvalue: '4275.9210995554195'
+      threshold: '0.0'
+      nonzero_elements: '11088'
+      total_elements: '236196'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:09:58-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-4:
+  n_reactors:
+    runtime: 0.765406833
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: false
+    numerical:
+      steps: '882'
+      rhs_evals: '988'
+      nonlinear_iters: '985'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '72'
+      lin_rhs_evals: '2178'
+      lin_iters: '2178'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3076'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2178'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.102513602810004e+16'
+      l2_norm: '1367294264.385356'
+      fro_norm: '2734588528.785341'
+      determinant: inf
+      min_eigenvalue: '0.9999668651664962'
+      max_eigenvalue: '4337.298255860143'
+      threshold: '0.0'
+      nonzero_elements: '4928'
+      total_elements: '46656'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:33:22-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-parallel-14:
+  n_reactors:
+    runtime: 1.457798006
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: false
+    numerical:
+      steps: '874'
+      rhs_evals: '986'
+      nonlinear_iters: '983'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2180'
+      lin_iters: '2180'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3071'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2180'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1207601607429586e+16'
+      l2_norm: '1387977227.9472218'
+      fro_norm: '5193335247.6503'
+      determinant: inf
+      min_eigenvalue: '0.999966059590665'
+      max_eigenvalue: '4401.940627660169'
+      threshold: '0.0'
+      nonzero_elements: '17248'
+      total_elements: '571536'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:55:31-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-2:
+  n_reactors:
+    runtime: 0.516709226
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: true
+    numerical:
+      steps: '880'
+      rhs_evals: '994'
+      nonlinear_iters: '991'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '73'
+      lin_rhs_evals: '2215'
+      lin_iters: '2215'
+      lin_conv_fails: '21'
+      prec_evals: '15'
+      prec_solves: '3113'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2215'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.0210311551202696e+16'
+      l2_norm: '1246914541.778729'
+      fro_norm: '1763150592.727875'
+      determinant: '4.011648276798213e+156'
+      min_eigenvalue: '0.9999582433758314'
+      max_eigenvalue: '3919.9679502995896'
+      threshold: '0.0'
+      nonzero_elements: '2464'
+      total_elements: '11664'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:29:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-14:
+  n_reactors:
+    runtime: 1.752136857
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: true
+    numerical:
+      steps: '867'
+      rhs_evals: '983'
+      nonlinear_iters: '980'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '74'
+      lin_rhs_evals: '2174'
+      lin_iters: '2174'
+      lin_conv_fails: '0'
+      prec_evals: '15'
+      prec_solves: '3057'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2174'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.136121436073898e+16'
+      l2_norm: '1401865474.7047536'
+      fro_norm: '5245137097.384035'
+      determinant: inf
+      min_eigenvalue: '0.9999638252105243'
+      max_eigenvalue: '4440.905555283442'
+      threshold: '0.0'
+      nonzero_elements: '16960'
+      total_elements: '571536'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:54:25-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-mass-parallel-14:
+  n_reactors:
+    runtime: 1296.737440245
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: false
+    numerical:
+      steps: '1651'
+      rhs_evals: '2064'
+      nonlinear_iters: '2061'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '70'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '29'
+      lin_solve_setups: '180'
+      lin_rhs_evals: '22330'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 09:55:34-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0
+GRI-0ep00-series-6:
+  n_reactors:
+    runtime: 1.009860038
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1625.0
+      P0: 101324.99999999999
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: true
+    numerical:
+      steps: '879'
+      rhs_evals: '988'
+      nonlinear_iters: '985'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '70'
+      lin_rhs_evals: '2202'
+      lin_iters: '2202'
+      lin_conv_fails: '5'
+      prec_evals: '15'
+      prec_solves: '3097'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2202'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '1.1258040814522418e+16'
+      l2_norm: '1345845032.2467744'
+      fro_norm: '3296444323.3040996'
+      determinant: inf
+      min_eigenvalue: '0.9999453196988024'
+      max_eigenvalue: '4200.365304185208'
+      threshold: '0.0'
+      nonzero_elements: '7277'
+      total_elements: '104976'
+    config:
+      model: GRI
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_data
+      surface: ''
+      record_steps: 1
+      date: 08:41:01-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1625
+      P: 101325.0

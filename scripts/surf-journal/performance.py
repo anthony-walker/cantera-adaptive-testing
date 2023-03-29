@@ -15,9 +15,8 @@ from matplotlib import ticker, cm
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
+plt.rcParams['font.size'] = 16
 
-def hello_world():
-    print("Hello World!")
 
 def add_nruns_to_older_files():
     files = os.listdir("surf-data")
@@ -290,6 +289,7 @@ def total_runtime_figure(yml_name="performance.yaml", problem="network_afterburn
     ax.set_xlim([10, 10000])
     ax.set_ylabel("Speed-up")
     ax.set_xlabel("Number of Species")
+    plt.subplots_adjust(bottom=0.15)
     plt.savefig(f"figures/speed-up-{name}-{problem}.pdf")
     plt.close()
     # thresholds
@@ -298,16 +298,6 @@ def total_runtime_figure(yml_name="performance.yaml", problem="network_afterburn
     for s, th in zip(species, threshold):
         print(f"{s}, {th:0.2e}")
     print("-" * 100)
-    fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(12)
-    # fig.set_figheight(8)
-    ax.loglog(species, threshold, color=colors[0], marker="s")
-    # ax.set_ylim([0, 10**3])
-    # ax.set_xlim([10, 10000])
-    ax.set_ylabel("Optimal Threshold")
-    ax.set_xlabel("Number of Species")
-    plt.savefig(f"figures/thresholds-{name}-{problem}.pdf")
-    plt.close()
 
 
 def plot_box_threshold(yml_name="performance.yaml", problem="plug_flow_reactor", *args, **kwargs):
@@ -360,12 +350,9 @@ def plot_box_threshold(yml_name="performance.yaml", problem="plug_flow_reactor",
     # labels and ticks
     plt.xscale('log')
     plt.yscale('log')
-    # plt.xticks([10**i for i in range()], fontsize=14)
-    # plt.yticks(fontsize=14)
-    plt.ylabel("Speed-up", fontsize=14)
-    plt.xlabel("Number of Species", fontsize=14)
-    # # plt.autoscale()
-    # # plt.tight_layout()
+    plt.ylabel("Speed-up")
+    plt.subplots_adjust(left=0.15)
+    plt.xlabel("Number of Species")
     plt.savefig(os.path.join("figures", f"bw-speedup-{name}-{problem}.pdf"))
     plt.close()
 
@@ -408,6 +395,7 @@ def series_parallel_figures(yml_name="performance.yaml", problem="n_reactors"):
     ax.set_xlabel("Number of Reactors")
     ax.set_ylabel("Speed-up")
     ax.legend()
+    plt.subplots_adjust(bottom=0.15)
     plt.savefig(f"figures/{name}-reactor-networks.pdf")
     plt.close()
     # plt.show()
@@ -453,14 +441,128 @@ def performance_database_plots(yval="condition", db_name="perf.db", problem="plu
 
     if x and y:
         fig, ax = plt.subplots(1, 1)
-        # fig.tight_layout()
         ax.loglog(x, y, color=colors[0], marker="s")
-        # ax.set_ylim([0, 10**3])
         ax.set_xlim([10, 10000])
         ax.set_ylabel("Condition Number")
         ax.set_xlabel("Number of Species")
+        plt.subplots_adjust(left=0.15, bottom=0.15)
         plt.savefig(f"figures/{yval}-{problem}.pdf")
         plt.close()
+
+def dual_axis_plots(yml_name="performance.yaml", yval="condition", db_name="perf.db", problem="plug_flow_reactor", fcn=max, ylab=None, yxlims=None):
+    # print(species, threshold, speedup)
+    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    # get all models of interest
+    mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
+    # get data
+    name = yml_name.split(".")[0]
+    yaml = ruamel.yaml.YAML()
+    with open(yml_name, 'r') as f:
+        data = dict(yaml.load(f))
+    # filter by keys
+    keys = data.keys()
+    keys = list(keys)
+    kmods = set()
+    # get runtime data
+    rt_data = {}
+    for k in keys:
+        for m in mods:
+            if m in k:
+                kmods.add(m)
+        if problem in data[k].keys():
+            if "em20" not in k:
+                rt_data[k] = data[k][problem]["runtime"]
+    kmods = list(kmods)
+    plot_data = {}
+    for m in kmods:
+        plot_data[m] = {"mass":0, "precon":1e12, "th":0, "nspecies":0, "nlsm":0, "nlsp":0, "lin_iters":0, "condition":0, "sparsity":0, "msteps":0, "psteps":0}
+    # get data
+    for k, v in rt_data.items():
+        for m in kmods:
+            if m == k.split("-")[0]:
+                curr_key = m
+        if "mass" in k:
+            plot_data[curr_key]["mass"] = v
+            nspec = data[k][problem]["thermo"]["gas_species"]
+            nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
+            plot_data[curr_key]["nspecies"] = nspec + nspec_surf
+            plot_data[curr_key]["nlsm"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+            plot_data[curr_key]["msteps"] = int(data[k][problem]["numerical"]["steps"])
+        else:
+            if plot_data[curr_key]["precon"] > v:
+                th = k.split("-")[-1]
+                th = re.sub("m","-", th)
+                th = re.sub("ep","e+", th)
+                plot_data[curr_key]["precon"] = v
+                plot_data[curr_key]["th"] = th
+                plot_data[curr_key]["nlsp"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+                plot_data[curr_key]["lin_iters"] = int(data[k][problem]["numerical"]["lin_iters"])
+                plot_data[curr_key]["condition"] = float(data[k][problem]["numerical"]["condition"])
+                plot_data[curr_key]["psteps"] = int(data[k][problem]["numerical"]["steps"])
+                nnz = int(data[k][problem]["numerical"]["nonzero_elements"])
+                total_elements = int(data[k][problem]["numerical"]["total_elements"])
+                plot_data[curr_key]["sparsity"] = (total_elements - nnz) / total_elements
+            nspec = data[k][problem]["thermo"]["gas_species"]
+            nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
+            plot_data[curr_key]["nspecies"] = nspec + nspec_surf
+
+    # plot runtime
+    pdata = []
+    for k, v in plot_data.items():
+        ct = (v["nspecies"], float(v["th"]), v["mass"]/v["precon"])
+        pdata.append(ct)
+    pdata.sort()
+    species, threshold, speedup = zip(*pdata)
+    # get db connection
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    # get all tables
+    cursor.execute("select name from sqlite_master where type = 'table'")
+    res = [c[0] for c in cursor.fetchall()]
+    res = list(filter(lambda x: problem in x, res))
+    # create vectors
+    x = []
+    y = []
+    for db_key in res:
+        cursor.execute(f""" SELECT total_elements FROM {db_key} """)
+        x.append(np.sqrt(cursor.fetchall()[0][0]) - 1)
+        # get speed up data
+        if yval == "sparsity":
+            cursor.execute(f""" SELECT nonzero_elements FROM {db_key} """)
+            y_arr = [x[0] for x in cursor.fetchall()]
+            cursor.execute(f""" SELECT total_elements FROM {db_key} """)
+            total = cursor.fetchall()[0][0]
+            sparsity = (total - np.mean(y_arr)) / total
+            y.append(sparsity)
+        elif yval == "singularity":
+            cursor.execute(f""" SELECT l2_norm FROM {db_key} """)
+            y_arr = np.array([x[0] for x in cursor.fetchall()])
+            cursor.execute(f""" SELECT condition FROM {db_key} """)
+            total = np.array([x[0] for x in cursor.fetchall()])
+            y.append(np.mean(y_arr / total))
+        elif yval == "ill-conditioned":
+            cursor.execute(f""" SELECT condition FROM {db_key} """)
+            y_arr = np.array([x[0] for x in cursor.fetchall()])
+            y_arr = np.mean(np.log(y_arr))
+            y.append(y_arr)
+        else:
+            cursor.execute(f""" SELECT {yval} FROM {db_key} """)
+            y_arr = [x[0] for x in cursor.fetchall()]
+            y.append(fcn(y_arr))
+    # create figure
+    fig, ax1 = plt.subplots(1, 1)
+    ax1.loglog(species, speedup, color=colors[0], marker="s")
+    ax1.set_xlim([10, 10000])
+    ax1.set_ylabel("Speed-up", color=colors[0])
+    ax1.set_xlabel("Number of Species")
+    if x and y:
+        x = species[:len(y)]
+        ax2 = ax1.twinx()
+        ax2.loglog(x, y, color=colors[1], marker="s")
+        ax2.set_ylabel("Condition Number", color=colors[1])
+    plt.subplots_adjust(left=0.15, bottom=0.15, right=0.85)
+    plt.savefig(f"figures/dax-speed-{yval}-{name}-{problem}.pdf")
+    plt.close()
 
 def randomized_state_plots():
     ms = ["Hydrogen", "GRI", "A2", "C5", "JetA", "Butane", "TwoButonane",
@@ -480,16 +582,103 @@ def randomized_state_plots():
         cond, th = curr_model.randomized_state_threshold()
         print(name, cond, th, curr_model.nspecies())
 
+
+
+def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterburner"):
+    # get all models of interest
+    mods, ___ = zip(*inspect.getmembers(models, inspect.isclass))
+    # get data
+    name = yml_name.split(".")[0]
+    yaml = ruamel.yaml.YAML()
+    with open(yml_name, 'r') as f:
+        data = dict(yaml.load(f))
+    # filter by keys
+    keys = data.keys()
+    keys = list(keys)
+    kmods = set()
+    # get runtime data
+    rt_data = {}
+    for k in keys:
+        for m in mods:
+            if m in k:
+                kmods.add(m)
+        if problem in data[k].keys():
+            if "em20" not in k:
+                rt_data[k] = data[k][problem]["runtime"]
+    kmods = list(kmods)
+    plot_data = {}
+    for m in kmods:
+        plot_data[m] = {"mass":0, "precon":1e12, "th":0, "nspecies":0, "nlsm":0, "nlsp":0, "lin_iters":0, "condition":0, "sparsity":0, "msteps":0, "psteps":0}
+    # get data
+    for k, v in rt_data.items():
+        for m in kmods:
+            if m == k.split("-")[0]:
+                curr_key = m
+        if "mass" in k:
+            plot_data[curr_key]["mass"] = v
+            nspec = data[k][problem]["thermo"]["gas_species"]
+            nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
+            plot_data[curr_key]["nspecies"] = nspec + nspec_surf
+            plot_data[curr_key]["nlsm"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+            plot_data[curr_key]["msteps"] = int(data[k][problem]["numerical"]["steps"])
+        else:
+            if plot_data[curr_key]["precon"] > v:
+                th = k.split("-")[-1]
+                th = re.sub("m","-", th)
+                th = re.sub("ep","e+", th)
+                plot_data[curr_key]["precon"] = v
+                plot_data[curr_key]["th"] = th
+                plot_data[curr_key]["nlsp"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+                plot_data[curr_key]["lin_iters"] = int(data[k][problem]["numerical"]["lin_iters"])
+                plot_data[curr_key]["condition"] = float(data[k][problem]["numerical"]["condition"])
+                plot_data[curr_key]["psteps"] = int(data[k][problem]["numerical"]["steps"])
+                nnz = int(data[k][problem]["numerical"]["nonzero_elements"])
+                total_elements = int(data[k][problem]["numerical"]["total_elements"])
+                plot_data[curr_key]["sparsity"] = (total_elements - nnz) / total_elements
+            nspec = data[k][problem]["thermo"]["gas_species"]
+            nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
+            plot_data[curr_key]["nspecies"] = nspec + nspec_surf
+
+    # plot runtime
+    pdata = []
+    for k, v in plot_data.items():
+        ct = (v["nspecies"], float(v["th"]), v["mass"], v["precon"])
+        pdata.append(ct)
+    pdata.sort()
+    species, threshold, mass_runtime, precon_runtime = zip(*pdata)
+    # print(species, threshold, speedup)
+    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    fig, ax = plt.subplots(1, 1)
+    # fig.set_figwidth(12)
+    # fig.set_figheight(8)
+    ax.loglog(species, mass_runtime, color=colors[0], marker="s", label="mass")
+    ax.loglog(species, precon_runtime, color=colors[1], marker="s", label="precon.")
+    ax.loglog([10, 100000], [0.01, 100], color="k", linestyle=":", label="$\mathcal{O}(n)$")
+    ax.loglog([10, 10000], [10, 1e7], color="k", linestyle="--", label="$\mathcal{O}(n^2)$")
+    # ax.set_ylim([0, 10**3])
+    ax.set_xlim([10, 10000])
+    ax.set_ylim([10**-2, 10**5])
+    ax.set_ylabel("Clocktime [$s$]")
+    ax.set_xlabel("Number of Species")
+    ax.legend(ncol=2, bbox_to_anchor=(0.5, 1.325), loc='upper center')
+    plt.subplots_adjust(bottom=0.15, left=0.15, right=0.9, top=0.75)
+    plt.savefig(f"figures/clocktime-{name}-{problem}.pdf")
+    plt.close()
+
 if __name__ == "__main__":
-    # yml = "performance.yaml"
-    # # combine_surf_yamls(direc="performance_data", yml_name=yml)
+    yml = "performance.yaml"
+    # combine_surf_yamls(direc="performance_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
     # plot_box_threshold(yml_name=yml, problem="plug_flow_reactor")
+    # dual_axis_plots(yml_name=yml)
+    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
-    # yml = "nab.yaml"
+    yml = "nab.yaml"
     # # combine_surf_yamls(direc="nab_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
     # plot_box_threshold(yml_name=yml, problem="network_combustor_exhaust")
+    # dual_axis_plots(yml_name=yml, problem="network_combustor_exhaust")
+    total_clocktime_figure(yml_name=yml, problem="network_combustor_exhaust")
 
     # yml = "surf_fuel.yaml"
     # # combine_surf_yamls(direc="surf_fuel_data", yml_name=yml)
@@ -505,22 +694,7 @@ if __name__ == "__main__":
     # performance_database_plots()
     # performance_database_plots(problem="network_combustor_exhaust")
 
-    # series and parallel data
-    yml = "series.yaml"
-    # combine_series_parallel_yamls(direc="series_data", yml_name=yml)
-    series_parallel_figures(yml_name=yml)
-
-    # yml = "series-nosurf.yaml"
-    # # combine_series_parallel_yamls(direc="series_ns_data", yml_name=yml)
+    # # series and parallel data
+    # yml = "series.yaml"
+    # # combine_series_parallel_yamls(direc="series_data", yml_name=yml)
     # series_parallel_figures(yml_name=yml)
-
-    # yml = "series-a2.yaml"
-    # combine_series_parallel_yamls(direc="series_a2_data", yml_name=yml)
-    # series_parallel_figures(yml_name=yml)
-
-    # yml = "series-nosurf-a2.yaml"
-    # combine_series_parallel_yamls(direc="series_ns_a2_data", yml_name=yml)
-    # series_parallel_figures(yml_name=yml)
-
-    # # randomized state plots
-    # randomized_state_plots()

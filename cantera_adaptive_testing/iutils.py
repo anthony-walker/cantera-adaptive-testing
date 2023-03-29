@@ -1,4 +1,5 @@
 import os
+import re
 import operator
 import ruamel.yaml
 import numpy as np
@@ -27,6 +28,27 @@ def remove_model_notes(model):
     new_model = model.split(".")[0]+"_new.yaml"
     with open(new_model, 'w') as f:
         data = yaml.dump(data, f)
+
+def capitalize_species(model):
+    model = os.path.join(os.path.dirname(__file__), "models", model)
+    # read in model
+    with open(model, 'r') as f:
+        data = yaml.load(f)
+    with open(model, 'r') as f:
+        content = f.read()
+    # write new file
+    for kv in data["phases"]:
+        for k, v in kv.items():
+            if k == "species":
+                spec_list = v
+    for sp in spec_list:
+        re_statement = "".join(["["+l+"]" for l in sp])
+        upper_case = sp.upper()
+        content = re.sub(re_statement, upper_case, content)
+    new_model = model.split(".")[0]+"_new.yaml"
+    print(content)
+    with open(new_model, 'w') as f:
+        f.write(content)
 
 def get_zero_dict(keys):
     return {k: 0 for k in keys}

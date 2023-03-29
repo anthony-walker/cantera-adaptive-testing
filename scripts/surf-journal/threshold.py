@@ -14,6 +14,7 @@ from matplotlib import ticker, cm
 plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
+plt.rcParams['font.size'] = 28
 
 colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
 
@@ -109,10 +110,10 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
         data = dict(yaml.load(f))
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(10)
-    # fig.set_figheight(8)
+    fig.set_figwidth(12)
+    fig.set_figheight(10)
+    plt.xticks(rotation=30)
     fig.tight_layout()
-    plt.xticks(rotation=70)
     plt.subplots_adjust(left=0.15, top=0.9, bottom=0.25)
     bwid = 0.15
     mods = list(set([d.rsplit("-")[0] for d in data.keys()]))
@@ -137,7 +138,8 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
         rt_data.sort()
         # get x and y data
         x, y = zip(*rt_data)
-        xlabs = [f"{i:.0e}" for i in x]
+        mags = [round(np.abs(np.log10(i))) if i > 0 else 1 for i in x]
+        xlabs = ["0"] + [ "$\mathregular{10}^{-"+f"{m}"+"}$" for m in mags[1:]]
         x = [i for i in range(len(x))]
         ax.set_xticks(x)
         ax.set_xticklabels(xlabs)
@@ -145,7 +147,7 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
         y = mass_runtime / np.array(y)
         ax.plot([-2, 30], [y[0]] * 2, color=colors[sh+1], linestyle="--", linewidth=0.5)
         ax.bar(x, y, width=bwid, align="center", label=m, color=colors[sh+1])
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("Speed-up")
     if ylims is not None:
         ax.set_ylim(ylims)
@@ -160,10 +162,10 @@ def model_threshold_steps_ratio(yml="jth.yaml", problem="well_stirred_reactor", 
         data = dict(yaml.load(f))
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
-    # fig.set_figwidth(10)
-    # fig.set_figheight(8)
+    fig.set_figwidth(12)
+    fig.set_figheight(12)
     fig.tight_layout()
-    plt.xticks(rotation=70)
+    # plt.xticks(rotation=70)
     plt.subplots_adjust(left=0.15, top=0.9, bottom=0.25)
     bwid = 0.15
     mods = list(set([d.rsplit("-")[0] for d in data.keys()]))
@@ -187,7 +189,8 @@ def model_threshold_steps_ratio(yml="jth.yaml", problem="well_stirred_reactor", 
         rt_data.sort()
         # get x and y data
         x, y = zip(*rt_data)
-        xlabs = [f"{i:.0e}" for i in x]
+        mags = [round(np.abs(np.log10(i))) if i > 0 else 1 for i in x]
+        xlabs = ["0"] + [ "$\mathregular{10}^{-"+f"{m}"+"}$" for m in mags[1:]]
         x = [i for i in range(len(x))]
         ax.set_xticks(x)
         ax.set_xticklabels(xlabs)
@@ -315,20 +318,31 @@ def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=N
         if th == 0:
             labels.append("0")
         else:
-            mthlab = "$\mathregular{10}"+"^{-"+f"{round(np.abs(np.log10(th)))}" + "}$"
+            mthlab = "$\mathregular{10}^{-"+f"{round(np.abs(np.log10(th)))}" + "}$"
             labels.append(mthlab)
     labels = [labels[0],] + labels[1:][::-1]
     txp, phiy = np.meshgrid(threshs, phi_vals)
     txT, Ty = np.meshgrid(threshs, T_vals)
+    # constants
+    fh = 10
+    fw = 14
+    rot = 30
+    lb = 0.1
+    bb = 0.15
+    rb=1
     # create all phi contours
     for i, T in enumerate(T_vals):
         levels = np.linspace(np.floor(np.amin(speedup[:, i, :])), np.ceil(np.amax(speedup[:, i, :])), 1000)
         plt.contourf(txp, phiy, np.transpose(speedup[:, i, :]), cmap=plt.cm.inferno, levels=levels)
         yts = np.linspace(np.floor(np.amin(speedup[:, i, :])), np.ceil(np.amax(speedup[:, i, :])), 5)
         cbar = plt.colorbar(ticks=yts)
+        cbar.ax.set_yticklabels(['{:.0f}'.format(x) for x in yts])
         # adjust figure width
         fig = plt.gcf()
-        fig.set_figwidth(12)
+        fig.set_figwidth(fw)
+        fig.set_figheight(fh)
+        fig.tight_layout()
+        plt.subplots_adjust(left=lb, bottom=bb, right=rb)
         # adjust axis
         ax = plt.gca()
         ax.set_xscale("log")
@@ -337,6 +351,7 @@ def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=N
         ax.set_xticklabels(labels)
         ax.set_xlabel("Threshold")
         ax.set_ylabel("Equivalence Ratio")
+        plt.xticks(rotation=rot)
         plt.grid(True, axis="both", color='k', linewidth=1)
         plt.savefig(f"figures/Tcontour_{T}_{model}.jpg")
         plt.close()
@@ -347,9 +362,13 @@ def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=N
         plt.contourf(txT, Ty, np.transpose(speedup[:, :, i]), cmap=plt.cm.inferno, levels=levels)
         yts = np.linspace(np.floor(np.amin(speedup[:, :, i])), np.ceil(np.amax(speedup[:, :, i])), 5)
         cbar = plt.colorbar(ticks=yts)
+        cbar.ax.set_yticklabels(['{:.0f}'.format(x) for x in yts])
         # adjust figure width
         fig = plt.gcf()
-        fig.set_figwidth(12)
+        fig.set_figwidth(fw)
+        fig.set_figheight(fh)
+        fig.tight_layout()
+        plt.subplots_adjust(left=lb+0.05, bottom=bb, right=rb)
         # adjust axis
         ax = plt.gca()
         ax.set_xscale("log")
@@ -357,26 +376,16 @@ def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=N
         ax.set_xticks(threshs)
         ax.set_xticklabels(labels)
         ax.set_xlabel("Threshold")
-        ax.set_ylabel("Temperature")
+        ax.set_ylabel("Temperature $[K]$")
+        plt.xticks(rotation=rot)
         plt.grid(True, axis="both", color='k', linewidth=1)
         plt.savefig(f"figures/Phicontour_{phi}_{model}.jpg")
         plt.close()
 
-    # labs = [str(l) for l in yts]
-    # ax.set_yticks(yts)
-    # cbar.ax.set_yticklabels(labs)
 
-    # get mass keys
-# yml = "jth.yaml"
+yml = "jth.yaml"
 # combine_surf_yamls(direc="jth_data", yml_name=yml)
-# ("well_stirred_reactor", [75, 275], [2.5, 3.05])
 # for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
-#     threshold_evaluation_bar(yml=yml, problem=prob, yval="sparsity", fcn=np.mean, yxlims=[0.35, 0.95], ylab="Sparsity")
-#     threshold_evaluation_bar(yml=yml, problem=prob, yval="lin_iters", yxlims=[2400, 3200], ylab="Linear Iterations")
-#     threshold_evaluation_bar(yml=yml, problem=prob, yval="l2_norm", ylab="L2 Norm", ylog=True)
-#     threshold_evaluation_bar(yml=yml, problem=prob, yval="condition", ylab="Condition Number", ylog=True)
 #     model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
-    # model_threshold_steps_ratio(yml=yml, problem=prob, ylims=slim)
-# combine_by_TP()
-create_perturbed_contour()
-create_perturbed_contour(model="A2")
+# # combine_by_TP(yml_name="butane.yml", direc="butane_jpt_data")
+create_perturbed_contour(model="Butane", yml="butane.yml")

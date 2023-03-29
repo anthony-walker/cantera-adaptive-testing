@@ -11,6 +11,11 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.lines import Line2D
 from matplotlib import ticker, cm
 
+plt.rcParams['mathtext.fontset'] = 'cm'
+plt.rcParams['mathtext.rm'] = 'serif'
+plt.rcParams["font.family"] = 'serif'
+plt.rcParams['font.size'] = 16
+
 
 def combine_surf_yamls(direc="jet_data", yml_name="jet.yaml"):
     yaml = ruamel.yaml.YAML()
@@ -59,7 +64,7 @@ def model_numbers():
     models.TwoMethylnonadecane.print_model_information()
 
 
-def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_reactor"):
+def model_assumptions_speedup_og(colors={}, markers={}, problem="well_stirred_reactor"):
     yaml = ruamel.yaml.YAML()
     with open("reaction.yaml", 'r') as f:
         data = dict(yaml.load(f))
@@ -105,8 +110,6 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     ax.bar(x2, y2, width=bwid, align="center", label="Jet-A", color=colors[2])
     ax.legend()
     ax.set_ylabel("Speed-up")
-    # ax.set_yscale("log")
-    # ax.set_ylim([10**0, 10**4])
     plt.savefig(f"figures/reaction-{problem}-bar.pdf")
     plt.close()
 
@@ -120,7 +123,7 @@ def model_evaluation(xval="steps", yval="condition", yml="reaction.yaml", proble
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
     mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
-    labels = ["std", "efo", "etb", "etb-efo"]
+    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
@@ -140,6 +143,7 @@ def model_evaluation(xval="steps", yval="condition", yml="reaction.yaml", proble
             ax.loglog(x_arr, y_arr, color=colors[i], label=labels[i])
         ax.legend()
         name = keylist[0].split("-")[0].lower()
+        plt.xticks(rotation=10)
         plt.savefig(f"figures/{name}-{xval}-{yval}.pdf")
 
 def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_stirred_reactor", fcn=max, ylab=None, yxlims=None):
@@ -152,7 +156,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
     mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
-    labels = ["std", "efo", "etb", "etb-efo"]
+    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
@@ -162,7 +166,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     xs = [i for i in range(4)]
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
     rg1 = 1
     rg2 = 5
     for q, keylist in enumerate(mkeys[rg1:rg2]):
@@ -197,7 +201,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
         ax.plot([-2, 5], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
         x = np.array(x) + bwid
     ax.set_xlim([min(xs)-bwid, max(x)])
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ylab = yval.capitalize() if ylab is None else ylab
     ax.set_ylabel(ylab)
     xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
@@ -205,6 +209,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     ax.set_xticklabels(labels)
     if yxlims is not None:
         ax.set_ylim(yxlims)
+    plt.xticks(rotation=10)
     plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
     plt.close()
 
@@ -239,12 +244,13 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
     bwid = 0.10
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
+    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
     x = [i for i in range(4)]
@@ -255,12 +261,13 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
         ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("Steps Ratio")
     ax.set_xlim([min(xs)-bwid, max(x)])
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
-    ax.set_xticklabels(xlabs)
+    ax.set_xticklabels(labels)
+    plt.xticks(rotation=10)
     # # ax.set_yscale("log")
     ax.set_ylim([0.3, 0.4])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-steps-ratio.pdf")
@@ -297,12 +304,13 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
     bwid = 0.10
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
+    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
     x = [i for i in range(4)]
@@ -313,14 +321,15 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
         ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("Speed-up")
     ax.set_xlim([min(xs)-bwid, max(x)])
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
-    ax.set_xticklabels(xlabs)
+    ax.set_xticklabels(labels)
+    plt.xticks(rotation=10)
     # # ax.set_yscale("log")
-    ax.set_ylim([250, 600])
+    ax.set_ylim([250, 360])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-speedup.pdf")
     plt.close()
 
@@ -355,7 +364,7 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
     bwid = 0.10
@@ -371,12 +380,13 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
         ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("clocktime-per-step")
     ax.set_xlim([min(xs)-bwid, max(x)])
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
     ax.set_xticklabels(xlabs)
+    plt.xticks(rotation=10)
     # # ax.set_yscale("log")
     # # ax.set_ylim([10**0, 10**4])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-ct-ps.pdf")
@@ -409,14 +419,14 @@ def model_condition_study():
     # create figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8)
     # create bar chart
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     for c, x, y, clr in zip(res, x_s, y_s, colors[1:5]):
         print(c, x, y)
         clab = c.split("_")[0]
         ax.bar(x, y, width=0.1, align="center", color=clr, label=clab)
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.1), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     # ylab = yval.capitalize() if ylab is None else ylab
     # ax.set_ylabel(ylab)
     # xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
@@ -427,23 +437,14 @@ def model_condition_study():
     # plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
     # plt.close()
 
-model_condition_study()
-
 # combine_surf_yamls(direc="jr_dat÷a", yml_name="jr.yaml")
 # model_numbers()
-# yml="jet.yaml"
-# for p in ["plug_flow_reactor",]:
-    # model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
-    # model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
-    # model_evaluation_bar(yval="max_eigenvalue", yml=yml, problem=p, fcn=np.mean, ylab="Mean Maximum Eigenvalue")
-    # model_evaluation_bar(yval="l2_norm", yml=yml, problem=p, fcn=np.mean, ylab="2-norm")
-    # model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
-    # model_evaluation_bar(yval="ill-conditioned", yml=yml, problem=p, fcn=np.mean, ylab="log(Condition Number)")
-    # model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
-    # model_evaluation_bar(yval="singularity", yml=yml, problem=p, ylab="Distance From Singular Matrix")
-    # model_evaluation_bar(yval="prec_solves", yml=yml, problem=p, ylab="Preconditioner Solves")
-    # model_evaluation_bar(yval="steps", yml=yml, problem=p, ylab="Time Steps")
-    # model_assumptions_speedup(problem=p, yml=yml)
-#     model_assumptions_clocktime(problem=p, yml=yml)
-    # model_steps_ratio(problem=p, yml=yml)
+yml="jet.yaml"
+for p in ["plug_flow_reactor",]:
+    model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
+    model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
+    model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
+    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
+    model_assumptions_speedup(problem=p, yml=yml)
+    model_steps_ratio(problem=p, yml=yml)
 

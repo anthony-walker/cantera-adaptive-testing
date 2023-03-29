@@ -1,0 +1,5070 @@
+A2-0ep00-parallel-5:
+  n_reactors:
+    runtime: 2.486010649
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: false
+    numerical:
+      steps: '1039'
+      rhs_evals: '1152'
+      nonlinear_iters: '1150'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2864'
+      lin_iters: '2864'
+      lin_conv_fails: '88'
+      prec_evals: '17'
+      prec_solves: '3926'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2864'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.911287006133201e+19'
+      l2_norm: '2998853593074.2983'
+      fro_norm: '6705640488750.287'
+      determinant: inf
+      min_eigenvalue: '0.9999557205000857'
+      max_eigenvalue: '10971901.115686662'
+      threshold: '0.0'
+      nonzero_elements: '15555'
+      total_elements: '360000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:05:26-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-2:
+  n_reactors:
+    runtime: 1.4984047839999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: true
+    numerical:
+      steps: '1052'
+      rhs_evals: '1161'
+      nonlinear_iters: '1159'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '15'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '90'
+      lin_rhs_evals: '2819'
+      lin_iters: '2819'
+      lin_conv_fails: '82'
+      prec_evals: '19'
+      prec_solves: '3890'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2819'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.1809417533259145e+19'
+      l2_norm: '3995241558995.4385'
+      fro_norm: '5636300008770.032'
+      determinant: inf
+      min_eigenvalue: '0.999985723750562'
+      max_eigenvalue: '14323347.00518549'
+      threshold: '0.0'
+      nonzero_elements: '6200'
+      total_elements: '57600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:24:53-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-11:
+  n_reactors:
+    runtime: 4453.903877666
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: false
+    numerical:
+      steps: '3207'
+      rhs_evals: '4826'
+      nonlinear_iters: '4825'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '269'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '529'
+      lin_rhs_evals: '78529'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:14:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-1:
+  n_reactors:
+    runtime: 597.4723685810001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: false
+    numerical:
+      steps: '3171'
+      rhs_evals: '4883'
+      nonlinear_iters: '4882'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '303'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '568'
+      lin_rhs_evals: '7260'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:20:31-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-10:
+  n_reactors:
+    runtime: 4825.630292432001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: true
+    numerical:
+      steps: '3246'
+      rhs_evals: '4925'
+      nonlinear_iters: '4924'
+      nonlinear_conv_fails: '6'
+      err_test_fails: '257'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '514'
+      lin_rhs_evals: '71390'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:38:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-8:
+  n_reactors:
+    runtime: 4119.295760696999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: true
+    numerical:
+      steps: '3187'
+      rhs_evals: '4859'
+      nonlinear_iters: '4858'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '248'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '503'
+      lin_rhs_evals: '57112'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 12:28:26-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-7:
+  n_reactors:
+    runtime: 3.095113552
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: false
+    numerical:
+      steps: '1045'
+      rhs_evals: '1161'
+      nonlinear_iters: '1159'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2833'
+      lin_iters: '2833'
+      lin_conv_fails: '104'
+      prec_evals: '17'
+      prec_solves: '3902'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2833'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.581450264332262e+19'
+      l2_norm: '3206661684441.9224'
+      fro_norm: '8484029355833.878'
+      determinant: inf
+      min_eigenvalue: '0.9999343768440557'
+      max_eigenvalue: '11809729.753984954'
+      threshold: '0.0'
+      nonzero_elements: '21777'
+      total_elements: '705600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:58:55-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-15:
+  n_reactors:
+    runtime: 5.560052880999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: true
+    numerical:
+      steps: '1041'
+      rhs_evals: '1155'
+      nonlinear_iters: '1153'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '91'
+      lin_rhs_evals: '2776'
+      lin_iters: '2776'
+      lin_conv_fails: '88'
+      prec_evals: '19'
+      prec_solves: '3838'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2776'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.556211264465988e+19'
+      l2_norm: '3494984967233.108'
+      fro_norm: '13530585032603.988'
+      determinant: inf
+      min_eigenvalue: '0.9999744417006398'
+      max_eigenvalue: '12651551.042189868'
+      threshold: '0.0'
+      nonzero_elements: '45201'
+      total_elements: '3240000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:56:00-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-11:
+  n_reactors:
+    runtime: 5201.471331954999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: true
+    numerical:
+      steps: '3272'
+      rhs_evals: '4987'
+      nonlinear_iters: '4986'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '274'
+      last_order: '3'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '534'
+      lin_rhs_evals: '79860'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:13:39-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-8:
+  n_reactors:
+    runtime: 4303.560072736
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: false
+    numerical:
+      steps: '3138'
+      rhs_evals: '4800'
+      nonlinear_iters: '4799'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '258'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '509'
+      lin_rhs_evals: '56144'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 12:36:33-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-3:
+  n_reactors:
+    runtime: 1.8583231869999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: false
+    numerical:
+      steps: '1046'
+      rhs_evals: '1160'
+      nonlinear_iters: '1158'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '90'
+      lin_rhs_evals: '2820'
+      lin_iters: '2820'
+      lin_conv_fails: '85'
+      prec_evals: '18'
+      prec_solves: '3890'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2820'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.125445002847596e+19'
+      l2_norm: '3939703997784.347'
+      fro_norm: '6823767491014.69'
+      determinant: inf
+      min_eigenvalue: '0.9999849327153145'
+      max_eigenvalue: '14158071.33913655'
+      threshold: '0.0'
+      nonzero_elements: '9333'
+      total_elements: '129600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:30:50-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-12:
+  n_reactors:
+    runtime: 4.791900017
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: true
+    numerical:
+      steps: '1053'
+      rhs_evals: '1164'
+      nonlinear_iters: '1162'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '15'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '87'
+      lin_rhs_evals: '2829'
+      lin_iters: '2829'
+      lin_conv_fails: '80'
+      prec_evals: '19'
+      prec_solves: '3901'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2829'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.241615236329973e+19'
+      l2_norm: '4015821500941.4424'
+      fro_norm: '13903107356500.494'
+      determinant: inf
+      min_eigenvalue: '0.999985194603658'
+      max_eigenvalue: '14405972.066409297'
+      threshold: '0.0'
+      nonzero_elements: '35334'
+      total_elements: '2073600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:55:30-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-9:
+  n_reactors:
+    runtime: 4041.7613777879997
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: false
+    numerical:
+      steps: '3017'
+      rhs_evals: '4547'
+      nonlinear_iters: '4546'
+      nonlinear_conv_fails: '10'
+      err_test_fails: '222'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '57'
+      lin_solve_setups: '459'
+      lin_rhs_evals: '62073'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:05:37-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-7:
+  n_reactors:
+    runtime: 3.5308543309999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: true
+    numerical:
+      steps: '1049'
+      rhs_evals: '1160'
+      nonlinear_iters: '1158'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '15'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2871'
+      lin_iters: '2871'
+      lin_conv_fails: '109'
+      prec_evals: '18'
+      prec_solves: '3941'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2871'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.849861369050463e+19'
+      l2_norm: '3553691866858.9443'
+      fro_norm: '9396801410121.81'
+      determinant: inf
+      min_eigenvalue: '0.9999617103802324'
+      max_eigenvalue: '12928840.070593413'
+      threshold: '0.0'
+      nonzero_elements: '20542'
+      total_elements: '705600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:53:42-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-15:
+  n_reactors:
+    runtime: 4.960180168000001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: false
+    numerical:
+      steps: '1028'
+      rhs_evals: '1141'
+      nonlinear_iters: '1139'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2835'
+      lin_iters: '2835'
+      lin_conv_fails: '82'
+      prec_evals: '18'
+      prec_solves: '3885'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2835'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.6417775551775465e+19'
+      l2_norm: '3654679741614.5664'
+      fro_norm: '14154513775139.682'
+      determinant: inf
+      min_eigenvalue: '0.9999846551053642'
+      max_eigenvalue: '13155120.312984949'
+      threshold: '0.0'
+      nonzero_elements: '46665'
+      total_elements: '3240000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 17:04:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-2:
+  n_reactors:
+    runtime: 1301.940397908
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: false
+    numerical:
+      steps: '3143'
+      rhs_evals: '4802'
+      nonlinear_iters: '4801'
+      nonlinear_conv_fails: '10'
+      err_test_fails: '267'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '523'
+      lin_rhs_evals: '14278'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:26:23-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-8:
+  n_reactors:
+    runtime: 3.6371215049999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: true
+    numerical:
+      steps: '1064'
+      rhs_evals: '1182'
+      nonlinear_iters: '1180'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '92'
+      lin_rhs_evals: '2958'
+      lin_iters: '2958'
+      lin_conv_fails: '94'
+      prec_evals: '18'
+      prec_solves: '4045'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2958'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.2984842272186606e+19'
+      l2_norm: '3846779038454.8506'
+      fro_norm: '10874043537890.008'
+      determinant: inf
+      min_eigenvalue: '0.9999682391849222'
+      max_eigenvalue: '13944710.267518448'
+      threshold: '0.0'
+      nonzero_elements: '24730'
+      total_elements: '921600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 12:27:53-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-1:
+  n_reactors:
+    runtime: 596.4355048360001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: true
+    numerical:
+      steps: '3171'
+      rhs_evals: '4883'
+      nonlinear_iters: '4882'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '303'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '568'
+      lin_rhs_evals: '7260'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:17:39-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-14:
+  n_reactors:
+    runtime: 5715.277269202
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: true
+    numerical:
+      steps: '3245'
+      rhs_evals: '4916'
+      nonlinear_iters: '4915'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '276'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '531'
+      lin_rhs_evals: '101640'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:17:45-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-13:
+  n_reactors:
+    runtime: 4.564041298999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: false
+    numerical:
+      steps: '1055'
+      rhs_evals: '1160'
+      nonlinear_iters: '1158'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '90'
+      lin_rhs_evals: '2747'
+      lin_iters: '2747'
+      lin_conv_fails: '72'
+      prec_evals: '19'
+      prec_solves: '3821'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2747'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.044469830101133e+19'
+      l2_norm: '2853970846812.812'
+      fro_norm: '10290138226968.582'
+      determinant: inf
+      min_eigenvalue: '0.9999900366181145'
+      max_eigenvalue: '10238454.190985415'
+      threshold: '0.0'
+      nonzero_elements: '40443'
+      total_elements: '2433600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 15:41:14-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-6:
+  n_reactors:
+    runtime: 2.666558565
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: false
+    numerical:
+      steps: '1041'
+      rhs_evals: '1155'
+      nonlinear_iters: '1153'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '15'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '89'
+      lin_rhs_evals: '2828'
+      lin_iters: '2828'
+      lin_conv_fails: '86'
+      prec_evals: '18'
+      prec_solves: '3893'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2828'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.551676055888211e+19'
+      l2_norm: '3660076576537.325'
+      fro_norm: '8965320032121.113'
+      determinant: inf
+      min_eigenvalue: '0.9999869549419136'
+      max_eigenvalue: '13135711.7178281'
+      threshold: '0.0'
+      nonzero_elements: '18666'
+      total_elements: '518400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:33:55-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-3:
+  n_reactors:
+    runtime: 2024.9994237779997
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: false
+    numerical:
+      steps: '3093'
+      rhs_evals: '4730'
+      nonlinear_iters: '4729'
+      nonlinear_conv_fails: '13'
+      err_test_fails: '259'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '514'
+      lin_rhs_evals: '21417'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:31:05-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-13:
+  n_reactors:
+    runtime: 5231.823143085
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: true
+    numerical:
+      steps: '3047'
+      rhs_evals: '4688'
+      nonlinear_iters: '4687'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '246'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '499'
+      lin_rhs_evals: '91234'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 15:36:25-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-14:
+  n_reactors:
+    runtime: 5344.9406345980005
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: false
+    numerical:
+      steps: '3116'
+      rhs_evals: '4669'
+      nonlinear_iters: '4668'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '246'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '495'
+      lin_rhs_evals: '99946'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:22:37-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-10:
+  n_reactors:
+    runtime: 4.1253945729999995
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: true
+    numerical:
+      steps: '1037'
+      rhs_evals: '1146'
+      nonlinear_iters: '1144'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2873'
+      lin_iters: '2873'
+      lin_conv_fails: '92'
+      prec_evals: '19'
+      prec_solves: '3932'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2873'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.830111518278139e+19'
+      l2_norm: '3777153444378.0747'
+      fro_norm: '11936809343765.268'
+      determinant: inf
+      min_eigenvalue: '0.9999851840594891'
+      max_eigenvalue: '13565554.692307575'
+      threshold: '0.0'
+      nonzero_elements: '30960'
+      total_elements: '1440000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:37:41-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-4:
+  n_reactors:
+    runtime: 2666.132848176
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: false
+    numerical:
+      steps: '3127'
+      rhs_evals: '4814'
+      nonlinear_iters: '4813'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '259'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '517'
+      lin_rhs_evals: '28072'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:49:05-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-11:
+  n_reactors:
+    runtime: 4.730991437999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: true
+    numerical:
+      steps: '1039'
+      rhs_evals: '1153'
+      nonlinear_iters: '1151'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2736'
+      lin_iters: '2736'
+      lin_conv_fails: '73'
+      prec_evals: '19'
+      prec_solves: '3798'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2736'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.0857747072271655e+19'
+      l2_norm: '3770403374333.329'
+      fro_norm: '12498908875015.092'
+      determinant: inf
+      min_eigenvalue: '0.9999730824303563'
+      max_eigenvalue: '13644946.79708851'
+      threshold: '0.0'
+      nonzero_elements: '33874'
+      total_elements: '1742400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:12:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-14:
+  n_reactors:
+    runtime: 4.695607711999999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: false
+    numerical:
+      steps: '1039'
+      rhs_evals: '1152'
+      nonlinear_iters: '1150'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '89'
+      lin_rhs_evals: '2760'
+      lin_iters: '2760'
+      lin_conv_fails: '81'
+      prec_evals: '18'
+      prec_solves: '3819'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2760'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.056574277526471e+19'
+      l2_norm: '3762997515854.7725'
+      fro_norm: '14079847451752.578'
+      determinant: inf
+      min_eigenvalue: '0.999977916371664'
+      max_eigenvalue: '13623121.128705649'
+      threshold: '0.0'
+      nonzero_elements: '43554'
+      total_elements: '2822400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:22:16-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-9:
+  n_reactors:
+    runtime: 3.802129821
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: true
+    numerical:
+      steps: '1054'
+      rhs_evals: '1169'
+      nonlinear_iters: '1167'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '93'
+      lin_rhs_evals: '2818'
+      lin_iters: '2818'
+      lin_conv_fails: '98'
+      prec_evals: '19'
+      prec_solves: '3895'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2818'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.611553574669247e+19'
+      l2_norm: '3666093630370.467'
+      fro_norm: '10990714076801.6'
+      determinant: inf
+      min_eigenvalue: '0.99998581664648'
+      max_eigenvalue: '13163354.531365246'
+      threshold: '0.0'
+      nonzero_elements: '27839'
+      total_elements: '1166400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:03:36-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-1:
+  n_reactors:
+    runtime: 1.1399758509999998
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: false
+    numerical:
+      steps: '1047'
+      rhs_evals: '1158'
+      nonlinear_iters: '1156'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '86'
+      lin_rhs_evals: '2910'
+      lin_iters: '2910'
+      lin_conv_fails: '84'
+      prec_evals: '18'
+      prec_solves: '3979'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2910'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.461514818661787e+19'
+      l2_norm: '2991644155643.2705'
+      fro_norm: '2991644155673.7827'
+      determinant: '5.518974530437422e+282'
+      min_eigenvalue: '0.999985476063221'
+      max_eigenvalue: '10794817.25011783'
+      threshold: '0.0'
+      nonzero_elements: '3111'
+      total_elements: '14400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:20:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-3:
+  n_reactors:
+    runtime: 1.93673689
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: true
+    numerical:
+      steps: '1064'
+      rhs_evals: '1181'
+      nonlinear_iters: '1179'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '92'
+      lin_rhs_evals: '2903'
+      lin_iters: '2903'
+      lin_conv_fails: '116'
+      prec_evals: '18'
+      prec_solves: '3996'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2903'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '6.093107858178511e+19'
+      l2_norm: '3743019161336.323'
+      fro_norm: '6474895248940.48'
+      determinant: inf
+      min_eigenvalue: '0.99996912378487'
+      max_eigenvalue: '13568433.975658396'
+      threshold: '0.0'
+      nonzero_elements: '9301'
+      total_elements: '129600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:28:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-15:
+  n_reactors:
+    runtime: 5091.012728186
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: false
+    numerical:
+      steps: '3104'
+      rhs_evals: '4632'
+      nonlinear_iters: '4631'
+      nonlinear_conv_fails: '7'
+      err_test_fails: '216'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '57'
+      lin_solve_setups: '456'
+      lin_rhs_evals: '103455'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 17:05:43-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-10:
+  n_reactors:
+    runtime: 5023.24211352
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: false
+    numerical:
+      steps: '3174'
+      rhs_evals: '4842'
+      nonlinear_iters: '4841'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '261'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '519'
+      lin_rhs_evals: '70180'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:49:36-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-7:
+  n_reactors:
+    runtime: 3902.118507603
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: false
+    numerical:
+      steps: '3226'
+      rhs_evals: '4898'
+      nonlinear_iters: '4897'
+      nonlinear_conv_fails: '5'
+      err_test_fails: '263'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '511'
+      lin_rhs_evals: '49126'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:59:05-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-13:
+  n_reactors:
+    runtime: 5.120538668
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: true
+    numerical:
+      steps: '1039'
+      rhs_evals: '1162'
+      nonlinear_iters: '1160'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '91'
+      lin_rhs_evals: '2826'
+      lin_iters: '2826'
+      lin_conv_fails: '71'
+      prec_evals: '18'
+      prec_solves: '3887'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2826'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '7.216658698834622e+19'
+      l2_norm: '4081660657705.09'
+      fro_norm: '14712250030565.65'
+      determinant: inf
+      min_eigenvalue: '0.9999330645060281'
+      max_eigenvalue: '14955527.160613582'
+      threshold: '0.0'
+      nonzero_elements: '39125'
+      total_elements: '2433600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 15:35:22-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-7:
+  n_reactors:
+    runtime: 3780.118380125001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 7
+      series: true
+    numerical:
+      steps: '3174'
+      rhs_evals: '4865'
+      nonlinear_iters: '4864'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '285'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '61'
+      lin_solve_setups: '558'
+      lin_rhs_evals: '51667'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 7
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:54:42-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-15:
+  n_reactors:
+    runtime: 5593.595033161001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 15
+      series: true
+    numerical:
+      steps: '3088'
+      rhs_evals: '4648'
+      nonlinear_iters: '4647'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '247'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '501'
+      lin_rhs_evals: '107085'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 15
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:57:15-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-13:
+  n_reactors:
+    runtime: 5207.8007941000005
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 13
+      series: false
+    numerical:
+      steps: '3199'
+      rhs_evals: '4781'
+      nonlinear_iters: '4780'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '242'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '497'
+      lin_rhs_evals: '92807'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 13
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 15:42:16-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-10:
+  n_reactors:
+    runtime: 3.8518397980000003
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 10
+      series: false
+    numerical:
+      steps: '1041'
+      rhs_evals: '1156'
+      nonlinear_iters: '1154'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '89'
+      lin_rhs_evals: '2803'
+      lin_iters: '2803'
+      lin_conv_fails: '95'
+      prec_evals: '18'
+      prec_solves: '3865'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2803'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.6723035722606625e+19'
+      l2_norm: '3672558837600.1187'
+      fro_norm: '11613650767915.432'
+      determinant: inf
+      min_eigenvalue: '0.9999846703990509'
+      max_eigenvalue: '13218151.577193191'
+      threshold: '0.0'
+      nonzero_elements: '31110'
+      total_elements: '1440000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 10
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:48:53-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-12:
+  n_reactors:
+    runtime: 4.211692249
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: false
+    numerical:
+      steps: '1040'
+      rhs_evals: '1146'
+      nonlinear_iters: '1144'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2721'
+      lin_iters: '2721'
+      lin_conv_fails: '80'
+      prec_evals: '18'
+      prec_solves: '3781'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2721'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.325883357397909e+19'
+      l2_norm: '3293019384271.252'
+      fro_norm: '11407353767844.123'
+      determinant: inf
+      min_eigenvalue: '0.9999649659529556'
+      max_eigenvalue: '11986691.975763062'
+      threshold: '0.0'
+      nonzero_elements: '37326'
+      total_elements: '2073600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:59:30-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-6:
+  n_reactors:
+    runtime: 4073.299213162
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: false
+    numerical:
+      steps: '3270'
+      rhs_evals: '5034'
+      nonlinear_iters: '5033'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '312'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '61'
+      lin_solve_setups: '590'
+      lin_rhs_evals: '44286'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:34:20-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-5:
+  n_reactors:
+    runtime: 3012.2484791890006
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: true
+    numerical:
+      steps: '3096'
+      rhs_evals: '4671'
+      nonlinear_iters: '4670'
+      nonlinear_conv_fails: '14'
+      err_test_fails: '230'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '480'
+      lin_rhs_evals: '35090'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:01:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-3:
+  n_reactors:
+    runtime: 1918.1596115839998
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 3
+      series: true
+    numerical:
+      steps: '3121'
+      rhs_evals: '4738'
+      nonlinear_iters: '4737'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '244'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '58'
+      lin_solve_setups: '488'
+      lin_rhs_evals: '21054'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 3
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:28:37-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-5:
+  n_reactors:
+    runtime: 2.5118749510000002
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: true
+    numerical:
+      steps: '1040'
+      rhs_evals: '1150'
+      nonlinear_iters: '1148'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2725'
+      lin_iters: '2725'
+      lin_conv_fails: '87'
+      prec_evals: '19'
+      prec_solves: '3786'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2725'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.741660505827426e+19'
+      l2_norm: '3524057946925.2227'
+      fro_norm: '7873943928753.679'
+      determinant: inf
+      min_eigenvalue: '0.9999654566749046'
+      max_eigenvalue: '12803638.155203221'
+      threshold: '0.0'
+      nonzero_elements: '15449'
+      total_elements: '360000'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:00:59-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-4:
+  n_reactors:
+    runtime: 2814.2588864719996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: true
+    numerical:
+      steps: '3258'
+      rhs_evals: '4967'
+      nonlinear_iters: '4966'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '283'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '61'
+      lin_solve_setups: '553'
+      lin_rhs_evals: '29524'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:48:37-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-9:
+  n_reactors:
+    runtime: 4641.346263550001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: true
+    numerical:
+      steps: '3314'
+      rhs_evals: '4998'
+      nonlinear_iters: '4997'
+      nonlinear_conv_fails: '8'
+      err_test_fails: '276'
+      last_order: '3'
+      stab_order_reductions: '0'
+      jac_evals: '62'
+      lin_solve_setups: '533'
+      lin_rhs_evals: '67518'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:04:11-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-1:
+  n_reactors:
+    runtime: 1.069075019
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 1
+      series: true
+    numerical:
+      steps: '1047'
+      rhs_evals: '1158'
+      nonlinear_iters: '1156'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '86'
+      lin_rhs_evals: '2910'
+      lin_iters: '2910'
+      lin_conv_fails: '84'
+      prec_evals: '18'
+      prec_solves: '3979'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2910'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.461514818661787e+19'
+      l2_norm: '2991644155643.2705'
+      fro_norm: '2991644155673.7827'
+      determinant: '5.518974530437422e+282'
+      min_eigenvalue: '0.999985476063221'
+      max_eigenvalue: '10794817.25011783'
+      threshold: '0.0'
+      nonzero_elements: '3111'
+      total_elements: '14400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 1
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:17:29-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-6:
+  n_reactors:
+    runtime: 3706.5117826100004
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: true
+    numerical:
+      steps: '3271'
+      rhs_evals: '4954'
+      nonlinear_iters: '4953'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '263'
+      last_order: '4'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '520'
+      lin_rhs_evals: '43560'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:33:21-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-2:
+  n_reactors:
+    runtime: 1391.052492637
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: true
+    numerical:
+      steps: '3193'
+      rhs_evals: '4957'
+      nonlinear_iters: '4956'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '288'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '60'
+      lin_solve_setups: '555'
+      lin_rhs_evals: '14520'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:25:05-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-12:
+  n_reactors:
+    runtime: 4863.697521272999
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: false
+    numerical:
+      steps: '2976'
+      rhs_evals: '4484'
+      nonlinear_iters: '4483'
+      nonlinear_conv_fails: '11'
+      err_test_fails: '237'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '57'
+      lin_solve_setups: '480'
+      lin_rhs_evals: '82764'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 15:00:25-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-4:
+  n_reactors:
+    runtime: 2.0474150749999995
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: false
+    numerical:
+      steps: '1041'
+      rhs_evals: '1161'
+      nonlinear_iters: '1159'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '18'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '92'
+      lin_rhs_evals: '2743'
+      lin_iters: '2743'
+      lin_conv_fails: '101'
+      prec_evals: '18'
+      prec_solves: '3807'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2743'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.303176419142728e+19'
+      l2_norm: '2897822564253.3105'
+      fro_norm: '5795645128565.66'
+      determinant: inf
+      min_eigenvalue: '0.9999853712068147'
+      max_eigenvalue: '10463213.26264915'
+      threshold: '0.0'
+      nonzero_elements: '12444'
+      total_elements: '230400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:48:49-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-9:
+  n_reactors:
+    runtime: 3.5546153489999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 9
+      series: false
+    numerical:
+      steps: '1030'
+      rhs_evals: '1139'
+      nonlinear_iters: '1137'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '89'
+      lin_rhs_evals: '2767'
+      lin_iters: '2767'
+      lin_conv_fails: '70'
+      prec_evals: '19'
+      prec_solves: '3815'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2767'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.8680997184027935e+19'
+      l2_norm: '3803469461555.2275'
+      fro_norm: '11410408384782.736'
+      determinant: inf
+      min_eigenvalue: '0.9999854362234073'
+      max_eigenvalue: '13668745.828012174'
+      threshold: '0.0'
+      nonzero_elements: '27999'
+      total_elements: '1166400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 9
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 13:05:02-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-4:
+  n_reactors:
+    runtime: 2.2691670709999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 4
+      series: true
+    numerical:
+      steps: '1031'
+      rhs_evals: '1153'
+      nonlinear_iters: '1151'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2855'
+      lin_iters: '2855'
+      lin_conv_fails: '102'
+      prec_evals: '19'
+      prec_solves: '3909'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2855'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.981426857673881e+19'
+      l2_norm: '3316745503952.642'
+      fro_norm: '6625179004199.868'
+      determinant: inf
+      min_eigenvalue: '0.9999865115911346'
+      max_eigenvalue: '11919736.718673445'
+      threshold: '0.0'
+      nonzero_elements: '12305'
+      total_elements: '230400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 4
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:48:30-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-6:
+  n_reactors:
+    runtime: 2.895280018
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 6
+      series: true
+    numerical:
+      steps: '1079'
+      rhs_evals: '1192'
+      nonlinear_iters: '1190'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '17'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '91'
+      lin_rhs_evals: '2910'
+      lin_iters: '2910'
+      lin_conv_fails: '82'
+      prec_evals: '19'
+      prec_solves: '4012'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2910'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.682292029922475e+19'
+      l2_norm: '2858557753173.735'
+      fro_norm: '6998428406670.867'
+      determinant: inf
+      min_eigenvalue: '0.999953744330814'
+      max_eigenvalue: '10471209.386545628'
+      threshold: '0.0'
+      nonzero_elements: '18597'
+      total_elements: '518400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 6
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:32:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-11:
+  n_reactors:
+    runtime: 4.407008653
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 11
+      series: false
+    numerical:
+      steps: '1037'
+      rhs_evals: '1149'
+      nonlinear_iters: '1147'
+      nonlinear_conv_fails: '1'
+      err_test_fails: '15'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '86'
+      lin_rhs_evals: '2701'
+      lin_iters: '2701'
+      lin_conv_fails: '70'
+      prec_evals: '19'
+      prec_solves: '3758'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2701'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.965683900683955e+19'
+      l2_norm: '3868385587639.586'
+      fro_norm: '12829983538750.648'
+      determinant: inf
+      min_eigenvalue: '0.9999857479570715'
+      max_eigenvalue: '13892174.670267753'
+      threshold: '0.0'
+      nonzero_elements: '34221'
+      total_elements: '1742400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 11
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:13:56-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-series-14:
+  n_reactors:
+    runtime: 5.420906025000001
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 14
+      series: true
+    numerical:
+      steps: '1045'
+      rhs_evals: '1170'
+      nonlinear_iters: '1168'
+      nonlinear_conv_fails: '2'
+      err_test_fails: '19'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '92'
+      lin_rhs_evals: '2839'
+      lin_iters: '2839'
+      lin_conv_fails: '96'
+      prec_evals: '18'
+      prec_solves: '3912'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2839'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '5.37693940657133e+19'
+      l2_norm: '3313351975585.9946'
+      fro_norm: '12392974956014.383'
+      determinant: inf
+      min_eigenvalue: '0.9999637773836729'
+      max_eigenvalue: '12056889.54538229'
+      threshold: '0.0'
+      nonzero_elements: '42511'
+      total_elements: '2822400'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 14
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 16:16:35-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-series-12:
+  n_reactors:
+    runtime: 5142.821932857
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 12
+      series: true
+    numerical:
+      steps: '3159'
+      rhs_evals: '4713'
+      nonlinear_iters: '4712'
+      nonlinear_conv_fails: '12'
+      err_test_fails: '251'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '59'
+      lin_solve_setups: '511'
+      lin_rhs_evals: '85668'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 12
+      series: true
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 14:56:20-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-mass-parallel-5:
+  n_reactors:
+    runtime: 3144.195377779
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: false
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 5
+      series: false
+    numerical:
+      steps: '3100'
+      rhs_evals: '4704'
+      nonlinear_iters: '4703'
+      nonlinear_conv_fails: '9'
+      err_test_fails: '250'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '57'
+      lin_solve_setups: '501'
+      lin_rhs_evals: '34485'
+      lin_iters: '0'
+      lin_conv_fails: '0'
+      prec_evals: '0'
+      prec_solves: '0'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '0'
+      time: '0.001'
+      preconditioned: 'False'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: false
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0
+      moles: false
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 5
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 11:05:49-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-8:
+  n_reactors:
+    runtime: 3.2294088939999996
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 8
+      series: false
+    numerical:
+      steps: '1042'
+      rhs_evals: '1150'
+      nonlinear_iters: '1148'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2754'
+      lin_iters: '2754'
+      lin_conv_fails: '90'
+      prec_evals: '19'
+      prec_solves: '3816'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2754'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.632641751080493e+19'
+      l2_norm: '3097750321129.5063'
+      fro_norm: '8761761034059.447'
+      determinant: inf
+      min_eigenvalue: '0.9999858259019143'
+      max_eigenvalue: '11166556.642232446'
+      threshold: '0.0'
+      nonzero_elements: '24888'
+      total_elements: '921600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 8
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 12:36:01-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
+A2-0ep00-parallel-2:
+  n_reactors:
+    runtime: 1.393885957
+    endtime: 0.001
+    nruns: 10
+    runtype: performance
+    thermo:
+      model: a2-119-841.yaml
+      moles: true
+      gas_reactions: 841
+      gas_species: 119
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1350.0
+      P0: 101325.0
+      V0: 1
+      skip_falloff: true
+      skip_thirdbody: true
+      n_reactors: 2
+      series: false
+    numerical:
+      steps: '1044'
+      rhs_evals: '1150'
+      nonlinear_iters: '1148'
+      nonlinear_conv_fails: '0'
+      err_test_fails: '16'
+      last_order: '5'
+      stab_order_reductions: '0'
+      jac_evals: '0'
+      lin_solve_setups: '88'
+      lin_rhs_evals: '2791'
+      lin_iters: '2791'
+      lin_conv_fails: '78'
+      prec_evals: '18'
+      prec_solves: '3855'
+      jt_vec_setup_evals: '0'
+      jt_vec_prod_evals: '2791'
+      time: '0.001'
+      preconditioned: 'True'
+      condition: '4.598638363034368e+19'
+      l2_norm: '3093750939271.238'
+      fro_norm: '4375224536966.5947'
+      determinant: inf
+      min_eigenvalue: '0.9999865779333992'
+      max_eigenvalue: '11142207.197106507'
+      threshold: '0.0'
+      nonzero_elements: '6222'
+      total_elements: '57600'
+    config:
+      model: A2
+      problems:
+      - n_reactors
+      runtype: performance
+      database:
+      log: true
+      verbose: true
+      preconditioned: true
+      flexible: false
+      min_val_repl: false
+      prefix: ''
+      threshold: 0.0
+      moles: true
+      remove_falloff: false
+      remove_thirdbody: false
+      enable_falloff: false
+      enable_thirdbody: false
+      append_surface_fuel: false
+      nrs: 2
+      series: false
+      replace_reactions: true
+      endtime: 0.001
+      runsteps: 0
+      max_time_step: 100000.0
+      max_steps: 100000.0
+      out_dir: series_ns_a2_data
+      surface: ''
+      record_steps: 1
+      date: 10:26:11-08-03-23
+      energy: on
+      advance_kwargs: {}
+      fuel: POSF10325:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      gphase: gas
+      sphase: ''
+      use_icdb: false
+      T: 1350
+      P: 101325.0
