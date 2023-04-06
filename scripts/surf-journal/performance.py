@@ -670,14 +670,14 @@ if __name__ == "__main__":
     # combine_surf_yamls(direc="performance_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
     # plot_box_threshold(yml_name=yml, problem="plug_flow_reactor")
-    # dual_axis_plots(yml_name=yml)
+    dual_axis_plots(yml_name=yml)
     total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
     yml = "nab.yaml"
     # # combine_surf_yamls(direc="nab_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="network_combustor_exhaust")
     # plot_box_threshold(yml_name=yml, problem="network_combustor_exhaust")
-    # dual_axis_plots(yml_name=yml, problem="network_combustor_exhaust")
+    dual_axis_plots(yml_name=yml, problem="network_combustor_exhaust")
     total_clocktime_figure(yml_name=yml, problem="network_combustor_exhaust")
 
     # yml = "surf_fuel.yaml"

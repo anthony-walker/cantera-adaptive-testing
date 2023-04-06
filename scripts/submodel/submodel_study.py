@@ -171,8 +171,8 @@ def make_test_data():
                 print(ln)
                 f.write(ln)
 
-def make_submodel_boxplot(start=0, end=20):
-    with open("smp_cv.txt", "r") as f:
+def make_submodel_boxplot(start=0, end=20, ending=""):
+    with open(f"smp{ending}.txt", "r") as f:
         lines = f.readlines()
     smp_data = []
     ap_data = []
@@ -206,8 +206,8 @@ def make_submodel_boxplot(start=0, end=20):
     plt.ylabel("Speed-up")
     plt.subplots_adjust(left=0.15)
     plt.xlabel("Threshold")
-    plt.ylim([0.5, 2])
-    plt.savefig(f"ap_boxplot.pdf")
+    plt.ylim([0.5, 2.1])
+    plt.savefig(f"ap_boxplot{ending}.pdf")
     plt.close()
 
     fig, ax = plt.subplots(figsize=(6, 10))
@@ -222,10 +222,10 @@ def make_submodel_boxplot(start=0, end=20):
     plt.ylabel("Speed-up")
     plt.subplots_adjust(left=0.15)
     plt.xlabel("Threshold")
-    plt.ylim([0.5, 2])
-    plt.savefig(f"smp_boxplot.pdf")
+    plt.ylim([0.5, 2.1])
+    plt.savefig(f"smp_boxplot{ending}.pdf")
     plt.close()
 
 # make_test_data()
-make_submodel_boxplot(end=19)
+make_submodel_boxplot(end=19, ending="_cv")
 
