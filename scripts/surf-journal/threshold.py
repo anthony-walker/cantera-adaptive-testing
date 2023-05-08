@@ -385,7 +385,7 @@ def create_perturbed_contour(yml="jpt.yaml", problem="plug_flow_reactor", ylab=N
 
 yml = "jth.yaml"
 # combine_surf_yamls(direc="jth_data", yml_name=yml)
-# for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
-#     model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
+for prob, lim, slim in [("plug_flow_reactor", [250, 380], [2.5, 2.9]), ]:
+    model_threshold_barchart(yml=yml, problem=prob, ylims=lim)
 # # combine_by_TP(yml_name="butane.yml", direc="butane_jpt_data")
-create_perturbed_contour(model="Butane", yml="butane.yml")
+# create_perturbed_contour(model="Butane", yml="butane.yml")

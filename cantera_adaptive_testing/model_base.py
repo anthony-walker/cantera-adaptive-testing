@@ -840,7 +840,9 @@ class ModelBase(object):
                     products.append(prod)
             fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
             surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
-            comb_contents = fuels + products + surfaces
+            comb_contents = fuels + products
+            if self.surface:
+                comb_contents += surfaces
             combust_idxs = [r.component_index(f) for f in comb_contents]
             time = []
             comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
@@ -950,7 +952,9 @@ class ModelBase(object):
                     products.append(prod)
             fuels = [f.split(":")[0].strip() for f in self.fuel.split(",")]
             surfaces = [s.split(":")[0].strip() for s in self.surface.split(",")]
-            comb_contents = fuels + products + surfaces
+            comb_contents = fuels + products
+            if self.surface:
+                comb_contents += surfaces
             combust_idxs = [r.component_index(f) for f in comb_contents]
             time = []
             comb_array = np.empty((len(combust_idxs), 0), dtype=float, order='C')
@@ -970,7 +974,7 @@ class ModelBase(object):
                 time.append(self.net.time)
             # now plot data
             fig, cax = plt.subplots(1, 1)
-            # fig.tight_layout()
+            fig.tight_layout()
             cax.ticklabel_format(axis='both', style='sci', scilimits=(0,0))
             for i, name in enumerate(comb_contents):
                 cax.plot(time, comb_array[i, :], label=name)
