@@ -45,7 +45,7 @@ perf_analysis_study() {
     export TSTART=0
     export TEND=0
     # launch all runs now that ss is found.
-    ./launch.sh ./options/pfr-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.001 -D perf.db
+    ./launch.sh ./options/nce-opts single 1 1 $PLIST -R analysis -O $SURF_DIR -L -S PlatinumLarge -E 0.0006 -D perf.db --record_steps 5
 }
 
 network_series_test() {
@@ -282,4 +282,29 @@ run_all_surface_studies() {
     surface_threshold_study
     surface_reaction_study
     surface_performance_study
+}
+
+short_perf_study() {
+    # performance runs
+    export PLIST=./model_lists/surf-performance
+    export SURF_DIR=sps_data
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    skip_mass
+    export TSTART=0
+    export TEND=0
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/sp-opts single 1 1 $PLIST -R steady -O $SURF_DIR -L -S PlatinumLarge -MTS 1e-3
+    # skip certain runs
+    reset_skips
+    skip_moles
+    skip_analyt
+    skip_flex
+    export TSTART=0
+    export TEND=18
+    # launch all runs now that ss is found.
+    ./launch.sh ./options/sp-opts single 1 1 $PLIST -R performance -O $SURF_DIR -L -S PlatinumLarge -MTS 1e-3
 }
