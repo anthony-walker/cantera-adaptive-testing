@@ -479,28 +479,31 @@ class ModelBase(object):
         self.net.initialize()
 
     def get_numerical_stats(self):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            stats = self.net.solver_stats
-            # add other solver stats here if you want
-            stats["time"] = self.net.time
-            stats["preconditioned"] = self.preconditioned
-            if self.preconditioned:
-                prec_mat = self.precon.matrix
-                eigvals = np.linalg.eigvals(prec_mat)
-                stats["condition"] = float(np.linalg.cond(prec_mat))
-                stats["logC"] = float(np.log10(stats["condition"]))
-                mv = np.amax(np.abs(np.log10(np.abs(prec_mat)[prec_mat != 0])))
-                stats["precision"] = float(mv)
-                stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
-                stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
-                stats["determinant"] = float(np.linalg.det(prec_mat))
-                stats["min_eigenvalue"] = float(np.amin(eigvals))
-                stats["max_eigenvalue"] = float(np.amax(eigvals))
-                stats["threshold"] = self.precon.threshold
-                stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
-                stats["total_elements"] = np.prod(prec_mat.shape)
-        return stats
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                stats = dict(self.net.solver_stats)
+                # add other solver stats here if you want
+                stats["time"] = self.net.time
+                stats["preconditioned"] = self.preconditioned
+                if self.preconditioned:
+                    prec_mat = self.precon.matrix
+                    eigvals = np.linalg.eigvals(prec_mat)
+                    stats["condition"] = float(np.linalg.cond(prec_mat))
+                    stats["logC"] = float(np.log10(stats["condition"]))
+                    mv = np.amax(np.abs(np.log10(np.abs(prec_mat)[prec_mat != 0])))
+                    stats["precision"] = float(mv)
+                    stats["l2_norm"] = float(np.linalg.norm(prec_mat, 2))
+                    stats["fro_norm"] = float(np.linalg.norm(prec_mat, 'fro'))
+                    stats["determinant"] = float(np.linalg.det(prec_mat))
+                    stats["min_eigenvalue"] = float(np.amin(eigvals))
+                    stats["max_eigenvalue"] = float(np.amax(eigvals))
+                    stats["threshold"] = self.precon.threshold
+                    stats["nonzero_elements"] = np.count_nonzero(prec_mat!=0)
+                    stats["total_elements"] = np.prod(prec_mat.shape)
+            return stats
+        except Exception as e:
+            return {}
 
     def add_numerical_stats(self, arr=None, sid=0):
         stats = self.get_numerical_stats()
@@ -755,7 +758,7 @@ class ModelBase(object):
             # eax.set_title("Exhaust")
             eax.set_xlabel("Time $[s]$")
             eax.set_ylabel("Amounts of selected species $[kmol]$")
-            eax.legend()
+            eax.legend(loc="center right")
             plt.subplots_adjust(left=0.15, bottom=0.15)
             plt.savefig(os.path.join(self.fig_dir, f"{self.curr_name}-exhaust.pdf"))
         else:

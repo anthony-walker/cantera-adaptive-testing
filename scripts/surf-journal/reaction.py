@@ -123,7 +123,7 @@ def model_evaluation(xval="steps", yval="condition", yml="reaction.yaml", proble
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
     mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
-    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
+    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
@@ -156,14 +156,14 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
     mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
-    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
+    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    bwid = 0.1
-    x = [i for i in range(4)]
-    xs = [i for i in range(4)]
+    bwid = 0.15
+    x = [i for i in range(2, 9, 2)]
+    xs = [i for i in range(2, 9, 2)]
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
     plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
@@ -179,7 +179,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
                 y_arr = [x[0] for x in cursor.fetchall()]
                 cursor.execute(f""" SELECT total_elements FROM {db_key} """)
                 total = cursor.fetchall()[0][0]
-                sparsity = (total - np.mean(y_arr)) / total
+                sparsity = (total - np.mean(y_arr)) / total * 100
                 y.append(sparsity)
             elif yval == "singularity":
                 cursor.execute(f""" SELECT l2_norm FROM {db_key} """)
@@ -198,7 +198,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
                 y.append(fcn(y_arr))
         clab = keylist[0].split("-0")[0]
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q])
-        ax.plot([-2, 5], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
+        ax.plot([-2, 9], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
         x = np.array(x) + bwid
     ax.set_xlim([min(xs)-bwid, max(x)])
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
@@ -247,20 +247,20 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.10
+    bwid = 0.15
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
-    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
+    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
-    x = [i for i in range(4)]
-    xs = [i for i in range(4)]
+    x = [i for i in range(2, 9, 2)]
+    xs = [i for i in range(2, 9, 2)]
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
-        ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
+        ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("Steps Ratio")
     ax.set_xlim([min(xs)-bwid, max(x)])
@@ -307,20 +307,20 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.10
+    bwid = 0.15
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
-    labels = ["standard", "enable-falloff", "enable-thirdbody", "enable-thirdbody \n& enable-falloff"]
+    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
-    x = [i for i in range(4)]
-    xs = [i for i in range(4)]
+    x = [i for i in range(2, 9, 2)]
+    xs = [i for i in range(2, 9, 2)]
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
-        ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
+        ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("Speed-up")
     ax.set_xlim([min(xs)-bwid, max(x)])
@@ -367,19 +367,19 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
     plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.10
+    bwid = 0.15
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
-    x = [i for i in range(4)]
-    xs = [i for i in range(4)]
+    x = [i for i in range(2, 9, 2)]
+    xs = [i for i in range(2, 9, 2)]
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
         ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
         x = np.array(x) + bwid
-        ax.plot([-2, 5], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
+        ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("clocktime-per-step")
     ax.set_xlim([min(xs)-bwid, max(x)])
@@ -444,7 +444,7 @@ for p in ["plug_flow_reactor",]:
     model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
     model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
     model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
-    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity Percentage", yxlims=[0.3, 0.8])
+    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity %", yxlims=[30, 80])
     model_assumptions_speedup(problem=p, yml=yml)
     model_steps_ratio(problem=p, yml=yml)
 

@@ -17,18 +17,18 @@ colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65
 def create_drgep_submodels():
     from pymars.drgep import run_drgep
     from pymars.sampling import InputIgnition
-    model_file = 'ic8-874-6864.cti'
-
+    model_file = 'nc11h24.yaml' #"ic8-209-1970-0p15.yaml"
+    # model_file = 'ic8-874-6864.cti'
     # Conditions for reduction
     conditions = [
         InputIgnition(
-            kind='constant pressure', pressure=1.0, temperature=1000.0, equivalence_ratio=1.0, fuel={'IC8H18': 1.0}, oxidizer={'O2': 1.0, 'N2': 3.76}),
+            kind='constant pressure', pressure=1.0, temperature=1000.0, equivalence_ratio=1.0, fuel={'nc11h24': 1.0}, oxidizer={'o2': 1.0, 'n2': 3.76}),
     ]
-    errors = [0.5, 1, 5, 10, 20]
+    errors = [20,]
 
     # Run DRGEPs
     for error in errors:
-        reduced_model = run_drgep(model_file, conditions, [], [], error, ['IC8H18', 'O2', 'N2'], [], path="./", num_threads=4)
+        reduced_model = run_drgep(model_file, conditions, [], [], error, ['nc11h24', 'o2', 'n2'], [], path="./", num_threads=1)
 
 def create_pfa_submodels():
     from pymars.pfa import run_pfa
@@ -226,6 +226,8 @@ def make_submodel_boxplot(start=0, end=20, ending=""):
     plt.savefig(f"smp_boxplot{ending}.pdf")
     plt.close()
 
-# make_test_data()
-make_submodel_boxplot(end=19, ending="_cv")
+# # make_test_data()
+# make_submodel_boxplot(end=19, ending="_cv")
+
+create_drgep_submodels()
 

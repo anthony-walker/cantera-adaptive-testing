@@ -1,0 +1,798 @@
+Butane-0ep00:
+  plug_flow_reactor:
+    runtime: 0.206761
+    endtime: 7.595773131552962e-07
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: true
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:48:34-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+Butane-mass:
+  plug_flow_reactor:
+    runtime: 0.1860415
+    endtime: 7.595773131552962e-07
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: butane-230-2461.yaml
+      moles: false
+      gas_reactions: 2461
+      gas_species: 230
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999997
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:47:42-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: C4H10:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+GRI-mass:
+  plug_flow_reactor:
+    runtime: 0.145891
+    endtime: 0.9002403894847256
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: false
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:48:31-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+GRI-0ep00:
+  plug_flow_reactor:
+    runtime: 0.1427875
+    endtime: 0.9002403894847256
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: gri-mech-55-325.yaml
+      moles: true
+      gas_reactions: 325
+      gas_species: 53
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:48:31-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: CH4:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+Hydrogen-0ep00:
+  plug_flow_reactor:
+    runtime: 0.091475
+    endtime: 0.0022686932583577324
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: hydrogen-10-28.yaml
+      moles: true
+      gas_reactions: 28
+      gas_species: 10
+      fuel: H2:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101325.0
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:48:30-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: H2:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+Hydrogen-mass:
+  plug_flow_reactor:
+    runtime: 0.019646
+    endtime: 0.0022686932583577324
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: hydrogen-10-28.yaml
+      moles: false
+      gas_reactions: 28
+      gas_species: 10
+      fuel: H2:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101325.0
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:47:36-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: H2:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+IsoOctane-mass:
+  plug_flow_reactor:
+    runtime: 46.11774
+    endtime: 0.09177611355973132
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: ic8-874-6864.yaml
+      moles: false
+      gas_reactions: 6864
+      gas_species: 874
+      fuel: IC8H18:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101325.0
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:50:00-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: IC8H18:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+IsoOctane-0ep00:
+  plug_flow_reactor:
+    runtime: 35.510149
+    endtime: 0.09177611355973132
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: ic8-874-6864.yaml
+      moles: true
+      gas_reactions: 6864
+      gas_species: 874
+      fuel: IC8H18:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101325.0
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:50:46-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: IC8H18:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+MethylDeconateNHeptane-0ep00:
+  plug_flow_reactor:
+    runtime: 20.101704
+    endtime: 0.03128917009370528
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: md-nc7-3787-10264.yaml
+      moles: true
+      gas_reactions: 10264
+      gas_species: 3787
+      fuel: md:1.0, nc7h16:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 17:13:40-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: md:1.0, nc7h16:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+MethylDeconateNHeptane-mass:
+  plug_flow_reactor:
+    runtime: 246.971767
+    endtime: 0.03128917009370528
+    nruns: 2
+    runtype: performance
+    thermo:
+      model: md-nc7-3787-10264.yaml
+      moles: false
+      gas_reactions: 10264
+      gas_species: 3787
+      fuel: md:1.0, nc7h16:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 17:09:33-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: md:1.0, nc7h16:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+MethylFiveDeconate-0ep00:
+  plug_flow_reactor:
+    runtime: 317.500198
+    endtime: 0.3569066874093468
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: md5d-2649-10487.yaml
+      moles: true
+      gas_reactions: 10487
+      gas_species: 2649
+      fuel: md5d:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 17:03:49-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: md5d:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+MethylFiveDeconate-mass:
+  plug_flow_reactor:
+    runtime: 322.684317
+    endtime: 0.3569066874093468
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: md5d-2649-10487.yaml
+      moles: false
+      gas_reactions: 10487
+      gas_species: 2649
+      fuel: md5d:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:58:27-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: md5d:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+NHeptane-mass:
+  plug_flow_reactor:
+    runtime: 14.048764
+    endtime: 1.7037278161159205e-07
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: n-heptane-c7h16-654-4846.yaml
+      moles: false
+      gas_reactions: 4846
+      gas_species: 654
+      fuel: NC7H16:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: false
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:48:53-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: false
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: NC7H16:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0
+NHeptane-0ep00:
+  plug_flow_reactor:
+    runtime: 15.754133
+    endtime: 1.7037278161159205e-07
+    nruns: 1
+    runtype: performance
+    thermo:
+      model: n-heptane-c7h16-654-4846.yaml
+      moles: true
+      gas_reactions: 4846
+      gas_species: 654
+      fuel: NC7H16:1.0
+      air: O2:1.0, N2:3.76
+      phi: 1
+      T0: 1000.0
+      P0: 101324.99999999999
+      V0: 1.0
+      skip_falloff: true
+      skip_thirdbody: true
+    numerical: {}
+    config:
+      log: true
+      out_dir: short_symp_data
+      runtype: performance
+      preconditioned: true
+      append_surface_fuel: false
+      T: 1000
+      P: 101325.0
+      date: 16:49:07-09-05-23
+      energy: on
+      verbose: false
+      threshold: 0
+      moles: true
+      database:
+      problems: []
+      advance_kwargs: {}
+      enable_falloff: false
+      enable_thirdbody: false
+      fuel: NC7H16:1.0
+      air: O2:1.0, N2:3.76
+      surface: ''
+      phi: 1
+      prefix: ''
+      remove_falloff: false
+      remove_thirdbody: false
+      gphase: gas
+      sphase: ''
+      nrs: 2
+      series: true
+      record_steps: 1
+      max_time_step: 100000.0
+      max_steps: 100000
+      append_ss: true
+      replace_reactions: true
+      use_icdb: false
+      endtime: 0
+      runsteps: 0

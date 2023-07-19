@@ -380,12 +380,18 @@ def series_parallel_figures(yml_name="performance.yaml", problem="n_reactors"):
     series_keys = list(zip(msks, psks))
     x = range(1, L+1, 1)
     # plot series
-    ys = []
-    yp = []
+    ysm = []
+    ysp = []
+    ypm = []
+    ypp = []
     for mk, pk in series_keys:
-        ys.append(data[mk]["n_reactors"]["runtime"] / data[pk]["n_reactors"]["runtime"])
+        ysm.append(data[mk]["n_reactors"]["runtime"])
+        ysp.append(data[pk]["n_reactors"]["runtime"])
     for mk, pk in parallel_keys:
-        yp.append(data[mk]["n_reactors"]["runtime"] / data[pk]["n_reactors"]["runtime"])
+        ypm.append(data[mk]["n_reactors"]["runtime"])
+        ypp.append(data[pk]["n_reactors"]["runtime"])
+    ys = np.array(ysm) / np.array(ysp)
+    yp = np.array(ypm) / np.array(ypp)
     colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
     fig, ax = plt.subplots(1, 1)
     print(ys)
@@ -397,6 +403,23 @@ def series_parallel_figures(yml_name="performance.yaml", problem="n_reactors"):
     ax.legend()
     plt.subplots_adjust(bottom=0.15)
     plt.savefig(f"figures/{name}-reactor-networks.pdf")
+    plt.close()
+    # clock time
+    print(ysm)
+    print(ysp)
+    print(ypm)
+    print(ypp)
+    colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
+    fig, ax = plt.subplots(1, 1)
+    ax.plot(x, ysm, color=colors[0], marker="s", label="series mass fractions")
+    ax.plot(x, ysp, color=colors[0], marker="o", label="series preconditioned")
+    ax.plot(x, ypm, color=colors[3], marker="s", label="parallel mass fractions")
+    ax.plot(x, ypp, color=colors[3], marker="o", label="parallel preconditioned")
+    ax.set_xlabel("Number of Reactors")
+    ax.set_ylabel("Clocktime [$s$]")
+    ax.legend()
+    plt.subplots_adjust(bottom=0.15)
+    plt.savefig(f"figures/{name}-clocktime-network.pdf")
     plt.close()
     # plt.show()
 
@@ -619,8 +642,8 @@ def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterbu
             nspec = data[k][problem]["thermo"]["gas_species"]
             nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
             plot_data[curr_key]["nspecies"] = nspec + nspec_surf
-            plot_data[curr_key]["nlsm"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
-            plot_data[curr_key]["msteps"] = int(data[k][problem]["numerical"]["steps"])
+            # plot_data[curr_key]["nlsm"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+            # plot_data[curr_key]["msteps"] = int(data[k][problem]["numerical"]["steps"])
         else:
             if plot_data[curr_key]["precon"] > v:
                 th = k.split("-")[-1]
@@ -628,13 +651,13 @@ def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterbu
                 th = re.sub("ep","e+", th)
                 plot_data[curr_key]["precon"] = v
                 plot_data[curr_key]["th"] = th
-                plot_data[curr_key]["nlsp"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
-                plot_data[curr_key]["lin_iters"] = int(data[k][problem]["numerical"]["lin_iters"])
-                plot_data[curr_key]["condition"] = float(data[k][problem]["numerical"]["condition"])
-                plot_data[curr_key]["psteps"] = int(data[k][problem]["numerical"]["steps"])
-                nnz = int(data[k][problem]["numerical"]["nonzero_elements"])
-                total_elements = int(data[k][problem]["numerical"]["total_elements"])
-                plot_data[curr_key]["sparsity"] = (total_elements - nnz) / total_elements
+                # plot_data[curr_key]["nlsp"] = int(data[k][problem]["numerical"]["nonlinear_iters"])
+                # plot_data[curr_key]["lin_iters"] = int(data[k][problem]["numerical"]["lin_iters"])
+                # plot_data[curr_key]["condition"] = float(data[k][problem]["numerical"]["condition"])
+                # plot_data[curr_key]["psteps"] = int(data[k][problem]["numerical"]["steps"])
+                # nnz = int(data[k][problem]["numerical"]["nonzero_elements"])
+                # total_elements = int(data[k][problem]["numerical"]["total_elements"])
+                # plot_data[curr_key]["sparsity"] = (total_elements - nnz) / total_elements
             nspec = data[k][problem]["thermo"]["gas_species"]
             nspec_surf = data[k][problem]["thermo"].get("surface_species", 0)
             plot_data[curr_key]["nspecies"] = nspec + nspec_surf
@@ -665,7 +688,7 @@ def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterbu
     plt.savefig(f"figures/clocktime-{name}-{problem}.pdf")
     plt.close()
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
     # yml = "performance.yaml"
     # combine_surf_yamls(direc="performance_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
@@ -700,3 +723,16 @@ def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterbu
     # yml = "series.yaml"
     # # combine_series_parallel_yamls(direc="series_data", yml_name=yml)
     # series_parallel_figures(yml_name=yml)
+
+    # yml = "short.yml"
+    # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
+
+
+    yml = "short_dev.yml"
+    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
+
+    yml = "short_surf.yml"
+    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
+
+    yml = "short_symp.yml"
+    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
