@@ -3,45 +3,6 @@ import math
 import numpy as np
 import cantera as ct
 
-def convert_molecules_rate(expression):
-    rate, eqn = expression.split(":")
-    rate = rate.strip()
-    eqn = eqn.strip()
-    print(rate)
-    eqn = re.sub("[=]", "=>", eqn)
-    res = re.match("\d+[.]{1}\d+[D]{1}[+-]?\d+", rate)
-    # search for A coefficient
-    coeff = float(re.sub("[D]{1}", "e", res.group(0)).strip())
-    coeff *= 6.02e23
-
-    # search for activation energy
-    res = re.search("[E][X][P][(][-]?\d+[.]?\d+", rate)
-    numerator = float(res.group(0)[4:].strip())
-    numerator *= 1.987202
-
-    # search for temperature exponent
-    res = re.search("[(][-]?\d+[.]?\d+", rate)
-    numerator = float(res.group(0)[4:].strip())
-    numerator *= 1.987202
-
-    ymlout = f"- equation: {eqn}\n"
-    ymlout += f"  rate-constant: {{A: {coeff:0.2e}, b: 0, Ea: {numerator:0.2f}}}\n"
-    print(ymlout)
-
-def convert_reactions_to_yaml(file):
-    with open(file) as f:
-        content = f.read()
-    # separate rates and reactions
-    lines = content.split(";")[:-1]
-    lines = [l.split(":") for l in lines]
-    lines = [(a.strip(), b.strip()) for a, b in lines]
-    rates, reactions = zip(*lines)
-    with open("mcm-rates.txt", "w") as f:
-        for r in rates:
-            f.write(r+"\n")
-    with open("mcm-reactions.txt", "w") as f:
-        for r in reactions:
-            f.write(r+"\n")
 
 class ZenithAngleData(ct.ExtensibleRateData):
     __slots__ = ("zenith_angle", "cza")

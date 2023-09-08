@@ -417,3 +417,17 @@ def FPPN(T):
 def KBPPN(T, M):
     return (KPPN0(T, M) * KPPNI(T) * FPPN(T)) / (KPPN0(T, M) + KPPNI(T))
 
+def KAWQ1(T):
+    return KCH3O2() * (1-7.18*math.exp(-885/T))
+
+def KAWQ2(T):
+    return 8.8e-12*math.exp(-1320/T) + 1.7e-14*math.exp(423/T)
+
+def KAWQ3(T):
+    return (1-1/(1+498*math.exp(-1160/T)))
+
+def KAWQ4(T):
+    return (1/(1+498*math.exp(-1160/T)))
+
+def KAWQ5(T):
+    return (1-math.exp(-550/T))
