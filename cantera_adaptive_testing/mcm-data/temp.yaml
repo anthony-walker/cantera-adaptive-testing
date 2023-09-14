@@ -1,0 +1,8 @@
+composition:
+  C: 10
+  H: 16
+  O: 4
+name: C1010OOH
+note: Not found
+thermo: ideal-gas
+transport: {}

@@ -96,8 +96,3 @@ class ConcentrationDependentRate(ct.ExtensibleRate):
 
 #     def eval(self, data):
 #         return self.ell * data.cza**self.m * math.exp(-self.n / data.cza)
-
-
-
-if __name__ == "__main__":
-    convert_reactions_to_yaml("temp.txt")

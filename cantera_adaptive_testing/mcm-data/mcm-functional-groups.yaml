@@ -1,0 +1,121 @@
+functional-groups:
+  Acetal: COCOC
+  Acyl (R-CO-): C(=O)
+  Acyl Halide Br: C(=O)Br
+  Acyl Halide Cl: C(=O)Cl
+  Acyl Halide I: C(=O)I
+  Alcohol: CO
+  Aldehyde: CC=O
+  Alkene: C=C
+  Alkyne: C#C
+  Amide: C(=O)N
+  Amide (secondary): C(=O)NC
+  Amide (tertiary): C(=O)N(C)C
+  Amine (primary): CN
+  Amine (secondary): CNC
+  Amine (tertiary): CN(C)C
+  Anhydride: C(=O)OC(=O)
+  Azide: N=[N+]=[N-]
+  Azo: N=N
+  Benzyl: '[CH2]C1=CC=CC=C1'
+  Boronic Acid: CB(O)O
+  Carboxylic Acid: C(=O)O
+  Diazo: C=[N+]=[N-]
+  Disulfide: CSSC
+  Enamine: C=CNC
+  Epoxide: C1OC1
+  Ester: C(=O)OC
+  Ether: COC
+  Haloalkane Br: CBr
+  Haloalkane Cl: CCl
+  Haloalkane F: CF
+  Haloalkane I: CI
+  Hemiacetal: COCO
+  Hemiketal: C(OC)C(=O)C
+  Hydrazone: C=NN
+  Imide: C(=O)NC(=O)
+  Imine: C=N
+  Isocyanate: N=C=O
+  Isothiocyanate: N=C=S
+  Ketal: C(OC)C(=O)C(OC)C
+  Ketone: C(=O)C
+  Nitrile: C#N
+  Nitro: C[N+](=O)[O-]
+  Orthoester: C(=O)OC(OC)OC
+  Oxime: C=NO
+  Phenol: C1=CC=C(C=C1)O
+  Phenyl: C1=CC=CC=C1
+  Phosphate: COP(=O)(O)O
+  Sulfate: COS(=O)(=O)O
+  Sulfide: CSC
+  Sulfone: C[S](=O)(=O)C
+  Sulfoxide: C[S](=O)C
+  Thioester: C(=O)SC
+  Thiol: CS
+  Thiophosphate: COP(=S)(O)O
+  Thiosulfate: COS(=O)(O)S
+  Methyl: C
+  Alcohol (primary): "CO"
+  Alcohol (secondary): "CC(O)C"
+  Alcohol (tertiary): "C(C)(C)O"
+
+smiles-groups:
+  C: CH3
+  C#C: C2H2
+  C#N: CHN
+  C(=O): CH2O
+  C(=O)Br: CHBrO
+  C(=O)C: C2H4O
+  C(=O)Cl: CHClO
+  C(=O)I: CHIO
+  C(=O)N: CH3NO
+  C(=O)N(C)C: C3H7NO
+  C(=O)NC: C2H5NO
+  C(=O)NC(=O): C2H3NO2
+  C(=O)O: CH2O2
+  C(=O)OC: C2H4O2
+  C(=O)OC(=O): C2H2O3
+  C(=O)OC(OC)OC: C4H8O4
+  C(=O)SC: C2H4OS
+  C(OC)C(=O)C: C4H8O2
+  C(OC)C(=O)C(OC)C: C6H12O3
+  C1=CC=C(C=C1)O: C6H6O
+  C1=CC=CC=C1: C6H5
+  C1OC1: C2H4O
+  C=C: C2H4
+  C=CNC: C3H7N
+  C=N: CH3N
+  C=NN: CH4N2
+  C=NO: CH3NO
+  C=[N+]=[N-]: CH2N2
+  CB(O)O: CH5BO2
+  CBr: CH3Br
+  CC=O: C2H4O
+  CCl: CH3Cl
+  CF: CH3F
+  CI: CH3I
+  CN: CH5N
+  CN(C)C: C3H9N
+  CNC: C2H7N
+  CO: CH4O
+  COC: C2H6O
+  COCO: C2H6O2
+  COCOC: C3H8O2
+  COP(=O)(O)O: CH5O4P
+  COP(=S)(O)O: CH5O3PS
+  COS(=O)(=O)O: CH4O4S
+  COS(=O)(O)S: CH6O3S2
+  CS: CH4S
+  CSC: C2H6S
+  CSSC: C2H6S2
+  C[N+](=O)[O-]: CH3NO2
+  C[S](=O)(=O)C: C2H6O2S
+  C[S](=O)C: C2H6OS
+  N=C=O: CHNO
+  N=C=S: CHNS
+  N=N: H2N2
+  N=[N+]=[N-]: HN3
+  '[CH2]C1=CC=CC=C1': C7H7
+  CC(O)C: C3H8O
+  CO: CH4O
+  CC(C)O: C3H8O
