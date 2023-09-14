@@ -83,7 +83,7 @@ def make_species_database(dir_name):
                         all_species[sp_name].update(sp)
     # output species to file
     with open("all-model-species.yaml", "w") as f:
-        yaml.safe_dump(all_species, f)
+        yaml.safe_dump(all_species, f, default_flow_style=False, sort_keys=False)
 
 
 def get_not_found_species(specie):
@@ -190,8 +190,9 @@ def write_species_extraction():
     data = get_species_data()
     # output species to file
     with open("mcm-species.yaml", "w") as f:
-        yaml.safe_dump(data, f)
+        yaml.safe_dump(data, f, default_flow_style=False, sort_keys=False)
+
 
 if __name__ == "__main__":
+    # make_species_database("all-models")
     write_species_extraction()
-    # print_functional_group_formulas()

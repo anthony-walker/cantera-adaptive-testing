@@ -19445,6 +19445,10 @@ C5H11CO3H:
     '
   thermo: ideal-gas
 C5H8:
+  composition:
+    C: 5
+    H: 8
+  thermo: ideal-gas
   critical-parameters:
     acentric-factor: 0.173
     critical-compressibility: 0.269
@@ -36412,6 +36416,10 @@ CH2OOG:
     '
   thermo: ideal-gas
 CH3BR:
+  composition:
+    C: 1
+    H: 3
+    Br: 1
   critical-parameters:
     acentric-factor: 0.157
     critical-compressibility: 0.262
@@ -56731,7 +56739,7 @@ HO2MC5OOH:
     '
   thermo: ideal-gas
 HO2NO2:
-  composition: {}
+  composition: {H: 1, O: 4, N: 1}
   name: HO2NO2
   note: 'HO2NO2 was not found in all-species-data and was constructed as well as possible
     using web requests and assuming ideal gas thermo.
@@ -58922,7 +58930,7 @@ HPNC524CO:
     '
   thermo: ideal-gas
 HSO3:
-  composition: {}
+  composition: {H: 1, S: 1, O: 3}
   name: HSO3
   note: 'HSO3 was not found in all-species-data and was constructed as well as possible
     using web requests and assuming ideal gas thermo.
@@ -73535,32 +73543,11 @@ N2O5:
     - 6000.0
 NA:
   composition:
-    C: 9
-    H: 18
-    O: 2
+    H: 1
+    N: 1
+    O: 3
   name: NA
-  thermo:
-    data:
-    - - -0.128250341
-      - 0.11517437
-      - -8.01798294e-05
-      - 2.91224119e-08
-      - -4.36666479e-12
-      - -73970.0309
-      - 34.5731878
-    - - 32.6715065
-      - 0.0395218187
-      - -1.330373e-05
-      - 2.04556317e-09
-      - -1.17996127e-13
-      - -85485.0906
-      - -141.974917
-    model: NASA7
-    note: 4/2/7therm
-    temperature-ranges:
-    - 300.0
-    - 1386.0
-    - 5000.0
+  thermo: ideal-condensed
 NAOO:
   composition:
     C: 3
@@ -81516,7 +81503,7 @@ O:
     model: gas
     well-depth: 80.0
 O1D:
-  composition: {}
+  composition: {O: 1}
   name: O1D
   note: 'O1D was not found in all-species-data and was constructed as well as possible
     using web requests and assuming ideal gas thermo.
@@ -81530,7 +81517,34 @@ O1D:
     ''%s'' at line 1")
 
     Composition not constructed as an exception was encountered: Invalid INCHI string..'
-  thermo: ideal-gas
+  thermo:
+    data:
+    - - 2.946429
+      - -0.001638166
+      - 2.421032e-06
+      - -1.602843e-09
+      - 3.890696e-13
+      - 29147.64
+      - 2.963995
+    - - 2.54206
+      - -2.755062e-05
+      - -3.102803e-09
+      - 4.551067e-12
+      - -4.368052e-16
+      - 29230.8
+      - 4.920308
+    model: NASA7
+    note: '120186'
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+  transport:
+    diameter: 2.75
+    geometry: atom
+    model: gas
+    well-depth: 80.0
+
 O2:
   another-literal-string: 'foo
 
@@ -88657,32 +88671,11 @@ RGDCO2H:
   thermo: ideal-gas
 SA:
   composition:
-    C: 7
-    H: 14
-    O: 2
+    H: 2
+    S: 1
+    O: 4
   name: SA
-  thermo:
-    data:
-    - - 0.233380691
-      - 0.0902600868
-      - -6.35285709e-05
-      - 2.3640672e-08
-      - -3.65127165e-12
-      - -68144.8524
-      - 29.7662444
-    - - 25.296451
-      - 0.0315591426
-      - -1.05182948e-05
-      - 1.60560565e-09
-      - -9.21619169e-14
-      - -76858.8885
-      - -104.828559
-    model: NASA7
-    note: 4/2/7therm
-    temperature-ranges:
-    - 300.0
-    - 1388.0
-    - 5000.0
+  thermo: ideal-condensed
 SBUACANO3:
   composition:
     C: 6

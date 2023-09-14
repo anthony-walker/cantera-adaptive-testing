@@ -33,7 +33,7 @@ def get_photolysis_parameterization(photo_string):
     lines = list(filter(lambda x: x.split(" ")[0] == number, lines))
     assert len(lines) == 1
     J, l, m, n = lines[0].split(" ")
-    return {"type": "zenith-angle-rate", "l": l, "m": m, "n": n, "scalar":scalar}
+    return {"type": "zenith-angle-rate", "l": l, "m": m, "n": n, "scalar":str(scalar)}
 
 def get_pure_arrhenius(arrhen_string):
     """ Get yaml parameterization for pure arrhenius expressions.
@@ -85,7 +85,7 @@ def get_function_rate(complex_string):
             complex_string = cs
             found = True
     assert found
-    return {"type": "scaled-function-rate", "function": complex_string, "scalar": scalar}
+    return {"type": "scaled-function-rate", "function": complex_string, "scalar": str(scalar)}
 
 def get_concentration_rate(conc_string):
     """ Get yaml output for concentration based rates
@@ -163,7 +163,7 @@ def get_half_power_rate(rate_exp):
     remainder = external_exp.split("*")
     consts = list(filter(lambda r: re.fullmatch("\d+([.]\d*)?(e[-+]\d+)?", r), remainder))
     species = list(filter(lambda x: x not in consts, remainder))
-    C = np.prod(map(lambda x: float(x), consts))
+    C = str(np.prod(list(map(lambda x: float(x), consts))))
     # add to data
     comp_data["type"] = "half-power-rate"
     comp_data["C"] = C
