@@ -32,7 +32,9 @@ def get_photolysis_parameterization(photo_string):
     number = photo_string.strip()[2:-1]
     lines = list(filter(lambda x: x.split(" ")[0] == number, lines))
     assert len(lines) == 1
-    J, l, m, n = lines[0].split(" ")
+    data = lines[0].split(" ")
+    data = [re.sub(r"D", "e", d) for d in data]
+    J, l, m, n = data
     return {"type": "zenith-angle-rate", "l": l, "m": m, "n": n, "scalar":str(scalar)}
 
 def get_pure_arrhenius(arrhen_string):

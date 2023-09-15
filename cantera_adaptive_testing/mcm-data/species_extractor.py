@@ -98,7 +98,7 @@ def get_not_found_species(specie):
         construct_data = {"name": specie, "composition":{}, "thermo":{}}
         note_str = f"""{specie} was not found in all-species-data and was constructed as well as possible using web requests and assuming ideal gas thermo.\n"""
         # assume ideal gas thermo
-        construct_data["thermo"] = "ideal-gas"
+        construct_data["thermo"] = {"model":"constant-cp"}
         response = requests.get(MCM_SPECIES_URL.format(specie))
         if response.status_code == 200:
             # get smiles string

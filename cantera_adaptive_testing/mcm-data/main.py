@@ -51,7 +51,6 @@ def main():
     # open reactions
     with open("mcm-reactions.yaml", "r") as f:
         reaction_data = yaml.safe_load(f)
-
     # get all species names
     species_names, species_items = zip(*species_data.items())
     # get all elements
@@ -77,7 +76,7 @@ def main():
         content = f.read()
         content = re.sub(r"\n  [-] ", ", ", content)
         content = re.sub(r"[:][,]", ":", content)
-        content = re.sub(r"[']NO[']", "NO", content)
+        content = re.sub(r"[']", "", content)
         # search for list
         random.seed(time.time())
         rep_str = "".join(random.choices(string.ascii_letters, k=30))
