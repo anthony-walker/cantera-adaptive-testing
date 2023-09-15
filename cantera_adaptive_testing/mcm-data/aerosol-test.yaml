@@ -498,30 +498,37 @@ atmosphere-reactions:
   l: 9.312e-07
   m: 1.230
   n: 0.307
+  scalar: 2
+- equation: NO + NO3 => 2 NO2
+  type: T-squared-rate
+  A: '1.44e+06'
+  b: '0.0'
+  Ea: '447.12045'
+- equation: O + O2 => O3
+  type: complex-rate
+  A: '3.61e-10'
+  b: '-2.6'
+  Ea: '0.0'
+  species-names: [O2, O2, RO2]
+  function-names: [K1I, KMT06]
 - equation: O + O3 => 2 O2
-  rate-constant: {A: 4.82e+12, b: 0, Ea: -4093.636}
+  type: T-cubed-rate
+  A: '2.45e+33'
+  b: '0.0'
+  Ea: '-17072.052381999998'
 - equation: O + NO2 => NO + O2
-  rate-constant: {A: 3.31e+12, b: 0, Ea: 373.594}
+  type: half-power-rate
+  A: '4.70e+10'
+  b: '0.0'
+  Ea: '1987.202'
+  function-names: KCH3O2
+  C: '0.4'
+  species-names: RO2
 - equation: NO + O3 => NO2 + O2
   rate-constant: {A: 8.43e+11, b: 0, Ea: -2603.235}
 - equation: NO2 + O3 => NO3 + O2
   rate-constant: {A: 8.43e+10, b: 0, Ea: -4908.389}
-- equation: NO + NO3 => 2 NO2
-  rate-constant: {A: 1.08e+13, b: 0, Ea: 218.592}
-- equation:  NO2 + NO3 => NO + NO2
-  rate-constant: {A: 2.71e+10, b: 0, Ea: -2503.874}
-- equation: OH + O3 => HO2 + O2
-  rate-constant: {A: 1.02e+12, b: 0, Ea: -1867.97}
-  - equation: OH + H2 => HO2
-  rate-constant: {A: 4.64e+12, b: 0, Ea: -4173.12}
-  # These could be a phase change reaction because water is produced
-- equation: OH + HO2NO2 => NO2 + H2O + O2
-  rate-constant: {A: 1.93e+11, b: 0, Ea: 1371.17}
-- equation: OH + HONO => NO2 + H2O
-  rate-constant: {A: 1.50e+12, b: 0, Ea: 516.67}
 
 
 aerosol-reactions:
 - equation: HNO3 + H2O(l) <=> HNO3(aq)  # Reaction 1
-  type: henrys-phase-transfer
-

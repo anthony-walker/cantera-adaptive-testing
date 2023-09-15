@@ -2,7 +2,7 @@ import cantera as ct
 import matplotlib.pyplot as plt
 from reactors import AerosolSolution, AerosolReactor
 
-model = "aerosol.yaml"
+model = "aerosol-test.yaml"
 
 # Use reaction mechanism GRI-Mech 3.0. For 0-D simulations,
 # no transport model is necessary.

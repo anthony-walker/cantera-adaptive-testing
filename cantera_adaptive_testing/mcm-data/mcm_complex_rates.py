@@ -93,8 +93,8 @@ def FC1(T):
 def NC1(T):
     return 0.75 - 1.27 * (math.log10(FC1(T)))
 
-def F1(T):
-    return 10 ** (math.log10(FC1(T)) / (1 + (math.log10(KR1(T)) / NC1(T)) ** 2))
+def F1(T, M):
+    return 10 ** (math.log10(FC1(T)) / (1 + (math.log10(KR1(T, M)) / NC1(T)) ** 2))
 
 def KMT01(T, M):
     return (K10(T, M) * K1I(T) * F1(T)) / (K10(T, M) + K1I(T))

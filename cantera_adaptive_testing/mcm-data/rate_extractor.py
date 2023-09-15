@@ -68,38 +68,6 @@ def get_pure_arrhenius(arrhen_string):
     ymlout["rate-constant"]["Ea"] = f"{Ea_coeff}"
     return ymlout
 
-def get_function_rate(complex_string):
-    """ Generate yaml output for function reaction rate
-
-    Args:
-        complex_string (str): string in the form of COMPLEX_FUNC*scalar
-    """
-    # get scalars
-    scalars = re.findall(r"(\d+([.]\d*)?([e][+-]\d+)?)+", complex_string)
-    scalars = [float(s[0]) for s in scalars]
-    scalar = np.prod(scalars) if scalars else 1
-    # get complex function
-    found = False
-    for cs in complex_string.split("*"):
-        if cs in complex_rate_fcns:
-            complex_string = cs
-            found = True
-    assert found
-    return {"type": "scaled-function-rate", "function": complex_string, "scalar": str(scalar)}
-
-def get_concentration_rate(conc_string):
-    """ Get yaml output for concentration based rates
-
-    Args:
-        conc_string (str): Concentration rate string of the form 6.0e-34*O2*(TEMP/300)^-2.6*O2
-    """
-    arrhen_data = get_pure_arrhenius(conc_string)
-    species_names = re.findall(r"(?:[A-Z]+[0-9]*)+", conc_string)
-    species_names = list(filter(lambda x: x not in complex_rate_fcns + ["TEMP"], species_names))
-    conc_data = {"type": "concentration-rate"}
-    conc_data.update(arrhen_data["rate-constant"])
-    conc_data["species-names"] = species_names
-    return conc_data
 
 def get_complex_rate(rate_exp, species_names, func_names):
     """ A function that can deal with a combined rate and produce the yaml
@@ -117,6 +85,7 @@ def get_complex_rate(rate_exp, species_names, func_names):
     if func_names:
         comp_data["function-names"] = func_names
     return comp_data
+
 
 def get_temp_squared_rate(rate_exp):
     rate_exp = re.sub("[*]TEMP[\^]2", "", rate_exp)
