@@ -6,7 +6,6 @@ description: |-
   (Jenkin et al., Atmos. Environ., 31, 81, 1997; Saunders et al., Atmos. Chem. Phys., 3, 161, 2003), for non aromatic schemes; (Jenkin et al., Atmos. Chem. Phys., 3, 181, 2003; Bloss et al., Atmos. Chem. Phys., 5, 641, 2005), for aromatic schemes; (Jenkin et al., Atmos. Chem. Phys., 12, 5275, 2012), for the β-caryophyllene scheme and (Jenkin et al., Atmos. Chem. Phys., 15, 11433-11459, 2015), for the isoprene scheme.
 
 generator: manual
-input-files: [h2o2.inp, gri30_tran.dat]
 cantera-version: 3.0.0
 date: Wed, 11 Dec 2019 16:59:04 -0500
 
