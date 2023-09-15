@@ -76,7 +76,8 @@ def main():
         content = f.read()
         content = re.sub(r"\n  [-] ", ", ", content)
         content = re.sub(r"[:][,]", ":", content)
-        content = re.sub(r"[']", "", content)
+        content = re.sub(r"[']NO[']", "NO", content)
+        content = re.sub(r"['](\d+([.]\d*e?[+-]?\d*)?)[']", r"\1", content)
         # search for list
         random.seed(time.time())
         rep_str = "".join(random.choices(string.ascii_letters, k=30))
