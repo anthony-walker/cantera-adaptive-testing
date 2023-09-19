@@ -3,6 +3,7 @@ import re
 import numpy as np
 import cantera as ct
 import mcm_complex_rates
+from sympy.parsing.sympy_parser import parse_expr
 
 # global used to get function based rates
 complex_rate_fcns = list(filter(lambda x: re.fullmatch("([A-Z0-9])+", x),
@@ -56,7 +57,7 @@ def get_pure_arrhenius(arrhen_string):
     ymlout["rate-constant"]["A"] = f"{A_coeff:0.2e}"
     # find b coefficient
     b_coeff = 0.0
-    res = re.search(r"[\^][-]?\d+([.]\d*)?([e][+-]\d+)?", arrhen_string)
+    res = re.search(r"[*][*][-]?\d+([.]\d*)?([e][+-]\d+)?", arrhen_string)
     if res:
         b_coeff = float(res.group(0)[1:])
     ymlout["rate-constant"]["b"] = f"{b_coeff}"
@@ -90,7 +91,7 @@ def get_complex_rate(rate_exp, species_names, func_names):
 
 
 def get_temp_squared_rate(rate_exp):
-    rate_exp = re.sub("[*]TEMP[\^]2", "", rate_exp)
+    rate_exp = re.sub(r"[*]TEMP[*][*]2", "", rate_exp)
     arrhen_data = get_pure_arrhenius(rate_exp)
     rate_data = {"type": "T-squared-rate"}
     rate_data.update(arrhen_data["rate-constant"])
@@ -102,7 +103,7 @@ def get_temp_cubed_rate(rate_exp):
     Args:
         rate_exp (str): Rate expression containing TEMP^2
     """
-    res = re.search(r"[*]exp[(]\d+([.]\d*)?([e][+-]\d+)?[/]TEMP[\^]3[)]", rate_exp)
+    res = re.search(r"[*]exp[(]\d+([.]\d*)?([e][+-]\d+)?[/]TEMP[*][*]3[)]", rate_exp)
     cubic_part = res.group(0)
     arrhen_data = get_pure_arrhenius(rate_exp.replace(cubic_part, ""))
     rate_data = {"type": "T-cubed-rate"}
@@ -115,7 +116,7 @@ def get_half_power_rate(rate_exp):
     Args:
         rate_exp (str): (*)^0.5 pattern
     """
-    res = re.search(r"[(].*[)][\^]0.5", rate_exp)
+    res = re.search(r"[(].*[)][*][*]0.5", rate_exp)
     power_exp = res.group(0)
     internal_arrhen = power_exp[1:-5]
     # get names
@@ -146,7 +147,7 @@ def rate_sorter(rate_exp):
     rate_exp = rate_exp.strip()
     # replace spaces inside rate expressions
     rate_exp = re.sub("\s+", "", rate_exp)
-    arrhen_regex = r"\d+([.]\d*)?([e][+-]\d+)?(([*]\d+([.]\d*)?([e][+-]\d+)?)+)?([*][(]TEMP[/]\d+[)][\^][-]?\d+([.]\d*)?)?([*]exp[(][-]?\d+[/]TEMP[)])?(([*]\d+([.]\d*)?([e][+-]\d+)?)+)?"
+    arrhen_regex = r"\d+([.]\d*)?([e][+-]\d+)?(([*]\d+([.]\d*)?([e][+-]\d+)?)+)?([*][(]TEMP[/]\d+[)][*][*][-]?\d+([.]\d*)?)?([*]exp[(][-]?\d+[/]TEMP[)])?(([*]\d+([.]\d*)?([e][+-]\d+)?)+)?"
     # string check for concentration based rates
     all_names = re.findall(r"(?:[A-Z]+[0-9]*)+", rate_exp)
     all_names = list(filter(lambda x: x != "TEMP", all_names))
@@ -172,11 +173,11 @@ def rate_sorter(rate_exp):
         return get_pure_arrhenius(rate_exp)
     elif re.fullmatch(arrhen_regex, complex_arrhen_string) or ((species_names or func_names) and complex_arrhen_string == ""):
         return get_complex_rate(complex_arrhen_string, species_names, func_names)
-    elif re.search("TEMP[\^]2", rate_exp):
+    elif re.search(r"TEMP[*][*]2", rate_exp):
         return get_temp_squared_rate(rate_exp)
-    elif re.search("TEMP[\^]3", rate_exp):
+    elif re.search(r"TEMP[*][*]3", rate_exp):
         return get_temp_cubed_rate(rate_exp)
-    elif re.search(r"[(]*[)][\^]0.5", rate_exp):
+    elif re.search(r"[(]*[)][*][*]0.5", rate_exp):
         return get_half_power_rate(rate_exp)
     # elif re.search(r"[(]1-(\d+([.]\d*)?([e][+-]\d+)?)?", rate_exp):
         # print(re.search(r"[(]1-(\d+([.]\d*)?([e][+-]\d+)?)?", rate_exp))
@@ -193,18 +194,40 @@ def get_list_of_rate_data():
     """
     with open("mcm-rates.txt", "r") as f:
         rates = f.read().split("\n")
-    return [rate_sorter(rate) for rate in rates[:-1]]
+    returns = []
+    for rate in rates[:-1]:
+        try:
+            val = rate_sorter(str(parse_expr(rate)))
+        except Exception as e:
+            val = rate_sorter(rate)
+        returns.append(val)
+    return returns
 
 def test_rate_sorter(skip_assertion=False):
     with open("mcm-rates.txt", "r") as f:
         rates = f.read().split("\n")
     num_unknowns = 0
     for rate in rates[:-1]:
-        if not rate_sorter(rate):
+        try:
+            val = rate_sorter(str(parse_expr(rate)))
+        except Exception as e:
+            val = rate_sorter(rate)
+        if not val:
             num_unknowns += 1
     # check that all have been resolved
     if not skip_assertion:
         assert num_unknowns == 0
 
+def count_arrhenius():
+    rates = get_list_of_rate_data()
+    counts = {"total": len(rates), "arrhenius":0}
+    for r in rates:
+        if "rate-constant" in r:
+            counts["arrhenius"] += 1
+        elif "type" in r:
+            counts[r["type"]] = counts.get(r["type"], 0) + 1
+    print(counts)
+
 if __name__ == "__main__":
-    test_rate_sorter()
+    # test_rate_sorter()
+    count_arrhenius()
