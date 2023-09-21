@@ -1,0 +1,7768 @@
+atmosphere-reactions:
+- equation: ACETOL + OH + O2 => MGLYOX + HO2 + H2O
+  rate-constant:
+    A: '9.64e+11'
+    b: '0.0'
+    Ea: '606.0966099999999'
+- equation: ACETOL + 2.0 O2 => CH3CO3 + HCHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: BIACETO + O2 => CH3CO3 + HCHO + CO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BIACETO2 + HO2 => BIACETOOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: BIACETO2 + NO => BIACETO + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: BIACETO2 + NO3 => BIACETO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BIACETO2 => BIACETO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BIACETO2 + 0.5 H2O => BIACETOH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BIACETO2 => CO23C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BIACETOH + 2.0 O2 => CH3CO3 + HOCH2CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+- equation: BIACETOOH => BIACETO + OH
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+  duplicate: true
+- equation: BIACETOOH => BIACETO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: BU1ENO3O => C2H5CHO + HCHO + NO2
+  rate-constant:
+    A: '4.22e+27'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BU1ENO3O + O2 => CO3C4NO3 + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BU1ENO3O2 + HO2 => BU1ENO3OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: BU1ENO3O2 + NO => BU1ENO3O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: BU1ENO3O2 + NO3 => BU1ENO3O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BU1ENO3O2 => BU1ENO3O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BU1ENO3O2 => CO3C4NO3 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BU1ENO3O2 + 0.5 H2O => HO3C4NO3 + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BU1ENO3OOH + OH => BU1ENO3O2 + H2O
+  rate-constant:
+    A: '5.40e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BU1ENO3OOH => BU1ENO3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: BUT1ENE + NO3 + O2 => BU1ENO3O2
+  rate-constant:
+    A: '1.25e+11'
+    b: '0.0'
+    Ea: '-1887.8419'
+- equation: BUT1ENE + NO3 + O2 => C43NO34O2
+  rate-constant:
+    A: '6.74e+10'
+    b: '0.0'
+    Ea: '-1887.8419'
+- equation: BUT1ENE + O3 => C2H5CHOOA + HCHO
+  rate-constant:
+    A: '1.07e+09'
+    b: '0.0'
+    Ea: '-3467.66749'
+- equation: BUT1ENE + O3 => CH2OOB + C2H5CHO
+  rate-constant:
+    A: '1.07e+09'
+    b: '0.0'
+    Ea: '-3467.66749'
+- equation: BUT1ENE + OH + O2 => HO3C4O2
+  rate-constant:
+    A: '5.17e+11'
+    b: '0.0'
+    Ea: '924.0489299999999'
+- equation: BUT1ENE + OH + O2 => NBUTOLAO2
+  rate-constant:
+    A: '3.46e+12'
+    b: '0.0'
+    Ea: '924.0489299999999'
+- equation: BUTACID + OH + O2 => NC3H7O2 + H2O + CO2
+  rate-constant:
+    A: '1.08e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTAL2NO3 + OH => EGLYOX + NO2 + H2O
+  rate-constant:
+    A: '2.67e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTAL2NO3 => BUTAL2O + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: BUTAL2NO3 + O2 => C2H5CHO + HO2 + CO + NO2
+  type: zenith-angle-rate
+  l: '7.914e-05'
+  m: '0.764'
+  n: '0.364'
+  scalar: '1'
+- equation: BUTAL2O + O2 => C2H5CHO + HO2 + CO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTALNO3 + OH => CO2C3CHO + NO2 + H2O
+  rate-constant:
+    A: '1.35e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTALNO3 => NO2 + BUTALO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: BUTALNO3 => NO2 + BUTALO
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+  duplicate: true
+- equation: BUTALO + O2 => CH3CHO + HCOCH2O2
+  rate-constant:
+    A: '1.63e+38'
+    b: '0.0'
+    Ea: '-14701.320396'
+- equation: BUTALO + O2 => CO2C3CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BUTALO2 + HO2 => BUTALO2H + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: BUTALO2 + NO => BUTALNO3
+  rate-constant:
+    A: '1.35e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: BUTALO2 + NO => BUTALO + NO2
+  rate-constant:
+    A: '1.49e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: BUTALO2 + NO3 => BUTALO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTALO2 => BUTALO + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BUTALO2 => CO2C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BUTALO2 + 0.5 H2O => HO2C3CHO + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: BUTALO2H + OH => BUTALO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: BUTALO2H + OH => CO2C3CHO + OH + H2O
+  rate-constant:
+    A: '7.65e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: BUTALO2H => BUTALO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: BUTALO2H + O2 => HO2 + CO + IC3H7O2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C111O + O2 => C112O2
+  rate-constant:
+    A: '6.93e+34'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: C111O2 + HO2 => C111OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C111O2 + NO => C111O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C111O2 + NO3 => C111O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C111O2 => C111O + 0.5 O2
+  type: complex-rate
+  A: '1.51e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C111OOH => C111O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C111OOH => C111O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C112O + O2 => CH3CHO + HO7C8CO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C112O2 + HO2 => C112OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C112O2 + NO => C112O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C112O2 + NO3 => C112O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C112O2 => C112O + 0.5 O2
+  type: complex-rate
+  A: '5.30e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C112OOH => C112O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C112OOH => C112O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C113CO + 2.0 O2 => CO3C4CO3 + C5H11CHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: C113NO3 => C113O + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C113O + O2 => CO3C4CHO + C5H11CHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-9367.670227999999'
+- equation: C113O2 + HO2 => C113OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C113O2 + NO => C113NO3
+  rate-constant:
+    A: '3.50e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C113O2 + NO => C113O + NO2
+  rate-constant:
+    A: '1.28e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C113O2 + NO3 => C113O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C113O2 => C113CO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C113O2 => C113O + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C113O2 + 0.5 H2O => C113OH + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C113OH + O2 => C113O + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C113OOH => C113O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C113OOH => C113O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C114O + O2 => CO3C4CHO + C5H11CO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C114O2 + HO2 => C114OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C114O2 + NO => C114O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C114O2 + NO3 => C114O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C114O2 => C114O + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C114O2 + 0.5 H2O => C114OH + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C114O2 => CO356C11 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C114OH + 2.0 O2 => C5H11CO3 + CO3C4CHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: C114OOH => C114O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C114OOH + O2 => C5H11CO3 + CO3C4CHO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: C115O + O2 => EGLYOX + C5H11CO3 + CO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C115O2 + HO2 => C115OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C115O2 + NO => C115O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C115O2 + NO3 => C115O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C115O2 => C115O + 0.5 O2
+  type: complex-rate
+  A: '5.30e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C115OOH => C115O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C115OOH => C115O + OH
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+  duplicate: true
+- equation: C115OOH => C115O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C2H4 + NO3 + O2 => ETHENO3O2
+  rate-constant:
+    A: '1.99e+12'
+    b: '0.0'
+    Ea: '-5723.1417599999995'
+- equation: C2H4 + O3 => HCHO + CH2OOA
+  rate-constant:
+    A: '5.48e+09'
+    b: '0.0'
+    Ea: '-5126.981159999999'
+- equation: C2H4 + OH + O2 => HOCH2CH2O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT15
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5CHO + NO3 + O2 => C2H5CO3 + HNO3
+  rate-constant:
+    A: '1.95e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: C2H5CHO + OH + O2 => C2H5CO3 + H2O
+  rate-constant:
+    A: '2.95e+12'
+    b: '0.0'
+    Ea: '804.8168099999999'
+- equation: C2H5CHO + 2.0 O2 => C2H5O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.879e-05'
+  m: '1.067'
+  n: '0.358'
+  scalar: '1'
+- equation: C2H5CHOO + CO => C2H5CHO + CO2
+  rate-constant:
+    A: '7.23e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOO + NO => C2H5CHO + NO2
+  rate-constant:
+    A: '6.02e+09'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOO + NO2 => C2H5CHO + NO3
+  rate-constant:
+    A: '6.02e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOO + SO2 => C2H5CHO + SO3
+  rate-constant:
+    A: '4.22e+10'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOO + H2O => C2H5CHO + H2O2
+  type: complex-rate
+  A: '3.61e+06'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5CHOO => PROPACID
+  type: complex-rate
+  A: '6.02e+06'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5CHOOA => C2H5CHOO
+  rate-constant:
+    A: '1.45e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOOA + O2 => C2H5O2 + CO + OH
+  rate-constant:
+    A: '2.17e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOOA + 2.0 O2 => C2H5O2 + HO2 + CO2
+  rate-constant:
+    A: '1.20e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CHOOA => C2H6 + CO2
+  rate-constant:
+    A: '1.20e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CO3 + HO2 => C2H5O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C2H5CO3 + HO2 => PERPROACID + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C2H5CO3 + HO2 => PROPACID + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C2H5CO3 + NO + O2 => NO2 + C2H5O2 + CO2
+  rate-constant:
+    A: '4.03e+12'
+    b: '0.0'
+    Ea: '675.64868'
+- equation: C2H5CO3 + NO2 => PPN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5CO3 + NO3 => C2H5O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5CO3 + 0.5 O2 => C2H5O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5CO3 + 0.5 H2O => PROPACID + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5NO3 => C2H5O + NO2
+  type: zenith-angle-rate
+  l: '1.907e-06'
+  m: '1.244'
+  n: '0.335'
+  scalar: '1'
+- equation: C2H5O + O2 => CH3CHO + HO2
+  type: complex-rate
+  A: '1.45e+10'
+  b: '0.0'
+  Ea: '-645.84065'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5O2 + HO2 => C2H5OOH + O2
+  rate-constant:
+    A: '2.59e+11'
+    b: '0.0'
+    Ea: '1728.86574'
+- equation: C2H5O2 + NO => C2H5NO3
+  rate-constant:
+    A: '1.38e+10'
+    b: '0.0'
+    Ea: '755.13676'
+- equation: C2H5O2 + NO => C2H5O + NO2
+  rate-constant:
+    A: '1.52e+12'
+    b: '0.0'
+    Ea: '755.13676'
+- equation: C2H5O2 + NO3 => C2H5O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C2H5O2 => C2H5O + 0.5 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN124
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5O2 + 0.5 H2O => C2H5OH + 0.75 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN125
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5O2 => CH3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN126
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C2H5OH + OH => C2H5O + H2O
+  rate-constant:
+    A: '9.03e+10'
+    b: '0.0'
+    Ea: '39.74404'
+- equation: C2H5OH + OH + O2 => CH3CHO + HO2 + H2O
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '39.74404'
+- equation: C2H5OH + OH + O2 => HOCH2CH2O2 + H2O
+  rate-constant:
+    A: '9.03e+10'
+    b: '0.0'
+    Ea: '39.74404'
+- equation: C2H5OOH => C2H5O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C3H7CHO + NO3 + O2 => HNO3 + C3H7CO3
+  rate-constant:
+    A: '1.02e+12'
+    b: '0.0'
+    Ea: '-2980.803'
+- equation: C3H7CHO + OH + O2 => BUTALO2 + H2O
+  rate-constant:
+    A: '5.46e+11'
+    b: '0.0'
+    Ea: '814.7528199999999'
+- equation: C3H7CHO + OH + O2 => C3H7CO3 + H2O
+  rate-constant:
+    A: '3.07e+12'
+    b: '0.0'
+    Ea: '814.7528199999999'
+- equation: C3H7CHO => CH3CHO + C2H4
+  type: zenith-angle-rate
+  l: '1.675e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C3H7CHO + 2.0 O2 => NC3H7O2 + CO + HO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C3H7CO3 + HO2 => BUTACID + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C3H7CO3 + HO2 => NC3H7O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C3H7CO3 + HO2 => PERBUACID + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C3H7CO3 + NO + O2 => NO2 + NC3H7O2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: C3H7CO3 + NO2 => PBN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C3H7CO3 + NO3 => NC3H7O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C3H7CO3 + 0.5 H2O => BUTACID + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C3H7CO3 + 0.5 O2 => NC3H7O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C3PAN1 => HOC2H4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C3PAN2 => HCOCH2CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C43NO34O + O2 => BUTAL2NO3 + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C43NO34O => C2H5CHO + HCHO + NO2
+  rate-constant:
+    A: '4.22e+27'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C43NO34O2 + HO2 => C43NO34OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C43NO34O2 + NO => C43NO34O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C43NO34O2 + NO3 => C43NO34O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C43NO34O2 => BUTAL2NO3 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C43NO34O2 => C43NO34O + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C43NO34O2 + 0.5 H2O => NBUTOLANO3 + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C43NO34OOH + OH => C43NO34O2 + H2O
+  rate-constant:
+    A: '3.40e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C43NO34OOH => C43NO34O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C4CHOBNO3 + OH => CO3C4CHO + NO2 + H2O
+  rate-constant:
+    A: '1.40e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4CHOBNO3 => C4CHOBO + NO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: C4CHOBNO3 => C4CHOBO + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+  duplicate: true
+- equation: C4CHOBO + O2 => CO3C4CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4CHOBO2 + HO2 => C4CHOBOOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C4CHOBO2 + NO => C4CHOBNO3
+  rate-constant:
+    A: '2.10e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C4CHOBO2 + NO => C4CHOBO + NO2
+  rate-constant:
+    A: '1.42e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C4CHOBO2 + NO3 => C4CHOBO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4CHOBO2 => C4CHOBO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4CHOBO2 => CO3C4CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4CHOBO2 + 0.5 H2O => HO3C4CHO + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4CHOBOOH + OH => C4CHOBO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: C4CHOBOOH + OH => CO3C4CHO + OH + H2O
+  rate-constant:
+    A: '9.45e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4CHOBOOH => C4CHOBO + OH
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: C4CHOBOOH => C4CHOBO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C4H9CHO + NO3 + O2 => C4H9CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: C4H9CHO + OH + O2 => C4CHOBO2 + H2O
+  rate-constant:
+    A: '7.25e+11'
+    b: '0.0'
+    Ea: '890.266496'
+- equation: C4H9CHO + OH + O2 => C4H9CO3 + H2O
+  rate-constant:
+    A: '3.09e+12'
+    b: '0.0'
+    Ea: '890.266496'
+- equation: C4H9CHO + 2.0 O2 => NC4H9O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C4H9CO3 + HO2 => NC4H9O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C4H9CO3 + HO2 => PENTACID + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C4H9CO3 + HO2 => PERPENACID + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C4H9CO3 + NO + O2 => NC4H9O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: C4H9CO3 + NO2 => PPEN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4H9CO3 + NO3 => NC4H9O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4H9CO3 + 0.5 O2 => NC4H9O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4H9CO3 + 0.5 H2O => PENTACID + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4OHCHO + NO3 + O2 => C4OHCO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: C4OHCHO + OH + O2 => C4OHCO3 + H2O
+  rate-constant:
+    A: '1.99e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4OHCHO + 2.0 O2 => C3H7CHO + CO + HO2 + HO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C4OHCO3 + HO2 => C3H7CHO + HO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C4OHCO3 + HO2 => C4OHCO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C4OHCO3 + NO + O2 => C3H7CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: C4OHCO3 + NO2 => C4OHPAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4OHCO3 + NO3 => C3H7CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4OHCO3 + 0.5 O2 => C3H7CHO + HO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4OHCO3H + OH => C4OHCO3 + H2O
+  rate-constant:
+    A: '9.51e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4OHCO3H + O2 => C3H7CHO + HO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C4OHPAN + OH => C3H7CHO + CO + NO2 + H2O + O2
+  rate-constant:
+    A: '3.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C4OHPAN => C4OHCO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4PAN1 => HOC3H6CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4PAN2 => HO13C3CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C4PAN3 => HO2C3CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C51NO3 => C51O + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C51O + O2 => CO2C3CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-12682.323164'
+- equation: C51O2 + HO2 => C51OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C51O2 + NO => C51NO3
+  rate-constant:
+    A: '1.06e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C51O2 + NO => C51O + NO2
+  rate-constant:
+    A: '1.52e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C51O2 + NO3 => C51O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C51O2 => C51O + 0.5 O2
+  type: complex-rate
+  A: '3.04e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C51O2 + 0.5 H2O => C51OH + 0.75 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C51O2 => HO1CO24C5 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C51OH2CO + OH + O2 => C5OH2CO4O2 + H2O
+  rate-constant:
+    A: '4.37e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C51OH2CO + 2.0 O2 => HOCH2CO3 + NC3H7O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C51OOH => C51O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C51OOH => C51O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C52OH1OOH + OH => C4OHCHO + OH + H2O
+  rate-constant:
+    A: '1.30e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C52OH1OOH + OH => PE1ENEBO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: C52OH1OOH => PE1ENEBO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C5H11CHO => CH3CHO + BUT1ENE
+  type: zenith-angle-rate
+  l: '1.675e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C5H11CHO + 2.0 O2 => PEAO2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C5H11CO3 + HO2 => C5H11CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C5H11CO3 + HO2 => PEAO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C5H11CO3 + NO + O2 => PEAO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: C5H11CO3 + NO2 => PHXN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5H11CO3 + NO3 => PEAO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C5H11CO3 + 0.5 O2 => PEAO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5H11CO3H + O2 => PEAO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C5OH2CO4O + O2 => HO1CO24C5 + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5OH2CO4O2 + HO2 => C5OHCO4OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C5OH2CO4O2 + NO => C5OH2CO4O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C5OH2CO4O2 + NO3 => C5OH2CO4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C5OH2CO4O2 => C5OH2CO4O + 0.5 O2
+  type: complex-rate
+  A: '5.30e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5OHCO4OOH + OH => C5OH2CO4O2 + H2O
+  rate-constant:
+    A: '4.26e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C5OHCO4OOH => C5OH2CO4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C5OHCO4OOH + O2 => IC3H7O2 + HOCH2CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C5PAN1 => HO2C4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5PAN16 => CO3C4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5PAN2 => CO2C4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5PAN8 => HO3C4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C5PAN9 => CO23C4CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C63NO3 => C63O + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C63O + O2 => CO3C4CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-12441.871722'
+- equation: C63O2 + HO2 => C63OOH + O2
+  rate-constant:
+    A: '1.35e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C63O2 + NO => C63NO3
+  rate-constant:
+    A: '6.34e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C63O2 + NO => C63O + NO2
+  rate-constant:
+    A: '1.56e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C63O2 + NO3 => C63O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C63O2 => C63O + 0.5 O2
+  type: complex-rate
+  A: '3.04e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C63O2 + 0.5 H2O => C63OH + 0.75 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C63O2 => HO1CO24C6 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C63OH + O2 => C63O + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C63OOH => C63O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C63OOH => C63O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C6H13CHO + 2.0 O2 => HO2 + CO + HEXAO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: C6H13CO3 + HO2 => C6H13CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C6H13CO3 + HO2 => C6H13CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C6H13CO3 + HO2 => HEXAO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: C6H13CO3 + NO + O2 => HEXAO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: C6H13CO3 + NO2 => PHPTN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C6H13CO3 + NO3 => HEXAO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C6H13CO3 + 0.5 H2O => C6H13CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C6H13CO3 + 0.5 O2 => HEXAO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C6H13CO3H + O2 => HEXAO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C6PAN1 => HO3C5CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C6PAN2 => CO3C5CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C6PAN22 => HO4C5CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C81O + O2 => CH3CHO + HO4C5CO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C81O2 + HO2 => C81OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C81O2 + NO => C81O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C81O2 + NO3 => C81O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C81O2 => C81O + 0.5 O2
+  type: complex-rate
+  A: '5.30e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C81OOH => C81O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C81OOH => C81O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C82NO3 => C82O + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: C82O + O2 => CO3C4CHO + C2H5CHO + HO2
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C82O2 + HO2 => C82OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C82O2 + NO => C82NO3
+  rate-constant:
+    A: '2.81e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C82O2 + NO => C82O + NO2
+  rate-constant:
+    A: '1.34e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C82O2 + NO3 => C82O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C82O2 => C82O + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C82O2 + 0.5 H2O => HO34CO6C8 + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C82O2 => HO3CO46C8 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C82OOH => C82O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C82OOH => C82O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C83O + O2 => EGLYOX + C2H5CO3 + CO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C83O2 + HO2 => C83OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C83O2 + NO => C83O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C83O2 + NO3 => C83O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C83O2 => C83O + 0.5 O2
+  type: complex-rate
+  A: '5.30e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C83OOH => C83O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: C83OOH => C83O + OH
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+  duplicate: true
+- equation: C83OOH => C83O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: C84O + O2 => CO3C4CHO + C2H5CO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C84O2 + HO2 => C84OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: C84O2 + NO => C84O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: C84O2 + NO3 => C84O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: C84O2 => C84O + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C84O2 + 0.5 H2O => C84OH + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C84O2 => CO346C8 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: C84OH + 2.0 O2 => C2H5CO3 + CO3C4CHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: C84OOH + O2 => C2H5CO3 + CO3C4CHO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: C84OOH => C84O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: C9PAN1 => HO7C8CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH2OO + CO => HCHO + CO2
+  rate-constant:
+    A: '7.23e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OO + NO => HCHO + NO2
+  rate-constant:
+    A: '6.02e+09'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OO + NO2 => HCHO + NO3
+  rate-constant:
+    A: '6.02e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OO + SO2 => HCHO + SO3
+  rate-constant:
+    A: '4.22e+10'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OO + H2O => HCHO + H2O2
+  type: complex-rate
+  A: '3.61e+06'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH2OO => HCOOH
+  type: complex-rate
+  A: '6.02e+06'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH2OOA => CH2OO
+  rate-constant:
+    A: '2.23e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OOA => CO + H2O
+  rate-constant:
+    A: '3.01e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OOA + O2 => HO2 + CO + OH
+  rate-constant:
+    A: '7.83e+28'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OOB => CH2OO
+  rate-constant:
+    A: '1.45e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OOB => CO + H2O
+  rate-constant:
+    A: '2.41e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2OOB + O2 => HO2 + CO + OH
+  rate-constant:
+    A: '2.17e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CHO + 2.0 O2 => CH3O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '7.344e-06'
+  m: '1.202'
+  n: '0.417'
+  scalar: '1'
+- equation: CH3CHOHCHO + NO3 + O2 => CH3CHOHCO3 + HNO3
+  rate-constant:
+    A: '2.02e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: CH3CHOHCHO + OH + O2 => CH3CHOHCO3 + H2O
+  rate-constant:
+    A: '1.02e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CHOHCHO + 2.0 O2 => CH3CHO + HO2 + CO + HO2
+  type: zenith-angle-rate
+  l: '7.914e-05'
+  m: '0.764'
+  n: '0.364'
+  scalar: '1'
+- equation: CH3CHOHCO3 + HO2 => CH3CHO + HO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CH3CHOHCO3 + HO2 => IPROPOLPER + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CH3CHOHCO3 + NO + O2 => CH3CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CH3CHOHCO3 + NO2 => IPROPOLPAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3CHOHCO3 + NO3 => CH3CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CHOHCO3 + 0.5 O2 => CH3CHO + HO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3CO2H + OH + O2 => CH3O2 + H2O + CO2
+  rate-constant:
+    A: '4.82e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CO3 + HO2 => CH3CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CH3CO3 + HO2 => CH3CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CH3CO3 + HO2 => CH3O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CH3CO3 + NO + O2 => NO2 + CH3O2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CH3CO3 + NO2 => PAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3CO3 + NO3 => NO2 + CH3O2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CO3 + 0.5 H2O => CH3CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3CO3 + 0.5 O2 => CH3O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3CO3H + OH => CH3CO3 + H2O
+  rate-constant:
+    A: '2.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3CO3H + O2 => CH3O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: CH3COCH2O + O2 => CH3CO3 + HCHO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3COCH2O2 + HO2 => CH3COCH2O + OH + O2
+  rate-constant:
+    A: '1.23e+10'
+    b: '0.0'
+    Ea: '2484.0025'
+- equation: CH3COCH2O2 + HO2 => HYPERACET + O2
+  rate-constant:
+    A: '6.96e+10'
+    b: '0.0'
+    Ea: '2484.0025'
+- equation: CH3COCH2O2 + NO => CH3COCH2O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH3COCH2O2 + NO3 => CH3COCH2O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3COCH2O2 + 0.5 H2O => ACETOL + 0.75 O2
+  type: complex-rate
+  A: '4.03e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3COCH2O2 => CH3COCH2O + 0.5 O2
+  type: complex-rate
+  A: '1.21e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3COCH2O2 => MGLYOX + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '4.03e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3COCH3 + 2.0 O2 => CH3CO3 + CH3O2
+  type: zenith-angle-rate
+  l: '7.992e-07'
+  m: '1.578'
+  n: '0.271'
+  scalar: '1'
+- equation: CH3NO3 => CH3O + NO2
+  type: zenith-angle-rate
+  l: '1.588e-06'
+  m: '1.154'
+  n: '0.318'
+  scalar: '1'
+- equation: CH3O + O2 => HCHO + HO2
+  type: complex-rate
+  A: '4.34e+10'
+  b: '0.0'
+  Ea: '-2146.17816'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3O2 + NO => CH3NO3
+  rate-constant:
+    A: '1.39e+09'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH3O2 + NO => CH3O + NO2
+  rate-constant:
+    A: '1.38e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH3O2 + NO2 => CH3O2NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT13
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3O2 + NO3 => CH3O + NO2 + O2
+  rate-constant:
+    A: '7.23e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3O2 => CH3O + 0.5 O2
+  type: complex-rate
+  A: '8.91e+11'
+  b: '0.0'
+  Ea: '-1033.34504'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3O2 + 0.5 H2O => CH3OH + 0.75 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN348
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3O2 => HCHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN349
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3O2NO2 => CH3O2 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT14
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CH3OH + OH + O2 => HO2 + HCHO + H2O
+  rate-constant:
+    A: '1.72e+12'
+    b: '0.0'
+    Ea: '-685.58469'
+- equation: CH3OOH => CH3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: CL + C2H6 + O2 => C2H5O2 + HCL
+  rate-constant:
+    A: '5.00e+13'
+    b: '0.0'
+    Ea: '-198.72019999999998'
+- equation: CL + NC11H24 + O2 => UDECO2 + HCL
+  rate-constant:
+    A: '3.72e+14'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO23C3CHO + 2.0 O2 => CH3CO3 + CO + CO + HO2
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: CO23C3CHO + O2 => CH3CO3 + HCOCO
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+- equation: CO23C4CHO + 2.0 O2 => BIACETO2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: CO23C4CHO + 2.0 O2 => CH3CO3 + HCOCH2CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+- equation: CO23C4CO3 + HO2 => BIACETO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO23C4CO3 + HO2 => CO23C4CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO23C4CO3 + NO + O2 => BIACETO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CO23C4CO3 + NO2 => C5PAN9
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO23C4CO3 + NO3 => BIACETO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO23C4CO3 + 0.5 O2 => BIACETO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO23C4CO3H + O2 => BIACETO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: CO23C4CO3H + O2 => BIACETO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: CO23C4NO3 + OH => CO23C3CHO + NO2 + H2O
+  rate-constant:
+    A: '7.83e+10'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO23C4NO3 + 2.0 O2 => NO3CH2CO3 + CH3CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+- equation: CO24C4CHO + 2.0 O2 => CO2C3CO3 + CO + HO2
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: CO2C3CHO + NO3 + O2 => CO2C3CO3 + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: CO2C3CHO + OH + O2 => CO2C3CO3 + H2O
+  rate-constant:
+    A: '4.31e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO2C3CHO + 0.5 H2O + 0.75 O2 => CH3COCH2O2 + HCHO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: CO2C3CO3 + HO2 => CH3COCH2O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO2C3CO3 + HO2 => CO2C3CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO2C3CO3 + NO + O2 => CH3COCH2O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CO2C3CO3 + NO2 => CO2C3PAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C3CO3 + NO3 => CH3COCH2O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO2C3CO3 + 0.5 O2 => CH3COCH2O2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C3CO3H + OH => CO2C3CO3 + H2O
+  rate-constant:
+    A: '2.52e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO2C3CO3H + O2 => CH3COCH2O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO2C3CO3H + O2 => CH3COCH2O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: CO2C3PAN + OH => MGLYOX + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '3.57e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO2C3PAN => CO2C3CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C4CHO + 2.0 O2 => MEKAO2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: CO2C4CO3 + HO2 => CO2C4CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO2C4CO3 + HO2 => CO2C4CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO2C4CO3 + HO2 => MEKAO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO2C4CO3 + NO + O2 => MEKAO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CO2C4CO3 + NO2 => C5PAN2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C4CO3 + NO3 => MEKAO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO2C4CO3 + 0.5 H2O => CO2C4CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C4CO3 + 0.5 O2 => MEKAO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO2C4CO3H + O2 => MEKAO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO2C4CO3H + O2 => MEKAO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: CO2C5OH + 2.0 O2 => CH3CO3 + HO1C3O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: CO346C8 + 2.0 O2 => C2H5CO3 + CO3C4CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO346C8 + 2.0 O2 => C2H5CO3 + CO3C4CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+  duplicate: true
+- equation: CO356C11 + 2.0 O2 => C5H11CO3 + CO3C4CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO356C11 + 2.0 O2 => C5H11CO3 + CO3C4CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+  duplicate: true
+- equation: CO35C5CHO + 2.0 O2 => HO2 + CO + CO + MEKCO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: CO35C5CHO + 2.0 O2 => HO2 + CO + CO3C4CO3
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: CO36C11 + 2.0 O2 => C5H11CO3 + DIEKBO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: CO36C8 + 2.0 O2 => C2H5CO3 + DIEKBO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: CO3C4CHO + 2.0 O2 => MEKCO2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: CO3C4CO2H + 2.0 O2 => MEKCO2 + HO2 + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: CO3C4CO3 + HO2 => CO3C4CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C4CO3 + HO2 => CO3C4CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C4CO3 + HO2 => MEKCO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C4CO3 + NO + O2 => MEKCO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CO3C4CO3 + NO2 => C5PAN16
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4CO3 + NO3 => MEKCO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C4CO3 + 0.5 H2O => CO3C4CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4CO3 + 0.5 O2 => MEKCO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4CO3H + O2 => MEKCO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO3C4CO3H + O2 => MEKCO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: CO3C4NO3 + OH + O2 => CO3C4NO3O2 + H2O
+  rate-constant:
+    A: '4.94e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C4NO3 => MEKCO + NO2
+  type: zenith-angle-rate
+  l: '4.365e-05'
+  m: '1.089'
+  n: '0.323'
+  scalar: '1'
+- equation: CO3C4NO3O + O2 => NO3CH2CO3 + CH3CHO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C4NO3O2 + HO2 => COC4NO3OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: CO3C4NO3O2 + NO => CO3C4NO3O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CO3C4NO3O2 + NO3 => CO3C4NO3O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C4NO3O2 => CO23C4NO3 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4NO3O2 => CO3C4NO3O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4NO3O2 + 0.5 H2O => CO3C4NO3OH + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C4NO3OH + OH + O2 => CO23C4NO3 + HO2 + H2O
+  rate-constant:
+    A: '3.40e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C4NO3OH => HO2CO3C4O + NO2
+  type: zenith-angle-rate
+  l: '4.365e-05'
+  m: '1.089'
+  n: '0.323'
+  scalar: '1'
+- equation: CO3C5CHO + 2.0 O2 => DIEKBO2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: CO3C5CO2H + 2.0 O2 => DIEKBO2 + HO2 + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: CO3C5CO3 + HO2 => CO3C5CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C5CO3 + HO2 => CO3C5CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C5CO3 + HO2 => DIEKBO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: CO3C5CO3 + NO + O2 => DIEKBO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: CO3C5CO3 + NO2 => C6PAN2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C5CO3 + NO3 => DIEKBO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C5CO3 + 0.5 H2O => CO3C5CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C5CO3 + 0.5 O2 => DIEKBO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C5CO3H + O2 => DIEKBO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO3C5CO3H + O2 => DIEKBO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: CO3C85O + O2 => C81O2
+  rate-constant:
+    A: '6.93e+34'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: CO3C85O2 + HO2 => CO3C85OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: CO3C85O2 + NO => CO3C85O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CO3C85O2 + NO3 => CO3C85O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CO3C85O2 => CO3C85O + 0.5 O2
+  type: complex-rate
+  A: '1.51e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: CO3C85OOH => CO3C85O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: CO3C85OOH => CO3C85O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: COC4NO3OOH + OH => CO3C4NO3O2 + H2O
+  rate-constant:
+    A: '9.88e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: COC4NO3OOH => CO3C4NO3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: COC4NO3OOH => CO3C4NO3O + OH
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+  duplicate: true
+- equation: DIEKBNO3 + OH => CO3C4CHO + NO2 + H2O
+  rate-constant:
+    A: '1.28e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: DIEKBNO3 => DIEKBO + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: DIEKBNO3 => DIEKBO + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+  duplicate: true
+- equation: DIEKBO + O2 => HOCO3C54O2
+  rate-constant:
+    A: '5.06e+34'
+    b: '0.0'
+    Ea: '-5101.147534'
+- equation: DIEKBO2 + HO2 => DIEKBOOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: DIEKBO2 + NO => DIEKBNO3
+  rate-constant:
+    A: '8.46e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: DIEKBO2 + NO => DIEKBO + NO2
+  rate-constant:
+    A: '1.54e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: DIEKBO2 + NO3 => DIEKBO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: DIEKBO2 => CO3C4CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: DIEKBO2 => DIEKBO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: DIEKBO2 + 0.5 H2O => HO1CO3C5 + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: DIEKBOOH + OH => CO3C4CHO + OH + H2O
+  rate-constant:
+    A: '3.23e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: DIEKBOOH + OH => DIEKBO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: DIEKBOOH => DIEKBO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: DIEKBOOH => DIEKBO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: EGLYOX + 2.0 O2 => C2H5CO3 + CO + HO2
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: ETHENO3O => NO2 + HCHO + HCHO
+  rate-constant:
+    A: '4.22e+27'
+    b: '0.0'
+    Ea: '0.0'
+- equation: ETHENO3O + O2 => NO3CH2CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: ETHENO3O2 + HO2 => ETHO2HNO3 + O2
+  rate-constant:
+    A: '6.78e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: ETHENO3O2 + NO => ETHENO3O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: ETHENO3O2 + NO3 => ETHENO3O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: ETHENO3O2 => ETHENO3O + 0.5 O2
+  type: complex-rate
+  A: '2.17e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: ETHENO3O2 + 0.5 H2O => ETHOHNO3 + 0.75 O2
+  type: complex-rate
+  A: '7.23e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: ETHENO3O2 => NO3CH2CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '7.23e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: ETHGLY + OH + O2 => HOCH2CHO + HO2 + H2O
+  rate-constant:
+    A: '8.73e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: ETHO2HNO3 + OH => ETHENO3O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: ETHO2HNO3 + OH => NO3CH2CHO + OH + H2O
+  rate-constant:
+    A: '9.76e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: ETHO2HNO3 => ETHENO3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: ETHOHNO3 + OH => HOCH2CHO + NO2 + H2O
+  rate-constant:
+    A: '5.06e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: GLYOX => CO + CO + H2
+  type: zenith-angle-rate
+  l: '6.845e-05'
+  m: '0.130'
+  n: '0.201'
+  scalar: '1'
+- equation: GLYOX + 2.0 O2 => CO + CO + HO2 + HO2
+  type: zenith-angle-rate
+  l: '3.802e-05'
+  m: '0.644'
+  n: '0.312'
+  scalar: '1'
+- equation: GLYOX => HCHO + CO
+  type: zenith-angle-rate
+  l: '1.032e-05'
+  m: '0.130'
+  n: '0.201'
+  scalar: '1'
+- equation: H2O2 => OH + OH
+  type: zenith-angle-rate
+  l: '1.041e-05'
+  m: '0.723'
+  n: '0.279'
+  scalar: '1'
+- equation: HCHO + 2.0 O2 => CO + HO2 + HO2
+  type: zenith-angle-rate
+  l: '4.642e-05'
+  m: '0.762'
+  n: '0.353'
+  scalar: '1'
+- equation: HCHO => H2 + CO
+  type: zenith-angle-rate
+  l: '6.853e-05'
+  m: '0.477'
+  n: '0.323'
+  scalar: '1'
+- equation: HCOCH2CO2H + 2.0 O2 => HCOCH2O2 + HO2 + CO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HCOCH2CO3 + HO2 => HCOCH2CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCH2CO3 + HO2 => HCOCH2CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCH2CO3 + HO2 => HCOCH2O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCH2CO3 + NO + O2 => HCOCH2O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HCOCH2CO3 + NO2 => C3PAN2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2CO3 + NO3 => HCOCH2O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HCOCH2CO3 + 0.5 H2O => HCOCH2CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2CO3 + 0.5 O2 => HCOCH2O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2CO3H + O2 => HCOCH2O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: HCOCH2CO3H + O2 => HCOCH2O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: HCOCH2O + O2 => HCHO + CO + HO2
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HCOCH2O2 + HO2 => HCOCH2OOH + O2
+  rate-constant:
+    A: '6.78e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HCOCH2O2 + NO => NO2 + HCOCH2O
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HCOCH2O2 + NO3 => HCOCH2O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HCOCH2O2 => GLYOX + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2O2 => HCOCH2O + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2O2 + 0.5 H2O => HOCH2CHO + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCH2OOH + OH => GLYOX + OH + H2O
+  rate-constant:
+    A: '1.75e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HCOCH2OOH + OH => HCOCH2O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HCOCH2OOH => HCOCH2O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HCOCH2OOH + O2 => HO2 + CO + HCHO + OH
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HCOCO + O2 => CO + CO + HO2
+  type: complex-rate
+  A: '3.01e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: HCOCO + O2 => CO + CO + HO2
+  rate-constant:
+    A: '4.22e+35'
+    b: '0.0'
+    Ea: '-6279.55832'
+  duplicate: true
+- equation: HCOCO + O2 => CO + OH + CO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN508
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCO + O2 => HCOCO3
+  type: complex-rate
+  A: '9.64e+12'
+  b: '0.0'
+  Ea: '-1092.9611'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCO2H + 2.0 O2 => HO2 + HO2 + CO + CO2
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: HCOCO3 + HO2 => HCOCO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCO3 + HO2 => HCOCO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCO3 + HO2 => HO2 + CO + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HCOCO3 + NO + O2 => HO2 + CO + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HCOCO3 + NO2 + O2 => HO2 + CO + NO3 + CO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCO3 + NO3 => HO2 + CO + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HCOCO3 + 0.5 O2 => CO + HO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCO3 + 0.5 H2O => HCOCO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HCOCO3H + O2 => HO2 + CO + OH + CO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+  duplicate: true
+- equation: HCOCO3H + O2 => HO2 + CO + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: HCOOH + OH + O2 => HO2 + H2O + CO2
+  rate-constant:
+    A: '2.71e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HEXANO3 => HEXAO + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HEXAO + O2 => HO1C6O2
+  rate-constant:
+    A: '1.55e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: HEXAO2 + HO2 => HEXAOOH + O2
+  rate-constant:
+    A: '1.35e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HEXAO2 + NO => HEXANO3
+  rate-constant:
+    A: '1.27e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HEXAO2 + NO => HEXAO + NO2
+  rate-constant:
+    A: '1.50e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HEXAO2 + NO3 => HEXAO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HEXAO2 => C5H11CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HEXAO2 => HEXAO + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HEXAO2 + 0.5 H2O => HEXAOH + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HEXAOOH => HEXAO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HNO3 => OH + NO2
+  type: zenith-angle-rate
+  l: '9.312e-07'
+  m: '1.230'
+  n: '0.307'
+  scalar: '1'
+- equation: HO12C5 + OH + O2 => C51OH2CO + HO2 + H2O
+  rate-constant:
+    A: '1.04e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO13C3CHO + 2.0 O2 => HOC2H4CHO + CO + HO2 + HO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO13C3CO3 + HO2 => HO13C3CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO13C3CO3 + HO2 => HOC2H4CHO + HO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO13C3CO3 + NO + O2 => HOC2H4CHO + NO2 + HO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO13C3CO3 + NO2 => C4PAN2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C3CO3 + NO3 => HOC2H4CHO + NO2 + HO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO13C3CO3 + 0.5 O2 => HOC2H4CHO + HO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C3CO3H + O2 => HOC2H4CHO + HO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO13C4O + O2 => HOC2H4CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-11005.124676'
+- equation: HO13C4O2 + HO2 => HO13C4OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO13C4O2 + NO => HO13C4NO3
+  rate-constant:
+    A: '1.14e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO13C4O2 + NO => HO13C4O + NO2
+  rate-constant:
+    A: '1.61e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO13C4O2 + NO3 => HO13C4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO13C4O2 => HO13C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C4O2 => HO13C4O + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C4O2 + 0.5 H2O => HO13C4OH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C4OOH => HO13C4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO13C5NO3 => HO13C5O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO13C5O + O2 => HOC2H4CHO + CH3CHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-9367.670227999999'
+- equation: HO13C5O2 + HO2 => HO13C5OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO13C5O2 + NO => HO13C5NO3
+  rate-constant:
+    A: '4.23e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO13C5O2 + NO => HO13C5O + NO2
+  rate-constant:
+    A: '1.58e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO13C5O2 + NO3 => HO13C5O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO13C5O2 + 0.5 H2O => HO134C5 + 0.75 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C5O2 => HO13C5O + 0.5 O2
+  type: complex-rate
+  A: '3.04e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C5O2 => HO13CO4C5 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.01e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO13C5OOH => HO13C5O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO13CO4C5 + 2.0 O2 => CH3CO3 + HOC2H4CHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO14CO2C4 + OH + O2 => HO1CO3CHO + HO2 + H2O
+  rate-constant:
+    A: '9.45e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO14CO2C4 + 2.0 O2 => HOCH2CO3 + HOCH2CH2O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO14CO3C5 + OH + O2 => HO1CO34C5 + HO2 + H2O
+  rate-constant:
+    A: '1.13e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO14CO3C5 + 1.25 O2 => CH3CHO + HOC2H4CO3 + 0.5 H2O
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO1C3NO3 => HO1C3O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO1C3O + O2 => HOC2H4CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C3O2 + HO2 => HO1C3OOH + O2
+  rate-constant:
+    A: '9.11e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO1C3O2 + NO => HO1C3NO3
+  rate-constant:
+    A: '3.09e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C3O2 + NO => HO1C3O + NO2
+  rate-constant:
+    A: '1.60e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C3O2 + NO3 => HO1C3O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1C3O2 => HO1C3O + 0.5 O2
+  type: complex-rate
+  A: '2.17e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C3O2 => HOC2H4CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '7.23e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C3O2 + 0.5 H2O => HOC3H6OH + 0.75 O2
+  type: complex-rate
+  A: '7.23e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C3OOH => HO1C3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO1C4NO3 => HO1C4O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO1C4O + O2 => HOC3H6CHO + HO2
+  rate-constant:
+    A: '5.26e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: HO1C4O2 + HO2 => HO1C4OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO1C4O2 + NO => HO1C4NO3
+  rate-constant:
+    A: '2.11e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C4O2 + NO => HO1C4O + NO2
+  rate-constant:
+    A: '1.60e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C4O2 + NO3 => HO1C4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1C4O2 => HO1C4O + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C4O2 => HOC3H6CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C4O2 + 0.5 H2O => HOC4H8OH + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C4OOH => HO1C4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO1C5NO3 => HO1C5O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO1C5O + O2 => HO2C4CHO + HO2
+  rate-constant:
+    A: '5.26e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: HO1C5O2 + HO2 => HO1C5OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO1C5O2 + NO => HO1C5NO3
+  rate-constant:
+    A: '8.46e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C5O2 + NO => HO1C5O + NO2
+  rate-constant:
+    A: '1.54e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C5O2 + NO3 => HO1C5O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1C5O2 => CO2C5OH + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C5O2 => HO1C5O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C5O2 + 0.5 H2O => HO2C5OH + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C5OOH => HO1C5O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO1C6NO3 => HO1C6O + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: HO1C6O + O2 => HO3C5CHO + HO2
+  rate-constant:
+    A: '5.26e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: HO1C6O2 + HO2 => HO1C6OOH + O2
+  rate-constant:
+    A: '1.35e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO1C6O2 + NO => HO1C6NO3
+  rate-constant:
+    A: '1.27e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C6O2 + NO => HO1C6O + NO2
+  rate-constant:
+    A: '1.50e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1C6O2 + NO3 => HO1C6O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1C6O2 + 0.5 H2O => HO14C6 + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C6O2 => HO1C6O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C6O2 => HO1CO4C6 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1C6OOH => HO1C6O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO1CO24C5 + 2.0 O2 => CH3COCH2O2 + HOCH2CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: HO1CO24C6 + 2.0 O2 => HOCH2CO3 + MEKCO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: HO1CO34C5 + 2.0 O2 => CH3CO3 + HOC2H4CO3
+  type: zenith-angle-rate
+  l: '3.326e-04'
+  m: '0.148'
+  n: '0.215'
+  scalar: '1'
+- equation: HO1CO3C4O + O2 => HOC2H4CO3 + HCHO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1CO3C4O2 + HO2 => HOCO3C4OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO1CO3C4O2 + NO => HO1CO3C4O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO1CO3C4O2 + NO3 => HO1CO3C4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1CO3C4O2 + 0.5 H2O => HO14CO2C4 + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1CO3C4O2 => HO1CO3C4O + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1CO3C4O2 => HO1CO3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO1CO3C5 + OH + O2 => CO3C4CHO + HO2 + H2O
+  rate-constant:
+    A: '8.79e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1CO3C5 + 2.0 O2 => C2H5CO3 + HOCH2CH2O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO1CO3CHO + NO3 + O2 => HOC2H4CO3 + CO + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: HO1CO3CHO + OH + O2 => HOC2H4CO3 + CO + H2O
+  rate-constant:
+    A: '1.54e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO1CO3CHO + 2.0 O2 => HOC2H4CO3 + HO2 + CO
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: HO1CO4C6 + 2.0 O2 => C2H5CO3 + HO1C3O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '0.5'
+- equation: HO1CO4C6 + 2.0 O2 => C2H5O2 + HOC3H6CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '0.5'
+- equation: HO2 + HO2 => H2O2 + O2
+  type: complex-rate
+  A: '1.14e-09'
+  b: '0.0'
+  Ea: '1947.45796'
+  species-names:
+  - M
+  function-names:
+  - KMT06
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: HO2 + HO2 => H2O2 + O2
+  type: complex-rate
+  A: '1.32e+11'
+  b: '0.0'
+  Ea: '1192.3211999999999'
+  function-names:
+  - KMT06
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: HO2 + NO => OH + NO2
+  rate-constant:
+    A: '2.08e+12'
+    b: '0.0'
+    Ea: '536.54454'
+- equation: HO2 + NO2 => HO2NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT09
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2 + NO3 => OH + NO2 + O2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2 + O3 => OH + 2.0 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN629
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C3CHO + 2.0 O2 => HO2 + CO + IPROPOLO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO2C3CO3 + HO2 => HO2C3CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C3CO3 + HO2 => HO2C3CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C3CO3 + HO2 => IPROPOLO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C3CO3 + NO + O2 => IPROPOLO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO2C3CO3 + NO2 => C4PAN3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C3CO3 + NO3 => IPROPOLO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2C3CO3 + 0.5 H2O => HO2C3CO3H + 0.25 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C3CO3 + 0.5 O2 => IPROPOLO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C3CO3H + O2 => IPROPOLO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO2C4CHO + 2.0 O2 => HO2C4O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO2C4CO3 + HO2 => HO2C4CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C4CO3 + HO2 => HO2C4CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C4CO3 + HO2 => HO2C4O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO2C4CO3 + NO + O2 => HO2C4O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO2C4CO3 + NO2 => C5PAN1
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4CO3 + NO3 => HO2C4O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2C4CO3 + 0.5 H2O => HO2C4CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4CO3 + 0.5 O2 => HO2C4O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4CO3H + O2 => HO2C4O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO2C4NO3 => HO2C4O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO2C4O + O2 => HO13C4O2
+  rate-constant:
+    A: '1.84e+35'
+    b: '0.0'
+    Ea: '-8425.73648'
+- equation: HO2C4O + O2 => HO2C3CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4O2 + HO2 => HO2C4OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO2C4O2 + NO => HO2C4NO3
+  rate-constant:
+    A: '5.37e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO2C4O2 + NO => HO2C4O + NO2
+  rate-constant:
+    A: '1.57e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO2C4O2 + NO3 => HO2C4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2C4O2 => HO2C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4O2 => HO2C4O + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4O2 + 0.5 H2O => HO2C4OH + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO2C4OOH => HO2C4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO2CO3C4O + O2 => HCHO + CH3CHOHCO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2NO2 => HO2 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT10
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO34CO6C8 + O2 => C82O + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO3C116NO3 => HO3C116O + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: HO3C116O + O2 => HO6CO9C11 + HO2
+  rate-constant:
+    A: '3.34e+35'
+    b: '0.0'
+    Ea: '-5852.3098899999995'
+- equation: HO3C116O2 + HO2 => HO3C116OOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO3C116O2 + NO => HO3C116NO3
+  rate-constant:
+    A: '2.80e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C116O2 + NO => HO3C116O + NO2
+  rate-constant:
+    A: '1.35e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C116O2 + NO3 => HO3C116O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C116O2 + 0.5 H2O => HO36C11 + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C116O2 => HO3C116O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C116O2 => HO6CO9C11 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C116OOH => HO3C116O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C3CHO + NO3 + O2 => HO3C3CO3 + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: HO3C3CHO + OH + O2 => HO3C3CO3 + H2O
+  rate-constant:
+    A: '1.85e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C3CHO + 0.5 H2O + 0.75 O2 => C2H5CHO + HCHO + HO2
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO3C3CO3 + HO2 => C2H5CHO + HO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C3CO3 + HO2 => HO3C3CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C3CO3 + NO + O2 => C2H5CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO3C3CO3 + NO2 => HO3C3PAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C3CO3 + NO3 => C2H5CHO + HO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C3CO3 + 0.5 O2 => C2H5CHO + HO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C3CO3H + OH => HO3C3CO3 + H2O
+  rate-constant:
+    A: '8.31e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C3CO3H + O2 => C2H5CHO + HO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C3PAN + OH => C2H5CHO + CO + NO2 + H2O + O2
+  rate-constant:
+    A: '2.30e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C3PAN => HO3C3CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4CHO + 2.0 O2 => HO3C4O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO3C4CO3 + HO2 => HO3C4CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C4CO3 + HO2 => HO3C4O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C4CO3 + NO + O2 => HO3C4O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO3C4CO3 + NO2 => C5PAN8
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4CO3 + NO3 => HO3C4O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C4CO3 + 0.5 O2 => HO3C4O2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4CO3H + O2 => HO3C4O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C4NO3 + OH => HO3C3CHO + NO2 + H2O
+  rate-constant:
+    A: '1.82e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C4O + O2 => C2H5CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-11005.124676'
+- equation: HO3C4O2 + HO2 => HO3C4OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO3C4O2 + NO => HO3C4NO3
+  rate-constant:
+    A: '2.76e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C4O2 + NO => HO3C4O + NO2
+  rate-constant:
+    A: '1.60e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C4O2 + NO3 => HO3C4O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C4O2 => HO3C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4O2 => HO3C4O + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4O2 + 0.5 H2O => NBUTOLAOH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C4OOH + OH => HO3C3CHO + OH + H2O
+  rate-constant:
+    A: '1.29e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C4OOH + OH => HO3C4O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HO3C4OOH => HO3C4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C5CHO + 2.0 O2 => HO3C5O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HO3C5CO3 + HO2 => HO3C5CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C5CO3 + HO2 => HO3C5CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C5CO3 + HO2 => HO3C5O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO3C5CO3 + NO + O2 => HO3C5O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO3C5CO3 + NO2 => C6PAN1
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5CO3 + NO3 => HO3C5O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C5CO3 + 0.5 H2O => HO3C5CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5CO3 + 0.5 O2 => HO3C5O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5CO3H + O2 => HO3C5O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C5NO3 => HO3C5O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: HO3C5O + O2 => HO13C5O2
+  rate-constant:
+    A: '1.22e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: HO3C5O2 + HO2 => HO3C5OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO3C5O2 + NO => HO3C5NO3
+  rate-constant:
+    A: '8.46e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C5O2 + NO => HO3C5O + NO2
+  rate-constant:
+    A: '1.54e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C5O2 + NO3 => HO3C5O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C5O2 + 0.5 H2O => HO13C5 + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5O2 => HO3C4CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5O2 => HO3C5O + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C5OOH => HO3C5O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3C86NO3 => HO3C86O + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: HO3C86O + O2 => HO3CO6C8 + HO2
+  rate-constant:
+    A: '3.34e+35'
+    b: '0.0'
+    Ea: '-5852.3098899999995'
+- equation: HO3C86O2 + HO2 => HO3C86OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO3C86O2 + NO => HO3C86NO3
+  rate-constant:
+    A: '2.24e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C86O2 + NO => HO3C86O + NO2
+  rate-constant:
+    A: '1.40e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO3C86O2 + NO3 => HO3C86O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO3C86O2 + 0.5 H2O => HO36C8 + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C86O2 => HO3C86O + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C86O2 => HO3CO6C8 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO3C86OOH => HO3C86O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO3CO46C8 + 2.0 O2 => CO3C4CO3 + C2H5CHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '2.0'
+- equation: HO3CO6C8 + 2.0 O2 => C2H5CO3 + HO3C5O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO4C5CO3 + HO2 => HO4C5CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO4C5CO3 + HO2 => PE1ENEBO2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO4C5CO3 + NO + O2 => PE1ENEBO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO4C5CO3 + NO2 => C6PAN22
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO4C5CO3 + NO3 => PE1ENEBO2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO4C5CO3 + 0.5 O2 => PE1ENEBO2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO4C5CO3H + O2 => PE1ENEBO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO6CO9C11 + 2.0 O2 => C2H5CO3 + HO7C8O2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HO7C8CO3 + HO2 => HO7C8CO3H + O2
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO7C8CO3 + HO2 => HO7C8O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HO7C8CO3 + NO + O2 => HO7C8O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HO7C8CO3 + NO2 => C9PAN1
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO7C8CO3 + NO3 => HO7C8O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO7C8CO3 + 0.5 O2 => HO7C8O2 + CO2
+  type: complex-rate
+  A: '6.02e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO7C8CO3H + O2 => HO7C8O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HO7C8O + O2 => HCHO + C6H13CHO + HO2
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO7C8O2 + HO2 => HO7C8OOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HO7C8O2 + NO => HO7C8O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HO7C8O2 + NO3 => HO7C8O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO7C8O2 => HO7C8O + 0.5 O2
+  type: complex-rate
+  A: '1.20e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HO7C8OOH => HO7C8O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HOC2H4CHO + 2.0 O2 => HOCH2CH2O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HOC2H4CO3 + HO2 => HOC2H4CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC2H4CO3 + HO2 => HOC2H4CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC2H4CO3 + HO2 => HOCH2CH2O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC2H4CO3 + NO + O2 => HOCH2CH2O2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HOC2H4CO3 + NO2 => C3PAN1
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC2H4CO3 + NO3 => HOCH2CH2O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOC2H4CO3 + 0.5 H2O => HOC2H4CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC2H4CO3 + 0.5 O2 => HOCH2CH2O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC2H4CO3H + O2 => HOCH2CH2O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HOC3H6CHO + 2.0 O2 => HO1C3O2 + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HOC3H6CO3 + HO2 => HO1C3O2 + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC3H6CO3 + HO2 => HOC3H6CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC3H6CO3 + HO2 => HOC3H6CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOC3H6CO3 + NO + O2 => HO1C3O2 + NO2 + CO2
+  rate-constant:
+    A: '1.81e+13'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HOC3H6CO3 + NO2 => C4PAN1
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC3H6CO3 + NO3 => HO1C3O2 + NO2 + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOC3H6CO3 + 0.5 O2 => HO1C3O2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC3H6CO3 + 0.5 H2O => HOC3H6CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOC3H6CO3H + O2 => HO1C3O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HOCH2CH2O + O2 => HO2 + HCHO + HCHO
+  rate-constant:
+    A: '5.72e+37'
+    b: '0.0'
+    Ea: '-11899.365576'
+- equation: HOCH2CH2O + O2 => HO2 + HOCH2CHO
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCH2CH2O2 + HO2 => HYETHO2H + O2
+  rate-constant:
+    A: '9.21e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HOCH2CH2O2 + NO => ETHOHNO3
+  rate-constant:
+    A: '8.13e+09'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HOCH2CH2O2 + NO => HOCH2CH2O + NO2
+  rate-constant:
+    A: '1.62e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HOCH2CH2O2 + NO3 => HOCH2CH2O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CHO + NO3 + O2 => HOCH2CO3 + HNO3
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: HOCH2CHO + OH + O2 => GLYOX + HO2 + H2O
+  rate-constant:
+    A: '1.20e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CHO + OH + O2 => HOCH2CO3 + H2O
+  rate-constant:
+    A: '4.82e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CHO + 2.0 O2 => HO2 + HCHO + HO2 + CO
+  type: zenith-angle-rate
+  l: '2.792e-05'
+  m: '0.805'
+  n: '0.338'
+  scalar: '1'
+- equation: HOCH2CO2H + OH + O2 => HCHO + HO2 + H2O + CO2
+  rate-constant:
+    A: '1.64e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CO3 + HO2 => HO2 + HCHO + OH + CO2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOCH2CO3 + HO2 => HOCH2CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOCH2CO3 + HO2 => HOCH2CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: HOCH2CO3 + NO + O2 => NO2 + HO2 + HCHO + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: HOCH2CO3 + NO2 => PHAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCH2CO3 + NO3 => NO2 + HO2 + HCHO + CO2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CO3 + 0.5 O2 => HCHO + HO2 + CO2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCH2CO3 + 0.5 H2O => HOCH2CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCH2CO3H + OH => HOCH2CO3 + H2O
+  rate-constant:
+    A: '3.73e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCH2CO3H + O2 => HCHO + HO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HOCO3C4OOH + OH => HO1CO3C4O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HOCO3C4OOH + OH => HO1CO3CHO + OH + H2O
+  rate-constant:
+    A: '1.30e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCO3C4OOH => HO1CO3C4O + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: HOCO3C4OOH => HO1CO3C4O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: HOCO3C54O + O2 => CH3CHO + HOC2H4CO3
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCO3C54O2 + HO2 => HOCO3C5OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HOCO3C54O2 + NO => HOCO3C54O + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: HOCO3C54O2 + NO3 => HOCO3C54O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCO3C54O2 + 0.5 H2O => HO14CO3C5 + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCO3C54O2 => HO1CO34C5 + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCO3C54O2 => HOCO3C54O + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HOCO3C5OOH + OH => HOCO3C54O2 + H2O
+  rate-constant:
+    A: '2.15e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HOCO3C5OOH + O2 => CH3CHO + HOC2H4CO3 + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HOCO3C5OOH => HOCO3C54O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HONO => OH + NO
+  type: zenith-angle-rate
+  l: '2.644e-03'
+  m: '0.261'
+  n: '0.288'
+  scalar: '1'
+- equation: HSO3 + O2 => HO2 + SO3
+  type: complex-rate
+  A: '7.83e+11'
+  b: '0.0'
+  Ea: '-655.77666'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HYETHO2H + OH => HOCH2CH2O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HYETHO2H + OH => HOCH2CHO + OH + H2O
+  rate-constant:
+    A: '8.31e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HYETHO2H => HOCH2CH2O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HYPERACET + OH => CH3COCH2O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HYPERACET + OH => MGLYOX + OH + H2O
+  rate-constant:
+    A: '5.05e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HYPERACET + O2 => CH3CO3 + HCHO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: HYPERACET => CH3COCH2O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: HYPROPO + O2 => CH3CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-12737.96482'
+- equation: HYPROPO2 + HO2 => HYPROPO2H + O2
+  rate-constant:
+    A: '9.11e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: HYPROPO2 + NO3 => HYPROPO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HYPROPO2 => ACETOL + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HYPROPO2 => HYPROPO + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HYPROPO2 + 0.5 H2O => PROPGLY + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: HYPROPO2H + OH => ACETOL + OH + H2O
+  rate-constant:
+    A: '1.47e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HYPROPO2H + OH => HYPROPO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: HYPROPO2H => HYPROPO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: IC3H7NO3 => IC3H7O + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: IC3H7O + O2 => CH3COCH3 + HO2
+  type: complex-rate
+  A: '9.03e+09'
+  b: '0.0'
+  Ea: '-457.05645999999996'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IC3H7O2 + HO2 => IC3H7OOH + O2
+  rate-constant:
+    A: '9.11e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: IC3H7O2 + NO => IC3H7NO3
+  rate-constant:
+    A: '6.83e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: IC3H7O2 + NO => IC3H7O + NO2
+  rate-constant:
+    A: '1.56e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: IC3H7O2 + NO3 => IC3H7O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: IC3H7O2 => IC3H7O + 0.5 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN839
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IC3H7OOH => IC3H7O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: IPROPOL + OH + O2 => CH3COCH3 + HO2 + H2O
+  rate-constant:
+    A: '1.35e+12'
+    b: '0.0'
+    Ea: '397.44039999999995'
+- equation: IPROPOL + OH + O2 => IPROPOLO2 + H2O
+  rate-constant:
+    A: '2.18e+11'
+    b: '0.0'
+    Ea: '397.44039999999995'
+- equation: IPROPOLO + O2 => CH3CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-10939.54701'
+- equation: IPROPOLO2 + HO2 => IPROPOLO2H + O2
+  rate-constant:
+    A: '9.11e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: IPROPOLO2 + NO => IPROPOLO + NO2
+  rate-constant:
+    A: '1.61e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: IPROPOLO2 + NO => PROLNO3
+  rate-constant:
+    A: '1.46e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: IPROPOLO2 + NO3 => IPROPOLO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: IPROPOLO2 => CH3CHOHCHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IPROPOLO2 => IPROPOLO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IPROPOLO2 + 0.5 H2O => PROPGLY + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IPROPOLO2H + OH => CH3CHOHCHO + OH + H2O
+  rate-constant:
+    A: '1.10e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: IPROPOLO2H + OH => IPROPOLO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: IPROPOLO2H => IPROPOLO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: IPROPOLPAN + OH => CH3CHO + CO + NO2 + H2O + O2
+  rate-constant:
+    A: '1.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: IPROPOLPAN => CH3CHOHCO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: IPROPOLPER + OH => CH3CHOHCO3 + H2O
+  rate-constant:
+    A: '5.62e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: IPROPOLPER + O2 => CH3CHO + HO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: MEKANO3 + OH => CO2C3CHO + NO2 + H2O
+  rate-constant:
+    A: '5.81e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKANO3 => MEKAO + NO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: MEKANO3 => MEKAO + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+  duplicate: true
+- equation: MEKAO + O2 => CO2C3CHO + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKAO + O2 => HO1CO3C4O2
+  rate-constant:
+    A: '7.83e+34'
+    b: '0.0'
+    Ea: '-8201.182654'
+- equation: MEKAO2 + HO2 => MEKAOOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: MEKAO2 + NO => MEKANO3
+  rate-constant:
+    A: '5.37e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: MEKAO2 + NO => MEKAO + NO2
+  rate-constant:
+    A: '1.57e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: MEKAO2 + NO3 => MEKAO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKAO2 => CO2C3CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKAO2 => MEKAO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKAO2 + 0.5 H2O => MEKAOH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKAOH + OH + O2 => CO2C3CHO + HO2 + H2O
+  rate-constant:
+    A: '8.13e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKAOH + 2.0 O2 => HOCH2CH2O2 + CH3CO3
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: MEKAOOH + OH => CO2C3CHO + OH + H2O
+  rate-constant:
+    A: '2.94e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKAOOH + OH => MEKAO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: MEKAOOH => MEKAO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+  duplicate: true
+- equation: MEKAOOH => MEKAO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+  duplicate: true
+- equation: MEKCO + O2 => C2H5CO3 + HCHO
+  rate-constant:
+    A: '6.02e+29'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKCO2 + HO2 => MEKCOOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: MEKCO2 + NO => MEKCO + NO2
+  rate-constant:
+    A: '1.63e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: MEKCO2 + NO3 => MEKCO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKCO2 => EGLYOX + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKCO2 => MEKCO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKCO2 + 0.5 H2O => MEKCOH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: MEKCOH + OH + O2 => EGLYOX + HO2 + H2O
+  rate-constant:
+    A: '2.07e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKCOH + 2.0 O2 => C2H5CO3 + HCHO + HO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: MEKCOOH + OH => EGLYOX + OH + H2O
+  rate-constant:
+    A: '5.75e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: MEKCOOH + OH => MEKCO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: MEKCOOH + O2 => C2H5CO3 + HCHO + OH
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: MEKCOOH => MEKCO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: MGLYOX + 2.0 O2 => CH3CO3 + CO + HO2
+  type: zenith-angle-rate
+  l: '1.537e-04'
+  m: '0.170'
+  n: '0.208'
+  scalar: '1'
+- equation: N2O5 => NO2 + NO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT04
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOL + OH + O2 => C3H7CHO + HO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '278.20828'
+- equation: NBUTOL + OH + O2 => NBUTOLAO2 + H2O
+  rate-constant:
+    A: '1.02e+12'
+    b: '0.0'
+    Ea: '278.20828'
+- equation: NBUTOL + OH + O2 => NBUTOLBO2 + H2O
+  rate-constant:
+    A: '1.02e+12'
+    b: '0.0'
+    Ea: '278.20828'
+- equation: NBUTOLANO3 + OH => MEKCOH + NO2 + H2O
+  rate-constant:
+    A: '7.65e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLAO + O2 => C2H5CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-12626.681508'
+- equation: NBUTOLAO2 + HO2 => NBUTOLAOOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: NBUTOLAO2 + NO => NBUTOLANO3
+  rate-constant:
+    A: '6.83e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NBUTOLAO2 + NO => NBUTOLAO + NO2
+  rate-constant:
+    A: '1.56e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NBUTOLAO2 + NO3 => NBUTOLAO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLAO2 => MEKCOH + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLAO2 => NBUTOLAO + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLAO2 + 0.5 H2O => NBUTOLAOH + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLAOH + OH + O2 => MEKCOH + HO2 + H2O
+  rate-constant:
+    A: '9.58e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLAOOH + OH => MEKCOH + OH + H2O
+  rate-constant:
+    A: '1.81e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLAOOH + OH => NBUTOLAO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: NBUTOLAOOH => NBUTOLAO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: NBUTOLBNO3 + OH => MEKAOH + NO2 + H2O
+  rate-constant:
+    A: '2.72e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLBNO3 => NBUTOLBO + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: NBUTOLBO + O2 => CH3CHO + HOCH2CH2O2
+  rate-constant:
+    A: '1.63e+38'
+    b: '0.0'
+    Ea: '-14701.320396'
+- equation: NBUTOLBO + O2 => MEKAOH + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLBO2 + HO2 => NBUTOLBOOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: NBUTOLBO2 + NO => NBUTOLBNO3
+  rate-constant:
+    A: '1.35e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NBUTOLBO2 + NO => NBUTOLBO + NO2
+  rate-constant:
+    A: '1.49e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NBUTOLBO2 + NO3 => NBUTOLBO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLBO2 + 0.5 H2O => HO2C4OH + 0.75 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLBO2 => MEKAOH + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.06e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLBO2 => NBUTOLBO + 0.5 O2
+  type: complex-rate
+  A: '3.18e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NBUTOLBOOH + OH => MEKAOH + OH + H2O
+  rate-constant:
+    A: '1.55e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NBUTOLBOOH + OH => NBUTOLBO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: NBUTOLBOOH => NBUTOLBO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: NC3H7NO3 => NC3H7O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: NC3H7O + O2 => C2H5CHO + HO2
+  type: complex-rate
+  A: '1.57e+10'
+  b: '0.0'
+  Ea: '-506.73650999999995'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC3H7O2 + HO2 => NC3H7OOH + O2
+  rate-constant:
+    A: '9.11e+10'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: NC3H7O2 + NO => NC3H7NO3
+  rate-constant:
+    A: '3.49e+10'
+    b: '0.0'
+    Ea: '695.5206999999999'
+- equation: NC3H7O2 + NO => NC3H7O + NO2
+  rate-constant:
+    A: '1.71e+12'
+    b: '0.0'
+    Ea: '695.5206999999999'
+- equation: NC3H7O2 + NO3 => NC3H7O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NC3H7O2 => C2H5CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '7.81e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC3H7O2 => NC3H7O + 0.5 O2
+  type: complex-rate
+  A: '2.34e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC3H7O2 + 0.5 H2O => NPROPOL + 0.75 O2
+  type: complex-rate
+  A: '7.81e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC3H7OOH => NC3H7O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: NC4H9NO3 => NC4H9O + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: NC4H9O + O2 => C3H7CHO + HO2
+  type: complex-rate
+  A: '5.36e+10'
+  b: '0.0'
+  Ea: '-1092.9611'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC4H9O + O2 => HO1C4O2
+  rate-constant:
+    A: '2.77e+34'
+    b: '0.0'
+    Ea: '-7094.31114'
+- equation: NC4H9O2 + HO2 => NC4H9OOH + O2
+  rate-constant:
+    A: '1.10e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: NC4H9O2 + NO => NC4H9NO3
+  rate-constant:
+    A: '5.37e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NC4H9O2 + NO => NC4H9O + NO2
+  rate-constant:
+    A: '1.57e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NC4H9O2 + NO3 => NC4H9O + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NC4H9O2 => C3H7CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC4H9O2 + 0.5 H2O => NBUTOL + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC4H9O2 => NC4H9O + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NC4H9OOH => NC4H9O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: NO + HYPROPO2 => HYPROPO + NO2
+  rate-constant:
+    A: '1.59e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NO + HYPROPO2 => PROPOLNO3
+  rate-constant:
+    A: '3.74e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: NO + NO + O2 => NO2 + NO2
+  type: complex-rate
+  A: '1.99e-15'
+  b: '0.0'
+  Ea: '1053.21706'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NO + NO3 => NO2 + NO2
+  rate-constant:
+    A: '1.08e+13'
+    b: '0.0'
+    Ea: '218.59222'
+- equation: NO + O3 => NO2 + O2
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-2603.2346199999997'
+- equation: NO2 + NO3 => N2O5
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT03
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NO2 + NO3 => NO + NO2 + O2
+  rate-constant:
+    A: '2.71e+10'
+    b: '0.0'
+    Ea: '-2503.87452'
+- equation: NO2 + O3 => NO3 + O2
+  rate-constant:
+    A: '8.43e+10'
+    b: '0.0'
+    Ea: '-4908.38894'
+- equation: NO2 => NO + O
+  type: zenith-angle-rate
+  l: '1.165e-02'
+  m: '0.244'
+  n: '0.267'
+  scalar: '1'
+- equation: NO3 + C5H11CHO + O2 => C5H11CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + C6H13CHO + O2 => C6H13CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CH3CHO + O2 => HNO3 + CH3CO3
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO23C3CHO + O2 => CH3CO3 + CO + CO + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO23C4CHO + O2 => CO23C4CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO24C4CHO + O2 => CO2C3CO3 + CO + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO2C4CHO + O2 => CO2C4CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO3C4CHO + O2 => CO3C4CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + CO3C5CHO + O2 => CO3C5CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + EGLYOX + O2 => C2H5CO3 + CO + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + GLYOX => HCOCO + HNO3
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HCHO + O2 => HNO3 + CO + HO2
+  rate-constant:
+    A: '3.31e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3 + HO13C3CHO + O2 => HO13C3CO3 + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HO2C3CHO + O2 => HO2C3CO3 + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HO2C4CHO + O2 => HO2C4CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HO3C4CHO + O2 => HO3C4CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HO3C5CHO + O2 => HO3C5CO3 + HNO3
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HOC2H4CHO + O2 => HOC2H4CO3 + HNO3
+  rate-constant:
+    A: '2.02e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + HOC3H6CHO + O2 => HOC3H6CO3 + HNO3
+  rate-constant:
+    A: '3.37e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 + MGLYOX + O2 => CH3CO3 + CO + HNO3
+  rate-constant:
+    A: '2.02e+12'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3 => NO + O2
+  type: zenith-angle-rate
+  l: '2.485e-02'
+  m: '0.168'
+  n: '0.108'
+  scalar: '1'
+- equation: NO3 => NO2 + O
+  type: zenith-angle-rate
+  l: '1.747e-01'
+  m: '0.155'
+  n: '0.125'
+  scalar: '1'
+- equation: NO3CH2CHO + NO3 + O2 => NO3CH2CO3 + HNO3
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: NO3CH2CHO + OH + O2 => NO3CH2CO3 + H2O
+  rate-constant:
+    A: '2.05e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3CH2CHO => NO2 + HCOCH2O
+  type: zenith-angle-rate
+  l: '4.365e-05'
+  m: '1.089'
+  n: '0.323'
+  scalar: '4.3'
+- equation: NO3CH2CO2H + OH => HCHO + NO2 + H2O + CO2
+  rate-constant:
+    A: '1.01e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3CH2CO3 + HO2 => HCHO + NO2 + OH + CO2 + O2
+  rate-constant:
+    A: '1.38e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: NO3CH2CO3 + HO2 => NO3CH2CO2H + O3
+  rate-constant:
+    A: '4.70e+10'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: NO3CH2CO3 + HO2 => NO3CH2CO3H + O2
+  rate-constant:
+    A: '1.28e+11'
+    b: '0.0'
+    Ea: '1947.45796'
+- equation: NO3CH2CO3 + NO => HCHO + NO2 + NO2 + CO2
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '576.28858'
+- equation: NO3CH2CO3 + NO2 => NO3CH2PAN
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KFPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NO3CH2CO3 + NO3 => HCHO + NO2 + NO2 + CO2 + O2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3CH2CO3 => HCHO + NO2 + CO2 + 0.5 O2
+  type: complex-rate
+  A: '4.22e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NO3CH2CO3 + 0.5 H2O => NO3CH2CO2H + 0.75 O2
+  type: complex-rate
+  A: '1.81e+12'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NO3CH2CO3H + OH => NO3CH2CO3 + H2O
+  rate-constant:
+    A: '2.19e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3CH2CO3H => HCHO + NO2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: NO3CH2PAN + OH => HCHO + CO + NO2 + NO2 + 0.5 H2O + 1.25 O2
+  rate-constant:
+    A: '6.74e+09'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3CH2PAN => NO3CH2CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: NPROPOL + OH + O2 => C2H5CHO + HO2 + H2O
+  rate-constant:
+    A: '1.37e+12'
+    b: '0.0'
+    Ea: '139.10414'
+- equation: NPROPOL + OH + O2 => HO1C3O2 + H2O
+  rate-constant:
+    A: '1.75e+11'
+    b: '0.0'
+    Ea: '139.10414'
+- equation: NPROPOL + OH + O2 => HYPROPO2 + H2O
+  rate-constant:
+    A: '1.23e+12'
+    b: '0.0'
+    Ea: '139.10414'
+- equation: O + NO => NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT01
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: O + NO2 => NO + O2
+  rate-constant:
+    A: '3.31e+12'
+    b: '0.0'
+    Ea: '373.593976'
+- equation: O + NO2 => NO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT02
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: O + O3 => 2.0 O2
+  rate-constant:
+    A: '4.82e+12'
+    b: '0.0'
+    Ea: '-4093.6361199999997'
+- equation: O + SO2 => SO3
+  type: complex-rate
+  A: '2.41e-08'
+  b: '0.0'
+  Ea: '-1987.202'
+  species-names:
+  - M
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: O + O2 => O3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN998
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: O + O2 => O3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN999
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: O1D => O
+  type: complex-rate
+  A: '1.20e+13'
+  b: '0.0'
+  Ea: '258.33626'
+  species-names:
+  - N2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: O1D => O
+  type: complex-rate
+  A: '1.93e+13'
+  b: '0.0'
+  Ea: '133.14253399999998'
+  species-names:
+  - O2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+  duplicate: true
+- equation: O1D + H2O => OH + OH
+  type: complex-rate
+  A: '1.29e+14'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: O3 => O + O2
+  type: zenith-angle-rate
+  l: '4.775e-04'
+  m: '0.298'
+  n: '0.080'
+  scalar: '1'
+- equation: O3 => O1D + O2
+  type: zenith-angle-rate
+  l: '6.073e-05'
+  m: '1.743'
+  n: '0.474'
+  scalar: '1'
+- equation: OCT3ONE + 2.0 O2 => C2H5CO3 + PEAO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: OCTNO3 => OCTO + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: OCTO + O2 => HO3C86O2
+  rate-constant:
+    A: '1.55e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: OCTO2 + HO2 => OCTOOH + O2
+  rate-constant:
+    A: '1.51e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: OCTO2 + NO => OCTNO3
+  rate-constant:
+    A: '5.63e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: OCTO2 + NO => OCTO + NO2
+  rate-constant:
+    A: '1.06e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: OCTO2 + NO3 => OCTO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OCTO2 => OCT3ONE + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OCTO2 => OCTO + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OCTO2 + 0.5 H2O => OCTOH + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OCTOOH => OCTO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: OH + BIACETOH + O2 => CO23C3CHO + HO2 + H2O
+  rate-constant:
+    A: '1.62e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + BIACETOOH => BIACETO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + BIACETOOH => CO23C3CHO + OH + H2O
+  rate-constant:
+    A: '3.61e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C111OOH => C111O2 + H2O
+  rate-constant:
+    A: '5.47e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C112OOH => C112O2 + H2O
+  rate-constant:
+    A: '3.43e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C113CO + O2 => CO356C11 + HO2 + H2O
+  rate-constant:
+    A: '9.33e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C113NO3 => C113CO + NO2 + H2O
+  rate-constant:
+    A: '6.08e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C113OH + O2 => C113CO + HO2 + H2O
+  rate-constant:
+    A: '2.97e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C113OOH => C113CO + OH + H2O
+  rate-constant:
+    A: '5.93e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C114OH + O2 => CO356C11 + HO2 + H2O
+  rate-constant:
+    A: '1.54e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C114OOH => CO356C11 + OH + H2O
+  rate-constant:
+    A: '3.42e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C115OOH => C115O2 + H2O
+  rate-constant:
+    A: '1.29e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C2H5NO3 => CH3CHO + NO2 + H2O
+  rate-constant:
+    A: '4.03e+11'
+    b: '0.0'
+    Ea: '-784.94479'
+- equation: OH + C2H5OOH => C2H5O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + C2H5OOH => CH3CHO + OH + H2O
+  rate-constant:
+    A: '4.82e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C2H6 + O2 => C2H5O2 + H2O
+  rate-constant:
+    A: '4.16e+12'
+    b: '0.0'
+    Ea: '-1987.202'
+- equation: OH + C3PAN1 => HOCH2CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '2.72e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C3PAN2 => GLYOX + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.26e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C4PAN1 => HOC2H4CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '3.57e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C4PAN2 => HOC2H4CHO + CO + NO2 + H2O + O2
+  rate-constant:
+    A: '4.95e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C4PAN3 => CH3CHOHCHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '5.42e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C51NO3 => HO1CO24C5 + NO2 + H2O
+  rate-constant:
+    A: '9.33e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C51OH + 0.5 O2 => HO1CO24C5 + OH + H2O
+  rate-constant:
+    A: '2.28e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C51OOH => HO1CO24C5 + OH + H2O
+  rate-constant:
+    A: '5.23e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5H11CHO + O2 => C5H11CO3 + H2O
+  rate-constant:
+    A: '1.73e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5H11CO3H => C5H11CO3 + H2O
+  rate-constant:
+    A: '6.99e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5PAN1 => HO2C3CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '6.26e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5PAN16 => EGLYOX + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '8.67e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5PAN2 => CO2C3CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5PAN8 => HO3C3CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '7.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C5PAN9 => CO23C3CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.88e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C63NO3 => HO1CO24C6 + NO2 + H2O
+  rate-constant:
+    A: '1.53e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C63OH + O2 => HO1CO24C6 + HO2 + H2O
+  rate-constant:
+    A: '2.35e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C63OOH => HO1CO24C6 + OH + H2O
+  rate-constant:
+    A: '5.30e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6H13CHO + O2 => C6H13CO3 + H2O
+  rate-constant:
+    A: '1.84e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6H13CO2H + O2 => HEXAO2 + H2O + CO2
+  rate-constant:
+    A: '5.96e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6H13CO3H => C6H13CO3 + H2O
+  rate-constant:
+    A: '8.01e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6PAN1 => HO3C4CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '8.13e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6PAN2 => CO3C4CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.92e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C6PAN22 => C4OHCHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '8.01e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C81OOH => C81O2 + H2O
+  rate-constant:
+    A: '3.17e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C82NO3 => HO3CO46C8 + NO2 + H2O
+  rate-constant:
+    A: '3.53e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C82OOH => HO3CO46C8 + OH + H2O
+  rate-constant:
+    A: '5.76e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C83OOH => C83O2 + H2O
+  rate-constant:
+    A: '9.15e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C84OH + O2 => CO346C8 + HO2 + H2O
+  rate-constant:
+    A: '1.52e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C84OOH => CO346C8 + OH + H2O
+  rate-constant:
+    A: '3.40e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + C9PAN1 => HCHO + C6H13CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.07e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CH3CHO + O2 => CH3CO3 + H2O
+  rate-constant:
+    A: '2.69e+12'
+    b: '0.0'
+    Ea: '685.58469'
+- equation: OH + CH3CHO + O2 => HCOCH2O2 + H2O
+  rate-constant:
+    A: '1.42e+11'
+    b: '0.0'
+    Ea: '685.58469'
+- equation: OH + CH3NO3 => HCHO + NO2 + H2O
+  rate-constant:
+    A: '2.41e+11'
+    b: '0.0'
+    Ea: '-1679.18569'
+- equation: OH + CH3OOH => CH3O2 + H2O
+  rate-constant:
+    A: '1.92e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + CH3OOH => HCHO + OH + H2O
+  rate-constant:
+    A: '1.28e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + CO + O2 => HO2 + CO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT05
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OH + CO23C3CHO + O2 => CH3CO3 + CO + CO + H2O
+  rate-constant:
+    A: '7.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO23C4CHO + O2 => CO23C4CO3 + H2O
+  rate-constant:
+    A: '4.00e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO23C4CO3H => CO23C4CO3 + H2O
+  rate-constant:
+    A: '2.55e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO24C4CHO + O2 => CO2C3CO3 + CO + H2O
+  rate-constant:
+    A: '8.01e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO2C4CHO + O2 => CO2C4CO3 + H2O
+  rate-constant:
+    A: '1.58e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO2C4CO2H + O2 => MEKAO2 + H2O + CO2
+  rate-constant:
+    A: '3.44e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO2C4CO3H => CO2C4CO3 + H2O
+  rate-constant:
+    A: '5.52e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO2C5OH + O2 => C51O2 + H2O
+  rate-constant:
+    A: '3.02e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO2C5OH + O2 => CO2C4CHO + HO2 + H2O
+  rate-constant:
+    A: '2.79e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO346C8 + O2 => C83O2 + H2O
+  rate-constant:
+    A: '1.80e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO356C11 + O2 => C115O2 + H2O
+  rate-constant:
+    A: '5.57e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO35C5CHO + O2 => CO3C4CO3 + CO + H2O
+  rate-constant:
+    A: '8.67e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO36C11 + O2 => C114O2 + H2O
+  rate-constant:
+    A: '8.55e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO36C8 + O2 => C84O2 + H2O
+  rate-constant:
+    A: '4.78e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C4CHO + O2 => CO3C4CO3 + H2O
+  rate-constant:
+    A: '4.07e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C4CO2H + O2 => MEKCO2 + H2O + CO2
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C4CO3H => CO3C4CO3 + H2O
+  rate-constant:
+    A: '3.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C5CHO + O2 => CO3C5CO3 + H2O
+  rate-constant:
+    A: '1.66e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C5CO2H + O2 => DIEKBO2 + H2O + CO2
+  rate-constant:
+    A: '4.14e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C5CO3H => CO3C5CO3 + H2O
+  rate-constant:
+    A: '6.20e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + CO3C85OOH => CO3C85O2 + H2O
+  rate-constant:
+    A: '5.22e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + EGLYOX + O2 => C2H5CO3 + CO + H2O
+  rate-constant:
+    A: '8.37e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + GLYOX => HCOCO + H2O
+  rate-constant:
+    A: '1.87e+12'
+    b: '0.0'
+    Ea: '675.64868'
+- equation: OH + H2 + O2 => HO2 + H2O
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-4173.1242'
+- equation: OH + H2O2 => HO2 + H2O
+  rate-constant:
+    A: '1.75e+12'
+    b: '0.0'
+    Ea: '-317.95232'
+- equation: OH + HCHO + O2 => HO2 + CO + H2O
+  rate-constant:
+    A: '3.25e+12'
+    b: '0.0'
+    Ea: '268.27227'
+- equation: OH + HCOCH2CO2H + O2 => HCOCH2O2 + H2O + CO2
+  rate-constant:
+    A: '1.29e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HCOCH2CO3H => HCOCH2CO3 + H2O
+  rate-constant:
+    A: '1.50e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HCOCO2H + O2 => CO + HO2 + H2O + CO2
+  rate-constant:
+    A: '7.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HCOCO3H => HCOCO3 + H2O
+  rate-constant:
+    A: '9.51e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HEXANO3 => C5H11CHO + NO2 + H2O
+  rate-constant:
+    A: '2.82e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HEXAOH + O2 => C5H11CHO + HO2 + H2O
+  rate-constant:
+    A: '5.85e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HEXAOOH => C5H11CHO + OH + H2O
+  rate-constant:
+    A: '9.15e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HEXAOOH => HEXAO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HNO3 => NO3 + H2O
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT11
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OH + HO134C5 + O2 => HO13CO4C5 + HO2 + H2O
+  rate-constant:
+    A: '1.48e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C3CHO + O2 => HO13C3CO3 + H2O
+  rate-constant:
+    A: '1.92e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C3CO3H => HO13C3CO3 + H2O
+  rate-constant:
+    A: '1.12e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C4NO3 => HO13C3CHO + NO2 + H2O
+  rate-constant:
+    A: '4.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C4OH + O2 => HO13C3CHO + HO2 + H2O
+  rate-constant:
+    A: '1.21e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C4OOH => HO13C3CHO + OH + H2O
+  rate-constant:
+    A: '1.54e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C4OOH => HO13C4O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HO13C5 + O2 => HO1CO3C5 + HO2 + H2O
+  rate-constant:
+    A: '9.70e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C5NO3 => HO13CO4C5 + NO2 + H2O
+  rate-constant:
+    A: '4.52e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13C5OOH => HO13CO4C5 + OH + H2O
+  rate-constant:
+    A: '2.40e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO13CO4C5 + O2 => HO1CO34C5 + HO2 + H2O
+  rate-constant:
+    A: '9.09e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO14C6 + O2 => HO1CO4C6 + HO2 + H2O
+  rate-constant:
+    A: '1.13e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C3NO3 => HOC2H4CHO + NO2 + H2O
+  rate-constant:
+    A: '2.67e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C3OOH => HO1C3O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HO1C3OOH => HOC2H4CHO + OH + H2O
+  rate-constant:
+    A: '9.15e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C4NO3 => HOC3H6CHO + NO2 + H2O
+  rate-constant:
+    A: '3.52e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C4OOH => HO1C4O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HO1C4OOH => HOC3H6CHO + OH + H2O
+  rate-constant:
+    A: '1.00e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C5NO3 => CO2C5OH + NO2 + H2O
+  rate-constant:
+    A: '3.57e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C5OOH => CO2C5OH + OH + H2O
+  rate-constant:
+    A: '1.85e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C6NO3 => HO1CO4C6 + NO2 + H2O
+  rate-constant:
+    A: '3.78e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1C6OOH => HO1CO4C6 + OH + H2O
+  rate-constant:
+    A: '2.22e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1CO24C5 + O2 => CO24C4CHO + HO2 + H2O
+  rate-constant:
+    A: '1.94e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1CO24C6 + O2 => CO35C5CHO + HO2 + H2O
+  rate-constant:
+    A: '2.62e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1CO34C5 + O2 => CO23C4CHO + HO2 + H2O
+  rate-constant:
+    A: '8.37e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1CO4C6 + O2 => C63O2 + H2O
+  rate-constant:
+    A: '3.40e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO1CO4C6 + O2 => CO3C5CHO + HO2 + H2O
+  rate-constant:
+    A: '3.05e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2 => H2O + O2
+  rate-constant:
+    A: '2.89e+13'
+    b: '0.0'
+    Ea: '496.8005'
+- equation: OH + HO2C3CHO + O2 => CO2C3CHO + HO2 + H2O
+  rate-constant:
+    A: '1.65e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C3CHO + O2 => HO2C3CO3 + H2O
+  rate-constant:
+    A: '1.29e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C3CO2H + O2 => IPROPOLO2 + H2O + CO2
+  rate-constant:
+    A: '1.67e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C3CO3H => HO2C3CO3 + H2O
+  rate-constant:
+    A: '1.88e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4CHO + O2 => HO2C4CO3 + H2O
+  rate-constant:
+    A: '1.86e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4CO2H + O2 => HO2C4O2 + H2O + CO2
+  rate-constant:
+    A: '6.68e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4CO3H => HO2C4CO3 + H2O
+  rate-constant:
+    A: '8.73e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4NO3 => HO2C3CHO + NO2 + H2O
+  rate-constant:
+    A: '5.38e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4OH + O2 => MEKAOH + HO2 + H2O
+  rate-constant:
+    A: '8.55e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4OOH => HO2C3CHO + OH + H2O
+  rate-constant:
+    A: '1.19e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2C4OOH => HO2C4O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HO2C5OH + O2 => CO2C5OH + HO2 + H2O
+  rate-constant:
+    A: '9.27e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO2NO2 => NO2 + H2O + O2
+  rate-constant:
+    A: '1.93e+11'
+    b: '0.0'
+    Ea: '1371.16938'
+- equation: OH + HO34CO6C8 + O2 => HO3CO46C8 + HO2 + H2O
+  rate-constant:
+    A: '2.80e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO36C11 + O2 => HO6CO9C11 + HO2 + H2O
+  rate-constant:
+    A: '1.63e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO36C8 + O2 => HO3CO6C8 + HO2 + H2O
+  rate-constant:
+    A: '1.58e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C116NO3 => HO6CO9C11 + NO2 + H2O
+  rate-constant:
+    A: '1.07e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C116OOH => HO6CO9C11 + OH + H2O
+  rate-constant:
+    A: '2.91e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C4CHO + O2 => CO3C4CHO + HO2 + H2O
+  rate-constant:
+    A: '2.05e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C4CHO + O2 => HO3C4CO3 + H2O
+  rate-constant:
+    A: '1.30e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C4CO3H => HO3C4CO3 + H2O
+  rate-constant:
+    A: '2.31e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5CHO + O2 => CO3C5CHO + HO2 + H2O
+  rate-constant:
+    A: '7.53e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5CHO + O2 => HO3C5CO3 + H2O
+  rate-constant:
+    A: '1.52e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5CO2H + O2 => HO3C5O2 + H2O + CO2
+  rate-constant:
+    A: '1.04e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5CO3H => HO3C5CO3 + H2O
+  rate-constant:
+    A: '1.25e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5NO3 => HO3C4CHO + NO2 + H2O
+  rate-constant:
+    A: '7.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5OOH => HO3C4CHO + OH + H2O
+  rate-constant:
+    A: '1.37e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C5OOH => HO3C5O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + HO3C86NO3 => HO3CO6C8 + NO2 + H2O
+  rate-constant:
+    A: '8.31e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3C86OOH => HO3CO6C8 + OH + H2O
+  rate-constant:
+    A: '2.66e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3CO46C8 + O2 => CO346C8 + HO2 + H2O
+  rate-constant:
+    A: '7.23e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3CO6C8 + O2 => C82O2 + H2O
+  rate-constant:
+    A: '3.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO3CO6C8 + O2 => CO36C8 + HO2 + H2O
+  rate-constant:
+    A: '7.75e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO4C5CO3H => HO4C5CO3 + H2O
+  rate-constant:
+    A: '2.40e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO6CO9C11 + O2 => C113O2 + H2O
+  rate-constant:
+    A: '4.16e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO6CO9C11 + O2 => CO36C11 + HO2 + H2O
+  rate-constant:
+    A: '9.51e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO7C8CO3H => HO7C8CO3 + H2O
+  rate-constant:
+    A: '2.66e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HO7C8OOH => HO7C8O2 + H2O
+  rate-constant:
+    A: '1.84e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC2H4CHO + O2 => HOC2H4CO3 + H2O
+  rate-constant:
+    A: '1.84e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC2H4CO2H + O2 => HOCH2CH2O2 + H2O + CO2
+  rate-constant:
+    A: '8.37e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC2H4CO3H => HOC2H4CO3 + H2O
+  rate-constant:
+    A: '1.04e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC3H6CHO + O2 => HOC3H6CO3 + H2O
+  rate-constant:
+    A: '1.59e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC3H6CO2H + O2 => HO1C3O2 + H2O + CO2
+  rate-constant:
+    A: '5.81e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC3H6CO3H => HOC3H6CO3 + H2O
+  rate-constant:
+    A: '7.89e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC3H6OH + O2 => HOC2H4CHO + HO2 + H2O
+  rate-constant:
+    A: '5.86e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HOC4H8OH + O2 => HOC3H6CHO + HO2 + H2O
+  rate-constant:
+    A: '6.68e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + HONO => NO2 + H2O
+  rate-constant:
+    A: '1.51e+12'
+    b: '0.0'
+    Ea: '516.67252'
+- equation: OH + IC3H7NO3 => CH3COCH3 + NO2 + H2O
+  rate-constant:
+    A: '3.73e+11'
+    b: '0.0'
+    Ea: '-457.05645999999996'
+- equation: OH + IC3H7OOH => CH3COCH3 + OH + H2O
+  rate-constant:
+    A: '1.00e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + IC3H7OOH => IC3H7O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + MGLYOX + O2 => CH3CO3 + CO + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '1142.64115'
+- equation: OH + NC11H24 + O2 => UDECO2 + H2O
+  rate-constant:
+    A: '7.77e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + NC3H7NO3 => C2H5CHO + NO2 + H2O
+  rate-constant:
+    A: '3.49e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + NC3H7OOH => C2H5CHO + OH + H2O
+  rate-constant:
+    A: '6.62e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + NC3H7OOH => NC3H7O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + NC4H9NO3 => C3H7CHO + NO2 + H2O
+  rate-constant:
+    A: '9.64e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + NC4H9OOH => C3H7CHO + OH + H2O
+  rate-constant:
+    A: '7.47e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + NC4H9OOH => NC4H9O2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + NO => HONO
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT07
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OH + NO2 => HNO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT08
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OH + NO3 => HO2 + NO2
+  rate-constant:
+    A: '1.20e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + O3 => HO2 + O2
+  rate-constant:
+    A: '1.02e+12'
+    b: '0.0'
+    Ea: '-1867.9698799999999'
+- equation: OH + OCT3ONE + O2 => CO3C85O2 + H2O
+  rate-constant:
+    A: '5.60e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + OCTNO3 => OCT3ONE + NO2 + H2O
+  rate-constant:
+    A: '2.34e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + OCTOH + O2 => OCT3ONE + HO2 + H2O
+  rate-constant:
+    A: '1.04e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + OCTOOH => OCT3ONE + OH + H2O
+  rate-constant:
+    A: '2.11e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + PEANO3 => C4H9CHO + NO2 + H2O
+  rate-constant:
+    A: '1.81e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + PEAOH + O2 => C4H9CHO + HO2 + H2O
+  rate-constant:
+    A: '5.16e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + PEAOOH => C4H9CHO + OH + H2O
+  rate-constant:
+    A: '8.49e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + PEAOOH => PEAO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + PHPTN => C5H11CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '3.71e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + PHXN => C4H9CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '3.01e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + SO2 => HSO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT12
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: OH + UDEC3ONE + O2 => C111O2 + H2O
+  rate-constant:
+    A: '8.13e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + UDECNO3 => UDEC3ONE + NO2 + H2O
+  rate-constant:
+    A: '5.47e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + UDECOH + O2 => UDEC3ONE + HO2 + H2O
+  rate-constant:
+    A: '1.29e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + UDECOOH => UDEC3ONE + OH + H2O
+  rate-constant:
+    A: '2.37e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PAN + OH => HCHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '1.81e+10'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PAN => CH3CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PBN + OH => C2H5CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '2.83e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PBN => C3H7CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PE1ENEBNO3 + OH => C4OHCHO + NO2 + H2O
+  rate-constant:
+    A: '2.07e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PE1ENEBO + O2 => C3H7CHO + HCHO + HO2
+  rate-constant:
+    A: '1.20e+38'
+    b: '0.0'
+    Ea: '-10907.751778'
+- equation: PE1ENEBO2 + HO2 => C52OH1OOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: PE1ENEBO2 + NO => PE1ENEBNO3
+  rate-constant:
+    A: '4.23e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: PE1ENEBO2 + NO => PE1ENEBO + NO2
+  rate-constant:
+    A: '1.58e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: PE1ENEBO2 + NO3 => PE1ENEBO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PE1ENEBO2 => C4OHCHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PE1ENEBO2 + 0.5 H2O => HO12C5 + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PE1ENEBO2 => PE1ENEBO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PEANO3 => PEAO + NO2
+  type: zenith-angle-rate
+  l: '2.485e-06'
+  m: '1.196'
+  n: '0.328'
+  scalar: '1'
+- equation: PEAO + O2 => HO1C5O2
+  rate-constant:
+    A: '1.22e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: PEAO2 + HO2 => PEAOOH + O2
+  rate-constant:
+    A: '1.24e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: PEAO2 + NO => PEANO3
+  rate-constant:
+    A: '8.46e+10'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: PEAO2 + NO => PEAO + NO2
+  rate-constant:
+    A: '1.54e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: PEAO2 + NO3 => PEAO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PEAO2 => C4H9CHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PEAO2 => PEAO + 0.5 O2
+  type: complex-rate
+  A: '4.70e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PEAO2 + 0.5 H2O => PEAOH + 0.75 O2
+  type: complex-rate
+  A: '1.57e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PEAOOH => PEAO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: PENTACID + OH + O2 => NC4H9O2 + H2O + CO2
+  rate-constant:
+    A: '4.14e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PERBUACID + OH => C3H7CO3 + H2O
+  rate-constant:
+    A: '4.99e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PERBUACID + O2 => NC3H7O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: PERPENACID + OH => C4H9CO3 + H2O
+  rate-constant:
+    A: '6.26e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PERPENACID + O2 => NC4H9O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: PERPROACID + OH => C2H5CO3 + H2O
+  rate-constant:
+    A: '2.66e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PERPROACID + O2 => C2H5O2 + OH + CO2
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: PHAN + OH => HCHO + CO + NO2 + H2O + O2
+  rate-constant:
+    A: '6.74e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PHAN => HOCH2CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PHPTN => C6H13CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PHXN => C5H11CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PPEN + OH => C3H7CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '4.13e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PPEN => C4H9CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPAN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PPN + OH => CH3CHO + CO + NO2 + H2O + 0.5 O2
+  rate-constant:
+    A: '7.65e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PPN => C2H5CO3 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KBPPN
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: PROLNO3 + OH => CH3CHOHCHO + NO2 + H2O
+  rate-constant:
+    A: '1.03e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PROPACID + OH + O2 => C2H5O2 + H2O + CO2
+  rate-constant:
+    A: '7.23e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PROPGLY + OH + O2 => ACETOL + HO2 + H2O
+  rate-constant:
+    A: '4.43e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PROPGLY + OH + O2 => CH3CHOHCHO + HO2 + H2O
+  rate-constant:
+    A: '2.80e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: PROPOLNO3 + OH => ACETOL + NO2 + H2O
+  rate-constant:
+    A: '5.52e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: UDEC3ONE + 2.0 O2 => C2H5CO3 + OCTO2
+  type: zenith-angle-rate
+  l: '5.804e-06'
+  m: '1.092'
+  n: '0.377'
+  scalar: '1'
+- equation: UDECNO3 => UDECO + NO2
+  type: zenith-angle-rate
+  l: '4.095e-06'
+  m: '1.111'
+  n: '0.316'
+  scalar: '1'
+- equation: UDECO + O2 => HO3C116O2
+  rate-constant:
+    A: '1.55e+35'
+    b: '0.0'
+    Ea: '-6816.10286'
+- equation: UDECO2 + HO2 => UDECOOH + O2
+  rate-constant:
+    A: '1.63e+11'
+    b: '0.0'
+    Ea: '2583.3626'
+- equation: UDECO2 + NO => UDECNO3
+  rate-constant:
+    A: '7.01e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: UDECO2 + NO => UDECO + NO2
+  rate-constant:
+    A: '9.25e+11'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: UDECO2 + NO3 => UDECO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: UDECO2 => UDEC3ONE + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: UDECO2 => UDECO + 0.5 O2
+  type: complex-rate
+  A: '9.03e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+- equation: UDECO2 + 0.5 H2O => UDECOH + 0.75 O2
+  type: complex-rate
+  A: '3.01e+10'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt
+aerosol-reactions:
+- equation: HNO3 => NA
+  rate-constant:
+    A: '3.61e+18'
+    b: '0.0'
+    Ea: '0.0'
+- equation: N2O5 + H2O => NA + NA
+  rate-constant:
+    A: '2.41e+20'
+    b: '0.0'
+    Ea: '0.0'
+- equation: SO3 + H2O => SA
+  type: complex-rate
+  A: '7.23e+08'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: n_undecane_complex_rates.py
+  ro2file: n-undecane-ro2-sum.txt

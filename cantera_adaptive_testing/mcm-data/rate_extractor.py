@@ -26,7 +26,7 @@ def get_photolysis_parameterization(photo_string):
     scalar = np.prod(scalars) if scalars else 1
     # reassign photo string as J string
     photo_string = J_string
-    with open(os.path.join(os.path.dirname(__file__), "mcm-photolysis.txt"), "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), "photolysis.txt"), "r") as f:
         content = f.read()
     content = re.sub(r"[ \t\r\f\v]+", " ", content)
     lines = [l.strip() for l in content.split("\n")]
@@ -173,26 +173,23 @@ def rate_sorter(rate_exp):
         return get_pure_arrhenius(rate_exp)
     elif re.fullmatch(arrhen_regex, complex_arrhen_string) or ((species_names or func_names) and complex_arrhen_string == ""):
         return get_complex_rate(complex_arrhen_string, species_names, func_names)
-    elif re.search(r"TEMP[*][*]2", rate_exp):
-        return get_temp_squared_rate(rate_exp)
-    elif re.search(r"TEMP[*][*]3", rate_exp):
-        return get_temp_cubed_rate(rate_exp)
-    elif re.search(r"[(]*[)][*][*]0.5", rate_exp):
-        return get_half_power_rate(rate_exp)
-    # elif re.search(r"[(]1-(\d+([.]\d*)?([e][+-]\d+)?)?", rate_exp):
-        # print(re.search(r"[(]1-(\d+([.]\d*)?([e][+-]\d+)?)?", rate_exp))
-        # get_one_minus_rate(rate_exp)
+    # elif re.search(r"TEMP[*][*]2", rate_exp):
+    #     return get_temp_squared_rate(rate_exp)
+    # elif re.search(r"TEMP[*][*]3", rate_exp):
+    #     return get_temp_cubed_rate(rate_exp)
+    # elif re.search(r"[(]*[)][*][*]0.5", rate_exp):
+    #     return get_half_power_rate(rate_exp)
     else:
         print("Unknown rate", rate_exp)
-        return {}
+        return {"type":"unknown-rate", "expression": rate_exp}
 
-def get_list_of_rate_data():
+def get_list_of_rate_data(prefix):
     """ Get a complete list of rate data
 
     Returns:
         list: data corresponding to each reaction
     """
-    with open("mcm-rates.txt", "r") as f:
+    with open(f"{prefix}-rates.txt", "r") as f:
         rates = f.read().split("\n")
     returns = []
     for rate in rates[:-1]:
@@ -201,10 +198,32 @@ def get_list_of_rate_data():
         except Exception as e:
             val = rate_sorter(rate)
         returns.append(val)
+    # go through and write complex-function for unknowns
+    fcn_template = "\ndef KUNKNOWN{}({}):\n    return {}\n"
+    repl_exp = "KUNKNOWN{}"
+    with open("mcm_complex_rates.py", "r") as f:
+        mcm_complex_content = f.read()
+    for i, rate in enumerate(returns):
+        if rate.get("type", "") == "unknown-rate":
+            rate_exp = rate.pop("expression")
+            args = ", ".join(set(re.findall(r"(?:[A-Z]+[0-9]*)+", rate_exp)))
+            fcn = fcn_template.format(i, args, rate_exp)
+            fcn = re.sub("exp", "math.exp", fcn)
+            fcn = re.sub("TEMP", "T", fcn)
+            mcm_complex_content += fcn
+            returns[i] = get_complex_rate("", [], [repl_exp.format(i)])
+    pyprefix = prefix.replace("-", "_")
+    with open(f"{pyprefix}_complex_rates.py", "w") as f:
+        f.write(mcm_complex_content)
+    # go through all returns and add files
+    for i, rate in enumerate(returns):
+        if rate.get("type", "") == "complex-rate":
+            rate["pyfile"] = f"{pyprefix}_complex_rates.py"
+            rate["ro2file"] = f"{prefix}-ro2-sum.txt"
     return returns
 
-def test_rate_sorter(skip_assertion=False):
-    with open("mcm-rates.txt", "r") as f:
+def test_rate_sorter(prefix, skip_assertion=False):
+    with open(f"{prefix}-rates.txt", "r") as f:
         rates = f.read().split("\n")
     num_unknowns = 0
     for rate in rates[:-1]:
@@ -212,22 +231,31 @@ def test_rate_sorter(skip_assertion=False):
             val = rate_sorter(str(parse_expr(rate)))
         except Exception as e:
             val = rate_sorter(rate)
-        if not val:
+        if val.get("type", "") == "unknown-rate":
             num_unknowns += 1
     # check that all have been resolved
     if not skip_assertion:
         assert num_unknowns == 0
 
-def count_arrhenius():
-    rates = get_list_of_rate_data()
+def count_arrhenius(prefix):
+    rates = get_list_of_rate_data(prefix)
     counts = {"total": len(rates), "arrhenius":0}
     for r in rates:
         if "rate-constant" in r:
             counts["arrhenius"] += 1
         elif "type" in r:
             counts[r["type"]] = counts.get(r["type"], 0) + 1
-    print(counts)
+            if "function-names" in r:
+                counts["has-func"] = counts.get("has-func", 0) + 1
+            if "species-names" in r:
+                counts["has-spec"] = counts.get("has-spec", 0) + 1
 
 if __name__ == "__main__":
-    # test_rate_sorter()
-    count_arrhenius()
+    # count_arrhenius()
+    get_list_of_rate_data("n-undecane")
+    # test_rate_sorter("n-undecane", skip_assertion=True)
+    # test_rate = "2*(1.03e-13*exp(365/TEMP)*1.6e-12*exp(-2200/TEMP))**(0.5)*RO2*0.6"
+    # simp_rate = str(parse_expr(test_rate))
+    # print(simp_rate)
+    # val = rate_sorter(simp_rate)
+    # print(val)

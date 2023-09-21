@@ -3,7 +3,7 @@ import math
 import inspect
 import numpy as np
 import cantera as ct
-import mcm_complex_rates
+import n_undecane_complex_rates as mcm_complex_rates
 
 
 class ZenithAngleData(ct.ExtensibleRateData):
@@ -60,7 +60,7 @@ class ComplexData(ct.ExtensibleRateData):
 
 @ct.extension(name="complex-rate", data=ComplexData)
 class ComplexRate(ct.ExtensibleRate):
-    __slots__ = ("species_names", "function_names", "A", "b", "Ea")
+    __slots__ = ("species_names", "function_names", "A", "b", "Ea", "pyfile", "ro2sumfile")
 
     def set_parameters(self, node, units):
         self.A = float(node.get("A", 1))
@@ -91,17 +91,24 @@ class ComplexRate(ct.ExtensibleRate):
                 if "T" == a:
                     built_args.append(data.thermo.T)
                 elif "M" == a:
-                    # TODO: Construct M
-                    built_args.append(1)
+                    M = data.thermo.concentrations[data.thermo.species_index("O2")]
+                    M = data.thermo.concentrations[data.thermo.species_index("N2")]
+                    built_args.append(M)
+                elif "RO2" == a:
+                    built_args.append(data.ro2_sum)
                 else:
                     built_args.append(data.thermo.concentrations[data.thermo.species_index(a)])
             rate *= fcn(*built_args)
-        # multiply by species
+        # multiply by speciess
         for sp in self.species_names:
-            if sp != "RO2":
-                rate *= data.thermo.concentrations[data.thermo.species_index(sp)]
-            else:
+            if sp == "RO2":
                 rate *= data.ro2_sum
+            elif sp == "M":
+                M = data.thermo.concentrations[data.thermo.species_index("O2")]
+                M = data.thermo.concentrations[data.thermo.species_index("N2")]
+                rate *= M
+            else:
+                rate *= data.thermo.concentrations[data.thermo.species_index(sp)]
         return rate
 
 

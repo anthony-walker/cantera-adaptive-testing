@@ -1,166 +1,166 @@
 import math
 
-def KRO2NO(T):
+def KRO2NO(T, M):
     return 2.7e-12 * math.exp(360 / T)
 
-def KRO2HO2(T):
+def KRO2HO2(T, M):
     return 2.91e-13 * math.exp(1300 / T)
 
-def KAPHO2(T):
+def KAPHO2(T, M):
     return 5.2e-13 * math.exp(980 / T)
 
-def KAPNO(T):
+def KAPNO(T, M):
     return 7.5e-12 * math.exp(290 / T)
 
-def KRO2NO3(T):
+def KRO2NO3(T, M):
     return 2.3e-12
 
-def KNO3AL(T):
+def KNO3AL(T, M):
     return 1.4e-12 * math.exp(-1860 / T)
 
-def KDEC(T):
+def KDEC(T, M):
     return 1.0e6
 
-def KROPRIM(T):
+def KROPRIM(T, M):
     return 2.5e-14 * math.exp(-300 / T)
 
-def KROSEC(T):
+def KROSEC(T, M):
     return 2.5e-14 * math.exp(-300 / T)
 
-def KCH3O2(T):
+def KCH3O2(T, M):
     return 1.03e-13 * math.exp(365 / T)
 
-def K298CH3O2(T):
+def K298CH3O2(T, M):
     return 3.5e-13
 
-def K14ISOM1(T):
+def K14ISOM1(T, M):
     return 3.00e7 * math.exp(-5300 / T)
 
 def KD0(T, M):
     return 1.10e-05 * M * math.exp(-10100 / T)
 
-def KDI(T):
+def KDI(T, M):
     return 1.90e17 * math.exp(-14100 / T)
 
 def KRD(T, M):
-    return KD0(T, M) / KDI(T)
+    return KD0(T, M) / KDI(T, M)
 
-def FCD(T):
+def FCD(T, M):
     return 0.30
 
-def NCD(T):
-    return 0.75 - 1.27 * (math.log10(FCD(T)))
+def NCD(T, M):
+    return 0.75 - 1.27 * (math.log10(FCD(T, M)))
 
-def FD(T):
-    return 10 ** (math.log10(FCD(T)) / (1 + (math.log10(KRD(T)) / NCD(T)) ** 2))
+def FD(T, M):
+    return 10 ** (math.log10(FCD(T, M)) / (1 + (math.log10(KRD(T, M)) / NCD(T, M)) ** 2))
 
 def KBPAN(T, M):
-    return (KD0(T, M) * KDI(T) * FD(T)) / (KD0(T, M) + KDI(T))
+    return (KD0(T, M) * KDI(T, M) * FD(T, M)) / (KD0(T, M) + KDI(T, M))
 
 def KC0(T, M):
     return 3.28e-28 * M * (T / 300) ** -6.87
 
-def KCI(T):
+def KCI(T, M):
     return 1.125e-11 * (T / 300) ** -1.105
 
 def KRC(T, M):
-    return KC0(T, M) / KCI(T)
+    return KC0(T, M) / KCI(T, M)
 
-def FCC(T):
+def FCC(T, M):
     return 0.30
 
-def NC(T):
-    return 0.75 - 1.27 * (math.log10(FCC(T)))
+def NC(T, M):
+    return 0.75 - 1.27 * (math.log10(FCC(T, M)))
 
-def FC(T):
-    return 10 ** (math.log10(FCC(T)) / (1 + (math.log10(KRC(T)) / NC(T)) ** 2))
+def FC(T, M):
+    return 10 ** (math.log10(FCC(T, M)) / (1 + (math.log10(KRC(T, M)) / NC(T, M)) ** 2))
 
 def KFPAN(T, M):
-    return (KC0(T, M) * KCI(T) * FC(T)) / (KC0(T, M) + KCI(T))
+    return (KC0(T, M) * KCI(T, M) * FC(T, M)) / (KC0(T, M) + KCI(T, M))
 
 def K10(T, M):
     return 1.0e-31 * M * (T / 300) ** -1.6
 
-def K1I(T):
+def K1I(T, M):
     return 5.0e-11 * (T / 300) ** -0.3
 
 def KR1(T, M):
-    return K10(T, M) / K1I(T)
+    return K10(T, M) / K1I(T, M)
 
-def FC1(T):
+def FC1(T, M):
     return 0.85
 
-def NC1(T):
-    return 0.75 - 1.27 * (math.log10(FC1(T)))
+def NC1(T, M):
+    return 0.75 - 1.27 * (math.log10(FC1(T, M)))
 
 def F1(T, M):
-    return 10 ** (math.log10(FC1(T)) / (1 + (math.log10(KR1(T, M)) / NC1(T)) ** 2))
+    return 10 ** (math.log10(FC1(T, M)) / (1 + (math.log10(KR1(T, M)) / NC1(T, M)) ** 2))
 
 def KMT01(T, M):
-    return (K10(T, M) * K1I(T) * F1(T)) / (K10(T, M) + K1I(T))
+    return (K10(T, M) * K1I(T, M) * F1(T, M)) / (K10(T, M) + K1I(T, M))
 
 def K20(T, M):
     return 1.3e-31 * M * (T / 300) ** -1.5
 
-def K2I(T):
+def K2I(T, M):
     return 2.3e-11 * (T / 300) ** 0.24
 
 def KR2(T, M):
-    return K20(T, M) / K2I(T)
+    return K20(T, M) / K2I(T, M)
 
-def FC2(T):
+def FC2(T, M):
     return 0.6
 
-def NC2(T):
-    return 0.75 - 1.27 * (math.log10(FC2(T)))
+def NC2(T, M):
+    return 0.75 - 1.27 * (math.log10(FC2(T, M)))
 
-def F2(T):
-    return 10 ** (math.log10(FC2(T)) / (1 + (math.log10(KR2(T)) / NC2(T)) ** 2))
+def F2(T, M):
+    return 10 ** (math.log10(FC2(T, M)) / (1 + (math.log10(KR2(T, M)) / NC2(T, M)) ** 2))
 
 def KMT02(T, M):
-    return (K20(T, M) * K2I(T) * F2(T)) / (K20(T, M) + K2I(T))
+    return (K20(T, M) * K2I(T, M) * F2(T, M)) / (K20(T, M) + K2I(T, M))
 
 def K30(T, M):
     return 3.6e-30 * M * (T / 300) ** -4.1
 
-def K3I(T):
+def K3I(T, M):
     return 1.9e-12 * (T / 300) ** 0.2
 
 def KR3(T, M):
-    return K30(T, M) / K3I(T)
+    return K30(T, M) / K3I(T, M)
 
-def FC3(T):
+def FC3(T, M):
     return 0.35
 
-def NC3(T):
-    return 0.75 - 1.27 * (math.log10(FC3(T)))
+def NC3(T, M):
+    return 0.75 - 1.27 * (math.log10(FC3(T, M)))
 
-def F3(T):
-    return 10 ** (math.log10(FC3(T)) / (1 + (math.log10(KR3(T)) / NC3(T)) ** 2))
+def F3(T, M):
+    return 10 ** (math.log10(FC3(T, M)) / (1 + (math.log10(KR3(T, M)) / NC3(T, M)) ** 2))
 
 def KMT03(T, M):
-    return (K30(T, M) * K3I(T) * F3(T)) / (K30(T, M) + K3I(T))
+    return (K30(T, M) * K3I(T, M) * F3(T, M)) / (K30(T, M) + K3I(T, M))
 
 def K40(T, M):
     return 1.3e-3 * M * (T / 300) ** -3.5 * math.exp(-11000 / T)
 
-def K4I(T):
+def K4I(T, M):
     return 9.7e14 * (T / 300) ** 0.1 * math.exp(-11080 / T)
 
 def KR4(T, M):
-    return K40(T, M) / K4I(T)
+    return K40(T, M) / K4I(T, M)
 
-def FC4(T):
+def FC4(T, M):
     return 0.35
 
-def NC4(T):
-    return 0.75 - 1.27 * (math.log10(FC4(T)))
+def NC4(T, M):
+    return 0.75 - 1.27 * (math.log10(FC4(T, M)))
 
-def F4(T):
-    return 10 ** (math.log10(FC4(T)) / (1 + (math.log10(KR4(T)) / NC4(T)) ** 2))
+def F4(T, M):
+    return 10 ** (math.log10(FC4(T, M)) / (1 + (math.log10(KR4(T, M)) / NC4(T, M)) ** 2))
 
 def KMT04(T, M):
-    return (K40(T, M) * K4I(T) * F4(T)) / (K40(T, M) + K4I(T))
+    return (K40(T, M) * K4I(T, M) * F4(T, M)) / (K40(T, M) + K4I(T, M))
 
 def KMT05(M):
     return 1.44e-13 * (1 + (M / 4.2e19))
@@ -171,227 +171,227 @@ def KMT06(T, H2O):
 def K70(T, M):
     return 7.4e-31 * M * (T / 300) ** -2.4
 
-def K7I(T):
+def K7I(T, M):
     return 3.3e-11 * (T / 300) ** -0.3
 
 def KR7(T, M):
-    return K70(T, M) / K7I(T)
+    return K70(T, M) / K7I(T, M)
 
-def FC7(T):
+def FC7(T, M):
     return 0.81
 
-def NC7(T):
-    return 0.75 - 1.27 * (math.log10(FC7(T)))
+def NC7(T, M):
+    return 0.75 - 1.27 * (math.log10(FC7(T, M)))
 
-def F7(T):
-    return 10 ** (math.log10(FC7(T)) / (1 + (math.log10(KR7(T)) / NC7(T)) ** 2))
+def F7(T, M):
+    return 10 ** (math.log10(FC7(T, M)) / (1 + (math.log10(KR7(T, M)) / NC7(T, M)) ** 2))
 
 def KMT07(T, M):
-    return (K70(T, M) * K7I(T) * F7(T)) / (K70(T, M) + K7I(T))
+    return (K70(T, M) * K7I(T, M) * F7(T, M)) / (K70(T, M) + K7I(T, M))
 
 def K80(T, M):
     return 3.2e-30 * M * (T / 300) ** -4.5
 
-def K8I(T):
+def K8I(T, M):
     return 3.0e-11
 
 def KR8(T, M):
-    return K80(T, M) / K8I(T)
+    return K80(T, M) / K8I(T, M)
 
-def FC8(T):
+def FC8(T, M):
     return 0.41
 
-def NC8(T):
-    return 0.75 - 1.27 * (math.log10(FC8(T)))
+def NC8(T, M):
+    return 0.75 - 1.27 * (math.log10(FC8(T, M)))
 
-def F8(T):
-    return 10 ** (math.log10(FC8(T)) / (1 + (math.log10(KR8(T)) / NC8(T)) ** 2))
+def F8(T, M):
+    return 10 ** (math.log10(FC8(T, M)) / (1 + (math.log10(KR8(T, M)) / NC8(T, M)) ** 2))
 
 def KMT08(T, M):
-    return (K80(T, M) * K8I(T) * F8(T)) / (K80(T, M) + K8I(T))
+    return (K80(T, M) * K8I(T, M) * F8(T, M)) / (K80(T, M) + K8I(T, M))
 
 def K90(T, M):
     return 1.4e-31 * M * (T / 300) ** -3.1
 
-def K9I(T):
+def K9I(T, M):
     return 4.0e-12
 
 def KR9(T, M):
-    return K90(T, M) / K9I(T)
+    return K90(T, M) / K9I(T, M)
 
-def FC9(T):
+def FC9(T, M):
     return 0.4
 
-def NC9(T):
-    return 0.75 - 1.27 * (math.log10(FC9(T)))
+def NC9(T, M):
+    return 0.75 - 1.27 * (math.log10(FC9(T, M)))
 
-def F9(T):
-    return 10 ** (math.log10(FC9(T)) / (1 + (math.log10(KR9(T)) / NC9(T)) ** 2))
+def F9(T, M):
+    return 10 ** (math.log10(FC9(T, M)) / (1 + (math.log10(KR9(T, M)) / NC9(T, M)) ** 2))
 
 def KMT09(T, M):
-    return (K90(T, M) * K9I(T) * F9(T)) / (K90(T, M) + K9I(T))
+    return (K90(T, M) * K9I(T, M) * F9(T, M)) / (K90(T, M) + K9I(T, M))
 
 def K100(T, M):
     return 4.10e-05 * M * math.exp(-10650 / T)
 
-def K10I(T):
+def K10I(T, M):
     return 6.0e15 * math.exp(-11170 / T)
 
 def KR10(T, M):
-    return K100(T, M) / K10I(T)
+    return K100(T, M) / K10I(T, M)
 
-def FC10(T):
+def FC10(T, M):
     return 0.4
 
-def NC10(T):
-    return 0.75 - 1.27 * (math.log10(FC10(T)))
+def NC10(T, M):
+    return 0.75 - 1.27 * (math.log10(FC10(T, M)))
 
-def F10(T):
-    return 10 ** (math.log10(FC10(T)) / (1 + (math.log10(KR10(T)) / NC10(T)) ** 2))
+def F10(T, M):
+    return 10 ** (math.log10(FC10(T, M)) / (1 + (math.log10(KR10(T, M)) / NC10(T, M)) ** 2))
 
 def KMT10(T, M):
-    return (K100(T, M) * K10I(T) * F10(T)) / (K100(T, M) + K10I(T))
+    return (K100(T, M) * K10I(T, M) * F10(T, M)) / (K100(T, M) + K10I(T, M))
 
-def K1(T):
+def K1(T, M):
     return 2.40e-14 * math.exp(460 / T)
 
-def K3(T):
+def K3(T, M):
     return 6.50e-34 * math.exp(1335 / T)
 
-def K4(T):
+def K4(T, M):
     return 2.70e-17 * math.exp(2199 / T)
 
 def K2(T, M):
-    return (K3(T) * M) / (1 + (K3(T) * M) / K4(T))
+    return (K3(T, M) * M) / (1 + (K3(T, M) * M) / K4(T, M))
 
 def KMT11(T, M):
-    return K1(T) + K2(T, M)
+    return K1(T, M) + K2(T, M)
 
 def K120(T, M):
     return 2.5e-31 * M * (T / 300) ** -2.6
 
-def K12I(T):
+def K12I(T, M):
     return 2.0e-12
 
 def KR12(T, M):
-    return K120(T, M) / K12I(T)
+    return K120(T, M) / K12I(T, M)
 
-def FC12(T):
+def FC12(T, M):
     return 0.53
 
-def NC12(T):
-    return 0.75 - 1.27 * (math.log10(FC12(T)))
+def NC12(T, M):
+    return 0.75 - 1.27 * (math.log10(FC12(T, M)))
 
-def F12(T):
-    return 10 ** (math.log10(FC12(T)) / (1 + (math.log10(KR12(T)) / NC12(T)) ** 2))
+def F12(T, M):
+    return 10 ** (math.log10(FC12(T, M)) / (1 + (math.log10(KR12(T, M)) / NC12(T, M)) ** 2))
 
 def KMT12(T, M):
-    return (K120(T, M) * K12I(T) * F12(T)) / (K120(T, M) + K12I(T))
+    return (K120(T, M) * K12I(T, M) * F12(T, M)) / (K120(T, M) + K12I(T, M))
 
 def K130(T, M):
     return 2.5e-30 * M * (T / 300) ** -5.5
 
-def K13I(T):
+def K13I(T, M):
     return 1.8e-11
 
 def KR13(T, M):
-    return K130(T, M) / K13I(T)
+    return K130(T, M) / K13I(T, M)
 
-def FC13(T):
+def FC13(T, M):
     return 0.36
 
-def NC13(T):
-    return 0.75 - 1.27 * (math.log10(FC13(T)))
+def NC13(T, M):
+    return 0.75 - 1.27 * (math.log10(FC13(T, M)))
 
-def F13(T):
-    return 10 ** (math.log10(FC13(T)) / (1 + (math.log10(KR13(T)) / NC13(T)) ** 2))
+def F13(T, M):
+    return 10 ** (math.log10(FC13(T, M)) / (1 + (math.log10(KR13(T, M)) / NC13(T, M)) ** 2))
 
 def KMT13(T, M):
-    return (K130(T, M) * K13I(T) * F13(T)) / (K130(T, M) + K13I(T))
+    return (K130(T, M) * K13I(T, M) * F13(T, M)) / (K130(T, M) + K13I(T, M))
 
 def K140(T, M):
     return 9.0e-5 * math.exp(-9690 / T) * M
 
-def K14I(T):
+def K14I(T, M):
     return 1.1e16 * math.exp(-10560 / T)
 
 def KR14(T, M):
-    return K140(T, M) / K14I(T)
+    return K140(T, M) / K14I(T, M)
 
-def FC14(T):
+def FC14(T, M):
     return 0.36
 
-def NC14(T):
-    return 0.75 - 1.27 * (math.log10(FC14(T)))
+def NC14(T, M):
+    return 0.75 - 1.27 * (math.log10(FC14(T, M)))
 
-def F14(T):
-    return 10 ** (math.log10(FC14(T)) / (1 + (math.log10(KR14(T)) / NC14(T)) ** 2))
+def F14(T, M):
+    return 10 ** (math.log10(FC14(T, M)) / (1 + (math.log10(KR14(T, M)) / NC14(T, M)) ** 2))
 
 def KMT14(T, M):
-    return (K140(T, M) * K14I(T) * F14(T)) / (K140(T, M) + K14I(T))
+    return (K140(T, M) * K14I(T, M) * F14(T, M)) / (K140(T, M) + K14I(T, M))
 
 def K150(T, M):
     return 8.6e-29 * M * (T / 300) ** -3.1
 
-def K15I(T):
+def K15I(T, M):
     return 9.0e-12 * (T / 300) ** -0.85
 
 def KR15(T, M):
-    return K150(T, M) / K15I(T)
+    return K150(T, M) / K15I(T, M)
 
-def FC15(T):
+def FC15(T, M):
     return 0.48
 
-def NC15(T):
-    return 0.75 - 1.27 * (math.log10(FC15(T)))
+def NC15(T, M):
+    return 0.75 - 1.27 * (math.log10(FC15(T, M)))
 
-def F15(T):
-    return 10 ** (math.log10(FC15(T)) / (1 + (math.log10(KR15(T)) / NC15(T)) ** 2))
+def F15(T, M):
+    return 10 ** (math.log10(FC15(T, M)) / (1 + (math.log10(KR15(T, M)) / NC15(T, M)) ** 2))
 
 def KMT15(T, M):
-    return (K150(T, M) * K15I(T) * F15(T)) / (K150(T, M) + K15I(T))
+    return (K150(T, M) * K15I(T, M) * F15(T, M)) / (K150(T, M) + K15I(T, M))
 
 def K160(T, M):
     return 8.0e-27 * M * (T / 300) ** -3.5
 
-def K16I(T):
+def K16I(T, M):
     return 3.0e-11 * (T / 300) ** -1
 
 def KR16(T, M):
-    return K160(T, M) / K16I(T)
+    return K160(T, M) / K16I(T, M)
 
-def FC16(T):
+def FC16(T, M):
     return 0.5
 
-def NC16(T):
-    return 0.75 - 1.27 * (math.log10(FC16(T)))
+def NC16(T, M):
+    return 0.75 - 1.27 * (math.log10(FC16(T, M)))
 
-def F16(T):
-    return 10 ** (math.log10(FC16(T)) / (1 + (math.log10(KR16(T)) / NC16(T)) ** 2))
+def F16(T, M):
+    return 10 ** (math.log10(FC16(T, M)) / (1 + (math.log10(KR16(T, M)) / NC16(T, M)) ** 2))
 
 def KMT16(T, M):
-    return (K160(T, M) * K16I(T) * F16(T)) / (K160(T, M) + K16I(T))
+    return (K160(T, M) * K16I(T, M) * F16(T, M)) / (K160(T, M) + K16I(T, M))
 
 def K170(T, M):
     return 5.0e-30 * M * (T / 300) ** -1.5
 
-def K17I(T):
+def K17I(T, M):
     return 1.0e-12
 
 def KR17(T, M):
-    return K170(T, M) / K17I(T)
+    return K170(T, M) / K17I(T, M)
 
-def FC17(T):
+def FC17(T, M):
     return 0.17 * math.exp(-51 / T) + math.exp(-T / 204)
 
-def NC17(T):
-    return 0.75 - 1.27 * (math.log10(FC17(T)))
+def NC17(T, M):
+    return 0.75 - 1.27 * (math.log10(FC17(T, M)))
 
-def F17(T):
-    return 10 ** (math.log10(FC17(T)) / (1 + (math.log10(KR17(T)) / NC17(T)) ** 2))
+def F17(T, M):
+    return 10 ** (math.log10(FC17(T, M)) / (1 + (math.log10(KR17(T, M)) / NC17(T, M)) ** 2))
 
 def KMT17(T, M):
-    return (K170(T, M) * K17I(T) * F17(T)) / (K170(T, M) + K17I(T))
+    return (K170(T, M) * K17I(T, M) * F17(T, M)) / (K170(T, M) + K17I(T, M))
 
 def KMT18(T, O2):
     return 9.5e-39 * O2 * math.exp(5270 / T) / (1 + 7.5e-29 * O2 * math.exp(5610 / T))
@@ -399,35 +399,20 @@ def KMT18(T, O2):
 def KPPN0(T, M):
     return 1.7e-03 * math.exp(-11280 / T) * M
 
-def KPPNI(T):
+def KPPNI(T, M):
     return 8.3e16 * math.exp(-13940 / T)
 
 def KRPPN(T, M):
-    return KPPN0(T, M) / KPPNI(T)
+    return KPPN0(T, M) / KPPNI(T, M)
 
-def FCPPN(T):
+def FCPPN(T, M):
     return 0.36
 
-def NCPPN(T):
-    return 0.75 - 1.27 * (math.log10(FCPPN(T)))
+def NCPPN(T, M):
+    return 0.75 - 1.27 * (math.log10(FCPPN(T, M)))
 
-def FPPN(T):
-    return 10 ** (math.log10(FCPPN(T)) / (1 + (math.log10(KRPPN(T)) / NCPPN(T)) ** 2))
+def FPPN(T, M):
+    return 10 ** (math.log10(FCPPN(T, M)) / (1 + (math.log10(KRPPN(T, M)) / NCPPN(T, M)) ** 2))
 
 def KBPPN(T, M):
-    return (KPPN0(T, M) * KPPNI(T) * FPPN(T)) / (KPPN0(T, M) + KPPNI(T))
-
-def KAWQ1(T):
-    return KCH3O2() * (1-7.18*math.exp(-885/T))
-
-def KAWQ2(T):
-    return 8.8e-12*math.exp(-1320/T) + 1.7e-14*math.exp(423/T)
-
-def KAWQ3(T):
-    return (1-1/(1+498*math.exp(-1160/T)))
-
-def KAWQ4(T):
-    return (1/(1+498*math.exp(-1160/T)))
-
-def KAWQ5(T):
-    return (1-math.exp(-550/T))
+    return (KPPN0(T, M) * KPPNI(T, M) * FPPN(T, M)) / (KPPN0(T, M) + KPPNI(T, M))

@@ -13,16 +13,19 @@ import pubchempy as pcp
 MCM_SPECIES_URL = "http://chmlin9.leeds.ac.uk/MCM/browse.htt?species={:s}"
 yaml.Dumper.ignore_aliases = lambda *args : True
 
+# add species that are assumed available in atmospherics
+add_species = ["H2O", "O2", "H", "N2", "AR", "CO2", "HCL", "HBR"]
+
 # global variable species_data place holder
 species_data = {}
 
 
-with open("mcm-functional-groups.yaml") as f:
+with open("functional-groups.yaml") as f:
     functional_groups = yaml.safe_load(f)["smiles-groups"]
 functional_group_list = sorted(functional_groups.items(), key=lambda x: len(x[0]), reverse=True)
 
 def print_functional_group_formulas():
-    with open("mcm-functional-groups.yaml") as f:
+    with open("functional-groups.yaml") as f:
         fct_gs = yaml.safe_load(f)["functional-groups"]
     for group, smiles in fct_gs.items():
         mol = Chem.MolFromSmiles(smiles)
@@ -167,9 +170,10 @@ def assign_global_species_data():
         species_data = yaml.safe_load(f)
 
 
-def get_species_data():
-    with open("mcm-species.txt", "r") as f:
+def get_species_data(prefix):
+    with open(f"{prefix}-species.txt", "r") as f:
         species = f.read().split("\n")[:-1]
+    species += add_species
     print("Loading all species data...")
     assign_global_species_data()
     # species = ["H2O", "IPROPOL", "O2", "N2", "TOLUENE"]
@@ -186,10 +190,10 @@ def get_species_data():
     return data
 
 
-def write_species_extraction():
-    data = get_species_data()
+def write_species_extraction(prefix):
+    data = get_species_data(prefix)
     # output species to file
-    with open("mcm-species.yaml", "w") as f:
+    with open(f"{prefix}-species.yaml", "w") as f:
         yaml.safe_dump(data, f, default_flow_style=False, sort_keys=False)
 
 

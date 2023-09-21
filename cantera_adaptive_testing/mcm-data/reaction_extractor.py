@@ -48,15 +48,16 @@ def balance_by_comps(species, react, prod, total_rcomp, total_pcomp, comp_elem, 
         for ele, amt in all_elems.items():
             total_rcomp[ele] = elem_fraction * amt + total_rcomp[ele] if ele in total_rcomp.keys() else elem_fraction * amt
 
-def get_balanced_reaction_list():
-    with open("mcm-reactions.txt", "r") as f:
+def get_balanced_reaction_list(prefix):
+    with open(f"{prefix}-reactions.txt", "r") as f:
         reactions = f.read().split("\n")[:-1]
-    with open("mcm-species.yaml", "r") as f:
+    with open(f"{prefix}-species.yaml", "r") as f:
         species = yaml.safe_load(f)
     # split reactions
     balanced_reactions = []
     for r in reactions:
         react, prod = get_reactants_products(r)
+        prod = list(filter(lambda x: bool(x), prod))
         rcomp = [species[q]["composition"] for q in react]
         pcomp = [species[p]["composition"] for p in prod]
         total_rcomp = get_composition_sum(rcomp)
@@ -79,17 +80,21 @@ def get_balanced_reaction_list():
     return balanced_reactions
 
 
-def write_balanced_reaction_list():
-    rate_data = rate_extractor.get_list_of_rate_data()
-    reaction_data = get_balanced_reaction_list()
+def write_balanced_reaction_list(prefix):
+    rate_data = rate_extractor.get_list_of_rate_data(prefix)
+    reaction_data = get_balanced_reaction_list(prefix)
     # merge into reaction yaml data
     reacts = []
     aero_reacts = []
     aero_species = ["NA", "SA"]
     ctr = 1
-    for reaction, rate in zip(reaction_data, rate_data):
+    # count and add duplicate reactions
+    dups = [reaction_data.count(r) > 1 for r in reaction_data]
+    for cdup, reaction, rate in zip(dups, reaction_data, rate_data):
         temp = {"equation": reaction}
         temp.update(rate)
+        if cdup:
+            temp.update({"duplicate": True})
         non_aero = True
         for ars in aero_species:
             if re.search(f"[ ][^A-Za-z0-9]*{ars}([ ]|$)", reaction):
@@ -102,9 +107,9 @@ def write_balanced_reaction_list():
         ctr += 1
     # sort out known aerosol reactions
 
-    with open("mcm-reactions.yaml", "w") as f:
+    with open(f"{prefix}-reactions.yaml", "w") as f:
         yaml.safe_dump({"atmosphere-reactions": reacts, "aerosol-reactions": aero_reacts}, f, default_flow_style=False, sort_keys=False)
 
 
 if __name__ == "__main__":
-    write_balanced_reaction_list()
+    write_balanced_reaction_list("n-undecane")
