@@ -1,0 +1,1392 @@
+HCHO:
+  name: HCHO
+  composition:
+    C: 1
+    H: 2
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1017.0
+    - 5000.0
+    data:
+    - - 2.41049
+      - 0.00702041
+      - -4.22947e-06
+      - 4.40116e-09
+      - -2.12647e-12
+      - -14111.4
+      - 10.6246
+    - - 2.9042038
+      - 0.00664407
+      - -2.45282e-06
+      - 4.12836e-10
+      - -2.6304e-14
+      - -14432.16
+      - 7.5065132
+CH3NO3:
+  name: CH3NO3
+  composition:
+    C: 1
+    H: 3
+    N: 1
+    O: 3
+  thermo:
+    model: constant-cp
+  note: 'CH3NO3 was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: CO[N+](=O)[O-]
+
+    InCHI: InChI=1S/CH3NO3/c1-5-2(3)4/h1H3
+
+    '
+CH2BROH:
+  name: CH2BROH
+  composition:
+    C: 1
+    H: 3
+    Br: 1
+    O: 1
+  thermo:
+    model: constant-cp
+  note: 'CH2BROH was not found in all-species-data and was constructed as well as
+    possible using web requests and assuming ideal gas thermo.
+
+    SMILES: C(O)Br
+
+    InCHI: InChI=1S/CH3BrO/c2-1-3/h3H,1H2
+
+    '
+CH3OH:
+  name: CH3OH
+  composition:
+    C: 1
+    H: 4
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1985.0
+    - 5000.0
+    data:
+    - - 1.82176844
+      - 0.012332642
+      - -2.73742177e-06
+      - -1.07387318e-09
+      - 4.23644837e-13
+      - -25222.2207
+      - 14.81043
+    - - 3.92867513
+      - 0.00981626074
+      - -3.40615476e-06
+      - 5.35510197e-10
+      - -3.13776029e-14
+      - -26145.4175
+      - 2.69464483
+    note: 2/25/4THERM
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 481.8
+    diameter: 3.626
+    rotational-relaxation: 1.0
+    note: SVE
+  note: L 8/88
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 49556000000000.0
+    - 0
+    b: 75.65835811
+O1D:
+  name: O1D
+  composition:
+    O: 1
+  note: 'O1D was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    InCHI: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    Composition not constructed as an exception was encountered: Invalid INCHI string..'
+  thermo:
+    data:
+    - - 2.946429
+      - -0.001638166
+      - 2.421032e-06
+      - -1.602843e-09
+      - 3.890696e-13
+      - 29147.64
+      - 2.963995
+    - - 2.54206
+      - -2.755062e-05
+      - -3.102803e-09
+      - 4.551067e-12
+      - -4.368052e-16
+      - 29230.8
+      - 4.920308
+    model: NASA7
+    note: '120186'
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+  transport:
+    diameter: 2.75
+    geometry: atom
+    model: gas
+    well-depth: 80.0
+BR:
+  name: BR
+  composition:
+    Br: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 2.48571711
+      - 0.000150647525
+      - -5.37267333e-07
+      - 7.20921065e-10
+      - -2.50205558e-13
+      - 12709.2168
+      - 6.86030804
+    - - 2.08851053
+      - 0.000712118611
+      - -2.70003073e-07
+      - 4.14986299e-11
+      - -2.31188294e-15
+      - 12856.8767
+      - 9.07351144
+    note: J 6/82
+O3:
+  name: O3
+  composition:
+    O: 3
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 3.40738221
+      - 0.00205379063
+      - 1.38486052e-05
+      - -2.23311542e-08
+      - 9.76073226e-12
+      - 15864.4979
+      - 8.2824758
+    - - 12.3302914
+      - -0.0119324783
+      - 7.98741278e-06
+      - -1.77194552e-09
+      - 1.26075824e-13
+      - 12675.5831
+      - -40.8823374
+    note: L 5/90
+CH2BRO:
+  name: CH2BRO
+  composition:
+    C: 1
+    H: 2
+    Br: 1
+    O: 1
+  thermo:
+    model: constant-cp
+  note: 'CH2BRO was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: C([O])Br
+
+    InCHI: InChI=1S/CH2BrO/c2-1-3/h1H2
+
+    '
+HO2NO2:
+  name: HO2NO2
+  composition:
+    H: 1
+    O: 4
+    N: 1
+  thermo:
+    model: constant-cp
+  note: 'HO2NO2 was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    InCHI: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    Composition not constructed as an exception was encountered: Invalid INCHI string..'
+NO3:
+  name: NO3
+  composition:
+    N: 1
+    O: 3
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 2.1735931
+      - 0.0104902697
+      - 1.1047265e-05
+      - -2.81561854e-08
+      - 1.36583958e-11
+      - 7392.19877
+      - 14.6022098
+    - - 7.48347734
+      - 0.00257772041
+      - -1.00945831e-06
+      - 1.72314072e-10
+      - -1.07154015e-14
+      - 5709.19428
+      - -14.1618155
+    note: J12/64
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 400.0
+    diameter: 4.2
+    dipole: 0.2
+    rotational-relaxation: 1.0
+  note: ATcT3E
+CH3BR:
+  name: CH3BR
+  descriptive-name: bromomethane
+  molecular-weight: 94.939
+  critical-parameters:
+    acentric-factor: 0.157
+    critical-compressibility: 0.262
+    critical-molar-volume: 0.1535
+    critical-pressure: 6610000.0
+    critical-temperature: 464
+  composition:
+    C: 1
+    H: 3
+    Br: 1
+N2O5:
+  name: N2O5
+  composition:
+    N: 2
+    O: 5
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 3.68767444
+      - 0.0392120798
+      - -5.53770029e-05
+      - 4.20097833e-08
+      - -1.3126071e-11
+      - -830.291184
+      - 12.1967866
+    - - 13.1108082
+      - 0.00487435791
+      - -1.87548389e-06
+      - 3.16374121e-10
+      - -1.95926845e-14
+      - -3116.347
+      - -34.6877692
+    note: L 4/90
+H2O2:
+  name: H2O2
+  composition:
+    H: 2
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.388754
+      - 0.006569226
+      - -1.485013e-07
+      - -4.625806e-09
+      - 2.471515e-12
+      - -17663.15
+      - 6.785363
+    - - 4.573167
+      - 0.004336136
+      - -1.474689e-06
+      - 2.348904e-10
+      - -1.431654e-14
+      - -18006.96
+      - 0.501137
+    note: '120186'
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 107.4
+    diameter: 3.458
+    rotational-relaxation: 3.8
+  note: L 7/88
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 1466520000000.0
+    - 0
+    b: 21.27344867
+'NO':
+  name: 'NO'
+  composition:
+    N: 1
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 4.2184763
+      - -0.004638976
+      - 1.1041022e-05
+      - -9.3361354e-09
+      - 2.803577e-12
+      - 9844.623
+      - 2.2808464
+    - - 3.2606056
+      - 0.0011911043
+      - -4.2917048e-07
+      - 6.9457669e-11
+      - -4.0336099e-15
+      - 9920.9746
+      - 6.3693027
+  transport:
+    model: gas
+    geometry: linear
+    diameter: 3.621
+    well-depth: 97.53
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+  note: RUS 78
+  extra-field: blue
+NA:
+  name: NA
+  composition:
+    H: 1
+    N: 1
+    O: 3
+  thermo:
+    model: constant-cp
+CH2BROOH:
+  name: CH2BROOH
+  composition:
+    C: 1
+    H: 3
+    Br: 1
+    O: 2
+  thermo:
+    model: constant-cp
+  note: 'CH2BROOH was not found in all-species-data and was constructed as well as
+    possible using web requests and assuming ideal gas thermo.
+
+    SMILES: C(OO)Br
+
+    InCHI: InChI=1S/CH3BrO2/c2-1-4-3/h3H,1H2
+
+    '
+HO2:
+  name: HO2
+  composition:
+    H: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 3500.0
+    data:
+    - - 4.30179801
+      - -0.00474912051
+      - 2.11582891e-05
+      - -2.42763894e-08
+      - 9.29225124e-12
+      - 294.80804
+      - 3.71666245
+    - - 4.0172109
+      - 0.00223982013
+      - -6.3365815e-07
+      - 1.1424637e-10
+      - -1.07908535e-14
+      - 111.856713
+      - 3.78510215
+    note: L5/89
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 107.4
+    diameter: 3.458
+    rotational-relaxation: 1.0
+    note: '*'
+  note: L 5/89
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 1466520000000.0
+    - 0
+    b: 21.27344867
+NO2:
+  name: NO2
+  composition:
+    N: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 3.9440312
+      - -0.001585429
+      - 1.6657812e-05
+      - -2.0475426e-08
+      - 7.8350564e-12
+      - 2896.6179
+      - 6.3119917
+    - - 4.8847542
+      - 0.0021723956
+      - -8.2806906e-07
+      - 1.574751e-10
+      - -1.0510895e-14
+      - 2316.4983
+      - -0.11741695
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.5
+    well-depth: 200.0
+    rotational-relaxation: 1.0
+  note: L 7/88
+CH4:
+  name: CH4
+  composition:
+    H: 4
+    C: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1462.0
+    - 5000.0
+    data:
+    - - 3.7211302
+      - -0.00250293289
+      - 1.90246534e-05
+      - -1.46871253e-08
+      - 3.43791152e-12
+      - -10142.4099
+      - 1.22776596
+    - - 4.09617653
+      - 0.00744330845
+      - -2.638719e-06
+      - 4.19577604e-10
+      - -2.4750805e-14
+      - -11383.5704
+      - -4.67561383
+    note: 29/11/04
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 141.4
+    diameter: 3.746
+    polarizability: 2.6
+    rotational-relaxation: 13.0
+  note: L 8/88
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 3222240000000.0
+    - 0
+    b: 29.8483
+  descriptive-name: methane
+  molecular-weight: 16.043
+  critical-parameters:
+    critical-temperature: 190.7
+    critical-pressure: 4630000.0
+    critical-molar-volume: 0.0989
+    critical-compressibility: 0.288
+    acentric-factor: 0.011
+HSO3:
+  name: HSO3
+  composition:
+    H: 1
+    S: 1
+    O: 3
+  note: 'HSO3 was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    InCHI: Exception: (1064, "You have an error in your SQL syntax.  Check the manual
+    that corresponds to your MySQL server version for the right syntax to use near
+    ''%s'' at line 1")
+
+    Composition not constructed as an exception was encountered: Invalid INCHI string..'
+  thermo:
+    model: constant-cp
+CO:
+  name: CO
+  composition:
+    C: 1
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1429.0
+    - 5000.0
+    data:
+    - - 3.19036352
+      - 0.000894419972
+      - -3.24927563e-08
+      - -1.04599967e-10
+      - 2.41965693e-14
+      - -14286.9054
+      - 5.33277914
+    - - 3.1121689
+      - 0.00115948283
+      - -3.38480362e-07
+      - 4.41403098e-11
+      - -2.12862228e-15
+      - -14271.8539
+      - 5.71725177
+    note: 29/11/04
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 98.1
+    diameter: 3.65
+    polarizability: 1.95
+    rotational-relaxation: 1.8
+  note: TPIS79
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 1620261200000.0
+    - 0
+    b: 25.83591
+  descriptive-name: carbon-monoxide
+  molecular-weight: 28.01
+  critical-parameters:
+    critical-temperature: 133.4
+    critical-pressure: 3500000.0
+    critical-molar-volume: 0.0931
+    critical-compressibility: 0.294
+    acentric-factor: 0.066
+CH3O2NO2:
+  name: CH3O2NO2
+  composition:
+    C: 1
+    H: 3
+    N: 1
+    O: 4
+  thermo:
+    model: constant-cp
+  note: 'CH3O2NO2 was not found in all-species-data and was constructed as well as
+    possible using web requests and assuming ideal gas thermo.
+
+    SMILES: COO[N+](=O)[O-]
+
+    InCHI: InChI=1S/CH3NO4/c1-5-6-2(3)4/h1H3
+
+    '
+CL:
+  name: CL
+  composition:
+    Cl: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.381577
+      - 0.0008891079
+      - 4.070476e-07
+      - -2.168943e-09
+      - 1.160827e-12
+      - 13839.99
+      - 6.021818
+    - - 2.920237
+      - -0.0003597985
+      - 1.294294e-07
+      - -2.162776e-11
+      - 1.376517e-15
+      - 13713.38
+      - 3.26269
+    note: "42189\n\tSpecies for chlorine 2010/07/19"
+O:
+  name: O
+  composition:
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.946429
+      - -0.001638166
+      - 2.421032e-06
+      - -1.602843e-09
+      - 3.890696e-13
+      - 29147.64
+      - 2.963995
+    - - 2.54206
+      - -2.755062e-05
+      - -3.102803e-09
+      - 4.551067e-12
+      - -4.368052e-16
+      - 29230.8
+      - 4.920308
+    note: '120186'
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 80.0
+    diameter: 2.75
+  note: L 1/90
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 474173000000.0
+    - 0
+    b: 10.69952492
+HNO3:
+  name: HNO3
+  composition:
+    H: 1
+    N: 1
+    O: 3
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 200.0
+    - 1000.0
+    - 6000.0
+    data:
+    - - 1.74492946
+      - 0.0188040888
+      - -8.15963597e-06
+      - -5.78584532e-09
+      - 4.43768083e-12
+      - -17380.5296
+      - 16.9545524
+    - - 8.00379234
+      - 0.00449837533
+      - -1.73648758e-06
+      - 2.93685555e-10
+      - -1.81478673e-14
+      - -19256.3022
+      - -16.0985546
+    note: L 4/90
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 300.0
+    diameter: 3.5
+    rotational-relaxation: 1.0
+SO3:
+  name: SO3
+  composition:
+    S: 1
+    O: 3
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.5780385
+      - 0.014556335
+      - -9.1764173e-06
+      - -7.9203022e-10
+      - 1.9709473e-12
+      - -48931.753
+      - 12.2651384
+    - - 7.0757376
+      - 0.0031763387
+      - -1.353576e-06
+      - 2.5630912e-10
+      - -1.7936044e-14
+      - -50211.376
+      - -11.1875176
+    note: J 9/65
+SO2:
+  name: SO2
+  composition:
+    S: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.2665338
+      - 0.0053237902
+      - 6.8437552e-07
+      - -5.2810047e-09
+      - 2.5590454e-12
+      - -36908.148
+      - 9.66465108
+    - - 5.2451364
+      - 0.0019704204
+      - -8.0375769e-07
+      - 1.5149969e-10
+      - -1.0558004e-14
+      - -37558.227
+      - -1.07404892
+    note: J 6/61
+CH3O:
+  name: CH3O
+  composition:
+    C: 1
+    H: 3
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1509.0
+    - 5000.0
+    data:
+    - - 2.23058023
+      - 0.00853178586
+      - 1.02166624e-06
+      - -3.41046916e-09
+      - 9.94691038e-13
+      - 945.939708
+      - 12.8377569
+    - - 4.64787019
+      - 0.00690830683
+      - -2.34404776e-06
+      - 3.6199457e-10
+      - -2.09253541e-14
+      - -299.208881
+      - -1.57740193
+    note: 8/9/4THERM
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 417.0
+    diameter: 3.69
+    dipole: 1.7
+    rotational-relaxation: 2.0
+  note: '121686'
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 22440500000000.0
+    - 0
+    b: 47.07629651
+CHOBR:
+  name: CHOBR
+  composition:
+    C: 1
+    H: 1
+    Br: 1
+    O: 1
+  thermo:
+    model: constant-cp
+  note: 'CHOBR was not found in all-species-data and was constructed as well as possible
+    using web requests and assuming ideal gas thermo.
+
+    SMILES: C(=O)Br
+
+    InCHI: InChI=1S/CHBrO/c2-1-3/h1H
+
+    '
+OH:
+  name: OH
+  composition:
+    H: 1
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1710.0
+    - 5000.0
+    data:
+    - - 3.41896226
+      - 0.000319255801
+      - -3.08292717e-07
+      - 3.64407494e-10
+      - -1.00195479e-13
+      - 3452.64448
+      - 2.54433372
+    - - 2.8537604
+      - 0.00102994334
+      - -2.32666477e-07
+      - 1.93750704e-11
+      - -3.15759847e-16
+      - 3699.4972
+      - 5.78756825
+    note: 7/13/0RUCIC
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 80.0
+    diameter: 2.75
+  note: RUS 78
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 477552000000.0
+    - 0
+    b: 10.72986231
+H2:
+  name: H2
+  composition:
+    H: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.298124
+      - 0.0008249442
+      - -8.143015e-07
+      - -9.475434e-11
+      - 4.134872e-13
+      - -1012.521
+      - -3.294094
+    - - 2.991423
+      - 0.0007000644
+      - -5.633829e-08
+      - -9.231578e-12
+      - 1.582752e-15
+      - -835.034
+      - -1.35511
+    note: '121286'
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 38.0
+    diameter: 2.92
+    polarizability: 0.79
+    rotational-relaxation: 280.0
+  note: TPIS78
+  equation-of-state:
+    model: Redlich-Kwong
+    a: 137191000000.0
+    b: 17.64
+HONO:
+  name: HONO
+  composition:
+    H: 1
+    N: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.290413
+      - 0.01409922
+      - -1.367872e-05
+      - 7.49878e-09
+      - -1.876905e-12
+      - -10431.95
+      - 13.28077
+    - - 5.486893
+      - 0.004218065
+      - -1.649143e-06
+      - 2.971877e-10
+      - -2.021148e-14
+      - -11268.65
+      - -2.997002
+  transport:
+    model: gas
+    geometry: nonlinear
+    diameter: 3.828
+    well-depth: 232.4
+    rotational-relaxation: 1.0
+  note: '31787'
+CH2BRO2:
+  name: CH2BRO2
+  composition:
+    C: 1
+    H: 2
+    Br: 1
+    O: 2
+  thermo:
+    model: constant-cp
+  note: 'CH2BRO2 was not found in all-species-data and was constructed as well as
+    possible using web requests and assuming ideal gas thermo.
+
+    SMILES: C(O[O])Br
+
+    InCHI: InChI=1S/CH2BrO2/c2-1-4-3/h1H2
+
+    '
+HCOOH:
+  name: HCOOH
+  composition:
+    H: 2
+    C: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 298.0
+    - 1000.0
+    - 3000.0
+    data:
+    - - 2.0171297
+      - 0.0113592352
+      - 4.4898085e-06
+      - -1.1965145e-08
+      - 4.74422211e-12
+      - -46698.6993
+      - 14.9765215
+    - - 2.64013146
+      - 0.0143900698
+      - -8.41512013e-06
+      - 2.2619264e-09
+      - -2.31757108e-13
+      - -47097.0475
+      - 10.5962451
+    note: ' Species # 23      RQCISD(T)/CBS//B3LYP/6-311++G(d,p) + BAC by C. F. Goldsmith
+
+      formic acid'
+CH3OOH:
+  name: CH3OOH
+  composition:
+    C: 1
+    H: 4
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.09218
+      - 0.0180223
+      - -7.11862e-06
+      - -1.47978e-09
+      - 1.45517e-12
+      - -17430.0
+      - 11.3028
+    - - 6.3680096
+      - 0.0107372
+      - -3.68666e-06
+      - 5.88827e-10
+      - -3.61266e-14
+      - -18426.159
+      - -6.0734207
+SA:
+  name: SA
+  composition:
+    H: 2
+    S: 1
+    O: 4
+  thermo:
+    model: constant-cp
+CH3O2:
+  name: CH3O2
+  composition:
+    C: 1
+    H: 3
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1365.0
+    - 5000.0
+    data:
+    - - 3.8049759
+      - 0.0098078466
+      - -3.90940624e-07
+      - -2.23072602e-09
+      - 6.4331082e-13
+      - -455.625796
+      - 7.817891
+    - - 6.34718801
+      - 0.00792089358
+      - -2.76601913e-06
+      - 4.35360631e-10
+      - -2.54984762e-14
+      - -1834.36055
+      - -7.42552545
+    note: 1/14/5THERM
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 42645700000000.0
+    - 0
+    b: 72.90474159
+  note: 1/14/5THERM
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 481.8
+    diameter: 3.626
+    rotational-relaxation: 1.0
+    note: WJP
+H2O:
+  name: H2O
+  composition:
+    H: 2
+    O: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.386842
+      - 0.003474982
+      - -6.354696e-06
+      - 6.968581e-09
+      - -2.506588e-12
+      - -30208.11
+      - 2.590233
+    - - 2.672146
+      - 0.003056293
+      - -8.73026e-07
+      - 1.200996e-10
+      - -6.391618e-15
+      - -29899.21
+      - 6.862817
+    note: '20387'
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 572.4
+    diameter: 2.605
+    dipole: 1.844
+    rotational-relaxation: 4.0
+  note: L 8/89
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 17458000000000.0
+    - -8000000000.0
+    b: 18.18
+    binary-a:
+      CO2:
+      - 7897000000000.0
+      - 0
+O2:
+  name: O2
+  composition:
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.212936
+      - 0.001127486
+      - -5.75615e-07
+      - 1.313877e-09
+      - -8.768554e-13
+      - -1005.249
+      - 6.034738
+    - - 3.697578
+      - 0.0006135197
+      - -1.258842e-07
+      - 1.775281e-11
+      - -1.136435e-15
+      - -1233.93
+      - 3.189166
+    note: '121386'
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 107.4
+    diameter: 3.458
+    polarizability: 1.6
+    rotational-relaxation: 3.8
+  note: TPIS89
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 1731320000000.0
+    - 0
+    b: 22.04783
+  another-literal-string: 'foo
+
+    bar
+
+    '
+  descriptive-name: oxygen
+  critical-parameters:
+    critical-temperature: 154.58
+    critical-pressure: 5043000.0
+    acentric-factor: 0.022
+    source: 'The acentric factor is calculated using the pure fluid saturation data
+      from
+
+      Lemmon et al. (2022).'
+H:
+  name: H
+  composition:
+    H: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.5
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 25471.63
+      - -0.4601176
+    - - 2.5
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 25471.63
+      - -0.4601176
+    note: '120186'
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 145.0
+    diameter: 2.05
+  note: L 7/88
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 132125000000.0
+    - 0
+    b: 17.63395812
+N2:
+  name: N2
+  composition:
+    N: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.298677
+      - 0.00140824
+      - -3.963222e-06
+      - 5.641515e-09
+      - -2.444855e-12
+      - -1020.9
+      - 3.950372
+    - - 2.92664
+      - 0.001487977
+      - -5.684761e-07
+      - 1.009704e-10
+      - -6.753351e-15
+      - -922.7977
+      - 5.980528
+    note: '121286'
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 97.53
+    diameter: 3.621
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+  note: '121286'
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 1559760000000.0
+    - 0
+    b: 26.81725
+  descriptive-name: nitrogen
+  critical-parameters:
+    critical-temperature: 126.2
+    critical-pressure: 3390000.0
+    acentric-factor: 0.038
+    source: 'The acentric factor is calculated using the pure fluid saturation data
+      from
+
+      Lemmon et al. (2022).'
+AR:
+  name: AR
+  composition:
+    Ar: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 2.5
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - -745.375
+      - 4.366001
+    - - 2.5
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - -745.375
+      - 4.366001
+    note: '120186'
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 136.5
+    diameter: 3.33
+  note: '120186'
+CO2:
+  name: CO2
+  composition:
+    C: 1
+    O: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1380.0
+    - 5000.0
+    data:
+    - - 2.5793049
+      - 0.00824684987
+      - -6.42716047e-06
+      - 2.54637024e-09
+      - -4.12030443e-13
+      - -48416.283
+      - 8.81141041
+    - - 5.18953018
+      - 0.00206006476
+      - -7.33575324e-07
+      - 1.17004374e-10
+      - -6.91729215e-15
+      - -49317.8953
+      - -5.18289303
+    note: 29/11/04
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 244.0
+    diameter: 3.763
+    polarizability: 2.65
+    rotational-relaxation: 2.1
+  note: L 7/88
+  equation-of-state:
+    model: Redlich-Kwong
+    a:
+    - 6457140000000.0
+    - 0
+    b: 29.65792
+    binary-a:
+      H2O:
+      - 7897000000000.0
+      - 0
+  descriptive-name: carbon-dioxide
+  molecular-weight: 44.01
+  critical-parameters:
+    critical-temperature: 304.2
+    critical-pressure: 7390000.0
+    critical-molar-volume: 0.0948
+    critical-compressibility: 0.275
+    acentric-factor: 0.228
+    source: The acentric factor is taken from Yaws (2001).
+HCL:
+  name: HCL
+  composition:
+    Cl: 1
+    H: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.338534
+      - 0.001268207
+      - -3.666917e-06
+      - 4.703992e-09
+      - -1.836011e-12
+      - -12131.51
+      - 3.193555
+    - - 2.755335
+      - 0.001473581
+      - -4.971254e-07
+      - 8.108658e-11
+      - -5.072063e-15
+      - -11918.06
+      - 6.515116
+    note: '42189'
+HBR:
+  name: HBR
+  composition:
+    H: 1
+    Br: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    - 5000.0
+    data:
+    - - 3.605669
+      - -0.00059529431
+      - 6.5029568e-07
+      - 9.3781219e-10
+      - -7.1141852e-13
+      - -5438.9455
+      - 3.49634113
+    - - 2.7935804
+      - 0.0015655925
+      - -5.6171064e-07
+      - 9.5783142e-11
+      - -6.181399e-15
+      - -5233.8384
+      - 7.65553403
+    note: J 9/65

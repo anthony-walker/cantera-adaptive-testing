@@ -1,0 +1,572 @@
+atmosphere-reactions:
+- equation: CH2BRO + O2 => CHOBR + HO2
+  type: complex-rate
+  A: '1.51e+10'
+  b: '0.0'
+  Ea: '-596.1605999999999'
+  species-names:
+  - O2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH2BRO2 + HO2 => CH2BROOH + O2
+  rate-constant:
+    A: '2.58e+11'
+    b: '0.0'
+    Ea: '1629.5056399999999'
+- equation: CH2BRO2 + NO => CH2BRO + NO2
+  rate-constant:
+    A: '2.44e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH2BRO2 + NO3 => CH2BRO + NO2 + O2
+  rate-constant:
+    A: '1.39e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2BRO2 => CH2BRO + 0.5 O2
+  type: complex-rate
+  A: '7.23e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH2BRO2 + 0.5 H2O => CH2BROH + 0.75 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH2BRO2 => CHOBR + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '2.41e+11'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - RO2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH2BROH + OH + O2 => CHOBR + HO2 + H2O
+  rate-constant:
+    A: '6.38e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2BROOH + OH => CH2BRO2 + H2O
+  rate-constant:
+    A: '1.14e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: CH2BROOH + OH => CHOBR + OH + H2O
+  rate-constant:
+    A: '3.49e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH2BROOH => CH2BRO + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: CH3BR + OH + O2 => CH2BRO2 + H2O
+  rate-constant:
+    A: '4.46e+11'
+    b: '0.0'
+    Ea: '-1738.8017499999999'
+- equation: CH3NO3 => CH3O + NO2
+  type: zenith-angle-rate
+  l: '1.588e-06'
+  m: '1.154'
+  n: '0.318'
+  scalar: '1'
+- equation: CH3O + O2 => HCHO + HO2
+  type: complex-rate
+  A: '4.34e+10'
+  b: '0.0'
+  Ea: '-2146.17816'
+  species-names:
+  - O2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3O2 + NO => CH3NO3
+  rate-constant:
+    A: '1.39e+09'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH3O2 + NO => CH3O + NO2
+  rate-constant:
+    A: '1.38e+12'
+    b: '0.0'
+    Ea: '715.3927199999999'
+- equation: CH3O2 + NO2 => CH3O2NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT13
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3O2 + NO3 => CH3O + NO2 + O2
+  rate-constant:
+    A: '7.23e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CH3O2 => CH3O + 0.5 O2
+  type: complex-rate
+  A: '8.91e+11'
+  b: '0.0'
+  Ea: '-1033.34504'
+  species-names:
+  - RO2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3O2 + 0.5 H2O => CH3OH + 0.75 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN19
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3O2 => HCHO + 0.5 H2O + 0.25 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN20
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3O2NO2 => CH3O2 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT14
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: CH3OH + OH + O2 => HO2 + HCHO + H2O
+  rate-constant:
+    A: '1.72e+12'
+    b: '0.0'
+    Ea: '-685.58469'
+- equation: CH3OOH => CH3O + OH
+  type: zenith-angle-rate
+  l: '7.649e-06'
+  m: '0.682'
+  n: '0.279'
+  scalar: '1'
+- equation: CHOBR + NO3 => CO + BR + HNO3
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-3696.1957199999997'
+- equation: CHOBR + OH => CO + BR + H2O
+  rate-constant:
+    A: '6.99e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: CHOBR + O2 => HO2 + CO + BR
+  type: zenith-angle-rate
+  l: '4.642e-05'
+  m: '0.762'
+  n: '0.353'
+  scalar: '1'
+- equation: CL + CH4 + O2 => CH3O2 + HCL
+  rate-constant:
+    A: '3.97e+12'
+    b: '0.0'
+    Ea: '-2464.13048'
+- equation: H2O2 => OH + OH
+  type: zenith-angle-rate
+  l: '1.041e-05'
+  m: '0.723'
+  n: '0.279'
+  scalar: '1'
+- equation: HCHO + 2.0 O2 => CO + HO2 + HO2
+  type: zenith-angle-rate
+  l: '4.642e-05'
+  m: '0.762'
+  n: '0.353'
+  scalar: '1'
+- equation: HCHO => H2 + CO
+  type: zenith-angle-rate
+  l: '6.853e-05'
+  m: '0.477'
+  n: '0.323'
+  scalar: '1'
+- equation: HCOOH + OH + O2 => HO2 + H2O + CO2
+  rate-constant:
+    A: '2.71e+11'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HNO3 => OH + NO2
+  type: zenith-angle-rate
+  l: '9.312e-07'
+  m: '1.230'
+  n: '0.307'
+  scalar: '1'
+- equation: HO2 + HO2 => H2O2 + O2
+  type: complex-rate
+  A: '1.14e-09'
+  b: '0.0'
+  Ea: '1947.45796'
+  species-names:
+  - M
+  function-names:
+  - KMT06
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: HO2 + HO2 => H2O2 + O2
+  type: complex-rate
+  A: '1.32e+11'
+  b: '0.0'
+  Ea: '1192.3211999999999'
+  function-names:
+  - KMT06
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: HO2 + NO => OH + NO2
+  rate-constant:
+    A: '2.08e+12'
+    b: '0.0'
+    Ea: '536.54454'
+- equation: HO2 + NO2 => HO2NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT09
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: HO2 + NO3 => OH + NO2 + O2
+  rate-constant:
+    A: '2.41e+12'
+    b: '0.0'
+    Ea: '0.0'
+- equation: HO2 + O3 => OH + 2.0 O2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN39
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: HO2NO2 => HO2 + NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT10
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: HONO => OH + NO
+  type: zenith-angle-rate
+  l: '2.644e-03'
+  m: '0.261'
+  n: '0.288'
+  scalar: '1'
+- equation: HSO3 + O2 => HO2 + SO3
+  type: complex-rate
+  A: '7.83e+11'
+  b: '0.0'
+  Ea: '-655.77666'
+  species-names:
+  - O2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: N2O5 => NO2 + NO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT04
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: NO + NO + O2 => NO2 + NO2
+  type: complex-rate
+  A: '1.99e-15'
+  b: '0.0'
+  Ea: '1053.21706'
+  species-names:
+  - O2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: NO + NO3 => NO2 + NO2
+  rate-constant:
+    A: '1.08e+13'
+    b: '0.0'
+    Ea: '218.59222'
+- equation: NO + O3 => NO2 + O2
+  rate-constant:
+    A: '8.43e+11'
+    b: '0.0'
+    Ea: '-2603.2346199999997'
+- equation: NO2 + NO3 => N2O5
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT03
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: NO2 + NO3 => NO + NO2 + O2
+  rate-constant:
+    A: '2.71e+10'
+    b: '0.0'
+    Ea: '-2503.87452'
+- equation: NO2 + O3 => NO3 + O2
+  rate-constant:
+    A: '8.43e+10'
+    b: '0.0'
+    Ea: '-4908.38894'
+- equation: NO2 => NO + O
+  type: zenith-angle-rate
+  l: '1.165e-02'
+  m: '0.244'
+  n: '0.267'
+  scalar: '1'
+- equation: NO3 + HCHO + O2 => HNO3 + CO + HO2
+  rate-constant:
+    A: '3.31e+08'
+    b: '0.0'
+    Ea: '0.0'
+- equation: NO3 => NO + O2
+  type: zenith-angle-rate
+  l: '2.485e-02'
+  m: '0.168'
+  n: '0.108'
+  scalar: '1'
+- equation: NO3 => NO2 + O
+  type: zenith-angle-rate
+  l: '1.747e-01'
+  m: '0.155'
+  n: '0.125'
+  scalar: '1'
+- equation: O + NO => NO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT01
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: O + NO2 => NO + O2
+  rate-constant:
+    A: '3.31e+12'
+    b: '0.0'
+    Ea: '373.593976'
+- equation: O + NO2 => NO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT02
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: O + O3 => 2.0 O2
+  rate-constant:
+    A: '4.82e+12'
+    b: '0.0'
+    Ea: '-4093.6361199999997'
+- equation: O + SO2 => SO3
+  type: complex-rate
+  A: '2.41e-08'
+  b: '0.0'
+  Ea: '-1987.202'
+  species-names:
+  - M
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: O + O2 => O3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN60
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: O + O2 => O3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KUNKNOWN61
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: O1D => O
+  type: complex-rate
+  A: '1.20e+13'
+  b: '0.0'
+  Ea: '258.33626'
+  species-names:
+  - N2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: O1D => O
+  type: complex-rate
+  A: '1.93e+13'
+  b: '0.0'
+  Ea: '133.14253399999998'
+  species-names:
+  - O2
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+  duplicate: true
+- equation: O1D + H2O => OH + OH
+  type: complex-rate
+  A: '1.29e+14'
+  b: '0.0'
+  Ea: '0.0'
+  species-names:
+  - H2O
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: O3 => O + O2
+  type: zenith-angle-rate
+  l: '4.775e-04'
+  m: '0.298'
+  n: '0.080'
+  scalar: '1'
+- equation: O3 => O1D + O2
+  type: zenith-angle-rate
+  l: '6.073e-05'
+  m: '1.743'
+  n: '0.474'
+  scalar: '1'
+- equation: OH + CH3NO3 => HCHO + NO2 + H2O
+  rate-constant:
+    A: '2.41e+11'
+    b: '0.0'
+    Ea: '-1679.18569'
+- equation: OH + CH3OOH => CH3O2 + H2O
+  rate-constant:
+    A: '1.92e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + CH3OOH => HCHO + OH + H2O
+  rate-constant:
+    A: '1.28e+12'
+    b: '0.0'
+    Ea: '377.56838'
+- equation: OH + CH4 + O2 => CH3O2 + H2O
+  rate-constant:
+    A: '1.11e+12'
+    b: '0.0'
+    Ea: '-3358.37138'
+- equation: OH + CO + O2 => HO2 + CO2
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT05
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: OH + H2 + O2 => HO2 + H2O
+  rate-constant:
+    A: '4.64e+12'
+    b: '0.0'
+    Ea: '-4173.1242'
+- equation: OH + H2O2 => HO2 + H2O
+  rate-constant:
+    A: '1.75e+12'
+    b: '0.0'
+    Ea: '-317.95232'
+- equation: OH + HCHO + O2 => HO2 + CO + H2O
+  rate-constant:
+    A: '3.25e+12'
+    b: '0.0'
+    Ea: '268.27227'
+- equation: OH + HNO3 => NO3 + H2O
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT11
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: OH + HO2 => H2O + O2
+  rate-constant:
+    A: '2.89e+13'
+    b: '0.0'
+    Ea: '496.8005'
+- equation: OH + HO2NO2 => NO2 + H2O + O2
+  rate-constant:
+    A: '1.93e+11'
+    b: '0.0'
+    Ea: '1371.16938'
+- equation: OH + HONO => NO2 + H2O
+  rate-constant:
+    A: '1.51e+12'
+    b: '0.0'
+    Ea: '516.67252'
+- equation: OH + NO => HONO
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT07
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: OH + NO2 => HNO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT08
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+- equation: OH + NO3 => HO2 + NO2
+  rate-constant:
+    A: '1.20e+13'
+    b: '0.0'
+    Ea: '0.0'
+- equation: OH + O3 => HO2 + O2
+  rate-constant:
+    A: '1.02e+12'
+    b: '0.0'
+    Ea: '-1867.9698799999999'
+- equation: OH + SO2 => HSO3
+  type: complex-rate
+  A: '1.00e+00'
+  b: '0.0'
+  Ea: '0.0'
+  function-names:
+  - KMT12
+  pyfile: methane_complex_rates.py
+  ro2file: methane-ro2-sum.txt
+aerosol-reactions:
+- equation: HNO3 => NA
+  rate-constant:
+    A: '3.61e+18'
+    b: '0.0'
+    Ea: '0.0'
+- equation: N2O5 + H2O => NA + NA
+  rate-constant:
+    A: '2.41e+20'
+    b: '0.0'
+    Ea: '0.0'

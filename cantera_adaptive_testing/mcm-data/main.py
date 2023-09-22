@@ -2,6 +2,7 @@ import re
 import os
 import yaml
 import time
+import click
 import string
 import random
 import datetime
@@ -15,6 +16,9 @@ def regenerate_files(facfile):
     write_species_extraction(prefix)
     write_balanced_reaction_list(prefix)
 
+@click.command()
+@click.argument('facfile', nargs=1)
+@click.option('--regenerate', default=True, help='Regenerate all needed files.')
 def main(facfile, regenerate=True):
     """ This file is the main file used to construct the completed mechanism.
 
@@ -36,7 +40,7 @@ def main(facfile, regenerate=True):
     if regenerate:
         regenerate_files(facfile)
     # open template file
-    with open("aerosol-template.yaml", "r") as f:
+    with open("template.yaml", "r") as f:
         aerosol_data = yaml.safe_load(f)
         aerosol_data["date"] = datetime.datetime.now()
 
@@ -98,4 +102,4 @@ def main(facfile, regenerate=True):
 
 
 if __name__ == "__main__":
-    main("n-undecane.fac")
+    main()

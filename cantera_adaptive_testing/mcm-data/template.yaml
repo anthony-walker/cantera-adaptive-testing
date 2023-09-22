@@ -1,0 +1,55 @@
+description: |-
+  Master Chemical Mechanism Translation from:
+
+  http://chmlin9.leeds.ac.uk/MCM/categories/saunders-2003-4_6_5-gen-master.htt?rxnId=13345
+
+  (Jenkin et al., Atmos. Environ., 31, 81, 1997; Saunders et al., Atmos. Chem. Phys., 3, 161, 2003), for non aromatic schemes; (Jenkin et al., Atmos. Chem. Phys., 3, 181, 2003; Bloss et al., Atmos. Chem. Phys., 5, 641, 2005), for aromatic schemes; (Jenkin et al., Atmos. Chem. Phys., 12, 5275, 2012), for the β-caryophyllene scheme and (Jenkin et al., Atmos. Chem. Phys., 15, 11433-11459, 2015), for the isoprene scheme.
+
+generator: manual
+cantera-version: 3.0.0
+date: Wed, 11 Dec 2019 16:59:04 -0500
+
+units: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}
+
+extensions:
+- type: python
+  name: rates
+
+phases:
+- name: fuel
+  thermo: ideal-gas
+  elements: [O, H, C, N, Ar]
+  species:
+  - h2o2.yaml/species: all
+  skip-undeclared-elements: true
+  kinetics: gas
+  reactions:
+  - h2o2.yaml/reactions: declared-species
+  transport: mixture-averaged
+  state:
+    T: 300.0
+    P: 1.01325e+05
+    X: {H2: 0.095, O2: 0.21, AR: 0.79}
+
+- name: atmosphere
+  thermo: ideal-gas
+  elements: [O, H, Ar, N]
+  species: [H2, H, O, O2, OH, H2O, HO2, H2O2, AR, N2, O1D, O3, NO2, NO, NO3, HNO3, HONO]
+  kinetics: gas
+  reactions:
+  - atmosphere-reactions
+  transport: none
+  state: {T: 300.0, P: 1 atm}
+
+- name: aerosol
+  thermo: ideal-surface
+  elements: []
+  species: []
+  kinetics: surface
+  reactions:
+  - aerosol-reactions
+  state:
+    T: 300.0
+    P: 1.01325e+05
+  adjacent-phases: [gas]
+  site-density: 2.39e-09

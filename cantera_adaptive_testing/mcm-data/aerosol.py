@@ -18,7 +18,7 @@ def run_combustor_atm_sim(folder, test):
 
     # Use reaction mechanism GRI-Mech 3.0. For 0-D simulations,
     # no transport model is necessary.
-    gas = AerosolSolution(model, name="fuel")
+    gas = AerosolSolution("gri30.yaml", name="gri30")
 
     # Create a Reservoir for the inlet, set to a methane/air mixture at a specified
     # equivalence ratio
@@ -26,7 +26,7 @@ def run_combustor_atm_sim(folder, test):
     equiv_ratio = 1.0  # stoichiometric combustion
     entrainment_ratio = 0.1 # amount of fresh air flowing into atmosphere compared to combustor mass flow
     gas.TP = 300, ct.one_atm
-    gas.set_equivalence_ratio(equiv_ratio, 'H2:1.0', 'O2:1.0, N2:3.76')
+    gas.set_equivalence_ratio(equiv_ratio, 'CH4:1.0', 'O2:1.0, N2:3.76')
     # create inlet fuel tank
     inlet = ct.Reservoir(gas)
 
@@ -65,8 +65,9 @@ def run_combustor_atm_sim(folder, test):
     outlet_far = ct.PressureController(atmosphere, far_field, primary=outlet_mfc, K=0.01)
     outlet_far = ct.PressureController(atmosphere, far_field, primary=entrain_mfc, K=0.01)
 
-    # the simulation only contains one reactor
+    # setp reactor network
     net = ct.ReactorNet([combustor, atmosphere])
+    net.preconditioner = ct.AdaptivePreconditioner()
 
     if not test:
         # Run a loop over decreasing residence times, until the reactor is extinguished,
@@ -84,11 +85,11 @@ def run_combustor_atm_sim(folder, test):
         net.step()
 
     # some plotting
-    if 0:
+    if not test:
         # Plot results
         f, ax1 = plt.subplots(1, 1)
         # ax1.plot(times, atms_states("O2").Y, '.-', color='r')
-        ax1.plot(times, atms_states("O1D").Y, '.-', color='r')
+        ax1.plot(times, atms_states("O3").Y, '.-', color='r')
         # ax2 = ax1.twinx()
         # ax2.plot(states.tres[:-1], states.T[:-1], '.-', color='C1')
         # # ax1.set_xlabel('residence time [s]')
