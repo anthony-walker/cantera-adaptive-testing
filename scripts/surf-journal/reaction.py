@@ -94,7 +94,7 @@ def model_assumptions_speedup_og(colors={}, markers={}, problem="well_stirred_re
     fig, ax = plt.subplots(1, 1)
     fig.set_figwidth(16)
     fig.set_figheight(8)
-    bwid = 0.15
+    bwid = 0.25
     xlabs = [m.split("-0ep00")[-1] for m in keys[:4]]
     xlabs[0] = "-std"
     xlabs = [re.sub("-rep","",x)[1:] for x in xlabs]
@@ -156,17 +156,17 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
     mkeys = [keys[i*4 : (i+1)*4] for i in range(len(keys) // 4)]
-    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
+    labels = ["neglect third-body\n& fall-off", "include \n fall-off", "include \n third-body", "include third-body \n& falloff"]
     # get db connection
     db_name = yml.split(".")[0]+".db"
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    bwid = 0.15
+    bwid = 0.25
     x = [i for i in range(2, 9, 2)]
     xs = [i for i in range(2, 9, 2)]
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.85)
     rg1 = 1
     rg2 = 5
     for q, keylist in enumerate(mkeys[rg1:rg2]):
@@ -197,11 +197,11 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
                 y_arr = [x[0] for x in cursor.fetchall()]
                 y.append(fcn(y_arr))
         clab = keylist[0].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q])
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q], edgecolor='black')
         ax.plot([-2, 9], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
         x = np.array(x) + bwid
     ax.set_xlim([min(xs)-bwid, max(x)])
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
+    ax.legend(ncol=4, bbox_to_anchor=(0.50, 1.275), loc='upper center')
     ylab = yval.capitalize() if ylab is None else ylab
     ax.set_ylabel(ylab)
     xavg = [(x[i] + xs[i])/2 - bwid / 2 for i in range(len(x))]
@@ -209,7 +209,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
     ax.set_xticklabels(labels)
     if yxlims is not None:
         ax.set_ylim(yxlims)
-    plt.xticks(rotation=10)
+    plt.xticks(rotation=-15)
     plt.savefig(f"figures/{yml.split('.')[0]}-{yval}-{problem}.pdf")
     plt.close()
 
@@ -244,13 +244,13 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.85)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.15
+    bwid = 0.25
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
-    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
+    labels = ["neglect third-body\n& fall-off", "include \n fall-off", "include \n third-body", "include third-body \n& falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
     x = [i for i in range(2, 9, 2)]
@@ -258,7 +258,7 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black")
         x = np.array(x) + bwid
         ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
@@ -267,7 +267,7 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
     ax.set_xticklabels(labels)
-    plt.xticks(rotation=10)
+    plt.xticks(rotation=-15)
     # # ax.set_yscale("log")
     ax.set_ylim([0.3, 0.4])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-steps-ratio.pdf")
@@ -304,13 +304,13 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
-    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.9)
+    plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2, right=0.85)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.15
+    bwid = 0.25
     xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
     xlabs[0] = "std"
-    labels = ["neglect third \n body & falloff", "include \n falloff", "include \n third body", "include third \n body & falloff"]
+    labels = ["neglect third-body\n& fall-off", "include \n fall-off", "include \n third-body", "include third-body \n& falloff"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
     x = [i for i in range(2, 9, 2)]
@@ -318,7 +318,7 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black")
         x = np.array(x) + bwid
         ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
@@ -327,7 +327,7 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
     ax.set_xticklabels(labels)
-    plt.xticks(rotation=10)
+    plt.xticks(rotation=-15)
     # # ax.set_yscale("log")
     ax.set_ylim([250, 360])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-speedup.pdf")
@@ -348,46 +348,47 @@ def model_assumptions_clocktime(colors={}, markers={}, problem="well_stirred_rea
     mass_keys = mkeys
     keys = list(filter(lambda x: "-0" in x, keys))
     keys.sort()
-    # get runtime data
-    rt_data = []
+    # get runtime data for preconditioned solver
+    prec_data = []
     for k in keys:
         if problem in data[k].keys():
-            rt_data.append(data[k][problem]["runtime"])
-    end_data = []
+            prec_data.append(data[k][problem]["runtime"])
+    mass_data = []
     for mk in mass_keys:
         if problem in data[mk].keys():
-            end_data.append(data[mk][problem]["endtime"])
+            mass_data.append(data[mk][problem]["runtime"])
     # make arrays
-    end_data = np.array(end_data)
-    rt_data = np.array(rt_data)
-    speedup = rt_data
+    mass_data = np.array(mass_data)
+    prec_data = np.array(prec_data)
     # create barchart figure
     fig, ax = plt.subplots(1, 1)
     fig.tight_layout()
     plt.subplots_adjust(left=0.15, top=0.8, bottom=0.2)
     # fig.set_figwidth(12)
     # fig.set_figheight(8)
-    bwid = 0.15
-    xlabs = [m.split("-0ep00")[-1][1:] for m in keys[:4]]
-    xlabs[0] = "std"
+    bwid = 0.4
+    xlabs = ["neglect third-body\n& fall-off", "include \n fall-off", "include \n third-body", "include third-body\n& fall-off"]
     colors = ["#e41a1c", "#377eb8","#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"]
     # make plot
     x = [i for i in range(2, 9, 2)]
     xs = [i for i in range(2, 9, 2)]
     for i in range(1, 5): #range(len(speedup) // 4):
-        y = speedup[i * 4:(i+1) * 4]
+        yp = prec_data[i * 4:(i+1) * 4]
+        ym = mass_data[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i])
-        x = np.array(x) + bwid
-        ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
+        ax.bar(x, yp, width=bwid / 2, align="center", label=clab, color=colors[i], edgecolor="black")
+        x = np.array(x) + bwid / 2
+        ax.bar(x, ym, width=bwid / 2, align="center", color=colors[i], edgecolor="black", hatch="//")
+        x = np.array(x) + bwid / 2
+        # ax.plot([-2, 9], [yp[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
     ax.set_ylabel("clocktime-per-step")
     ax.set_xlim([min(xs)-bwid, max(x)])
     xavg = [(x[i] + xs[i])/2 - bwid/2 for i in range(len(x))]
     ax.set_xticks(xavg)
     ax.set_xticklabels(xlabs)
-    plt.xticks(rotation=10)
-    # # ax.set_yscale("log")
+    plt.xticks(rotation=-15)
+    ax.set_yscale("log")
     # # ax.set_ylim([10**0, 10**4])
     plt.savefig(f"figures/{yml.split('.')[0]}-{problem}-ct-ps.pdf")
     plt.close()
@@ -441,10 +442,11 @@ def model_condition_study():
 # model_numbers()
 yml="jet.yaml"
 for p in ["plug_flow_reactor",]:
-    model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
-    model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
+    # model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
+    # model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
     model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
-    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity %", yxlims=[30, 80])
-    model_assumptions_speedup(problem=p, yml=yml)
-    model_steps_ratio(problem=p, yml=yml)
+    # model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity %", yxlims=[30, 80])
+    # model_assumptions_speedup(problem=p, yml=yml)
+    # model_steps_ratio(problem=p, yml=yml)
+    # model_assumptions_clocktime(problem=p, yml=yml)
 

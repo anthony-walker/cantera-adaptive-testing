@@ -8,7 +8,8 @@ from reactors import AerosolSolution, AerosolReactor
 @click.command()
 @click.argument('folder', nargs=1)
 @click.option('--test', default=False, help='Number of greetings.')
-def run_combustor_atm_sim(folder, test):
+@click.option('--endtime', default=1.0, help='Number of greetings.')
+def run_combustor_atm_sim(folder, test, endtime):
     # change directories
     orig_dir = os.getcwd()
     os.chdir(folder)
@@ -22,9 +23,9 @@ def run_combustor_atm_sim(folder, test):
 
     # Create a Reservoir for the inlet, set to a methane/air mixture at a specified
     # equivalence ratio
-    residence_time = 0.1
-    equiv_ratio = 1.0  # stoichiometric combustion
-    entrainment_ratio = 0.1 # amount of fresh air flowing into atmosphere compared to combustor mass flow
+    residence_time = 1.5
+    equiv_ratio = 1.1  # stoichiometric combustion
+    entrainment_ratio = 1e6 # amount of fresh air flowing into atmosphere compared to combustor mass flow
     gas.TP = 300, ct.one_atm
     gas.set_equivalence_ratio(equiv_ratio, 'CH4:1.0', 'O2:1.0, N2:3.76')
     # create inlet fuel tank
@@ -76,7 +77,8 @@ def run_combustor_atm_sim(folder, test):
         atms_states = ct.SolutionArray(atms)
         times = []
         # loop for an hour of simulation time
-        while net.time < 60:
+        while net.time < endtime:
+            print(f"Integrated to {net.time}..")
             comb_states.append(combustor.thermo.state)
             atms_states.append( atmosphere.thermo.state)
             times.append(net.time)
@@ -88,10 +90,13 @@ def run_combustor_atm_sim(folder, test):
     if not test:
         # Plot results
         f, ax1 = plt.subplots(1, 1)
-        # ax1.plot(times, atms_states("O2").Y, '.-', color='r')
-        ax1.plot(times, atms_states("O3").Y, '.-', color='r')
-        # ax2 = ax1.twinx()
-        # ax2.plot(states.tres[:-1], states.T[:-1], '.-', color='C1')
+        ax1.plot(times, comb_states("CH4").Y*combustor.mass, '.-', color='b')
+        ax2 = ax1.twinx()
+        ax2.plot(times, atms_states("CH4").Y*atmosphere.mass, '.-', color='g')
+        ax2.plot(times, atms_states("CO2").Y*atmosphere.mass, '.-', color='r')
+        # ax2.plot(times, atms_states("NO2").Y, '--', color='g')
+        # ax2.plot(times, atms_states("NO3").Y, '.-', color='g')
+        # ax2.plot(times, atms_states.T, '.-', color='C1')
         # # ax1.set_xlabel('residence time [s]')
         # # ax1.set_ylabel('heat release rate [W/m$^3$]', color='C0')
         # # ax2.set_ylabel('temperature [K]', color='C1')

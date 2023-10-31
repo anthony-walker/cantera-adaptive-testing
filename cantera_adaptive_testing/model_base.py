@@ -475,7 +475,7 @@ class ModelBase(object):
             self.net.preconditioner = self.precon
             self.net.derivative_settings = {"skip-falloff": not self.enable_falloff,
                 "skip-third-bodies": not self.enable_thirdbody,
-                "skip-coverage-dependence": True, "skip-electrochemistry": True}
+                "skip-coverage-dependence": True, "skip-electrochemistry": True, "skip-flow-devices": True, "skip-walls": True}
         self.net.initialize()
 
     def get_numerical_stats(self):
@@ -662,8 +662,8 @@ class ModelBase(object):
         residence_time = 0.001
         inlet_mfc = ct.MassFlowController(inlet, combustor,
             mdot=combustor.mass / residence_time)
-        outlet_mfc = ct.PressureController(combustor, exhaust, master=inlet_mfc)
-        outlet_mfc2 = ct.PressureController(exhaust, atmosphere, master=outlet_mfc)
+        outlet_mfc = ct.PressureController(combustor, exhaust, primary=inlet_mfc)
+        outlet_mfc2 = ct.PressureController(exhaust, atmosphere, primary=outlet_mfc)
         # the simulation only contains one reactor
         self.net = ct.ReactorNet([combustor, exhaust])
         self.net.max_time_step = self.max_time_step
@@ -796,7 +796,7 @@ class ModelBase(object):
         # We need an outlet to the downstream reservoir. This will determine the
         # pressure in the reactor. The value of K will only affect the transient
         # pressure difference.
-        v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        v = ct.PressureController(r, downstream, primary=m, K=1e-5)
         # Setup thermo data dictionary
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
             "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
@@ -1052,8 +1052,8 @@ class ModelBase(object):
             mdot=combustor.mass / residence_time)
         afterburn_mfc = ct.MassFlowController(inlet, afterburner,
             mdot=afterburner.mass / residence_time)
-        outlet_mfc = ct.PressureController(combustor, afterburner, master=inlet_mfc)
-        outlet_mfc2 = ct.PressureController(afterburner, atmosphere, master=outlet_mfc)
+        outlet_mfc = ct.PressureController(combustor, afterburner, primary=inlet_mfc)
+        outlet_mfc2 = ct.PressureController(afterburner, atmosphere, primary=outlet_mfc)
         # the simulation only contains one reactor
         self.net = ct.ReactorNet([combustor, afterburner])
         self.net.max_time_step = self.max_time_step
@@ -1186,7 +1186,7 @@ class ModelBase(object):
         # We need an outlet to the downstream reservoir. This will determine the
         # pressure in the reactor. The value of K will only affect the transient
         # pressure difference.
-        v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        v = ct.PressureController(r, downstream, primary=m, K=1e-5)
         # Setup thermo data dictionary
         self.thermo_data.update({"thermo": {"model": self.model.split("/")[-1], "moles": self.moles, "gas_reactions": gas.n_reactions,
             "gas_species": gas.n_species, "fuel": self.fuel, "air": self.air,
@@ -1306,12 +1306,12 @@ class ModelBase(object):
                 # We need an outlet to the downstream reservoir. This will determine the
                 # pressure in the reactor. The value of K will only affect the transient
                 # pressure difference.
-                v = ct.PressureController(reactors[i], reactors[i+1], master=m, K=1e-5)
-            v = ct.PressureController(reactors[-1], downstream, master=m, K=1e-5)
+                v = ct.PressureController(reactors[i], reactors[i+1], primary=m, K=1e-5)
+            v = ct.PressureController(reactors[-1], downstream, primary=m, K=1e-5)
         else:
             for r in reactors:
                 m = ct.MassFlowController(upstream, r, mdot=mass_flow_rate)
-                v = ct.PressureController(r, downstream, master=m, K=1e-5)
+                v = ct.PressureController(r, downstream, primary=m, K=1e-5)
         # Add surface data if it exists
         if self.surface:
             for r in reactors:
@@ -1460,7 +1460,7 @@ class ModelBase(object):
         # We need an outlet to the downstream reservoir. This will determine the
         # pressure in the reactor. The value of K will only affect the transient
         # pressure difference.
-        v = ct.PressureController(r, downstream, master=m, K=1e-5)
+        v = ct.PressureController(r, downstream, primary=m, K=1e-5)
         # Add surface data if it exists
         if self.surface:
             # import the surface model
@@ -1476,7 +1476,7 @@ class ModelBase(object):
         self.net.preconditioner = self.precon
         self.net.derivative_settings = {"skip-falloff": not self.enable_falloff,
                 "skip-third-bodies": not self.enable_thirdbody,
-                "skip-coverage-dependence": True, "skip-electrochemistry": True}
+                "skip-coverage-dependence": True, "skip-electrochemistry": True, "skip-flow-devices": True, "skip-walls": True}
         self.net.max_time_step = 1e-16
         self.net.initialize()
         self.net.step()

@@ -3,7 +3,9 @@ import re
 import numpy as np
 import cantera as ct
 import mcm_complex_rates
+from cac.constants import DATA_DIR
 from sympy.parsing.sympy_parser import parse_expr
+
 
 # global used to get function based rates
 complex_rate_fcns = list(filter(lambda x: re.fullmatch("([A-Z0-9])+", x),
@@ -26,7 +28,7 @@ def get_photolysis_parameterization(photo_string):
     scalar = np.prod(scalars) if scalars else 1
     # reassign photo string as J string
     photo_string = J_string
-    with open(os.path.join(os.path.dirname(__file__), "photolysis.txt"), "r") as f:
+    with open(os.path.join(DATA_DIR, "photolysis.txt"), "r") as f:
         content = f.read()
     content = re.sub(r"[ \t\r\f\v]+", " ", content)
     lines = [l.strip() for l in content.split("\n")]

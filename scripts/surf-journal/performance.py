@@ -394,31 +394,27 @@ def series_parallel_figures(yml_name="performance.yaml", problem="n_reactors"):
     yp = np.array(ypm) / np.array(ypp)
     colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
     fig, ax = plt.subplots(1, 1)
-    print(ys)
-    print(yp)
+    # print(ys)
+    # print(yp)
     ax.plot(x, ys, color=colors[0], marker="s", label="series")
     ax.plot(x, yp, color=colors[3], marker="s", label="parallel")
     ax.set_xlabel("Number of Reactors")
     ax.set_ylabel("Speed-up")
-    ax.legend()
-    plt.subplots_adjust(bottom=0.15)
+    ax.legend(ncol=2, bbox_to_anchor=(0.5, 1.3), loc='upper center')
+    plt.subplots_adjust(left=0.15, bottom=0.15, right=0.85, top=0.8)
     plt.savefig(f"figures/{name}-reactor-networks.pdf")
     plt.close()
     # clock time
-    print(ysm)
-    print(ysp)
-    print(ypm)
-    print(ypp)
     colors = ["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]
     fig, ax = plt.subplots(1, 1)
-    ax.plot(x, ysm, color=colors[0], marker="s", label="series mass fractions")
-    ax.plot(x, ysp, color=colors[0], marker="o", label="series preconditioned")
-    ax.plot(x, ypm, color=colors[3], marker="s", label="parallel mass fractions")
+    ax.plot(x, ysm, color=colors[0], marker="s", label="series direct")
+    ax.plot(x, ypm, color=colors[0], marker="o", label="parallel direct")
+    ax.plot(x, ysp, color=colors[3], marker="s", label="series preconditioned")
     ax.plot(x, ypp, color=colors[3], marker="o", label="parallel preconditioned")
     ax.set_xlabel("Number of Reactors")
     ax.set_ylabel("Clocktime [$s$]")
-    ax.legend()
-    plt.subplots_adjust(bottom=0.15)
+    ax.legend(ncol=2, bbox_to_anchor=(0.5, 1.3), loc='upper center')
+    plt.subplots_adjust(left=0.15, bottom=0.15, right=0.85, top=0.8)
     plt.savefig(f"figures/{name}-clocktime-network.pdf")
     plt.close()
     # plt.show()
@@ -689,11 +685,11 @@ def total_clocktime_figure(yml_name="performance.yaml", problem="network_afterbu
     plt.close()
 
 if __name__ == "__main__":
-    # yml = "performance.yaml"
+    yml = "performance.yaml"
     # combine_surf_yamls(direc="performance_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
     # plot_box_threshold(yml_name=yml, problem="plug_flow_reactor")
-    # dual_axis_plots(yml_name=yml)
+    # dual_axis_plots(yml_name=yml, problem="plug_flow_reactor")
     # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
     # yml = "nab.yaml"
@@ -712,27 +708,27 @@ if __name__ == "__main__":
     # yml = "pfr.yaml"
     # # combine_surf_yamls(direc="pfr_data", yml_name=yml)
     # total_runtime_figure(yml_name=yml, problem="plug_flow_reactor")
-    # plot_box_threshold(yml_name=yml, problem="plug_flow_reactor")
+    # # plot_box_threshold(yml_name=yml, problem="plug_flow_reactor")
+    # dual_axis_plots(yml_name=yml, problem="plug_flow_reactor")
     # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
     # # database plots
     # performance_database_plots()
     # performance_database_plots(problem="network_combustor_exhaust")
 
-    # # series and parallel data
-    # yml = "series.yaml"
+    # series and parallel data
+    yml = "series.yaml"
     # # combine_series_parallel_yamls(direc="series_data", yml_name=yml)
-    # series_parallel_figures(yml_name=yml)
+    series_parallel_figures(yml_name=yml)
 
     # yml = "short.yml"
     # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
+    # yml = "short_dev.yml"
+    # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
-    yml = "short_dev.yml"
-    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
+    # yml = "short_surf.yml"
+    # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
 
-    yml = "short_surf.yml"
-    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
-
-    yml = "short_symp.yml"
-    total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")
+    # yml = "short_symp.yml"
+    # total_clocktime_figure(yml_name=yml, problem="plug_flow_reactor")

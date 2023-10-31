@@ -146,8 +146,8 @@ def model_threshold_barchart(yml="jth.yaml", problem="well_stirred_reactor", yli
         x = np.array(x) + sh * bwid
         y = mass_runtime / np.array(y)
         ax.plot([-2, 30], [y[0]] * 2, color=colors[sh+1], linestyle="--", linewidth=0.5)
-        ax.bar(x, y, width=bwid, align="center", label=m, color=colors[sh+1])
-    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
+        ax.bar(x, y, width=bwid, align="center", label=m, color=colors[sh+1], edgecolor='black')
+    ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.15), loc='upper center')
     ax.set_ylabel("Speed-up")
     if ylims is not None:
         ax.set_ylim(ylims)
