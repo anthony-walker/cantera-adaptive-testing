@@ -15,6 +15,10 @@ plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['mathtext.rm'] = 'serif'
 plt.rcParams["font.family"] = 'serif'
 plt.rcParams['font.size'] = 16
+HATCHES = [
+    '/', '\\', '-', 'x', '//', '|', '+', '\\', '*', 'o', 'O', '.', '-',
+    '\\|', '//|', '-', 'v', '^', '<', '>', '1', '2', '3', '4'
+]
 
 
 def combine_surf_yamls(direc="jet_data", yml_name="jet.yaml"):
@@ -197,7 +201,7 @@ def model_evaluation_bar(yval="condition", yml="reaction.yaml", problem="well_st
                 y_arr = [x[0] for x in cursor.fetchall()]
                 y.append(fcn(y_arr))
         clab = keylist[0].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q], edgecolor='black')
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[rg1:rg2][q], edgecolor='black', hatch=HATCHES[rg1:rg2][q])
         ax.plot([-2, 9], [y[0]] * 2, color=colors[rg1:rg2][q], linestyle="--", linewidth=0.5)
         x = np.array(x) + bwid
     ax.set_xlim([min(xs)-bwid, max(x)])
@@ -258,7 +262,7 @@ def model_steps_ratio(colors={}, markers={}, problem="well_stirred_reactor", yml
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black")
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black", hatch=HATCHES[i])
         x = np.array(x) + bwid
         ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
@@ -318,7 +322,7 @@ def model_assumptions_speedup(colors={}, markers={}, problem="well_stirred_react
     for i in range(1, 5): #range(len(speedup) // 4):
         y = speedup[i * 4:(i+1) * 4]
         clab = keys[i * 4].split("-0")[0]
-        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black")
+        ax.bar(x, y, width=bwid, align="center", label=clab, color=colors[i], edgecolor="black", hatch=HATCHES[i])
         x = np.array(x) + bwid
         ax.plot([-2, 9], [y[0]] * 2, color=colors[i], linestyle="--", linewidth=0.5)
     ax.legend(ncol=4, bbox_to_anchor=(0.5, 1.25), loc='upper center')
@@ -444,9 +448,9 @@ yml="jet.yaml"
 for p in ["plug_flow_reactor",]:
     # model_evaluation_bar(yval="lin_iters", yml=yml, problem=p, ylab="Linear Iterations", yxlims=[2250, 3250])
     # model_evaluation_bar(yval="nonlinear_iters", yml=yml, problem=p, ylab="Nonlinear Iterations", yxlims=[1000, 1400])
-    model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Condition Number")
-    # model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity %", yxlims=[30, 80])
-    # model_assumptions_speedup(problem=p, yml=yml)
-    # model_steps_ratio(problem=p, yml=yml)
+    model_evaluation_bar(yval="condition", yml=yml, problem=p, fcn=np.mean, ylab="Max Condition Number")
+    model_evaluation_bar(yval="sparsity", yml=yml, problem=p, ylab="Sparsity %", yxlims=[30, 80])
+    model_assumptions_speedup(problem=p, yml=yml)
+    model_steps_ratio(problem=p, yml=yml)
     # model_assumptions_clocktime(problem=p, yml=yml)
 
