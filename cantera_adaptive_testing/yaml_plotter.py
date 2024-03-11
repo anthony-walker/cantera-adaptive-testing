@@ -516,25 +516,40 @@ def plot_speedup_linters_bars(*args, **kwargs):
     midxs = iutils.get_range_pts(mnames)
     for mix, miy in midxs:
         # fig and axes
-        fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(15,10))
+        fig, axes = plt.subplots(nrows=1, ncols=3, sharey=True, figsize=(15,10))
         # labels
         labels = ["{:0.0e}".format(t) for t in thresholds[mix:miy]]
         labels = ["$10^{{{:d}}}$".format(
             int(lbl.split("e")[-1])) for lbl in labels]
-        labels = ["A", "$0$"] + labels[2:-2] + ["Y", "M"]
+        labels = ["Analytical Preconditioner", "$0$"] + labels[2:-2] + ["Moles", "Mass Fractions"]
         # data
         curr_runtimes = np.array(runtimes[mix:miy])
+        MRT = curr_runtimes[-2]
+        curr_runtimes[-2] = curr_runtimes[-1]
+        curr_runtimes[-1] = MRT
         # plot speedup
-        speedup = curr_runtimes[-2]/curr_runtimes[:]
+        speedup = MRT/curr_runtimes[:]
         fig, ax = plot_precon_species_barchart_horiz(fig, axes[0],
-            labels[:-2], speedup[:-2], 1)
+            labels, speedup, 1)
+        ax.plot([1, 1], [-10, 100], linestyle="-.", color="r", linewidth=2)
         ax.set_xlabel('Speed-up', fontsize=14)
+        ax.set_ylim([-1, 22])
         # plot liniters
         crr_liniters = np.array([linsols[i]['lin_iters']
                                 for i in range(mix, miy-2, 1)])
         fig, ax = plot_precon_species_barchart_horiz(fig, axes[1],
             labels[:-2], crr_liniters, 1, share_label=True)
         ax.set_xlabel('Linear Iterations', fontsize=14)
+        # plot non-liniters
+        crr_liniters = np.array([nonlinsols[i]['nonlinear_iters']
+                                for i in range(mix, miy, 1)])
+        MNLT = crr_liniters[-2]
+        crr_liniters[-2] = crr_liniters[-1]
+        crr_liniters[-1] = MNLT
+        fig, ax = plot_precon_species_barchart_horiz(fig, axes[2],
+            labels, crr_liniters, 1, share_label=True)
+        ax.set_xlabel('Nonlinear Iterations', fontsize=14)
+        axes[0].set_ylabel('Threshold', labelpad=-100)
         plt.savefig(os.path.join("figures", f"Speed-Liniters-{mnames[mix]}-{problem[:3]}-{species[mix]:0.0f}.{kwargs['extension']}"), bbox_inches='tight')
         plt.close()
 
